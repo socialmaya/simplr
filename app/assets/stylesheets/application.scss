@@ -14,6 +14,9 @@
  *= require_self
  */
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 $x_right_gap: 5px;
 $x_left_gap: 5px;
 
@@ -91,4 +94,24 @@ textarea {
 	background: black;
 	height: 30px;
 	width: 32px;
+}
+
+.standard_page_header {
+  color: white;
+  text-align: center;
+}
+
+.discrete_title {
+  color: gray;
+  font-size: 11px;
+  font-weight: bold;
+  padding-left: 5px;
+}
+
+#spacing_header {
+	padding-bottom: 32.5px;
+}
+
+#footer_spacing_container {
+	padding-bottom: 50px;
 }

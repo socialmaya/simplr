@@ -1,5 +1,35 @@
 source 'https://rubygems.org'
 
+# Use ActiveModel has_secure_password
+gem 'bcrypt'
+gem 'gpgme'
+
+# uploading images
+gem 'rmagick'
+gem 'carrierwave'
+gem 'remotipart'
+
+# for location data
+gem 'geocoder'
+gem 'geo_units'
+gem 'geo-distance'
+gem 'geoip'
+gem 'area'
+
+# user agent detection
+gem 'useragent'
+gem 'browser'
+gem 'bot-away'
+gem 'voight_kampff'
+gem "simple_captcha2"
+
+# fonts and glyphs
+gem 'font-awesome-sass'
+
+# social media
+gem 'koala' # for facebook
+gem 'tumblr_client'
+gem 'twitter'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

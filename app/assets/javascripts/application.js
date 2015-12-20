@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bindWithDelay
+//= require scrollView
+//= require jquery.remotipart
+//= require bonsai

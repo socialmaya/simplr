@@ -1,0 +1,7 @@
+// pages
+
+var anchor = $("#more_content_anchor");
+var buffer_wheel = $("#buffer_wheel");
+
+anchor.after("<%=j render 'pages/more_content' %>");
+anchor.remove();

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # pages
+  get 'pages/scroll_to_top', as: 'scroll_to_top'
+  get 'pages/toggle_menu', as: 'toggle_menu'
+  
+  resources :messages
   resources :comments
   resources :groups
   resources :users
