@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card_corner_cut_out"></div>
+  <%= render "users/anon_avatar", token: anon_token, position: :token_card_link %>
+  
+  <div align="center" class="standard_body">
+    <p><%= post.body %></p>
+    <p><%= post.image %></p>
+  </div>
+  
+  <%= link_to 'Show', post, class: :top_right_link %>
+  <%= link_to 'Edit', edit_post_path(post), class: :bottom_right_link %>
+  <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: :bottom_left_link %>
+</div>
+
+
