@@ -2,6 +2,8 @@ Simplr - Minimalistic Social Network
 ======
 Simplr, a minimalistic social network with simplicity and a vibrant, reactive aesthetic as it's core values.
 
+Simplr is free and open source software, as specified above by the GNU General Public License.
+
 ## Setting up Simplr server
 
 1. Download the package or clone the repo.
