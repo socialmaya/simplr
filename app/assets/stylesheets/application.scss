@@ -69,19 +69,19 @@ textarea {
 .top_left_link {
 	@include corner_link;
 	left: $x_left_gap;
-	top: 10px;
+	top: 5px;
 }
 
 .bottom_right_link {
 	@include corner_link;
 	right: $x_right_gap;
-	bottom: 10px;
+	bottom: 5px;
 }
 
 .bottom_left_link {
 	@include corner_link;
 	left: $x_left_gap;
-	bottom: 10px;
+	bottom: 5px;
 }
 
 .card_corner_cut_out {
