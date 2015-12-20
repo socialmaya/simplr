@@ -3,4 +3,6 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :groups
+  
+  mount_uploader :image, ImageUploader
 end

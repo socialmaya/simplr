@@ -8,4 +8,10 @@
   <%= render "posts/card", post: post %>
 <% end %>
 
-
+<% if @posts.empty? %>
+  <div class="card">
+    <p align="center">
+      There aren't any posts yet.
+    </p>
+  </div>
+<% end %>

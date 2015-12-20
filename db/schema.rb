@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220213538) do
+ActiveRecord::Schema.define(version: 20151220230835) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "anon_token"
+    t.string   "image"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -27,6 +29,8 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "anon_token"
+    t.string   "image"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -37,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "anon_token"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -47,6 +52,7 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.boolean  "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "anon_token"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -55,6 +61,7 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "anon_token"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -65,12 +72,15 @@ ActiveRecord::Schema.define(version: 20151220213538) do
     t.string   "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "anon_token"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "auth_token"
+    t.string   "image"
   end
 
 end

@@ -1,6 +1,8 @@
 <div class="card">
   <div class="card_corner_cut_out"></div>
-  <%= render "users/anon_avatar", token: anon_token, position: :token_card_link %>
+  <% if post.anon_token.present? %>
+    <%= render "users/anon_avatar", token: post.anon_token, position: :token_card_link %>
+  <% end %>
   
   <div align="center" class="standard_body">
     <p><%= post.body %></p>
