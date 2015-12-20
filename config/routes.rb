@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # posts
+  get 'posts/add_image', as: 'add_image'
+  
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
