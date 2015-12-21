@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
+  get 'pages/more'
   
   resources :messages
   resources :comments

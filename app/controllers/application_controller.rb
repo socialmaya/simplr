@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :anon_token, :current_user, :mobile?, :browser, :get_location, :page_size, :paginate, :reset_page
+  helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
+    :page_size, :paginate, :reset_page, :char_codes
   
   def get_location
     address = nil; locale = nil
@@ -43,6 +44,15 @@ class ApplicationController < ActionController::Base
       session[:page] = nil
       session[:current_proposal_section] = nil
     end
+  end
+  
+  def char_codes items
+    codes = []; for item in items
+      for char in (item.body.present? ? item.body : item.image.to_s).split("")
+        codes << char.codepoints.first * 0.01
+      end
+    end
+    return codes
   end
   
   def anon_token

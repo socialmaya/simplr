@@ -1,14 +1,17 @@
+<script>
+  <%= render "posts/infinite_scroll.js" %>
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <div class="card">
   <%= render "posts/form" %>
 </div>
 
-<% @posts.each do |post| %>
-  <%= render "posts/card", post: post %>
-<% end %>
+<div id="feed_container_anchor"></div>
+<%= render "posts/feed_container" %>
 
-<% if @posts.empty? %>
+<% if @items.empty? %>
   <div class="card">
     <p align="center">
       There aren't any posts yet.

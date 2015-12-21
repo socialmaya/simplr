@@ -4,14 +4,18 @@
     <%= render "users/anon_avatar", token: post.anon_token, position: :token_card_link %>
   <% end %>
   
-  <div align="center" class="standard_body">
-    <% if post.image %>
-      <%= link_to post do %>
+  <div align="center">
+    <% if post.image.url %>
+      <% unless @post_shown %>
+        <%= link_to post do %>
+          <%= image_tag post.image, class: :standard_image %>
+        <% end %>
+      <% else %>
         <%= image_tag post.image, class: :standard_image %>
       <% end %>
     <% end %>
     
-    <p><%= post.body %></p>
+    <p class="standard_body"><%= post.body %></p>
   </div>
   
   <%= link_to 'Show', post, class: :top_right_link %>

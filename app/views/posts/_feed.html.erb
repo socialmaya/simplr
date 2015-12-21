@@ -1,0 +1,7 @@
+<% @items.each do |post| %>
+  <%= render "posts/card", post: post %>
+<% end %>
+
+<% unless @items.size < page_size %>
+	<div id="more_content_anchor"></div>
+<% end %>
