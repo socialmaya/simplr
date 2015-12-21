@@ -12,9 +12,21 @@
       </div>
     <% end %>
     
-    <div class="field">
-      <%= f.text_area :body, placeholder: "Yo dawg, post something cool..." %>
-    </div>
+		<table>
+			<tr>
+				<td>
+          <%= f.text_area :body, placeholder: "Yo dawg, post something cool..." %>
+				</td>
+				<td>
+					<%= link_to add_post_image_path, remote: true do %>
+						<i class="fa fa-picture-o"></i>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+		
+		<p id="hidden_file_field" hidden><%= f.file_field :image %></p>
+    
     <div class="actions">
       <%= f.submit "Post" %>
     </div>

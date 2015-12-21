@@ -5,8 +5,13 @@
   <% end %>
   
   <div align="center" class="standard_body">
+    <% if post.image %>
+      <%= link_to post do %>
+        <%= image_tag post.image, class: :standard_image %>
+      <% end %>
+    <% end %>
+    
     <p><%= post.body %></p>
-    <p><%= post.image %></p>
   </div>
   
   <%= link_to 'Show', post, class: :top_right_link %>

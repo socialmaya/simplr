@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # posts
-  get 'posts/add_image', as: 'add_image'
+  get 'posts/add_image', as: 'add_post_image'
   
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'
