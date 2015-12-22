@@ -4,7 +4,7 @@
     <%= render "users/anon_avatar", token: post.anon_token, position: :token_card_link %>
   <% elsif post.user_id %>
     <%= link_to user_path(post.user), class: :user_avatar_link do %>
-      <%= image_tag post.user.image, class: :avatar_container %>
+      <%= image_tag post.user.image, class: :user_avatar_image %>
     <% end %>
   <% end %>
   

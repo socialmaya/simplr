@@ -4,8 +4,13 @@
 
 .user_avatar_link {
 	position: absolute;
-	left: 1.5px;
-	top: -0.5px;
+	left: 0px;
+	top: 0px;
+}
+
+.user_avatar_image {
+  width: 25.5px;
+  height: 23px;
 }
 
 .current_token_link {
