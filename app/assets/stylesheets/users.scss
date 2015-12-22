@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user_avatar_link {
+	position: absolute;
+	left: 1.5px;
+	top: -0.5px;
+}
+
 .current_token_link {
 	position: absolute;
 	right: 11.5px;

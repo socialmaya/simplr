@@ -33,7 +33,12 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.anon_token = anon_token unless current_user
+    
+    if current_user
+      @post.user_id = current_user.id
+    else
+      @post.anon_token = anon_token
+    end
 
     respond_to do |format|
       if @post.save

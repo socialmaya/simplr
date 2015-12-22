@@ -2,6 +2,10 @@
   <div class="card_corner_cut_out"></div>
   <% if post.anon_token.present? %>
     <%= render "users/anon_avatar", token: post.anon_token, position: :token_card_link %>
+  <% elsif post.user_id %>
+    <%= link_to user_path(post.user), class: :user_avatar_link do %>
+      <%= image_tag post.user.image, class: :avatar_container %>
+    <% end %>
   <% end %>
   
   <div align="center">
