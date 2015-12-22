@@ -1,21 +1,43 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="card">
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+	  <p>Sign up</p>
+	
+	  <p>
+  	  <%= link_to "Already signed up?", sessions_new_path %>
+    </p>
+    
+    <div align="center">
+      <p>
+	      <%= f.text_field :name, placeholder: "Username" %>
+	    </p>
+	    <p>
+	      <%= f.text_field :email, placeholder: "Email (optional)" %>
+	    </p>
+	    <p>
+	      <%= f.password_field :password, placeholder: "Password" %>
+	    </p>
+	    <p>
+	      <%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
+	    </p>
+      <button type="submit" name="commit">
+	      <b>Sign up <i class="fa fa-pencil"></i></b>
+      </button>
     </div>
+    
+	  <p id="remember_me_check_box">
+		  Remember me <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+	  </p>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

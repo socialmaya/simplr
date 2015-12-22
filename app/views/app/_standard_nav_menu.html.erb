@@ -6,5 +6,11 @@
   
   <%= link_to "Home", root_url, id: :standard_nav_menu_link %>
 	
+	<% unless current_user %>
+  	<%= link_to "Sign up", new_user_path, id: :standard_nav_menu_link %>
+  <% else %>
+  	<%= link_to "Log out", sessions_destroy_path, id: :standard_nav_menu_link %>
+	<% end %>
+	
 	<%= link_to "Groups", groups_path, id: :standard_nav_menu_link %>
 </div>

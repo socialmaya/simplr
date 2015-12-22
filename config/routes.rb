@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # sessions
+  get 'sessions/new'
+  post 'sessions/create', as: 'sessions'
+  get 'sessions/destroy'
+  
   # posts
   get 'posts/add_image', as: 'add_post_image'
   
