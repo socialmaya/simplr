@@ -20,9 +20,11 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    current_user.update_token
-    cookies.delete(:auth_token)
-    flash[:notice] = "Log out successful."
+    if current_user
+      current_user.update_token
+      cookies.delete(:auth_token)
+      flash[:notice] = "Log out successful."
+    end
     redirect_to root_url
   end
 end
