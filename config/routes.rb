@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # posts
   get 'posts/add_image', as: 'add_post_image'
   
+  # search
+  get 'search', to: 'search#index', as: 'search'
+  
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
