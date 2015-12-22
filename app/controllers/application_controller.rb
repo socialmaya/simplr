@@ -56,12 +56,17 @@ class ApplicationController < ActionController::Base
   end
   
   def anon_token
-    if cookies[:token_timestamp].nil? or \
-      cookies[:token_timestamp].to_datetime < 1.week.ago
-      cookies.permanent[:token] = SecureRandom.urlsafe_base64
-      cookies.permanent[:token_timestamp] = DateTime.current
+    unless current_user # signed up and and logged in
+      if cookies[:token_timestamp].nil? or \
+        cookies[:token_timestamp].to_datetime < 1.week.ago
+        cookies.permanent[:token] = SecureRandom.urlsafe_base64
+        cookies.permanent[:token_timestamp] = DateTime.current
+      end
+      token = cookies[:token].to_s
+    else
+      token = nil
     end
-    return cookies[:token].to_s
+    return token
   end
 
   def current_user

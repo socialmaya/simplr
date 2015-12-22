@@ -1,9 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="card">
+  <div align="center">
+    <% if @user.image.url %>
+      <%= image_tag @user.image, class: :standard_image %>
+    <% end %>
+    
+    <p>
+      <%= @user.name %>
+    </p>
+    
+    <% if @user.bio.present? %>
+      <p>
+        <%= @user.bio %>
+      </p>
+    <% end %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="card">
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+</div>

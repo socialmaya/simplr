@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_confirmation_of :password
   
-  before_create :encrypt_password, :generate_token
+  before_create :encrypt_password, :generate_token, :gen_unique_token
   
   mount_uploader :image, ImageUploader
   
@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def gen_unique_token
+    self.unique_token = SecureRandom.urlsafe_base64
+  end
   
   def encrypt_password
     if self.password.present?

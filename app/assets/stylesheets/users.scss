@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.current_token_link {
+	position: absolute;
+	right: 11.5px;
+	top: 10px;
+}
+
 .avatar_container {
 	width: 25px;
 	height: 25px;

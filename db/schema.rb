@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221234620) do
+ActiveRecord::Schema.define(version: 20151222062627) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20151221234620) do
     t.string   "email"
     t.string   "password"
     t.string   "password_salt"
+    t.string   "unique_token"
   end
 
 end
