@@ -1,11 +1,6 @@
 class PagesController < ApplicationController
   def more
-    relevant_items = if params[:posts]
-      Post.all
-    else
-      []
-    end
-    if session[:page].nil? or session[:page] * page_size <= relevant_items.size
+    if session[:page].nil? or session[:page] * page_size <= Post.all.size
       if session[:page]
         session[:page] += 1
       else
