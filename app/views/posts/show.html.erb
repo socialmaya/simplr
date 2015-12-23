@@ -1,5 +1,7 @@
 <%= render "posts/card", post: @post %>
 
-<div class="card">
-  <%= link_to 'Back', root_url %>
-</div>
+<% for comment in @comments %>
+  <%= render "comments/card", comment: comment %>
+<% end %>
+
+<%= render "comments/form" %>

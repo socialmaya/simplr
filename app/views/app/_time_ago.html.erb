@@ -1,0 +1,5 @@
+<% _time_ago = time_ago(time_ago_in_words(item.created_at)) %>
+<%= link_to item, class: :top_right_link do %>
+  <strong><%= _time_ago %></strong>
+<% end %>
+

@@ -17,7 +17,13 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post_shown = true
+    if @post
+      @post_shown = true
+      @comment = Comment.new
+      @comments = @post.comments
+    else
+      redirect_to '/404'
+    end
   end
 
   # GET /posts/new
