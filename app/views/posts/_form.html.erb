@@ -1,29 +1,31 @@
-<%= form_for(@post) do |f| %>
-  <div align="center">
-    <% if @post.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="card">
+  <%= form_for(@post) do |f| %>
+    <div align="center">
+      <% if @post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-        <ul>
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-    
-    <%= f.text_area :body, placeholder: "Post something cool..." %>
+          <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <%= f.text_area :body, placeholder: "Post something cool..." %>
 
-		<%= link_to add_post_image_path, remote: true, id: :add_image_icon_link do %>
-			<i class="fa fa-picture-o fa-2x"></i>
-		<% end %>
+		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link do %>
+			  <i class="fa fa-picture-o fa-2x"></i>
+		  <% end %>
 		
-		<p id="hidden_file_field" hidden><%= f.file_field :image %></p>
-    
-    <p>
-	    <button type="submit" name="commit" id="new_post_form_button">
-	      <b>Post <i class="fa fa-pencil"></i></b>
-	    </button>
-	  </p>
-  </div>
-<% end %>
+		  <p id="hidden_file_field" hidden><%= f.file_field :image %></p>
+      
+      <p>
+	      <button type="submit" name="commit" id="new_post_form_button">
+	        <b>Post <i class="fa fa-pencil"></i></b>
+	      </button>
+	    </p>
+    </div>
+  <% end %>
+</div>

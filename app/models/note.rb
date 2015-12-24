@@ -1,7 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :user
   before_create :write_message
-  validates_presence_of :message
   
   scope :unseen, -> { where seen: [nil, false] }
   

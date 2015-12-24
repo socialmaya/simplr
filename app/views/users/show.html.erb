@@ -16,9 +16,21 @@
       </p>
     <% end %>
   </div>
+  <%= link_to 'Edit', edit_user_path(@user), class: :top_right_link %>
 </div>
 
-<div class="card">
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
-</div>
+<%= render "posts/form" %>
+
+<% for post in @posts %>
+  <%= render "posts/card", post: post %>
+<% end %>
+
+<% if @posts.empty? %>
+  <div class="card">
+    <p align="center">
+      You haven't posted anything yet.
+    </p>
+  </div>
+<% end %>
+
+

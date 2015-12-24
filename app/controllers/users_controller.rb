@@ -30,6 +30,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @post = Post.new
+    @posts = @user.posts
   end
 
   # GET /users/1/edit
