@@ -26,6 +26,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
+    if current_user
+      @comment.user_id = current_user.id
+    else
+      @comment.anon_token = anon_token
+    end
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
