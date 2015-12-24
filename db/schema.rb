@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222091950) do
+ActiveRecord::Schema.define(version: 20151224123046) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(version: 20151222091950) do
     t.integer  "group_id"
     t.text     "body"
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "anon_token"
+    t.string   "receiver_token"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -50,9 +51,11 @@ ActiveRecord::Schema.define(version: 20151222091950) do
     t.string   "message"
     t.string   "action"
     t.boolean  "seen"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "anon_token"
+    t.string   "sender_token"
+    t.integer  "item_id"
   end
 
   create_table "posts", force: :cascade do |t|
