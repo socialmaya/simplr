@@ -3,7 +3,7 @@ class NotesController < ApplicationController
     @notes = if current_user
       current_user.notes.unseen
     else
-      Note.where(receiver_token: anon_token).unseen
+      Note.where(anon_token: anon_token).unseen
     end
   end
 end

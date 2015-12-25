@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :groups
   
@@ -25,8 +26,7 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate login, password
-    user = find_by_name login.downcase
-    user = find_by_email login.downcase unless user
+    user = self.find_by_name login; user = self.find_by_email login unless user
     if user && user.password == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else

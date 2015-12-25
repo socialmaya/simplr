@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # posts
   get 'posts/add_image', as: 'add_post_image'
   
+  # notes
+  get 'notes/index', as: 'notes'
+  
   # search
   get 'search', to: 'search#index', as: 'search'
   

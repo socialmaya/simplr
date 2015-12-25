@@ -1,13 +1,10 @@
 <script>
   <%= render "posts/infinite_scroll.js" %>
-  <%= render "app/fader.js", target: "logo_header_", target_id: "0" %>
 </script>
 
 <p id="notice"><%= notice %></p>
 
-<div class="card">
-  <%= render "posts/form" %>
-</div>
+<%= render "posts/form" %>
 
 <div id="feed_container_anchor"></div>
 <%= render "posts/feed_container" %>
