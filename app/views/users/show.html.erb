@@ -16,7 +16,9 @@
       </p>
     <% end %>
   </div>
-  <%= link_to 'Edit', edit_user_path(@user), class: :top_right_link %>
+  <% if @user.id.eql? current_user.id %>
+    <%= link_to 'Edit', edit_user_path(@user), class: :top_right_link %>
+  <% end %>
 </div>
 
 <%= render "posts/form" %>
