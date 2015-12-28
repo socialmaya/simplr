@@ -4,12 +4,14 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.all.reverse
+    @group = Group.new
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @post = Post.new
   end
 
   # GET /groups/new
@@ -25,7 +27,11 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    if current_user
+      @group.user_id = current_user.id
+    else
+      @group.anon_token = anon_token
+    end
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -69,6 +75,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description)
+      params.require(:group).permit(:name, :description, :image)
     end
 end

@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @all_items = Post.all.reverse
+    @all_items = Post.where(group_id: nil).reverse
     @items = paginate @all_items
     @char_codes = char_codes @items
     @post = Post.new
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    
+    @post.group_id = params[:group_id]
     if current_user
       @post.user_id = current_user.id
     else

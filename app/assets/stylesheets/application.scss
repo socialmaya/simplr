@@ -35,6 +35,11 @@ $x_left_gap: 5px;
 	position: absolute;
 }
 
+@mixin standard_form_element {
+  width: 55%;
+  max-width: 275px;
+}
+
 html {
 	font-family: Helvetica;
 	background: black;
@@ -108,14 +113,15 @@ textarea {
 }
 
 .standard_form_button {
+  @include standard_form_element;
   height: 35px;
-  width: 200px;
   background: white;
 }
 
 .standard_text_field {
-  width: 75%;
+  @include standard_form_element;
   margin-bottom: 7.5px;
+  display: block;
 }
 
 .standard_page_header {

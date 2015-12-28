@@ -13,6 +13,8 @@
         </div>
       <% end %>
       
+      <%= hidden_field_tag :group_id, @group.id if @group %>
+      
       <%= f.text_area :body, placeholder: "Post something cool..." %>
 
 		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link do %>

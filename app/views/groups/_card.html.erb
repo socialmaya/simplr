@@ -1,0 +1,17 @@
+<div class="card">
+  <div align="center">
+    <p>
+    <%= link_to group.name, group %>
+    </p>
+    
+    <% if group.image.url %>
+      <%= image_tag group.image, class: :standard_image %>
+    <% end %>
+    
+    <p><%= group.description %></p>
+  </div>
+  
+  <%= render "app/time_ago", item: group %>
+  <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>
+  <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: :bottom_left_link %>
+</div>
