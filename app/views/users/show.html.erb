@@ -18,6 +18,8 @@
   </div>
   <% if @user.id.eql? current_user.id %>
     <%= link_to 'Edit', edit_user_path(@user), class: :top_right_link %>
+  <% else %>
+    <%= link_to 'Message', "/#", class: :top_right_link %>
   <% end %>
 </div>
 

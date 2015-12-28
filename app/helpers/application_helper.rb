@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def fa_icon icon, label=''
+    str = %Q[<i class="fa fa-#{icon}"></i>] + " " + label
+    return str.html_safe
+  end
+  
 	def random_color
 		rgb = []; 3.times { rgb << Random.rand(1..255) }
 		return rgb

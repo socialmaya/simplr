@@ -4,17 +4,17 @@
   <%= link_to '<i class="fa fa-times fa-2x"></i>'.html_safe, toggle_menu_path,
     remote: true, id: :standard_nav_menu_link, align: :right %>
   
-  <%= link_to "Home", root_url, id: :standard_nav_menu_link %>
+  <%= link_to fa_icon("home", "Home"), root_url, id: :standard_nav_menu_link %>
 	
-	<%= link_to "Notes#{': ' + currently_unseen_notes.size.to_s unless currently_unseen_notes.size.zero?}",
+	<%= link_to fa_icon("bell-o", "Notes#{': ' + currently_unseen_notes.size.to_s unless currently_unseen_notes.size.zero?}"),
 	  notes_path, id: :standard_nav_menu_link %>
 	
-	<%= link_to "Groups", groups_path, id: :standard_nav_menu_link %>
+	<%= link_to fa_icon("cubes", "Groups"), groups_path, id: :standard_nav_menu_link %>
 	
 	<% unless current_user %>
-  	<%= link_to "Sign up", new_user_path, id: :standard_nav_menu_link %>
-  	<%= link_to "Log in", sessions_new_path, id: :standard_nav_menu_link %>
+  	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, id: :standard_nav_menu_link %>
+  	<%= link_to fa_icon("sign-in", "Log in"), sessions_new_path, id: :standard_nav_menu_link %>
   <% else %>
-  	<%= link_to "Log out", sessions_destroy_path, id: :standard_nav_menu_link %>
+  	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, id: :standard_nav_menu_link %>
 	<% end %>
 </div>
