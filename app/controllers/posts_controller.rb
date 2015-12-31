@@ -49,7 +49,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         Tag.extract @post #extracts any hashtags along with their position in the text
-        format.html { redirect_to posts_url, notice: 'Post was successfully created.' }
+        format.html { redirect_to (@post.group.present? ? @post.group : posts_url),
+          notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }

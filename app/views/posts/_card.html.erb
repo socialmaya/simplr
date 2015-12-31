@@ -3,18 +3,22 @@
   
   <div align="center">
     <% if post.image.url %>
-      <% unless @post_shown %>
-        <%= link_to post do %>
+      <p class="standard_post_image">
+        <% unless @post_shown %>
+          <%= link_to post do %>
+            <%= image_tag post.image, class: :standard_image %>
+          <% end %>
+        <% else %>
           <%= image_tag post.image, class: :standard_image %>
         <% end %>
-      <% else %>
-        <%= image_tag post.image, class: :standard_image %>
-      <% end %>
+      </p>
     <% end %>
     
-	  <p class="standard_body" class="<%= 'justified_body_text' if post.body.size > 150 %>">
-      <%= render "app/body", item: post %>
-		</p>
+    <% if post.body.present? %>
+	    <p class="standard_body" class="<%= 'justified_body_text' if post.body.size > 150 %>">
+        <%= render "app/body", item: post %>
+		  </p>
+		<% end %>
   </div>
   
   <%= render "app/time_ago", item: post %>

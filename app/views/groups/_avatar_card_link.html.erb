@@ -1,0 +1,8 @@
+<div class="group_card_corner_cut_out"></div>
+<%= link_to group, class: :group_avatar_link do %>
+  <% if group.image.url %>
+    <%= image_tag group.image, class: :group_avatar_image %>
+  <% else %>
+    <%= fa_icon "cubes fa-2x group_placeholder_icon" %>
+  <% end %>
+<% end %>

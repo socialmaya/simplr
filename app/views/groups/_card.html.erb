@@ -1,13 +1,10 @@
 <div class="card">
+  <%= render "groups/avatar_card_link", group: group %>
+    
   <div align="center">
     <p>
-    <%= link_to group.name, group %>
-    </p>
-    
-    <% if group.image.url %>
-      <%= image_tag group.image, class: :standard_image %>
-    <% end %>
-    
+      <%= link_to group.name, group %>
+    </p>    
     <p><%= group.description %></p>
   </div>
   
