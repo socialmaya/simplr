@@ -31,13 +31,15 @@ function background_fader() {
 	  // actually applies change
 	  var color = "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")";
 	  var target1 = $("html");
-	  var target2 = $("#menu_link_container");
-	  var target3 = $("#scroll_to_top_link_container");
-	  var target4 = $(".card_corner_cut_out");
+	  var target2 = $("#standard_nav_menu");
+	  var target3 = $("#menu_link_container");
+	  var target4 = $("#scroll_to_top_link_container");
+	  var target5 = $(".card_corner_cut_out");
 	  target1.css("background", color);
 	  target2.css("background", color);
 	  target3.css("background", color);
-	  target4.each(function() {
+	  target4.css("background", color);
+	  target5.each(function() {
 	    $(this).css("background", color);
 	  });
   }, change_speed);
