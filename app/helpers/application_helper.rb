@@ -4,8 +4,9 @@ module ApplicationHelper
     return str.html_safe
   end
   
-	def random_color
+	def random_color as_str=nil
 		rgb = []; 3.times { rgb << Random.rand(1..255) }
+		rgb = "#{ rgb[0] }, #{ rgb[1] }, #{ rgb[2] }" if as_str
 		return rgb
 	end
 	
