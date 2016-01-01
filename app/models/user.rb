@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :connections, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notes, dependent: :destroy
@@ -13,6 +14,22 @@ class User < ActiveRecord::Base
   before_create :encrypt_password, :generate_token, :gen_unique_token
   
   mount_uploader :image, ImageUploader
+  
+  def following
+    _following = []
+    self.connections.each do |connection|
+      _following << connection.user if connection.user
+    end
+    return _following
+  end
+  
+  def followers
+    _followers = []
+    Connection.where(other_user_id: self.id).each do |connection|
+      _followers << connection.user if connection.user
+    end
+    return _followers
+  end
   
   def update_token
     self.generate_token
