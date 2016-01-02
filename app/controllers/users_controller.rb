@@ -30,8 +30,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @post = Post.new
-    @posts = @user.posts
+    if @user
+      @post = Post.new
+      @posts = @user.posts
+      @user_shown = true
+    end
   end
 
   # GET /users/1/edit

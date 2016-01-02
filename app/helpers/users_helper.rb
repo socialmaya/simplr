@@ -1,6 +1,8 @@
 module UsersHelper
   def this_user_current?
-    current_user and @user and current_user.id.eql? @user.id
+    if current_user and @user and @user_shown and current_user.id.eql? @user.id
+      true
+    end
   end
   
   def avatar_pattern chars

@@ -5,8 +5,8 @@ function background_fader() {
   var fat_rgb = [false, false, false]; // ensures pos/neg
   var color_min = 25; // when it should go back up
   var color_max = 255; // when color should go back down
-  var change_rate = 0.5; // added/subbed each round
-  var change_speed = 10; // interval speed
+  var change_rate = 0.25; // added/subbed each round
+  var change_speed = 15; // interval speed, higher==slower
 
   for (var i=0; i < rgb.length; i++) {
 	  rgb[i] = Math.round(Math.random() * 255);
