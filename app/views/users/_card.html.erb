@@ -1,0 +1,21 @@
+<div class="card">
+  <div align="center">
+    <% if user.image.url %>
+      <%= image_tag user.image, class: :profile_picture %>
+    <% end %>
+    
+    <p>
+      <strong><%= user.name %></strong><%= ": " + user.bio if user.bio.present? %>
+    </p>
+    
+    <% if this_user_current? %>
+      <%= link_to 'Edit', edit_user_path(user), class: :top_right_link %>
+    <% else %>
+      <% unless current_user.following? user %>
+        <%= link_to 'Follow <i class="fa fa-user-plus"></i>'.html_safe, follow_path(user.id), method: :post %>
+      <% else %>
+        <%= link_to 'Unfollow <i class="fa fa-user-times"></i>'.html_safe, unfollow_path(user.id), method: :delete %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

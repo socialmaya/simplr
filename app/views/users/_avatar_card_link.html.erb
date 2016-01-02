@@ -2,7 +2,7 @@
 <% if item.anon_token.present? %>
   <%= render "users/anon_avatar", token: item.anon_token, position: :token_card_link %>
 <% elsif item.user_id %>
-  <%= link_to user_path(item.user), class: :user_avatar_link do %>
+  <%= link_to user_path(item.user), class: :user_avatar_link, title: "#{item.user.name}" do %>
     <%= image_tag item.user.image, class: :user_avatar_image %>
   <% end %>
 <% end %>

@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   def following
     _following = []
     self.connections.each do |connection|
-      _following << connection.user if connection.user
+      _following << User.find_by_id(connection.other_user_id)
     end
     return _following
   end
