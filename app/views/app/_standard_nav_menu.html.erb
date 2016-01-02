@@ -2,22 +2,27 @@
 
 <div id="standard_nav_menu" hidden>
   <%= link_to '<i class="fa fa-times fa-2x"></i>'.html_safe, toggle_menu_path,
-    remote: true, id: :standard_nav_menu_link, align: :right %>
+    remote: true, id: :standard_nav_menu_link, align: :right, title: "Exit menu" %>
   
-  <%= link_to fa_icon("home", "Home"), root_url, id: :standard_nav_menu_link %>
+  <%= link_to fa_icon("home", "Home"), root_url, id: :standard_nav_menu_link,
+    title: "Home is where the main feed is, consisting of posts and groups, in reverse chronological order." %>
 	
 	<%= link_to fa_icon("bell-o", "Notes#{': ' + currently_unseen_notes.size.to_s unless currently_unseen_notes.size.zero?}"),
-	  notes_path, id: :standard_nav_menu_link %>
+	  notes_path, id: :standard_nav_menu_link, title: "See what's happening..." %>
 	
-	<%= link_to fa_icon("search", "Search"), search_path, id: :standard_nav_menu_link %>
+	<%= link_to fa_icon("search", "Search"), search_path, id: :standard_nav_menu_link,
+	  title: "Search for groups, users, posts, comments, etc." %>
 	
-	<%= link_to fa_icon("cubes", "Groups"), groups_path, id: :standard_nav_menu_link %>
+	<%= link_to fa_icon("cubes", "Groups"), groups_path, id: :standard_nav_menu_link,
+	  title: "Click here to see all of the groups you've joined." %>
 	
 	<% unless current_user %>
-  	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, id: :standard_nav_menu_link %>
+  	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, id: :standard_nav_menu_link,
+  	  title: "Click here to sign up and see way less ads." %>
   	<%= link_to fa_icon("sign-in", "Log in"), sessions_new_path, id: :standard_nav_menu_link %>
   <% else %>
 	  <%= link_to fa_icon("users", "Following"), following_path(current_user.id), id: :standard_nav_menu_link %>
-  	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, id: :standard_nav_menu_link %>
+  	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, id: :standard_nav_menu_link,
+  	  title: "Click here to destroy your cookie." %>
 	<% end %>
 </div>
