@@ -1,4 +1,8 @@
 module UsersHelper
+  def this_user_current?
+    current_user and @user and current_user.id.eql? @user.id
+  end
+  
   def avatar_pattern chars
     # pattern based on chars, in following order:
     # pixels chosen, colors chosen

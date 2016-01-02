@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # connections
+  post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
+  delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'
+  get 'users/:user_id/following', to: 'connections#following', as: 'following'
+  get 'users/:user_id/followers', to: 'connections#followers', as: 'followers'
+  
   # sessions
   get 'sessions/new'
   post 'sessions/create', as: 'sessions'

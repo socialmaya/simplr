@@ -15,6 +15,19 @@ class User < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   
+  def following? other_user
+    self.connections.where(other_user_id: other_user.id).present?
+  end
+  
+  def follow other_user
+    self.connections.create other_user_id: other_user.id
+  end
+  
+  def unfollow other_user
+    connection = self.connections.find_by_other_user_id(other_user.id)
+    connection.destroy if connection
+  end
+  
   def following
     _following = []
     self.connections.each do |connection|

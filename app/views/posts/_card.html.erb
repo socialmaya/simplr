@@ -3,13 +3,13 @@
   
   <div align="center">
     <% if post.image.url %>
-      <p class="standard_post_image">
+      <p>
         <% unless @post_shown %>
           <%= link_to post do %>
-            <%= image_tag post.image, class: :standard_image %>
+            <%= image_tag post.image, class: :standard_post_image %>
           <% end %>
         <% else %>
-          <%= image_tag post.image, class: :standard_image %>
+          <%= image_tag post.image, class: :standard_post_image %>
         <% end %>
       </p>
     <% end %>

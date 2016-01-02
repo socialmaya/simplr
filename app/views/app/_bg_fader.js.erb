@@ -35,11 +35,15 @@ function background_fader() {
 	  var target3 = $("#menu_link_container");
 	  var target4 = $("#scroll_to_top_link_container");
 	  var target5 = $(".card_corner_cut_out");
+	  var target6 = $(".group_card_corner_cut_out");
 	  target1.css("background", color);
 	  target2.css("background", color);
 	  target3.css("background", color);
 	  target4.css("background", color);
 	  target5.each(function() {
+	    $(this).css("background", color);
+	  });
+	  target6.each(function() {
 	    $(this).css("background", color);
 	  });
   }, change_speed);
