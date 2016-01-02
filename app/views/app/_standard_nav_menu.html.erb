@@ -5,7 +5,7 @@
     remote: true, id: :standard_nav_menu_link, align: :right, title: "Exit menu" %>
   
   <%= link_to fa_icon("home", "Home"), root_url, id: :standard_nav_menu_link,
-    title: "Home is where the main feed is, consisting of posts and groups, in reverse chronological order." %>
+    title: "Home consists of posts and groups, in reverse chronological order." %>
 	
 	<%= link_to fa_icon("bell-o", "Notes#{': ' + currently_unseen_notes.size.to_s unless currently_unseen_notes.size.zero?}"),
 	  notes_path, id: :standard_nav_menu_link, title: "See what's happening..." %>
