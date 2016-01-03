@@ -19,7 +19,6 @@ gem 'area'
 # user agent detection
 gem 'useragent'
 gem 'browser'
-gem 'bot-away'
 gem 'voight_kampff'
 gem "simple_captcha2"
 

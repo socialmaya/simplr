@@ -4,11 +4,11 @@ echo "\nCopying...\n"
 
 cd ~/Code/GitHub/
 
-rm -rf anrcho/*
+rm -rf simplr/*
 
-cp -r ~/Code/rails/anrcho/ ~/Code/GitHub/anrcho/
+cp -r ~/Code/rails/simplr/ ~/Code/GitHub/simplr/
 
-cd ~/Code/GitHub/anrcho
+cd ~/Code/GitHub/simplr
 
 echo "Committing...\n"
 

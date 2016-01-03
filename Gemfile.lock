@@ -43,9 +43,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bot-away (2.0.1)
-      actionpack (>= 2.3.5)
-    browser (1.0.1)
+    browser (1.1.0)
     buftok (0.2.0)
     builder (3.2.2)
     byebug (8.2.1)
@@ -75,21 +73,13 @@ GEM
     fastercsv (1.5.5)
     font-awesome-sass (4.5.0)
       sass (>= 3.2)
-    geo-distance (0.2.0)
-      geo_point (~> 0.2.5)
-      geo_units (~> 0.2.4.1)
-    geo_calc (0.7.6)
-      activesupport (>= 3.0.1)
-      geo_units (~> 0.2.1)
+    geo-distance (0.1.2)
+    geo_units (0.3.1.1)
+      activesupport
       i18n
-      require_all (~> 1.2.0)
-      sugar-high (~> 0.4.6.3)
-    geo_point (0.2.5)
-      geo_calc (~> 0.7.5)
-      geo_units (~> 0.2.1)
-    geo_units (0.2.4.1)
-      sugar-high (~> 0.4.6.2)
-    geocoder (1.2.13)
+      sugar-high (>= 0.6.0)
+      sweetloader
+    geocoder (1.2.14)
     geoip (1.6.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -105,8 +95,8 @@ GEM
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    jbuilder (2.3.2)
-      activesupport (>= 3.0.0, < 5)
+    jbuilder (2.4.0)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
@@ -161,10 +151,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    rdoc (4.2.0)
+    rdoc (4.2.1)
       json (~> 1.4)
     remotipart (1.2.1)
-    require_all (1.2.1)
     rmagick (2.15.4)
     sass (3.4.20)
     sass-rails (5.0.4)
@@ -176,10 +165,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simple_captcha2 (0.3.4)
+    simple_captcha2 (0.4.0)
       rails (>= 4.1)
     simple_oauth (0.3.1)
-    spring (1.6.0)
+    spring (1.6.1)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -188,7 +177,10 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.11)
-    sugar-high (0.4.6.4)
+    sugar-high (0.7.3)
+    sweetloader (0.1.6)
+      activesupport (>= 3.0.1)
+      i18n
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -235,7 +227,6 @@ PLATFORMS
 DEPENDENCIES
   area
   bcrypt
-  bot-away
   browser
   byebug
   carrierwave
@@ -264,3 +255,6 @@ DEPENDENCIES
   useragent
   voight_kampff
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2
