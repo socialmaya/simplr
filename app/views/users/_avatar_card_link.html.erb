@@ -1,7 +1,9 @@
 <div class="card_corner_cut_out"></div>
 <% if item.anon_token.present? %>
   <%= render "users/anon_avatar", token: item.anon_token, position: :token_card_link %>
-<% elsif item.user_id %>
+<% elsif item.user and item.user.image.url.nil? %>
+  <%= render "users/anon_avatar", token: item.user.unique_token, position: :token_card_link %>
+<% elsif item.user %>
   <%= link_to user_path(item.user), class: :user_avatar_link, title: "#{item.user.name}" do %>
     <%= image_tag item.user.image, class: :user_avatar_image %>
   <% end %>
