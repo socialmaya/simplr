@@ -18,7 +18,7 @@
 		  <p>Icon: <%= f.file_field :image %></p>
       
       <button type="submit" name="commit" class="standard_form_button">
-        <b><%= @editing ? "Save" : "Create" %> <i class="fa fa-group"></i></b>
+        <b>Create <i class="fa fa-group"></i></b>
       </button>
     </div>
   <% end %>

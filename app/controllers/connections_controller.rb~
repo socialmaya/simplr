@@ -28,11 +28,11 @@ class ConnectionsController < ApplicationController
   end
   
   def invites
-    @group.invites
+  
   end
   
   def requests
-    @group.requests
+  
   end
   
   def following

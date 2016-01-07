@@ -2,6 +2,7 @@
 
 <div class="card">
   <div align="center">
-    <%= link_to 'Back', @group %>
+    <%= link_to 'Show', @group %> |
+    <%= link_to 'Back', groups_path %>
   </div>
 </div>

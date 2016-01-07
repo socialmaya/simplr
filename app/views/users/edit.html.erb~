@@ -19,7 +19,7 @@
 
 <div class="card">
   <div align="center">
-    <%= link_to 'Back', @user %>
+    <%= link_to 'Bask', @user %>
   </div>
 </div>
 
