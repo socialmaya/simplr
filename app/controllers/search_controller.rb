@@ -32,6 +32,9 @@ class SearchController < ApplicationController
     if item.respond_to? :name
       match = true if item.name.present? and scan item.name, query
     end
+    if item.respond_to? :anon_token
+      match = true if item.anon_token.present? and scan item.anon_token, query
+    end
     return match
   end
   
@@ -39,7 +42,7 @@ class SearchController < ApplicationController
     for word in text.split(" ")
       for key_word in query.split(" ")
         if key_word.size > 2
-          if word == key_word.downcase or word == key_word.capitalize \
+          if word.eql? key_word or word.eql? key_word.downcase or word.eql? key_word.capitalize \
             or word.include? key_word.downcase or word.include? key_word.capitalize
             match = true
           end
