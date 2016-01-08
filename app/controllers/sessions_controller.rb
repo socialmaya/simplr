@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = @user.auth_token
       end
       cookies.permanent[:logged_in_before] = true
-      cookies.delete(:token_timestamp)
       redirect_to root_url
     else
       redirect_to :back, notice: "Invalid username, email, or password"
@@ -23,7 +22,6 @@ class SessionsController < ApplicationController
     if current_user
       current_user.update_token
       cookies.delete(:auth_token)
-      cookies.delete(:token_timestamp)
     end
     redirect_to root_url
   end
