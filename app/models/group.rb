@@ -16,11 +16,7 @@ class Group < ActiveRecord::Base
   end
   
   def members
-    _members = []
-    self.connections.current.each do |connection|
-      _members << connection.user if connection.user
-    end
-    return _members
+    self.connections.current
   end
   
   def invites

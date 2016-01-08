@@ -1,5 +1,5 @@
 <div class="card_corner_cut_out"></div>
-<% if item.anon_token.present? %>
+<% if item.respond_to? :anon_token and item.anon_token.present? %>
   <%= render "users/anon_avatar", token: item.anon_token, position: :token_card_link %>
 <% elsif item.user and item.user.image.url.nil? %>
   <%= render "users/anon_avatar", token: item.user.unique_token, position: :token_card_link %>

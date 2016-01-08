@@ -14,8 +14,7 @@ class SessionsController < ApplicationController
       cookies.permanent[:logged_in_before] = true
       redirect_to root_url
     else
-      flash[:error] = "Invalid email or password"
-      redirect_to :back
+      redirect_to :back, notice: "Invalid username, email, or password"
     end
   end
   
@@ -23,7 +22,6 @@ class SessionsController < ApplicationController
     if current_user
       current_user.update_token
       cookies.delete(:auth_token)
-      flash[:notice] = "Log out successful."
     end
     redirect_to root_url
   end

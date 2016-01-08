@@ -1,7 +1,17 @@
 <%= render "groups/card", group: @group %>
 
-<%= render "posts/form" %>
+<% if group_auth @group and @group.requests.present? %>
+  <div class="card">
+    <div align="center">
+      <%= link_to "There are requests pending.", requests_path(@group) %>
+    </div>
+  </div>
+<% end %>
 
-<% for post in @posts %>
-  <%= render "posts/card", post: post %>
+<% if group_auth @group or group_member_auth @group %>
+  <%= render "posts/form" %>
+
+  <% for post in @posts %>
+    <%= render "posts/card", post: post %>
+  <% end %>
 <% end %>
