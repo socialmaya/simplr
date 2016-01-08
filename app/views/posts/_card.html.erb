@@ -22,7 +22,7 @@
   </div>
   
   <%= render "app/time_ago", item: post %>
-  <% if post.user_id.eql? current_user or post.anon_token.eql? anon_token %>
+  <% if current_user and post.user_id.eql? current_user.id %>
     <%= link_to 'Edit', edit_post_path(post), class: :bottom_right_link %>
     <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: :bottom_left_link %>
   <% end %>
