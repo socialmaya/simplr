@@ -29,6 +29,9 @@ class SearchController < ApplicationController
     if item.respond_to? :body
       match = true if item.body.present? and scan item.body, query
     end
+    if item.respond_to? :name
+      match = true if item.name.present? and scan item.name, query
+    end
     return match
   end
   

@@ -16,7 +16,7 @@
     </p>
     
     <% unless this_user_current? %>
-      <% unless current_user.following? user %>
+      <% unless current_user and current_user.following? user %>
         <%= link_to 'Follow <i class="fa fa-user-plus"></i>'.html_safe, follow_path(user.id), method: :post %>
       <% else %>
         <%= link_to 'Unfollow <i class="fa fa-user-times"></i>'.html_safe, unfollow_path(user.id), method: :delete %>

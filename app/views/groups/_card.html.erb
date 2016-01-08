@@ -1,6 +1,6 @@
 <div class="card">
   <%= render "groups/avatar_card_link", group: group %>
-    
+  
   <div align="center">
     <p>
       <%= link_to group.name, group %>
@@ -15,7 +15,7 @@
   
   <% if group_auth group %>
     <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>
-  <% else %>
+  <% elsif current_user %>
     <% if group.members.find_by_user_id current_user.id %>
       <%= link_to 'Leave', leave_group_path(group.id), method: :delete, class: :bottom_right_link %>
     <% elsif not group.requests.find_by_user_id current_user.id %>
