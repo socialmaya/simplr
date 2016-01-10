@@ -22,6 +22,7 @@ class Note < ActiveRecord::Base
   def action_text action
     _actions = { post_comment: "Someone commented on your post.",
       comment_reply: "Someone replied to your comment.",
+      user_follow: "Someone started following you.",
       group_invite: "You've been invited to a group.",
       group_request: "Someone requested to join #{Group.find(self.item_id).name}." }
     return _actions[action.to_sym]

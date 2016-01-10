@@ -1,7 +1,11 @@
 module UsersHelper
-  def this_user_current?
-    if current_user and @user and @user_shown and current_user.id.eql? @user.id
-      true
+  def this_user_current? user=nil
+    if current_user
+      if @user and @user_shown and current_user.id.eql? @user.id
+        true
+      elsif user and current_user.id.eql? user.id
+        true
+      end
     end
   end
   

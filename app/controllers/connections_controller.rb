@@ -11,10 +11,11 @@ class ConnectionsController < ApplicationController
       invite = @group.invite_to_join @user
       Note.notify(:group_invite, nil, @user, current_user) if invite
     elsif @group
-      current_user.request_to_join @group
-      Note.notify(:group_request, @group, @group.creator, current_user)
+      request = current_user.request_to_join @group
+      Note.notify(:group_request, @group, @group.creator, current_user) if request
     elsif @user
-      current_user.follow @user
+      connection = current_user.follow @user
+      Note.notify(:user_follow, nil, @user, current_user) if connection
     end
     redirect_to :back
   end
