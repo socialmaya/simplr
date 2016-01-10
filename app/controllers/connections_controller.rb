@@ -12,6 +12,7 @@ class ConnectionsController < ApplicationController
       Note.notify(:group_invite, nil, @user, current_user) if invite
     elsif @group
       current_user.request_to_join @group
+      Note.notify(:group_request, @group, @group.creator, current_user)
     elsif @user
       current_user.follow @user
     end

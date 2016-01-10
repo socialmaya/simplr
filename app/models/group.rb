@@ -6,6 +6,14 @@ class Group < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def creator
+    if self.user
+      return self.user
+    else
+      return self.anon_token
+    end
+  end
+
   def invite_to_join _user
     invite = self.connections.create user_id: _user.id, invite: true
   end

@@ -1,13 +1,15 @@
 <h2 class="standard_page_header">Notifications <i class="fa fa-bell-o"></i></h2>
 
 <% for note in @notes %>
-  <div class="card">
+  <div class="<%= note.seen ? 'old_item_card' : 'card' %>">
     <p align="center">
       <% case note.action.to_sym %>
       <% when :post_comment %>
         <%= link_to note.message, post_path(note.item_id) %>
       <% when :group_invite %>
         <%= link_to note.message, invites_path(note.user) %>
+      <% when :group_request %>
+        <%= link_to note.message, requests_path(note.item_id) %>
       <% end %>
     </p>
   </div>
@@ -21,4 +23,4 @@
   </div>
 <% end %>
 
-<% @notes.update_all seen: true %>
+<% currently_unseen_notes.update_all seen: true %>

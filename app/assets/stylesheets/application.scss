@@ -69,6 +69,11 @@ textarea {
 	@include card;
 }
 
+.old_item_card {
+  @include card;
+  background: grey;
+}
+
 .top_right_link {
 	@include corner_link;
 	right: $x_right_gap;
