@@ -14,7 +14,7 @@ class Note < ActiveRecord::Base
       sender_id: (sender.is_a?(String) ? nil : (sender.nil? ? nil : sender.id)),
       
       # if one of the users is anonymous / not signed up
-      anon_token: (receiver.is_a?(String) ? receiver : (item.anon_token.present? ? item.anon_token : nil)),
+      anon_token: (receiver.is_a?(String) ? receiver : ((item and item.anon_token.present?) ? item.anon_token : nil)),
       sender_token: (sender.is_a?(String) ? sender : nil)
     )
   end

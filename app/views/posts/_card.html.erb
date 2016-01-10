@@ -1,6 +1,6 @@
 <div class="card">
   <%= render "users/avatar_card_link", item: post %>
-  
+
   <div align="center">
     <% if post.image.url %>
       <p>
@@ -13,20 +13,17 @@
         <% end %>
       </p>
     <% end %>
-    
+
     <% if post.body.present? %>
 	    <p class="standard_body" class="<%= 'justified_body_text' if post.body.size > 150 %>">
         <%= render "app/body", item: post %>
 		  </p>
 		<% end %>
   </div>
-  
+
   <%= render "app/time_ago", item: post %>
   <% if (anon_token and anon_token.eql? post.anon_token) \
     or (current_user and post.user_id.eql? current_user.id) %>
     <%= link_to 'Edit', edit_post_path(post), class: :bottom_right_link %>
-    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: :bottom_left_link %>
   <% end %>
 </div>
-
-

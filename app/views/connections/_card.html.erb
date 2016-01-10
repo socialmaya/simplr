@@ -6,8 +6,9 @@
     if connection.user and (connection.request or !connection.request) %>
   
   <div align="center">
-    <p>
+    <p class="invite_message">
       <%= link_to connection.user.name, connection.user %>
+      <%= " has been invited to join #{connection.group.name}." if connection.invite %>
       <%= " has requested to join." if connection.request %>
     </p>
     

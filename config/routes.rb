@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'
   get 'users/:user_id/following', to: 'connections#following', as: 'following'
   get 'users/:user_id/followers', to: 'connections#followers', as: 'followers'
-  
+
   # user to group connections
   post 'groups/:group_id/request_to_join', to: 'connections#create', as: 'request_to_join'
   post 'users/:user_id/invite_to_join/:group_id', to: 'connections#create', as: 'invite_to_join'
@@ -13,33 +13,34 @@ Rails.application.routes.draw do
   get 'groups/:group_id/members', to: 'connections#members', as: 'members'
   get 'users/:user_id/invites', to: 'connections#invites', as: 'invites'
   get 'group/:group_id/requests', to: 'connections#requests', as: 'requests'
-  
+  get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
+
   # sessions
   get 'sessions/new'
   post 'sessions/create', as: 'sessions'
   get 'sessions/destroy'
-  
+
   # posts
   get 'posts/add_image', as: 'add_post_image'
-  
+
   # notes
   get 'notes/index', as: 'notes'
-  
+
   # search
   get 'search', to: 'search#index', as: 'search'
-  
+
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
   get 'pages/more'
-  
+
   resources :connections
   resources :messages
   resources :comments
   resources :groups
   resources :users
   resources :posts
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

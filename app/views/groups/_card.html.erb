@@ -11,7 +11,7 @@
   </div>
   
   <%= render "app/time_ago", item: group %>
-  <%= link_to "Members: #{group.members.size}", members_path(group), class: :bottom_left_link %>
+  <%= link_to "Members: #{group.members.size + 1}", members_path(group), class: :bottom_left_link %>
   
   <% if group_auth group %>
     <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>

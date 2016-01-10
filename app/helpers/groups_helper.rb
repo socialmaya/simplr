@@ -1,4 +1,12 @@
 module GroupsHelper
+  def group_invite_options
+    options = [["Choose a group", nil]]
+    for group in my_groups
+      options << [group.name, group.id]
+    end
+    return options
+  end
+  
   def my_groups
     _my_groups = []
     if current_user

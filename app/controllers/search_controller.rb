@@ -17,14 +17,20 @@ class SearchController < ApplicationController
               end
             end
           end
+          case @query
+          when "groups"
+            match = true if _class.eql? Group
+          when "users"
+            match = true if _class.eql? User
+          end
           @results << item if match
         end
       end
     end
   end
-  
+
   private
-  
+
   def scan_text item, query, match=false
     if item.respond_to? :body
       match = true if item.body.present? and scan item.body, query
@@ -37,7 +43,7 @@ class SearchController < ApplicationController
     end
     return match
   end
-  
+
   def scan text, query, match=false
     for word in text.split(" ")
       for key_word in query.split(" ")
