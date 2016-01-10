@@ -12,20 +12,20 @@
           </ul>
         </div>
       <% end %>
-      
+
       <%= hidden_field_tag :group_id, @group.id if @group %>
-      
-      <%= f.text_area :body, placeholder: "Post something cool..." %>
+
+      <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""), placeholder: "Post something cool..." %>
 
 		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
 			  <i class="fa fa-picture-o fa-2x"></i>
 		  <% end %>
-		
+
 		  <p id="hidden_file_field" hidden><%= f.file_field :image %></p>
-      
+
       <p>
 	      <button type="submit" name="commit" id="new_post_form_button">
-	        <b>Post <i class="fa fa-pencil"></i></b>
+	        <b><%= @post.id.nil? ? "Post" : "Save" %> <i class="fa fa-pencil"></i></b>
 	      </button>
 	    </p>
     </div>
