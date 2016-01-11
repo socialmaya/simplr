@@ -2,7 +2,7 @@
   <%= render "groups/avatar_card_link", group: connection.group \
     if connection.group and connection.invite %>
     
-  <%= render "users/avatar_card_link", item: connection \
+  <%= render "users/avatar_card_link", user: connection.user, token: connection.anon_token \
     if connection.user and (connection.request or !connection.request) %>
   
   <div align="center">

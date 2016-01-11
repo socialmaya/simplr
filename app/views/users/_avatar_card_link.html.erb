@@ -1,10 +1,13 @@
 <div class="card_corner_cut_out"></div>
-<% if item.respond_to? :anon_token and item.anon_token.present? %>
-  <%= render "users/anon_avatar", token: item.anon_token, position: :token_card_link %>
-<% elsif item.user and item.user.image.url.nil? %>
-  <%= render "users/anon_avatar", token: item.user.unique_token, position: :token_card_link %>
-<% elsif item.user %>
-  <%= link_to user_path(item.user), class: :user_avatar_link, title: "#{item.user.name}" do %>
-    <%= image_tag item.user.image, class: :user_avatar_image %>
+
+<% if defined?(user) and user %>
+  <% if user and user.image.url %>
+    <%= link_to user_path(user), class: :user_avatar_link, title: "#{user.name}" do %>
+      <%= image_tag user.image, class: :user_avatar_image %>
+    <% end %>
+  <% elsif user %>
+    <%= render "users/anon_avatar", token: user.unique_token, position: :token_card_link %>
   <% end %>
+<% elsif defined?(token) and token.present? %>
+  <%= render "users/anon_avatar", token: token, position: :token_card_link %>
 <% end %>
