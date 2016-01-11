@@ -1,0 +1,13 @@
+<h2 class="standard_page_header">Followers <i class="fa fa-users"></i></h2>
+
+<% for user in @followers %>
+  <%= render "users/card", user: user %>
+<% end %>
+
+<% if @followers.empty? %>
+  <div class="card">
+    <p align="center">
+      This user doesn't have any followers yet.
+    </p>
+  </div>
+<% end %>
