@@ -1,3 +1,7 @@
+<% @groups = my_groups.reverse %>
+
+<%= render "groups/form" %>
+
 <% @groups.each do |group| %>
   <%= render "groups/card", group: group %>
 <% end %>
@@ -5,7 +9,7 @@
 <% if @groups.empty? %>
   <div class="card">
     <p align="center">
-      There aren't any groups yet.
+      You aren't in any groups yet.
     </p>
   </div>
 <% end %>

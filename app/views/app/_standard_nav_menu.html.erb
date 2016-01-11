@@ -13,8 +13,8 @@
 	<%= link_to fa_icon("search", "Search"), search_path, id: :standard_nav_menu_link,
 	  title: "Search for groups, users, posts, comments, etc." %>
 	
-	<%= link_to fa_icon("cubes", "Groups"), groups_path, id: :standard_nav_menu_link,
-	  title: "Click here to see all of the groups you've joined." %>
+	<%= link_to fa_icon("cubes", "Groups"), my_groups_path, id: :standard_nav_menu_link,
+	  title: "Click to see all of the groups you're in." %>
 	
 	<% unless current_user %>
   	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, id: :standard_nav_menu_link,
@@ -23,6 +23,6 @@
   <% else %>
 	  <%= link_to fa_icon("users", "Following"), following_path(current_user.id), id: :standard_nav_menu_link %>
   	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, id: :standard_nav_menu_link,
-  	  title: "Click here to destroy your cookie." %>
+  	  title: "Click here to destroy your cookie.", data: { confirm: "Are you sure?" } %>
 	<% end %>
 </div>

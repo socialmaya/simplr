@@ -5,9 +5,12 @@
     <p>
       <%= link_to group.name, group %>
     </p>
-    <p>
-      <%= group.description %>
-    </p>
+    
+    <% if group.body.present? %>
+	    <p class="<%= 'justified_body_text' if group.body.size > 150 %>">
+        <%= render "app/body", item: group %>
+		  </p>
+		<% end %>
   </div>
   
   <%= render "app/time_ago", item: group %>

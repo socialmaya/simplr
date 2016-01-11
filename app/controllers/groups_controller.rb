@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @group = Group.new
+    @groups = Group.all.reverse
   end
 
   # GET /groups/1
@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
     end
     respond_to do |format|
       if @group.save
+        Tag.extract @group
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -76,6 +77,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description, :image)
+      params.require(:group).permit(:name, :body, :image)
     end
 end
