@@ -33,7 +33,8 @@ class CommentsController < ApplicationController
     end
     respond_to do |format|
       if @comment.save
-        Note.notify :post_comment, @comment.post, @comment.post.user, current_user
+        Note.notify :post_comment, @comment.post, @comment.post.user, current_user \
+          unless current_user.eql? @comment.post.user
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
