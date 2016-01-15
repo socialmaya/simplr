@@ -1,4 +1,6 @@
-<h2 class="standard_page_header">Notifications <i class="fa fa-bell-o"></i></h2>
+<%= link_to  clear_notes_path, method: :delete do %>
+  <h2 class="standard_page_header">Notifications <i class="fa fa-bell-o"></i></h2>
+<% end %>
 
 <% for note in @notes %>
   <div class="<%= note.seen ? 'old_item_card' : 'card' %>">

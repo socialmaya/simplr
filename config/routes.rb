@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # notes
   get 'notes/index', as: 'notes'
+  delete 'notes/destroy', as: 'clear_notes'
 
   # search
   get 'search', to: 'search#index', as: 'search'
