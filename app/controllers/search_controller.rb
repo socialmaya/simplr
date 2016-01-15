@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     @query = params[:query].present? ? params[:query] : session[:query]
     session[:query] = @query; @results = []; @results_shown = true
     if @query.present?
-      [User, Post, Comment, Group].each do |_class|
+      [Group, User, Post, Comment].each do |_class|
         _class.all.reverse.each do |item|
           match = false; match_by_tag = false
           # scans all text for query
@@ -22,6 +22,8 @@ class SearchController < ApplicationController
             match = true if _class.eql? Group
           when "users"
             match = true if _class.eql? User
+          when "groups and users", "users and groups"
+            match = true if [Group, User].include? _class
           end
           @results << item if match
         end
