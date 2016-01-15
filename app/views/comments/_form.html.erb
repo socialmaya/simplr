@@ -1,22 +1,14 @@
 <div class="card">
-  <%= form_for(@comment) do |f| %>
-    <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-        <ul>
-        <% @comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <%= form_for((@replying ? @reply : @comment)) do |f| %>
+    
     <%= hidden_field_tag :post_id, @post.id if @post %>
+    <%= hidden_field_tag(:comment_id, @comment.id) if @replying %>
     
     <div align="center">
-      <%= f.text_area :body, placeholder: "Leave a comment..." %>
+      <%= f.text_area :body, placeholder: "Leave a #{ @replying ? 'reply' : 'comment' }..." %>
       <p>
         <button type="submit" name="commit" class="standard_form_button">
-          <b>Comment <i class="fa fa-pencil"></i></b>
+          <b><%= @replying ? "Reply" : "Comment" %> <i class="fa fa-pencil"></i></b>
         </button>
       </p>
     </div>

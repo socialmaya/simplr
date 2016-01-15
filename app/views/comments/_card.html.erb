@@ -2,9 +2,12 @@
   <%= render "users/avatar_card_link", user: comment.user, token: comment.anon_token %>
   
   <div align="center">
-    <p>
-      <%= comment.body %>
-    </p>
+    <% if comment.body.present? %>
+	    <p class="standard_body" class="<%= 'justified_body_text' if comment.body.size > 150 %>">
+        <%= render "app/body", item: comment %>
+		  </p>
+		<% end %>
   </div>
+  
   <%= render "app/time_ago", item: comment %>
 </div>

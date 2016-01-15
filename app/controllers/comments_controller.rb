@@ -10,6 +10,9 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @replying = true
+    @reply = Comment.new
+    @replies = @comment.replies
   end
 
   # GET /comments/new
@@ -26,21 +29,25 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
+    @comment.comment_id = params[:comment_id]
     if current_user
       @comment.user_id = current_user.id
     else
       @comment.anon_token = anon_token
     end
-    respond_to do |format|
-      if @comment.save
+    if @comment.save
+      Tag.extract @comment
+      if @comment.comment
+        Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_user \
+          unless current_user.eql? @comment.comment.user
+        redirect_to @comment.comment
+      elsif @comment.post
         Note.notify :post_comment, @comment.post, @comment.post.user, current_user \
           unless current_user.eql? @comment.post.user
-        format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        redirect_to @comment.post
       end
+    else
+      redirect_to :back
     end
   end
 

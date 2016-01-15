@@ -8,6 +8,8 @@
       <% case note.action.to_sym %>
       <% when :post_comment %>
         <%= link_to note.message, post_path(note.item_id) %>
+      <% when :comment_reply %>
+        <%= link_to note.message, comment_path(note.item_id) %>
       <% when :group_invite %>
         <%= link_to note.message, invites_path(note.user) %>
       <% when :group_request %>

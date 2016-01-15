@@ -1,24 +1,7 @@
-<p id="notice"><%= notice %></p>
+<%= render "comments/card", comment: @comment %>
 
-<p>
-  <strong>User:</strong>
-  <%= @comment.user_id %>
-</p>
+<% for reply in @replies %>
+  <%= render "comments/card", comment: reply %>
+<% end %>
 
-<p>
-  <strong>Post:</strong>
-  <%= @comment.post_id %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @comment.comment_id %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @comment.body %>
-</p>
-
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= render 'comments/form' %>
