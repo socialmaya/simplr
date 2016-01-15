@@ -1,6 +1,6 @@
 <div class="card">
   <%= form_for @user, url: user_path(@user), method: :patch,
-	  :html => {:multipart => true, "data-ajax" => false} do |f| %>
+	  :html => { :multipart => true, "data-ajax" => false } do |f| %>
 	  <div align="center">
       <%= f.text_field :name, placeholder: "Change your name", class: "standard_text_field" %>
       
