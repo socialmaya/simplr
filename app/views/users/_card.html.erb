@@ -2,7 +2,10 @@
   <%= render "users/avatar_card_link", user: user %>
   <div align="center">
     <p>
-      <%= link_to user.name, user, class: :user_name_link %><%= ": " + user.bio if user.bio.present? %>
+      <%= link_to user.name, user, class: :user_name_link %>
+      <% if user.body.present? %>
+        <%= render "app/body", item: user %>
+      <% end %>
     </p>
 
     <% unless this_user_current? user %>

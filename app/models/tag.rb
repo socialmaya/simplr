@@ -17,7 +17,7 @@ class Tag < ActiveRecord::Base
       next unless tag.size > 1
       tag = "#" + tag unless tag.include? "#"
       tag.slice!(",") if tag.include? ","
-      item.tags.create(tag: tag)
+      item.tags.create(tag: tag) unless item.tags.find_by_tag tag
     end
   end
   
@@ -25,7 +25,7 @@ class Tag < ActiveRecord::Base
     text = item.body
     text.split(' ').each do |word|
       if word.include? "#" and word.size > 1
-        item.tags.create(tag: word, index: text.index(word))
+        item.tags.create(tag: word, index: text.index(word)) unless item.tags.find_by_tag word
       end
     end
   end

@@ -11,7 +11,10 @@
     <% end %>
 
     <p>
-      <%= link_to user.name, user, class: :user_name_link %><%= ": " + user.bio if user.bio.present? %>
+      <%= link_to user.name, user, class: :user_name_link %>
+      <% if user.body.present? %>
+        <%= render "app/body", item: user %>
+      <% end %>
       <%= link_to 'Edit <i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? %>
     </p>
 
