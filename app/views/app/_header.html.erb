@@ -11,6 +11,8 @@
 <%= link_to '<i class="fa fa-bars fa-2x"></i>'.html_safe, toggle_menu_path,
   id: :toggle_menu_link, remote: true, title: "Main menu" %>
 
+<%= render "notes/nav_link" %>
+
 <%= render "users/current_avatar" %>
 
 <div id="spacing_header"></div>
