@@ -9,7 +9,8 @@
 <% if @groups.empty? %>
   <div class="card">
     <p align="center">
-      You aren't in any groups yet.
+      You aren't in any groups yet. <%= link_to "Click here",
+        search_path(query: "groups") %> to search for groups to join.
     </p>
   </div>
 <% end %>
