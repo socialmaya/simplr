@@ -35,14 +35,13 @@ class ApplicationController < ActionController::Base
   end
 
   def page_size
-    @page_size = 10
+    @page_size = 5
   end
   
   def reset_page
     # resets back to top
     unless session[:more]
       session[:page] = nil
-      session[:current_proposal_section] = nil
     end
   end
   

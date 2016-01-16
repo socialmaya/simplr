@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def more
-    if session[:page].nil? or session[:page] * page_size <= Post.all.size
+    if session[:page].nil? or session[:page] * page_size <= Post.global.size
       if session[:page]
         session[:page] += 1
       else
@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   private
   
   def build_feed_data
-    @all_items = Post.all.reverse
+    @all_items = Post.global.reverse
     @items = paginate @all_items
     @char_codes = char_codes @items
   end
