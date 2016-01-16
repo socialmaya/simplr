@@ -4,7 +4,7 @@
       <%= hidden_field_tag :user_id, @user.id %>
       <div align="center">
         <p>
-          Invite <%= @user.name %> to one of your groups
+          Invite <%= link_to @user.name, @user %> to one of your groups
         </p>
       
         <p><%= select_tag :group_id, options_for_select(group_invite_options) %></p>
@@ -16,7 +16,7 @@
     <% end %>
   <% elsif @user %>
     <p align="center">
-      You aren't in any groups to invite <%= @user.name %> to.
+      You aren't in any groups to invite <%= link_to @user.name, @user %> to.
     </p>
   <% end %>
 </div>
