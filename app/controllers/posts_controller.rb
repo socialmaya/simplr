@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @all_items = Post.where(group_id: nil).reverse
+    @all_items = Post.global.reverse
     @items = paginate @all_items
     @char_codes = char_codes @items
     @post = Post.new

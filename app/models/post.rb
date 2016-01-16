@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   
+  scope :global, -> { where group_id: nil }
+  
   private
   
   def text_or_image?
