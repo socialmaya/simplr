@@ -1,3 +1,7 @@
+<% if @post.group.present? %>
+  <%= render "app/lineage", line: { group: @post.group, post: @post } %>
+<% end %>
+
 <%= render "posts/card", post: @post %>
 
 <% for comment in @comments %>

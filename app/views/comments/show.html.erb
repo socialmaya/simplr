@@ -1,3 +1,9 @@
+<% if @comment.comment.present? %>
+  <%= render "app/lineage", line: { comment: @comment.comment, reply: @comment } %>
+<% elsif @comment.post.present? %>
+  <%= render "app/lineage", line: { group: @comment.post.group, post: @comment.post, comment: @comment } %>
+<% end %>
+
 <%= render "comments/card", comment: @comment %>
 
 <% for reply in @replies %>
