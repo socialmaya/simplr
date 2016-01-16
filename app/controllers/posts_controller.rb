@@ -45,7 +45,6 @@ class PostsController < ApplicationController
     else
       @post.anon_token = anon_token
     end
-
     respond_to do |format|
       if @post.save
         Tag.extract @post #extracts any hashtags along with their position in the text
@@ -64,6 +63,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        Tag.extract @post
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else

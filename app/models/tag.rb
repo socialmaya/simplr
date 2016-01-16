@@ -28,5 +28,16 @@ class Tag < ActiveRecord::Base
         item.tags.create(tag: word, index: text.index(word)) unless item.tags.find_by_tag word
       end
     end
+    # deletes any tags removed from text
+    for tag in item.tags
+      unless item.body.include? tag.tag
+        tag.destroy unless tag.index.nil?
+      end
+    end
   end
 end
+
+
+
+
+
