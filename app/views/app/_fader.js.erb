@@ -30,7 +30,8 @@ function fader_<%= target + "_" + target_id %>() {
 	  }
 	  // actually applies change
 	  var target = $("#<%= target + (target_id.present? ? '_' + target_id : '') %>");
-	  target.css("color", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
+	  target.css("<%= defined?(background) ? 'background' : 'color' %>",
+	    "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
   }, change_speed);
 }
 

@@ -2,6 +2,8 @@
 
 <%= render "groups/card", group: @group %>
 
+<%= render "users/card", user: @group.creator, group_creator: true if @group.creator %>
+
 <% for member in @members %>
   <%= render "connections/card", connection: member %>
 <% end %>
@@ -9,7 +11,7 @@
 <% if @members.empty? %>
   <div class="card">
     <div align="center">
-      There aren't any members yet.
+      There aren't any other members yet.
     </div>
   </div>
 <% end %>

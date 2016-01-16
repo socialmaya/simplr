@@ -1,6 +1,12 @@
 <div class="card">
   <%= render "users/avatar_card_link", user: user %>
   <div align="center">
+    <% if defined?(group_creator) %>
+      <p>
+        <b>Group Creator</b>
+      </p>
+    <% end %>
+  
     <p>
       <%= link_to user.name, user, class: :user_name_link %>
       <% if user.body.present? %>

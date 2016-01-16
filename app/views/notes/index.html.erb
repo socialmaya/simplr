@@ -3,7 +3,12 @@
 <% end %>
 
 <% for note in @notes %>
-  <div class="<%= note.seen ? 'old_item_card' : 'card' %>">
+  <% unless note.seen %>
+    <script>
+      <%= render "app/fader.js", target: "note_card", target_id: note.id.to_s, background: true %>
+    </script>
+  <% end %>
+  <div class="card" id="note_card_<%= note.id %>">
     <p align="center">
       <% case note.action.to_sym %>
       <% when :post_comment %>
