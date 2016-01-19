@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :toggle_comments]
   before_action :reset_page_num, only: [:index, :show]
+  
+  def toggle_comments
+    @comments = @post.comments.last 5
+  end
   
   def add_image
   end

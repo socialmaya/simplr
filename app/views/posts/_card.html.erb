@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="post_card_<%= post.id %>">
   <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
 
   <div align="center">
@@ -24,7 +24,7 @@
   <%= render "app/time_ago", item: post %>
   
   <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
-    post, class: :bottom_right_link %>
+    toggle_comments_path(post), remote: true, class: :bottom_right_link %>
   
   <% if (anon_token and anon_token.eql? post.anon_token) \
     or (current_user and post.user_id.eql? current_user.id) %>
