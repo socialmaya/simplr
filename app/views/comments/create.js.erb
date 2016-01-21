@@ -1,0 +1,2 @@
+$("#mini_comments_container_<%= @post.id %>").remove();
+$("#post_comments_anchor_<%= @post.id %>").after("<%=j render 'posts/comments' %>");

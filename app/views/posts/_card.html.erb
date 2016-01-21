@@ -1,4 +1,4 @@
-<div class="card" id="post_card_<%= post.id %>">
+<div class="card">
   <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
 
   <div align="center">
@@ -20,6 +20,8 @@
 		  </p>
 		<% end %>
   </div>
+		
+	<div id="post_comments_anchor_<%= post.id %>"></div>
 
   <%= render "app/time_ago", item: post %>
   

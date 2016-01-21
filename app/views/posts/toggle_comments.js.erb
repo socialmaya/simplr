@@ -1,1 +1,4 @@
-$("#post_card_<%= @post.id %>").after("<%=j render 'posts/comments' %>");
+if (!post_<%= @post.id %>_comments_shown) {
+  $("#post_comments_anchor_<%= @post.id %>").after("<%=j render 'posts/comments' %>");
+  var post_<%= @post.id %>_comments_shown = true
+}

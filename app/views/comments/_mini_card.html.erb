@@ -1,0 +1,12 @@
+<div class="mini_comment_card">
+  <% if comment.user and comment.user.image %>
+    <div class="mini_comment_avatar">
+      <%= image_tag comment.user.image, class: :user_avatar_image %>
+    </div>
+  <% elsif comment.anon_token %>
+    <%= render "users/anon_avatar", token: comment.anon_token, position: :mini_comment_avatar %>
+  <% end %>
+  <span class="mini_comment_body">
+    <%= render "app/body", item: comment %>
+  </span>
+</div>

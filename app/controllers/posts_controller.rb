@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   
   def toggle_comments
     @comments = @post.comments.last 5
+    @comment = Comment.new
   end
   
   def add_image

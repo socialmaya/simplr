@@ -42,9 +42,14 @@ class CommentsController < ApplicationController
           unless current_user.eql? @comment.comment.user
         redirect_to @comment.comment
       elsif @comment.post
-        Note.notify :post_comment, @comment.post, @comment.post.user, current_user \
-          unless current_user.eql? @comment.post.user
-        redirect_to @comment.post
+        @post = @comment.post
+        Note.notify :post_comment, @post, @post.user, current_user unless current_user.eql? @post.user
+        unless params[:ajax_req]
+          redirect_to @post
+        else
+          @comment = Comment.new
+          @comments = @post.comments.last 5
+        end
       end
     else
       redirect_to :back
