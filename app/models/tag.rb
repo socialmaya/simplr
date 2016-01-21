@@ -12,20 +12,18 @@ class Tag < ActiveRecord::Base
     return (recent_matches.size > Tag.all.size / 4)
   end
   
-  def self.add_from text, item
-    text.split(" ").each do |tag|
-      next unless tag.size > 1
-      tag = "#" + tag unless tag.include? "#"
-      tag.slice!(",") if tag.include? ","
-      item.tags.create(tag: tag) unless item.tags.find_by_tag tag
-    end
-  end
-  
   def self.extract item
     text = item.body
     text.split(' ').each do |word|
-      if word.include? "#" and word.size > 1
-        item.tags.create(tag: word, index: text.index(word)) unless item.tags.find_by_tag word
+      if word.include? '#' and word.size > 1
+        tag = item.tags.find_by_tag word
+        # creates any new tags found in text
+        if tag.nil?
+          item.tags.create(tag: word, index: text.index(word))
+        # repositions any tags moved in text
+        elsif not tag.index.eql? text.index(word)
+          tag.update index: text.index(word)
+        end
       end
     end
     # deletes any tags removed from text
@@ -33,6 +31,15 @@ class Tag < ActiveRecord::Base
       unless item.body.include? tag.tag
         tag.destroy unless tag.index.nil?
       end
+    end
+  end
+  
+  def self.add_from text, item
+    text.split(' ').each do |tag|
+      next unless tag.size > 1
+      tag = '#' + tag unless tag.include? '#'
+      tag.slice!(',') if tag.include? ','
+      item.tags.create(tag: tag) unless item.tags.find_by_tag tag
     end
   end
 end
