@@ -1,7 +1,7 @@
 <div class="card_corner_cut_out"></div>
 
 <% if defined?(user) and user %>
-  <% if user and user.image.url %>
+  <% if user.image.url %>
     <%= link_to user_path(user), class: :user_avatar_link, title: "#{user.name}" do %>
       <%= image_tag user.image, class: :user_avatar_image %>
     <% end %>
