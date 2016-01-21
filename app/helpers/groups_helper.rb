@@ -24,7 +24,7 @@ module GroupsHelper
   end
   
   def group_member_auth group
-    return group.members.find_by_user_id current_user.id
+    current_user and group.members.find_by_user_id current_user.id
   end
   
   def group_auth group

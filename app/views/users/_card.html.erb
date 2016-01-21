@@ -14,7 +14,7 @@
       <% end %>
     </p>
 
-    <% unless this_user_current? user %>
+    <% if current_user and not this_user_current? user %>
       <% unless current_user and current_user.following? user %>
         <%= link_to 'Follow <i class="fa fa-user-plus"></i>'.html_safe, follow_path(user.id), method: :post %>
       <% else %>
