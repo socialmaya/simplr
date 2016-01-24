@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    msg_limit = 4 # how many to display
+    msg_limit = 3 # how many to display
     @new_message = Message.new
     @group = Group.find_by_id(params[:group_id])
     if @group

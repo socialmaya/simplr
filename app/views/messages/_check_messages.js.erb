@@ -7,7 +7,7 @@ function check_messages() {
 			  data: $.param({group_id: "<%= @group.id %>"})
 		  });
 	  }
-  }, 2500);
+  }, 500);
 }
 
 if (!check_messages_started) {
