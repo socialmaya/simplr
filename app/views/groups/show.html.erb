@@ -8,6 +8,14 @@
   </div>
 <% end %>
 
+<% if current_user %>
+  <div class="card">
+    <div align="center">
+      <%= link_to "Click here for group chat.", group_chat_path(@group.id) %>
+    </div>
+  </div>
+<% end %>
+
 <% if group_auth @group or group_member_auth @group %>
   <%= render "posts/form" %>
 

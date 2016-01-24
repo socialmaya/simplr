@@ -1,37 +1,25 @@
-<%= form_for(@message) do |f| %>
-  <% if @message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
-      <% @message.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :receiver_id %><br>
-    <%= f.number_field :receiver_id %>
-  </div>
-  <div class="field">
-    <%= f.label :group_id %><br>
-    <%= f.number_field :group_id %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div class="card" id="new_message_form">
+	<div align="center">
+		<%= form_for @new_message, url: messages_path, method: :post, remote: true do |f| %>
+			<%= hidden_field_tag :group_id, @group.id if @group %>
+			<table>
+				<tr>
+					<td>
+						<%= link_to add_message_image_path, remote: true do %>
+							<i class="fa fa-picture-o"></i>
+						<% end %>
+					</td>
+					<td>
+						<%= f.text_area :body, placeholder: "Send a message..." %>
+					</td>
+					<td>
+				    <button type="submit" name="commit">
+				      <i class="fa fa-send"></i>
+				    </button>
+					</td>
+				</tr>
+			</table>
+			<div id="hidden_file_field" hidden><%= f.file_field :image %></div>
+		<% end %>
+	</div>
+</div>

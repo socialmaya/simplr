@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get 'group/:group_id/requests', to: 'connections#requests', as: 'requests'
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'my_groups', to: 'connections#my_groups', as: 'my_groups'
+  
+  # messages
+  get 'messages/add_image', as: 'add_message_image'
+  get 'messages/instant_messages', to: 'messages#instant_messages'
+  get 'groups/:group_id/chat', to: 'messages#index', as: 'group_chat'
 
   # sessions
   get 'sessions/new'

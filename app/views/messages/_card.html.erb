@@ -1,5 +1,5 @@
 <div class="card">
-  <%= render "messages/time_ago", message: message %>
+  <%= render "app/time_ago", item: message %>
   <div align="center">
     <% if message.image.url %>
       <%= image_tag message.image, class: :standard_image %>
