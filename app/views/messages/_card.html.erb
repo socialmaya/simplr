@@ -1,0 +1,13 @@
+<div class="card">
+  <%= render "messages/time_ago", message: message %>
+  <div align="center">
+    <% if message.image.url %>
+      <%= image_tag message.image, class: :standard_image %>
+    <% end %>
+    <% if message.body.present? %>
+      <p>
+        <%= render "app/body", item: message %>
+      </p>
+    <% end %>
+  </div>
+</div>
