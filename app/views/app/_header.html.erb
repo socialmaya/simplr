@@ -1,6 +1,8 @@
-<script>
-  <%= render "app/bg_fader.js" %>
-</script>
+<% if settings[:bg_fader_on] %>
+  <script>
+    <%= render "app/bg_fader.js" %>
+  </script>
+<% end %>
 
 <%= render "pages/scroll_to_top" %>
 

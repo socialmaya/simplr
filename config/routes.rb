@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :settings
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
   delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'

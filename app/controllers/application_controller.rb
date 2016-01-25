@@ -4,7 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes
+    :page_size, :paginate, :reset_page, :char_codes, :settings
+    
+  def settings
+    if current_user
+      setting = lambda { |name| current_user.settings.find_by_name name }
+      settings = {}; Setting.names.each do |category, names|
+        for name in names
+          settings[name.to_sym] = setting.call(name).send(category)
+        end
+      end
+      return settings
+    else
+      return {}
+    end
+  end
   
   def get_location
     address = nil; locale = nil

@@ -48,6 +48,7 @@ class MessagesController < ApplicationController
     @new_message = Message.new # for ajax, new form
     @group = Group.find_by_id params[:group_id]
     @message = Message.new(message_params)
+    @message.user_id = current_user.id
     @message.group_id = params[:group_id]
     @message.save!
   end
@@ -111,6 +112,6 @@ class MessagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def message_params
-    params.require(:message).permit(:user_id, :receiver_id, :group_id, :body, :image)
+    params.require(:message).permit(:user_id, :group_id, :body, :image)
   end
 end

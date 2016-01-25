@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :connections, dependent: :destroy
+  has_many :settings, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notes, dependent: :destroy
@@ -12,6 +13,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
 
   before_create :encrypt_password, :generate_token, :gen_unique_token
+  after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
 
@@ -74,6 +76,14 @@ class User < ActiveRecord::Base
       user
     else
       nil
+    end
+  end
+  
+  def initialize_settings
+    Setting.names.each do |category, names|
+      for name in names
+        self.settings.create name: name
+      end
     end
   end
 

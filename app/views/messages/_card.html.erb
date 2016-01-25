@@ -1,8 +1,9 @@
 <div class="card">
+  <%= render "users/avatar_card_link", user: message.user %>
   <%= render "app/time_ago", item: message %>
   <div align="center">
     <% if message.image.url %>
-      <%= image_tag message.image, class: :standard_image %>
+      <p><%= image_tag message.image, class: :message_image %></p>
     <% end %>
     <% if message.body.present? %>
       <p>
