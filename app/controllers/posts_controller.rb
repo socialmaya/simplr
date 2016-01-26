@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @you_are_home = true
     @all_items = Post.global.reverse
     @items = paginate @all_items
     @char_codes = char_codes @items
