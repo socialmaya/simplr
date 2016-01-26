@@ -14,6 +14,10 @@
       <% end %>
 
       <%= hidden_field_tag :group_id, @group.id if @group %>
+      
+      <% if @post.image.url %>
+        <p><%= image_tag @post.image, class: :standard_post_image %></p>
+      <% end %>
 
       <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""), placeholder: "Post something cool..." %>
 
