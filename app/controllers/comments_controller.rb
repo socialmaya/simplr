@@ -1,5 +1,11 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  
+  def toggle_mini_index
+    @post = Post.find_by_id params[:post_id]
+    @comments = @post.comments.last 5 if @post
+    @comment = Comment.new
+  end
 
   # GET /comments
   # GET /comments.json

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get 'posts/add_image', as: 'add_post_image'
   
   # comments
-  get 'posts/:id/toggle_comments', to: 'posts#toggle_comments', as: 'toggle_comments'
+  get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'
 
   # notes
   get 'notes/index', as: 'notes'
