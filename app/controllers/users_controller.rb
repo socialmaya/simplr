@@ -16,8 +16,7 @@ class UsersController < ApplicationController
       cookies.permanent[:logged_in_before] = true
       redirect_to root_url
     else
-      flash[:error] = "No fields can be empty."
-      redirect_to :back
+      redirect_to :back, notice: "This username may already be taken."
     end
   end
 

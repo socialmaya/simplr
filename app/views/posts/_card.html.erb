@@ -26,10 +26,7 @@
   <%= render "app/time_ago", item: post %>
   
   <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
-    toggle_comments_path(post), remote: true, class: :bottom_right_link %>
+    (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
   
-  <% if (anon_token and anon_token.eql? post.anon_token) \
-    or (current_user and post.user_id.eql? current_user.id) %>
-    <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link %>
-  <% end %>
+  <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link if own_item? post %>
 </div>

@@ -4,6 +4,6 @@ class Setting < ActiveRecord::Base
   
   def self.names
     { on: ['bg_fader_on'],
-      state: ['bg_color', 'post_card_color'] }
+      state: ['bg_color', 'post_bg_color', 'post_txt_color'] }
   end
 end

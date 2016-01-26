@@ -78,16 +78,22 @@ class User < ActiveRecord::Base
       nil
     end
   end
-
-  private
   
   def initialize_settings
-    Setting.names.each do |category, names|
+    _settings = Setting.names
+    names = _settings[:on]; _settings[:state].each { |name| names << name }
+    unless names.size.eql? self.settings.size
       for name in names
-        self.settings.create name: name
+        self.settings.create name: name unless self.settings.find_by_name name
+      end
+    else
+      i=0; for setting in self.settings
+        setting.update name: names[i]; i+=1
       end
     end
   end
+
+  private
 
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64

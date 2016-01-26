@@ -1,4 +1,8 @@
 module UsersHelper
+  def own_item? item
+    (anon_token and anon_token.eql? item.anon_token) or (current_user and item.user_id.eql? current_user.id)
+  end
+  
   def this_user_current? user=nil
     if current_user
       if @user and @user_shown and current_user.id.eql? @user.id
