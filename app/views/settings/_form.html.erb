@@ -1,6 +1,5 @@
 <%= form_tag update_settings_path, method: :put do %>
   <div align="center">
-    
     <% for name in Setting.names[:on] %>
       <p>
         <%= name + " " %>
