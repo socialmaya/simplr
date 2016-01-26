@@ -15,7 +15,7 @@
 
       <%= hidden_field_tag :group_id, @group.id if @group %>
       
-      <% if @post.image.url %>
+      <% if @editing and @post.image.url %>
         <p><%= image_tag @post.image, class: :standard_post_image %></p>
       <% end %>
 
