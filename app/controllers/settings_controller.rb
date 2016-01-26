@@ -1,10 +1,9 @@
 class SettingsController < ApplicationController
-  before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: [:show, :edit, :destroy]
 
   # GET /settings
   # GET /settings.json
   def index
-    @settings = Setting.all
   end
 
   # GET /settings/1
@@ -37,18 +36,13 @@ class SettingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /settings/1
-  # PATCH/PUT /settings/1.json
   def update
-    respond_to do |format|
-      if @setting.update(setting_params)
-        format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
-        format.json { render :show, status: :ok, location: @setting }
-      else
-        format.html { render :edit }
-        format.json { render json: @setting.errors, status: :unprocessable_entity }
+    Setting.names.each do |category, names|
+      for name in names
+        current_user.settings.find_by_name(name).update category => params[name.to_sym]
       end
     end
+    redirect_to :back
   end
 
   # DELETE /settings/1

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'my_groups', to: 'connections#my_groups', as: 'my_groups'
   
+  # settings
+  put 'settings/update', as: 'update_settings'
+  
   # messages
   get 'messages/add_image', as: 'add_message_image'
   get 'messages/instant_messages', to: 'messages#instant_messages'

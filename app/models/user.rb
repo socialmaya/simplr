@@ -78,6 +78,8 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  private
   
   def initialize_settings
     Setting.names.each do |category, names|
@@ -86,8 +88,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-  private
 
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64

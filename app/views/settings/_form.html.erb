@@ -1,37 +1,17 @@
-<%= form_for(@setting) do |f| %>
-  <% if @setting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+<%= form_tag update_settings_path, method: :put do %>
+  <div align="center">
+    
+    <% for name in Setting.names[:on] %>
+      <p>
+        <%= name + " " %>
+        <%= check_box_tag name.to_sym, nil, settings[name.to_sym] %>
+      </p>
+    <% end %>
 
-      <ul>
-      <% @setting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :group_id %><br>
-    <%= f.number_field :group_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :on %><br>
-    <%= f.check_box :on %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <p>
+      <button type="submit" name="commit" class="standard_form_button">
+        <b>Save <i class="fa fa-cog"></i></b>
+      </button>
+    </p>
   </div>
 <% end %>
