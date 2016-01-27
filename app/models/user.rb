@@ -23,9 +23,13 @@ class User < ActiveRecord::Base
       user.posts.each { |post| _feed << post }
     end
     for group in my_groups
-      group.posts.each { |post| _feed << post unless _feed.include? post }
+      group.posts.each do |post|
+        _feed << post unless _feed.include? post
+      end
     end
-    self.posts.each { |post| _feed << post unless _feed.include? post }
+    self.posts.each do |post|
+      _feed << post unless _feed.include? post
+    end
     _feed.sort_by { |item| item.created_at }
     return _feed.reverse
   end
