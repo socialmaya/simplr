@@ -9,7 +9,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @you_are_home = true
-    @all_items = Post.global.reverse
+    @all_items = if current_user
+      current_user.feed
+    else
+      Post.global.reverse
+    end
     @items = paginate @all_items
     @char_codes = char_codes @items
     @post = Post.new

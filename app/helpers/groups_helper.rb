@@ -10,10 +10,7 @@ module GroupsHelper
   def my_groups
     _my_groups = []
     if current_user
-      current_user.groups.each { |group| _my_groups << group }
-      current_user.connections.current.where.not(group_id: nil).each do |connection|
-        _my_groups << connection.group if connection.group
-      end
+      current_user.my_groups.each { |group| _my_groups << group }
     elsif anon_token
       Group.where(anon_token: anon_token).each { |group| _my_groups << group }
       Connection.where(anon_token: anon_token).where.not(group_id: nil).each do |connection|

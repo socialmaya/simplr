@@ -28,7 +28,11 @@ class PagesController < ApplicationController
   private
   
   def build_feed_data
-    @all_items = Post.global.reverse
+    @all_items = if current_user
+      current_user.feed
+    else
+      Post.global.reverse
+    end
     @items = paginate @all_items
     @char_codes = char_codes @items
   end

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def show
     if @user
       @post = Post.new
-      @posts = @user.posts
+      @posts = @user.posts.reverse
       @user_shown = true
     end
   end

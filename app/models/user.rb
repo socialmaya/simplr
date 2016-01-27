@@ -16,9 +16,18 @@ class User < ActiveRecord::Base
   after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
-
-  def request_to_join group
-    self.connections.create group_id: group.id, request: true
+  
+  def feed
+    _feed = []
+    for user in following
+      user.posts.each { |post| _feed << post unless _feed.include? post }
+    end
+    for group in my_groups
+      group.posts.each { |post| _feed << post unless _feed.include? post }
+    end
+    self.posts.each { |post| _feed << post unless _feed.include? post }
+    _feed.sort_by { |item| item.created_at }
+    return _feed.reverse
   end
 
   def following? other_user
@@ -51,6 +60,19 @@ class User < ActiveRecord::Base
     return _followers
   end
 
+  def request_to_join group
+    self.connections.create group_id: group.id, request: true
+  end
+  
+  def my_groups
+    _my_groups = []
+    self.groups.each { |group| _my_groups << group }
+    self.connections.current.where.not(group_id: nil).each do |connection|
+      _my_groups << connection.group if connection.group
+    end
+    return _my_groups
+  end
+
   def invites
     self.connections.invites
   end
@@ -78,6 +100,8 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  private
   
   def initialize_settings
     _settings = Setting.names
@@ -92,8 +116,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-  private
 
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64
