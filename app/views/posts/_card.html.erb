@@ -1,5 +1,10 @@
 <div class="card">
   <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
+  <% if post.group %>
+    <span class="posted_to_group_label">
+      posted to <%= link_to post.group.name, post.group, class: :posted_to_group_link %>
+    </span>
+  <% end %>
 
   <div align="center">
     <% if post.image.url %>

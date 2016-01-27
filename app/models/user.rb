@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def feed
     _feed = []
     for user in following
-      user.posts.each { |post| _feed << post unless _feed.include? post }
+      user.posts.each { |post| _feed << post }
     end
     for group in my_groups
       group.posts.each { |post| _feed << post unless _feed.include? post }
