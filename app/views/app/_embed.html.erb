@@ -17,6 +17,8 @@
 			<%= link_to word[0..25] + "... ", word, target: :_blank %>
 		<% end %>
 	<% end %>
+<% elsif user_mentioned word %>
+  <%= link_to user_mentioned(word).name, user_mentioned(word) %>
 <% else %>
 	<% if word.size < 30 %>
 		<%= (word + " ").html_safe %>

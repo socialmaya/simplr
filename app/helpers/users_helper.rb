@@ -1,4 +1,8 @@
 module UsersHelper
+  def user_mentioned word
+    User.find_by_name(word.slice(word.index("@")+1..word.size)) if word.include? "@"
+  end
+  
   def own_item? item
     (anon_token and anon_token.eql? item.anon_token) or (current_user and item.user_id.eql? current_user.id)
   end
