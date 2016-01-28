@@ -2,7 +2,8 @@
   <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
   <% if post.group %>
     <span class="posted_to_group_label">
-      posted to <%= link_to post.group.name, post.group, class: :posted_to_group_link %>
+      posted to <%= link_to post.group.name, post.group, class: :posted_to_group_link,
+        title: "Group (#{post.group.name})" %>
     </span>
   <% end %>
 
