@@ -10,7 +10,10 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @posts = @group.posts.reverse
+    # reset_page
+    # @all_items = @group.posts.reverse
+    @items = @group.posts.reverse
+    # @char_codes = char_codes @items
     @post = Post.new
   end
 

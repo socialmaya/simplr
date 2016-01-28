@@ -19,7 +19,15 @@
 <% if group_auth @group or group_member_auth @group %>
   <%= render "posts/form" %>
 
-  <% for post in @posts %>
+  <% for post in @items %>
     <%= render "posts/card", post: post %>
   <% end %>
+<% end %>
+
+<% if @items.empty? %>
+  <div class="card">
+    <p align="center">
+      There aren't any posts yet.
+    </p>
+  </div>
 <% end %>
