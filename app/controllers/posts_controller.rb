@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   
   def add_image
@@ -90,6 +91,13 @@ class PostsController < ApplicationController
   end
 
   private
+    def secure_post
+      set_post
+      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token)
+        redirect_to '/404'
+      end
+    end
+    
     def reset_page_num
       reset_page
     end

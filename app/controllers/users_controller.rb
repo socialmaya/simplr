@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :secure_user, only: [:edit, :update, :destroy]
   
   def new
     @user = User.new
@@ -66,6 +67,10 @@ class UsersController < ApplicationController
   end
 
   private
+    def secure_user
+      set_user; redirect_to '/404' unless current_user.eql? @user
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
