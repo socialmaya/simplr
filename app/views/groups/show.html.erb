@@ -18,7 +18,6 @@
 
 <% if group_auth @group or group_member_auth @group %>
   <%= render "posts/form" %>
-
   <% for post in @items %>
     <%= render "posts/card", post: post %>
   <% end %>

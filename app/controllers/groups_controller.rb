@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :secure_group, only: [:edit, :update, :destroy]
   
   # GET /groups
   # GET /groups.json
@@ -74,6 +75,16 @@ class GroupsController < ApplicationController
   end
 
   private
+    def secure_group
+      set_group
+      secure = if current_user
+        current_user.id.eql? @group.user_id
+      else
+        anon_token.eql? @group.anon_token
+      end
+      redirect_to '/404' unless secure
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
