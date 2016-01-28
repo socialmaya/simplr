@@ -11,10 +11,19 @@
         <%= render "app/body", item: group %>
 		  </p>
 		<% end %>
+		
+    <% if @group_shown %>
+      <p>
+        <%= link_to 'Chat <i class="fa fa-comments"></i>'.html_safe, group_chat_path(group) %>
+        <%= " | " %>
+        <%= link_to 'Members <i class="fa fa-users"></i>'.html_safe, members_path(group) %>
+      </p>
+    <% else %>
+      <%= link_to "Members: #{group.members.size + 1}", members_path(group), class: :bottom_left_link %>
+    <% end %>
   </div>
   
   <%= render "app/time_ago", item: group %>
-  <%= link_to "Members: #{group.members.size + 1}", members_path(group), class: :bottom_left_link %>
   
   <% if group_auth group %>
     <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>
