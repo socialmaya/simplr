@@ -14,14 +14,6 @@
       <% end %>
     </p>
 
-    <% if current_user and not this_user_current? user %>
-      <% unless current_user and current_user.following? user %>
-        <%= link_to 'Follow <i class="fa fa-user-plus"></i>'.html_safe, follow_path(user.id), method: :post %>
-      <% else %>
-        <%= link_to 'Unfollow <i class="fa fa-user-times"></i>'.html_safe, unfollow_path(user.id), method: :delete %>
-      <% end %>
-      <%= " | " %>
-      <%= link_to 'Invite <i class="fa fa-users"></i>'.html_safe, invite_path(user) %>
-    <% end %>
+    <%= render "users/card_links", user: user %>
   </div>
 </div>

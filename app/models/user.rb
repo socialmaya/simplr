@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     self.posts.each do |post|
       _feed << post unless _feed.include? post
     end
-    _feed.sort_by { |item| item.created_at }
+    _feed.sort_by! { |item| item.created_at }
     return _feed.reverse
   end
 
