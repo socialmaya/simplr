@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings
+    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?
     
   def settings
     if current_user
@@ -80,6 +80,10 @@ class ApplicationController < ActionController::Base
       token = nil
     end
     return token
+  end
+  
+  def dev?
+    current_user and current_user.dev
   end
 
   def current_user

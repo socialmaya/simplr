@@ -1,8 +1,10 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  
   has_many :comments, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :views
   
   validate :text_or_image?, on: :create
   

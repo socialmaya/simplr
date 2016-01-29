@@ -1,10 +1,12 @@
 class Group < ActiveRecord::Base
   belongs_to :user
+  
   has_many :posts, dependent: :destroy
   has_many :settings, dependent: :destroy
   has_many :connections, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :views
 
   mount_uploader :image, ImageUploader
 

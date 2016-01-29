@@ -15,7 +15,7 @@
       <% if user.body.present? %>
         <%= render "app/body", item: user %>
       <% end %>
-      <%= link_to 'Edit <i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? %>
+      <%= link_to 'Edit <i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? or dev? %>
     </p>
 
     <%= render "users/card_links", user: user %>

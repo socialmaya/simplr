@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :secure_user, only: [:edit, :update, :destroy]
+  before_action :dev_only, only: [:index]
   
   def new
     @user = User.new
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   def show
     if @user
       @post = Post.new
-      @posts = @user.posts.reverse
+      @posts = @user.posts.last(10).reverse
       @user_shown = true
     end
   end
@@ -67,8 +68,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def dev_only
+      redirect_to '/404' unless dev?
+    end
+    
     def secure_user
-      set_user; redirect_to '/404' unless current_user.eql? @user
+      set_user; redirect_to '/404' unless current_user.eql? @user or dev?
     end
     
     # Use callbacks to share common setup or constraints between actions.

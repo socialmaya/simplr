@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :groups
+  has_many :views
 
   validates_presence_of :name, length: { minimum: 3 }
   validates_presence_of :password, length: { minimum: 4 }

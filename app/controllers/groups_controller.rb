@@ -83,7 +83,7 @@ class GroupsController < ApplicationController
       else
         anon_token.eql? @group.anon_token
       end
-      redirect_to '/404' unless secure
+      redirect_to '/404' unless secure or dev?
     end
     
     # Use callbacks to share common setup or constraints between actions.

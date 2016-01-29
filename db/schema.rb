@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124061349) do
+ActiveRecord::Schema.define(version: 20160128230559) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20160124061349) do
     t.string   "password"
     t.string   "password_salt"
     t.string   "unique_token"
+    t.boolean  "dev"
+  end
+
+  create_table "views", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "anon_token"
+    t.integer  "group_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
