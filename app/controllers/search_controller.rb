@@ -3,6 +3,7 @@ class SearchController < ApplicationController
     @query = params[:query].present? ? params[:query] : session[:query]
     session[:query] = @query; @results = []; @results_shown = true
     if @query.present?
+      @result_types = { group: 0, user: 0, post: 0, comment: 0 }
       [Group, User, Post, Comment].each do |_class|
         _class.all.reverse.each do |item|
           match = false; match_by_tag = false
@@ -25,7 +26,10 @@ class SearchController < ApplicationController
           when "groups and users", "users and groups"
             match = true if [Group, User].include? _class
           end
-          @results << item if match
+          if match
+            @results << item
+            @result_types[item.class.to_s.downcase.to_sym] +=1
+          end
         end
       end
     end
