@@ -85,7 +85,7 @@ class ConnectionsController < ApplicationController
   end
 
   def followers
-    @followers = @user.followers
+    @followers = @user.followers.last(10).reverse
   end
 
   private

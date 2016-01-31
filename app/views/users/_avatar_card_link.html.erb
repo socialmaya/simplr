@@ -6,7 +6,7 @@
       <%= image_tag user.image, class: :user_avatar_image %>
     <% end %>
   <% elsif user %>
-    <%= render "users/anon_avatar", token: user.unique_token, position: :token_card_link %>
+    <%= render "users/anon_avatar", user: user, position: :token_card_link %>
   <% end %>
 <% elsif defined?(token) and token.present? %>
   <%= render "users/anon_avatar", token: token, position: :token_card_link %>

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.authenticate(params[:login], params[:password])
     if @user
-      @user.update_token
+      @user.update_token if @user.auth_token.nil? # stay logged in on multiple devices/browsers
       if params[:remember_me]
         cookies.permanent[:auth_token] = @user.auth_token
       else

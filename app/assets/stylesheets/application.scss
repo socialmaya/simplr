@@ -74,6 +74,11 @@ textarea {
   background: grey;
 }
 
+.danger_card {
+  @include card;
+  background: red;
+}
+
 .top_right_link {
 	@include corner_link;
 	right: $x_right_gap;
@@ -105,6 +110,10 @@ textarea {
 	background: black;
 	height: 30px;
 	width: 32px;
+}
+
+.caution_link {
+  color: yellow;
 }
 
 .justified_body_text {
