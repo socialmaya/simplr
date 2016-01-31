@@ -1,6 +1,30 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers]
+  before_action :invite_only, except: [:invite_only_message, :redeem_invite]
+    
+  def invite_only_message
+  end
+    
+  def redeem_invite
+    @invite = Connection.find_by_unique_token params[:token]
+    if @invite and @invite.invited_to_site? and not @invite.redeemed
+      cookies.permanent[:invite_token] = @invite.unique_token
+      @invite.update redeemed: true
+      redirect_to new_user_path
+    else
+      redirect_to '/404'
+    end
+  end
+    
+  def generate_invite
+    @invite = Connection.new invite: true
+    if @invite.save
+      redirect_to dev_panel_path(invite_token: @invite.unique_token)
+    else
+      redirect_to :back
+    end
+  end
 
   def new
     @connection = Connection.new
@@ -65,10 +89,15 @@ class ConnectionsController < ApplicationController
   end
 
   private
-
-  def set_item
-    @user = User.find_by_id params[:user_id]
-    @group = Group.find_by_id params[:group_id]
-    @connection = Connection.find_by_id params[:id] unless @user or @group
-  end
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
+    end
+    
+    def set_item
+      @user = User.find_by_id params[:user_id]
+      @group = Group.find_by_id params[:group_id]
+      @connection = Connection.find_by_id params[:id] unless @user or @group
+    end
 end

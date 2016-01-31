@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :secure_user, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
+  before_action :invite_only
   
   def new
     @user = User.new
@@ -68,6 +69,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
+    end
+    
     def dev_only
       redirect_to '/404' unless dev?
     end

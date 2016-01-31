@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :invite_only
   
   def add_image
   end
@@ -78,40 +79,45 @@ class MessagesController < ApplicationController
   end
 
   private
-  
-  def check_last_im message
-    # eval to inflate hash from string
-    in_sequence = false; last_im = eval(cookies[:last_im].to_s)
-    if last_im.class.eql? Hash and message.id > last_im[:message_id].to_i
-      if @group and last_im[:group_id].eql? @group.id
-        in_sequence = true # meaning not the last message
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
       end
     end
-    return in_sequence
-  end
   
-  # keeps track of last message loaded
-  def set_last_im
-    message_id = if @instant_messages.present?
-      @instant_messages.last.id
-    # last message on page load, before ajax call
-    elsif @group and @group.messages.present?
-      @group.messages.last.id
-    else
-      nil
+    def check_last_im message
+      # eval to inflate hash from string
+      in_sequence = false; last_im = eval(cookies[:last_im].to_s)
+      if last_im.class.eql? Hash and message.id > last_im[:message_id].to_i
+        if @group and last_im[:group_id].eql? @group.id
+          in_sequence = true # meaning not the last message
+        end
+      end
+      return in_sequence
     end
-    last_im = { message_id: message_id }
-    last_im[:group_id] = @group.id
-    cookies[:last_im] = last_im.to_s if last_im[:message_id]
-  end
-  
-  # Use callbacks to share common setup or constraints between actions.
-  def set_message
-    @message = Message.find(params[:id])
-  end
+    
+    # keeps track of last message loaded
+    def set_last_im
+      message_id = if @instant_messages.present?
+        @instant_messages.last.id
+      # last message on page load, before ajax call
+      elsif @group and @group.messages.present?
+        @group.messages.last.id
+      else
+        nil
+      end
+      last_im = { message_id: message_id }
+      last_im[:group_id] = @group.id
+      cookies[:last_im] = last_im.to_s if last_im[:message_id]
+    end
+    
+    # Use callbacks to share common setup or constraints between actions.
+    def set_message
+      @message = Message.find(params[:id])
+    end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def message_params
-    params.require(:message).permit(:user_id, :group_id, :body, :image)
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def message_params
+      params.require(:message).permit(:user_id, :group_id, :body, :image)
+    end
 end

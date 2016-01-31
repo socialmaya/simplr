@@ -8,7 +8,7 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
   <body>
-    <%= render "app/header" %>
+    <%= render "app/header" if invited? %>
     <%= yield %>
 		<div id="footer_spacing_container"></div>
   </body>

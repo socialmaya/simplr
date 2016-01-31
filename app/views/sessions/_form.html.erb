@@ -1,6 +1,6 @@
 <% unless current_user %>
   <div class="card">
-	  <%= link_to "Sign up", new_user_path, class: :top_right_link %>
+	  <%= link_to "Haven't signed up yet?", new_user_path, class: :top_right_link if invited? %>
 	  
 	  <%= form_tag sessions_path do %>
 	    <div align="center">

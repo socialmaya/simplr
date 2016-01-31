@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :secure_group, only: [:edit, :update, :destroy]
+  before_action :invite_only
   
   # GET /groups
   # GET /groups.json
@@ -76,6 +77,12 @@ class GroupsController < ApplicationController
   end
 
   private
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
+    end
+    
     def secure_group
       set_group
       secure = if current_user

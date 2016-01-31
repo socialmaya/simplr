@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :invite_only
   
   def toggle_mini_index
     @post = Post.find_by_id params[:post_id]
@@ -88,6 +89,12 @@ class CommentsController < ApplicationController
   end
 
   private
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])

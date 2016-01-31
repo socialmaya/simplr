@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def justified_body item
+    'justified_body_text' if item.body.size > 150
+  end
+  
   def fa_icon icon, label=''
     str = %Q[<i class="fa fa-#{icon}"></i>] + " " + label
     return str.html_safe

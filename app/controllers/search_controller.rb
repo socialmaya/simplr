@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :invite_only
+  
   def index
     @query = params[:query].present? ? params[:query] : session[:query]
     session[:query] = @query; @results = []; @results_shown = true
@@ -36,31 +38,36 @@ class SearchController < ApplicationController
   end
 
   private
+    def scan_text item, query, match=false
+      if item.respond_to? :body
+        match = true if item.body.present? and scan item.body, query
+      end
+      if item.respond_to? :name
+        match = true if item.name.present? and scan item.name, query
+      end
+      if item.respond_to? :anon_token
+        match = true if item.anon_token.present? and scan item.anon_token, query
+      end
+      return match
+    end
 
-  def scan_text item, query, match=false
-    if item.respond_to? :body
-      match = true if item.body.present? and scan item.body, query
-    end
-    if item.respond_to? :name
-      match = true if item.name.present? and scan item.name, query
-    end
-    if item.respond_to? :anon_token
-      match = true if item.anon_token.present? and scan item.anon_token, query
-    end
-    return match
-  end
-
-  def scan text, query, match=false
-    for word in text.split(" ")
-      for key_word in query.split(" ")
-        if key_word.size > 2
-          if word.eql? key_word or word.eql? key_word.downcase or word.eql? key_word.capitalize \
-            or word.include? key_word.downcase or word.include? key_word.capitalize
-            match = true
+    def scan text, query, match=false
+      for word in text.split(" ")
+        for key_word in query.split(" ")
+          if key_word.size > 2
+            if word.eql? key_word or word.eql? key_word.downcase or word.eql? key_word.capitalize \
+              or word.include? key_word.downcase or word.include? key_word.capitalize
+              match = true
+            end
           end
         end
       end
+      return match
     end
-    return match
-  end
+    
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
+    end
 end

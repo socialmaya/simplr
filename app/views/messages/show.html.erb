@@ -1,29 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render "messages/card", message: @message %>
 
-<p>
-  <strong>User:</strong>
-  <%= @message.user_id %>
-</p>
-
-<p>
-  <strong>Receiver:</strong>
-  <%= @message.receiver_id %>
-</p>
-
-<p>
-  <strong>Group:</strong>
-  <%= @message.group_id %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @message.body %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @message.image %>
-</p>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<% if @message.group %>
+  <div class="card">
+    <div align="center">
+      <%= link_to "Back to chat (#{@message.group.name})", @message.group %>
+    </div>
+  </div>
+<% end %>

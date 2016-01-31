@@ -21,7 +21,7 @@
     <% end %>
 
     <% if post.body.present? %>
-	    <p class="standard_body" class="<%= 'justified_body_text' if post.body.size > 150 %>">
+	    <p class="standard_body" class="<%= justified_body post %>">
         <%= render "app/body", item: post %>
 		  </p>
 		<% end %>
@@ -34,5 +34,5 @@
   <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
     (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
   
-  <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link if own_item? post %>
+  <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link if own_item? post or dev? %>
 </div>

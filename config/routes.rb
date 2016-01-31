@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   resources :settings
+  # invitation connections
+  get 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
+  get 'redeem_invitation/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
+  get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
+  
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
   delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'
@@ -19,6 +24,7 @@ Rails.application.routes.draw do
   
   # settings
   put 'settings/update', as: 'update_settings'
+  get 'dev_panel', to: 'settings#dev_panel', as: 'dev_panel'
   
   # messages
   get 'messages/add_image', as: 'add_message_image'

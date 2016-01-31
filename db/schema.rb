@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128230559) do
+ActiveRecord::Schema.define(version: 20160131081724) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160128230559) do
     t.boolean  "request"
     t.string   "anon_token"
     t.string   "unique_token"
+    t.boolean  "redeemed"
   end
 
   create_table "groups", force: :cascade do |t|
