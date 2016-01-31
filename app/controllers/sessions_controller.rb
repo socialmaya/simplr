@@ -25,4 +25,12 @@ class SessionsController < ApplicationController
     end
     redirect_to root_url
   end
+  
+  def destroy_all_other_sessions
+    if current_user
+      current_user.update_token
+      cookies[:auth_token] = current_user.auth_token
+    end
+    redirect_to :back
+  end
 end

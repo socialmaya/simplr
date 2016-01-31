@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   # sessions
   get 'sessions/new'
   post 'sessions/create', as: 'sessions'
-  get 'sessions/destroy'
+  delete 'sessions/destroy'
+  delete 'sessions/destroy_all_other_sessions', as: 'destroy_all_other_sessions'
 
   # posts
   get 'posts/add_image', as: 'add_post_image'
