@@ -1,11 +1,3 @@
-<% if settings[:bg_fader_on] %>
-  <script>
-    <%= render "app/bg_fader.js" %>
-  </script>
-<% elsif settings[:bg_color].present? %>
-  <script>
-    <%= render "app/bg_color.js" %>
-  </script>
-<% end %>
+<%= render "app/color_settings" %>
 
 <div id="footer_spacing_container"></div>

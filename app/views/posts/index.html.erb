@@ -1,18 +1,16 @@
-<div id="bullshit_browser_caching_fix">
-  <script>
-    <%= render "posts/infinite_scroll.js" %>
-  </script>
+<script>
+  <%= render "posts/infinite_scroll.js" %>
+</script>
 
-  <%= render "posts/form" %>
+<%= render "posts/form" %>
 
-  <div id="feed_container_anchor"></div>
-  <%= render "posts/feed_container" %>
+<div id="feed_container_anchor"></div>
+<%= render "posts/feed_container" %>
 
-  <% if @items.empty? %>
-    <div class="card">
-      <p align="center">
-        There aren't any posts yet.
-      </p>
-    </div>
-  <% end %>
-</div>
+<% if @items.empty? %>
+  <div class="card">
+    <p align="center">
+      There aren't any posts yet.
+    </p>
+  </div>
+<% end %>
