@@ -1,13 +1,3 @@
-<% if settings[:bg_fader_on] %>
-  <script>
-    <%= render "app/bg_fader.js" %>
-  </script>
-<% elsif settings[:bg_color].present? %>
-  <script>
-    <%= render "app/bg_color.js" %>
-  </script>
-<% end %>
-
 <%= render "pages/scroll_to_top" %>
 
 <%= render "app/standard_nav_menu" %>
@@ -25,5 +15,3 @@
 <%= render "users/current_avatar" %>
 
 <div id="spacing_header"></div>
-
-
