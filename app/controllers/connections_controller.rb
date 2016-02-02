@@ -41,10 +41,10 @@ class ConnectionsController < ApplicationController
       request = current_user.request_to_join @group
       Note.notify(:group_request, @group, @group.creator, current_user) if request
     elsif @user
-      connection = current_user.follow @user
+      connection = current_user.follow @user; @followed = true
       Note.notify(:user_follow, nil, @user, current_user) if connection
     end
-    redirect_to :back
+    redirect_to :back unless @followed
   end
 
   def update
@@ -61,10 +61,11 @@ class ConnectionsController < ApplicationController
       @group.remove current_user
     elsif @user
       current_user.unfollow @user
+      @unfollowed = true
     elsif @connection
       @connection.destroy
     end
-    redirect_to :back
+    redirect_to :back unless @unfollowed
   end
 
   def my_groups

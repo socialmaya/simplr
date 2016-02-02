@@ -13,7 +13,8 @@
         <%= render "app/body", item: user %>
       <% end %>
     </p>
-
+    
+    <div id="user_<%= user.id %>_card_links_anchor"></div>
     <%= render "users/card_links", user: user %>
   </div>
 </div>

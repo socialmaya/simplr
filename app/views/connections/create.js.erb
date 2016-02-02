@@ -1,0 +1,4 @@
+<% if @user and not @group %>
+  $("#user_<%= @user.id %>_card_links").remove();
+  $("#user_<%= @user.id %>_card_links_anchor").after("<%=j render "users/card_links", user: @user %>");
+<% end %>

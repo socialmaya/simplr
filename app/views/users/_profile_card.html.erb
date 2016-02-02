@@ -18,6 +18,7 @@
       <%= link_to 'Edit <i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? or dev? %>
     </p>
 
+    <div id="user_<%= user.id %>_card_links_anchor"></div>
     <%= render "users/card_links", user: user %>
   </div>
 </div>
