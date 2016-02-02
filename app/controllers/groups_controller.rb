@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :secure_group, only: [:edit, :update, :destroy]
+  before_action :dev_only, only: [:index]
   before_action :invite_only
   
   # GET /groups
@@ -81,6 +82,10 @@ class GroupsController < ApplicationController
       unless invited?
         redirect_to invite_only_path
       end
+    end
+    
+    def dev_only
+      redirect_to '/404' unless dev?
     end
     
     def secure_group
