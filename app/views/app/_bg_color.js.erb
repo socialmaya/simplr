@@ -1,4 +1,4 @@
-function bg_color1() {
+function bg_color() {
   var color = "<%= settings[:bg_color] %>";
   var target1 = $("html");
   var target2 = $("#standard_nav_menu");
@@ -17,4 +17,4 @@ function bg_color1() {
     $(this).css("background", color);
   });
 }
-bg_color1();
+bg_color();
