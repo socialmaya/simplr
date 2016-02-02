@@ -2,6 +2,9 @@ class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers]
   before_action :invite_only, except: [:invite_only_message, :redeem_invite]
+  
+  def copy_invite_link
+  end
     
   def invite_only_message
   end

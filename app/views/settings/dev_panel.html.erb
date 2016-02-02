@@ -2,7 +2,8 @@
 
 <% if @invite %>
   <div class="card">
-    <b id="invite_link_label">Invitation link - Copy and share:</b>
+    <b id="invite_link_label"><%= link_to "Invitation link - Copy and share:",
+      copy_invite_link_path, remote: true %></b>
     <div align="center">
       <%= text_field_tag :invite_link, @invite_link, id: :invite_link_field %>
     </div>
