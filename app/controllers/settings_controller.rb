@@ -17,7 +17,9 @@ class SettingsController < ApplicationController
   def update
     Setting.names.each do |category, names|
       for name in names
-        current_user.settings.find_by_name(name).update category => params[name.to_sym]
+        if category.eql? :state and params[name.to_sym].present? or category.eql? :on
+          current_user.settings.find_by_name(name).update category => params[name.to_sym]
+        end
       end
     end
     redirect_to :back

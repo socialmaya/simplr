@@ -2,6 +2,10 @@
   <script>
     <%= render "app/bg_fader.js" %>
   </script>
+<% elsif settings[:bg_color].present? %>
+  <script>
+    <%= render "app/bg_color.js" %>
+  </script>
 <% end %>
 
 <%= render "pages/scroll_to_top" %>

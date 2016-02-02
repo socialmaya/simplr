@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="post_card_<%= post.id %>">
   <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
   <% if post.group %>
     <span class="posted_to_group_label">
@@ -36,3 +36,15 @@
   
   <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link if own_item? post or dev? %>
 </div>
+
+<% if settings(post.user)[:post_bg_color].present? %>
+  <script>
+    <%= render "posts/bg_color.js", post: post %>
+  </script>
+<% end %>
+
+<% if settings(post.user)[:post_txt_color].present? %>
+  <script>
+    <%= render "posts/txt_color.js", post: post %>
+  </script>
+<% end %>
