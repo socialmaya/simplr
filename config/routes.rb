@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :settings
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
-  get 'redeem_invitation/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
+  get 'invitation/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
   get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
   
   # user to user connections

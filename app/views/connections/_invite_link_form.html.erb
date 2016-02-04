@@ -1,0 +1,10 @@
+<%= form_tag generate_invite_path, method: :post do %>
+  <p>
+    <button type="submit" name="commit" id="generate_invite_button">
+      <b>Generate invitation to site <i class="fa fa-user-plus"></i></b>
+    </button>
+  </p>
+  <p>
+    with dev powers <%= check_box_tag :grant_dev_access %>
+  </p>
+<% end %>
