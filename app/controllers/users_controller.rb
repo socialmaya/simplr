@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    grant_dev_access
     if @user.save
       if params[:remember_me]
         cookies.permanent[:auth_token] = @user.auth_token
@@ -69,6 +70,14 @@ class UsersController < ApplicationController
   end
 
   private
+    def grant_dev_access
+      # grants dev powers sent with invite
+      if cookies[:grant_dev_access]
+        cookies.delete(:grant_dev_access)
+        @user.dev = true
+      end
+    end
+    
     def invite_only
       unless invited?
         redirect_to invite_only_path

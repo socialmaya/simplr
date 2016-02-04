@@ -12,8 +12,11 @@ class ConnectionsController < ApplicationController
   def redeem_invite
     @invite = Connection.find_by_unique_token params[:token]
     if @invite and @invite.invited_to_site? and not @invite.redeemed
-      cookies.permanent[:invite_token] = @invite.unique_token
       @invite.update redeemed: true
+      if @invite.redeemed
+        cookies.permanent[:invite_token] = @invite.unique_token
+        cookies[:grant_dev_access] = @invite.grant_dev_access
+      end
       redirect_to new_user_path
     else
       redirect_to '/404'
@@ -21,7 +24,7 @@ class ConnectionsController < ApplicationController
   end
     
   def generate_invite
-    @invite = Connection.new invite: true
+    @invite = Connection.new invite: true, grant_dev_access: params[:grant_dev_access]
     if @invite.save
       redirect_to dev_panel_path(invite_token: @invite.unique_token)
     else

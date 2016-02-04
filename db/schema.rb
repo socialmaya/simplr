@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131081724) do
+ActiveRecord::Schema.define(version: 20160204033528) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -28,13 +28,14 @@ ActiveRecord::Schema.define(version: 20160131081724) do
     t.integer  "user_id"
     t.integer  "other_user_id"
     t.integer  "group_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.boolean  "invite"
     t.boolean  "request"
     t.string   "anon_token"
     t.string   "unique_token"
     t.boolean  "redeemed"
+    t.boolean  "grant_dev_access"
   end
 
   create_table "groups", force: :cascade do |t|
