@@ -10,8 +10,7 @@
 <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
   id: :return_home_link, title: "Return home" unless @you_are_home %>
 
-<%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe,
-  toggle_search_dropdown_path, remote: true, id: :search_nav_link %>
+<%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, search_path, id: :search_nav_link %>
 
 <%= render "notes/nav_link" %>
 
