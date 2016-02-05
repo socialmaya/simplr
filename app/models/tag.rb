@@ -4,12 +4,24 @@ class Tag < ActiveRecord::Base
   belongs_to :comment
   belongs_to :group
   
+  def self.trending
+    _trending = []
+    for tag in self.all
+      # gets all trending hashtags and prevents any duplicates from being returned
+      _trending << tag if tag.trending? and not _trending.detect { |_tag| _tag.tag.eql? tag.tag }
+    end
+    # sorts by the number of occurances a tags been used
+    _trending.sort_by! { |tag| self.where(tag: tag.tag).size }
+    # returns all trending, ascending by occurance
+    return _trending.reverse
+  end
+  
   def trending?
     matches = Tag.where tag: self.tag
     recent_matches = matches.select do |tag|
       tag.created_at < 1.week.ago
     end
-    return (recent_matches.size > Tag.all.size / 4)
+    return (recent_matches.size > Tag.all.size / 10)
   end
   
   def self.extract item

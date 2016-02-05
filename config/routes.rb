@@ -50,6 +50,7 @@ Rails.application.routes.draw do
 
   # search
   get 'search', to: 'search#index', as: 'search'
+  get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
 
   # pages
   get 'pages/scroll_to_top', as: 'scroll_to_top'

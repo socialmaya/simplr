@@ -1,6 +1,10 @@
 class SearchController < ApplicationController
   before_action :invite_only
   
+  def toggle_dropdown
+    @tags = Tag.trending
+  end
+  
   def index
     @query = params[:query].present? ? params[:query] : session[:query]
     session[:query] = @query; @results = []; @results_shown = true
