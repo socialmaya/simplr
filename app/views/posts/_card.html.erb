@@ -21,7 +21,7 @@
     <% end %>
 
     <% if post.body.present? %>
-	    <p class="standard_body" class="<%= justified_body post %>">
+	    <p class="standard_body" class="<%= justified_body post %>" id="post_body_text_<%= post.id %>">
         <%= render "app/body", item: post %>
 		  </p>
 		<% end %>
@@ -37,13 +37,21 @@
   <%= link_to 'Edit', edit_post_path(post), class: :bottom_left_link if own_item? post or dev? %>
 </div>
 
-<% if settings(post.user)[:post_bg_color].present? %>
+<% if settings(post.user)[:post_bg_fader_on] %>
+  <script>
+    <%= render "app/fader.js", target: "post_card", target_id: post.id, background: true, slow: true %>
+  </script>
+<% elsif settings(post.user)[:post_bg_color].present? %>
   <script>
     <%= render "posts/bg_color.js", post: post %>
   </script>
 <% end %>
 
-<% if settings(post.user)[:post_txt_color].present? %>
+<% if settings(post.user)[:post_txt_fader_on] %>
+  <script>
+    <%= render "app/fader.js", target: "post_body_text", target_id: post.id %>
+  </script>
+<% elsif settings(post.user)[:post_txt_color].present? %>
   <script>
     <%= render "posts/txt_color.js", post: post %>
   </script>

@@ -105,8 +105,12 @@ class User < ActiveRecord::Base
       nil
     end
   end
-
-  private
+  
+  def self.initialize_all_settings
+    for user in self.all
+      user.initialize_settings
+    end
+  end
   
   def initialize_settings
     _settings = Setting.names
@@ -121,6 +125,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  private
 
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64

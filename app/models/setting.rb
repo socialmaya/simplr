@@ -3,7 +3,7 @@ class Setting < ActiveRecord::Base
   validates_presence_of :name
   
   def self.names
-    { on: ['bg_fader_on'],
+    { on: ['bg_fader_on', 'post_bg_fader_on', 'post_txt_fader_on'],
       state: ['bg_color', 'post_bg_color', 'post_txt_color'] }
   end
 end
