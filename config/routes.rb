@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   
   # settings
   put 'settings/update', as: 'update_settings'
+  put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev_panel', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
   

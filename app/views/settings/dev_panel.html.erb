@@ -13,7 +13,7 @@
 <div class="card">
   <div align="center">
     <p class="justified_body_text">
-      This website is invite-only. Click the link below to generate a link you can easily share with anyone via text, email, etc. The link will direct the recipient to a user sign up page enabling them to begin using the site. However, once the link is redeemed, they will only be able to register from the browser they opened the link from. After sign up, the user can then log in from any device or browser they choose.
+      This website is invite-only. User the form below to generate a link you can easily share with anyone via text, email, etc. The link will direct the recipient to a user sign up page enabling them to begin using the site. However, once the link is redeemed, they will only be able to register from the browser they opened the link from. After sign up, the user can then log in from any device or browser they choose.
     </p>
     <%= render "connections/invite_link_form" %>
   </div>
@@ -21,12 +21,16 @@
 
 <div class="card">
   <div align="center">
-    <b>Totals:</b> 
-      <%= link_to "#{User.all.size} users", users_path %>, 
-      <%= link_to "#{Group.all.size} groups", groups_path %>, 
-      <%= Post.all.size %> posts, 
-      <%= Comment.all.size %> comments, 
-      <%= Message.all.size %> messages
+    <p>
+      <b>Totals:</b> 
+        <%= link_to "#{User.all.size} users", users_path %>, 
+        <%= link_to "#{Group.all.size} groups", groups_path %>, 
+        <%= Post.all.size %> posts, 
+        <%= Comment.all.size %> comments, 
+        <%= Message.all.size %> messages
+    </p>
+    <%= link_to 'Reinitialize all user settings <i class="fa fa-cogs"></i>'.html_safe,
+      update_all_user_settings_path, method: :put %>
   </div>
 </div>
 

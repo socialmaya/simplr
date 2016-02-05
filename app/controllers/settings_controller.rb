@@ -1,6 +1,11 @@
 class SettingsController < ApplicationController
   before_action :dev_only, only: [:dev_panel]
   
+  def update_all_user_settings
+    Setting.initialize_all_settings
+    redirect_to :back
+  end
+  
   def dev_panel
     if params[:invite_token]
       @invite = Connection.find_by_unique_token params[:invite_token]
