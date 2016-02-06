@@ -4,6 +4,12 @@
     
   <%= render "users/avatar_card_link", user: connection.user, token: connection.anon_token \
     if connection.user and (connection.request or !connection.request) %>
+    
+  <% if connection.user and connection.group and group_auth connection.group %>
+    <%= link_to "Remove", remove_user_path(connection.user.id, connection.group.id),
+      data: { confirm: "Are you sure you want to remove this user from the group?" },
+      method: :delete, class: :top_right_link %>
+  <% end %>
   
   <div align="center">
     <p class="invite_message">
