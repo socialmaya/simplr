@@ -71,10 +71,6 @@ class ConnectionsController < ApplicationController
     redirect_to :back unless @unfollowed
   end
 
-  def my_groups
-    @group = Group.new
-  end
-
   def members
     @members = @group.members
   end

@@ -3,6 +3,10 @@ class GroupsController < ApplicationController
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
+
+  def my_groups
+    @group = Group.new
+  end
   
   # GET /groups
   # GET /groups.json
