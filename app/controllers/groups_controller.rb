@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def their_groups
     @user = User.find_by_id params[:user_id]
     @groups = @user.my_groups
+    redirect_to my_groups_path if @user.eql? current_user
   end
 
   def my_groups
