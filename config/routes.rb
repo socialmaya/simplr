@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'users/:user_id/invite_to_join/:group_id', to: 'connections#create', as: 'invite_to_join'
   delete 'groups/:group_id/leave', to: 'connections#destroy', as: 'leave_group'
   delete 'users/:user_id/remove/:group_id', to: 'connections#destroy', as: 'remove_user'
+  get 'user/:user_id/their_groups', to: 'groups#their_groups', as: 'their_groups'
   get 'groups/:group_id/members', to: 'connections#members', as: 'members'
   get 'users/:user_id/invites', to: 'connections#invites', as: 'invites'
   get 'group/:group_id/requests', to: 'connections#requests', as: 'requests'

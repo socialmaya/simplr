@@ -3,6 +3,11 @@ class GroupsController < ApplicationController
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
+  
+  def their_groups
+    @user = User.find_by_id params[:user_id]
+    @groups = @user.my_groups
+  end
 
   def my_groups
     @group = Group.new
