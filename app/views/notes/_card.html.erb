@@ -1,0 +1,17 @@
+<div class="card" id="note_card_<%= note.id %>">
+  <%= render "app/time_ago", item: note %>
+  <p align="center">
+    <% case note.action.to_sym %>
+    <% when :post_comment %>
+      <%= link_to note.message, post_path(note.item_id) %>
+    <% when :comment_reply %>
+      <%= link_to note.message, comment_path(note.item_id) %>
+    <% when :group_invite %>
+      <%= link_to note.message, invites_path(note.user) %>
+    <% when :group_request %>
+      <%= link_to note.message, requests_path(note.item_id) %>
+    <% when :user_follow %>
+      <%= link_to note.message, followers_path(note.user) %>
+    <% end %>
+  </p>
+</div>

@@ -1,5 +1,10 @@
 class NotesController < ApplicationController
   before_action :current_notes, only: [:index, :destroy]
+  
+  def show
+    @note = Note.find(params[:id])
+  end
+  
   def index
     @notes = @notes.last(10).reverse
   end
