@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
   has_many :messages, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :views
+  
+  validates_uniqueness_of :name
 
   mount_uploader :image, ImageUploader
 

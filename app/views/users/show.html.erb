@@ -1,7 +1,5 @@
 <%= render "users/profile_card", user: @user %>
 
-<%= render "users/my_groups_card", user: @user if @user.my_groups.size > 3 %>
-
 <% if this_user_current? %>
   <%= render "posts/form" %>
 <% end %>
