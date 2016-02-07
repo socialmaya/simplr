@@ -1,4 +1,4 @@
-<% if settings[:bg_fader_on] %>
+<% if settings[:bg_fader_on] or (@user_shown and settings(@user)[:profile_bg_fader_on]) %>
   <script>
     <%= render "app/bg_fader.js" %>
   </script>
