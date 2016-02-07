@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="user_profile_card_<%= user.id %>">
   <div align="center">
     <% if user.image.url %>
       <% if @user_shown %>
@@ -23,3 +23,9 @@
     <%= render "users/my_groups", user: user if user.my_groups.size > 1 %>
   </div>
 </div>
+
+<% if settings(user)[:profile_card_bg_color] %>
+  <script>
+    <%= render "users/profile_card_bg_color.js", user: user %>
+  </script>
+<% end %>

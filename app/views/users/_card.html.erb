@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/avatar_card_link", user: user, token: (defined?(token) ? token : nil) %>
   <div align="center">
     <% if defined?(group_creator) %>
@@ -18,3 +18,9 @@
     <%= render "users/card_links", user: user %>
   </div>
 </div>
+
+<% if settings(user)[:profile_card_bg_color] %>
+  <script>
+    <%= render "users/profile_card_bg_color.js", user: user %>
+  </script>
+<% end %>
