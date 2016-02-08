@@ -1,7 +1,7 @@
 class Setting < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :name
-      
+  
   def self.initialize_all_settings
     for user in User.all
       user.initialize_settings

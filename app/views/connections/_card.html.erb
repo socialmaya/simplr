@@ -30,7 +30,8 @@
 
 <% if settings(connection.user)[:profile_card_bg_fader_on] %>
   <script>
-    <%= render "app/fader.js", target: "user_profile_card", target_id: connection.user.id.to_s, background: true %>
+    <%= render "app/fader.js", target: "user_profile_card",
+      target_id: connection.user.id.to_s, background: true, slow: true %>
   </script>
 <% elsif settings(connection.user)[:profile_card_bg_color] %>
   <script>
