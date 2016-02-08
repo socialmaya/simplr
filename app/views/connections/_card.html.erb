@@ -28,7 +28,11 @@
   </div>
 </div>
 
-<% if settings(connection.user)[:profile_card_bg_color] %>
+<% if settings(connection.user)[:profile_card_bg_fader_on] %>
+  <script>
+    <%= render "app/fader.js", target: "user_profile_card", target_id: connection.user.id.to_s, background: true %>
+  </script>
+<% elsif settings(connection.user)[:profile_card_bg_color] %>
   <script>
     <%= render "users/profile_card_bg_color.js", user: connection.user %>
   </script>

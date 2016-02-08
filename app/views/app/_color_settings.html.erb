@@ -1,4 +1,8 @@
-<% if settings[:bg_fader_on] or (@user_shown and settings(@user)[:profile_bg_fader_on]) %>
+<% if @user_shown and settings(@user)[:profile_bg_color] and not settings(@user)[:profile_bg_fader_on] %>
+  <script>
+    <%= render "users/profile_bg_color.js" %>
+  </script>
+<% elsif settings[:bg_fader_on] or (@user_shown and settings(@user)[:profile_bg_fader_on]) %>
   <script>
     <%= render "app/bg_fader.js" %>
   </script>
