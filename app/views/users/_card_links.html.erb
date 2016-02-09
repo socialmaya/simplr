@@ -8,6 +8,8 @@
         unfollow_path(user.id), method: :delete, remote: true %>
     <% end %>
     <%= " | " %>
-    <%= link_to 'Invite <i class="fa fa-envelope"></i>'.html_safe, invite_path(user) %>
+    <%= link_to 'Invite <i class="fa fa-cubes"></i>'.html_safe, invite_path(user) %>
+    <%= " | " %>
+    <%= link_to 'Message <i class="fa fa-envelope"></i>'.html_safe, invite_path(user) %>
   </div>
 <% end %>

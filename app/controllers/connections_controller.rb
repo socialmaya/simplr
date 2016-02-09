@@ -3,6 +3,11 @@ class ConnectionsController < ApplicationController
     :members, :invites, :requests, :following, :followers]
   before_action :invite_only, except: [:invite_only_message, :redeem_invite]
   
+  # for message folders
+  def index
+    @folders = current_user.message_folders
+  end
+  
   def copy_invite_link
   end
     

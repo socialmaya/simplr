@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  belongs_to :connection
   
   validate :body_or_image
   

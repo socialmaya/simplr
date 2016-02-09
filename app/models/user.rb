@@ -85,6 +85,26 @@ class User < ActiveRecord::Base
   def requests
     self.connections.requests
   end
+  
+  def messages_between? user
+    messages_between = false
+    for folder in self.message_folders
+      if folder.connections.size.eql? 2 and folder.connections.where(user_id: user.id).present?
+        messages_between = true
+      end
+    end
+    return messages_between
+  end
+  
+  def message_folders
+    folders = []
+    self.connections.where.not(connection_id: nil).each do |connection|
+      if connection.connection.message_folder
+        folders << connection.connection
+      end
+    end
+    return folders
+  end
 
   def update_token
     self.generate_token

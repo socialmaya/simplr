@@ -1,11 +1,16 @@
 class Connection < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  # as folder for messages
+  belongs_to :connection
+  has_many :connections
+  has_many :messages
   
   before_create :gen_unique_token
   
   scope :invites, -> { where invite: true }
   scope :requests, -> { where request: true }
+  scope :folders, -> { where message_folder: true }
   scope :current, -> { where.not(invite: true).where.not request: true }
   
   def invited_to_site?
