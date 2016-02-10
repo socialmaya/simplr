@@ -24,7 +24,8 @@ class Note < ActiveRecord::Base
       comment_reply: "Someone replied to your comment.",
       user_follow: "Someone started following you.",
       group_invite: "You've been invited to a group.",
-      group_request: "Someone requested to join a group." }
+      group_request: "Someone requested to join a group.",
+      group_request_accepted: "You're request to join a group was accepted." }
     return _actions[action.to_sym]
   end
   

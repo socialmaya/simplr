@@ -11,6 +11,12 @@ class Group < ActiveRecord::Base
   validates_uniqueness_of :name
 
   mount_uploader :image, ImageUploader
+  
+  def members_size
+    size = self.members.size
+    size +=1 if self.creator
+    return size
+  end
 
   def creator
     if self.user

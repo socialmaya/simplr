@@ -16,11 +16,11 @@
       <p>
         <%= link_to 'Chat <i class="fa fa-comments"></i>'.html_safe, group_chat_path(group) %>
         <%= " | " %>
-        <%= link_to ("Members#{' (' + (group.members.size + 1).to_s + ') ' unless group.members.size.zero?}" \
+        <%= link_to ("Members#{' (' + (group.members_size).to_s + ')' unless group.members.size.zero?} " \
           + '<i class="fa fa-users"></i>').html_safe, members_path(group) %>
       </p>
     <% else %>
-      <%= link_to "Members: #{group.members.size + 1}", members_path(group), class: :bottom_left_link %>
+      <%= link_to "Members: #{group.members_size}", members_path(group), class: :bottom_left_link %>
     <% end %>
   </div>
   

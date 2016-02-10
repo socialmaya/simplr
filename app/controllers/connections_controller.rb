@@ -3,11 +3,6 @@ class ConnectionsController < ApplicationController
     :members, :invites, :requests, :following, :followers]
   before_action :invite_only, except: [:invite_only_message, :redeem_invite]
   
-  # for message folders
-  def index
-    @folders = current_user.message_folders
-  end
-  
   def copy_invite_link
   end
     
@@ -47,17 +42,24 @@ class ConnectionsController < ApplicationController
       Note.notify(:group_invite, nil, @user, current_user) if invite
     elsif @group
       request = current_user.request_to_join @group
-      Note.notify(:group_request, @group, @group.creator, current_user) if request
+      if request
+        Note.notify(:group_request, @group, @group.creator, current_user)
+        for member in @group.members
+          Note.notify(:group_request, @group, member.user, current_user)
+        end
+      end
     elsif @user
       connection = current_user.follow @user; @followed = true
       Note.notify(:user_follow, nil, @user, current_user) if connection
     end
     redirect_to :back unless @followed
   end
-
+  
+  # when group invite or request is accepted
   def update
     if @connection
       @connection.update invite: false, request: false
+      Note.notify :group_request_accepted, @connection.group, @connection.user, current_user
     end
     redirect_to :back
   end
