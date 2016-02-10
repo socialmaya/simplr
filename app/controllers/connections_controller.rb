@@ -58,8 +58,13 @@ class ConnectionsController < ApplicationController
   # when group invite or request is accepted
   def update
     if @connection
+      request = @connection.request
       @connection.update invite: false, request: false
-      Note.notify :group_request_accepted, @connection.group, @connection.user, current_user
+      if @connection.group
+        if request
+          Note.notify :group_request_accepted, @connection.group, @connection.user, current_user
+        end
+      end
     end
     redirect_to :back
   end
