@@ -5,10 +5,10 @@ class ConnectionsController < ApplicationController
   
   def copy_invite_link
   end
-    
+  
   def invite_only_message
   end
-    
+  
   def redeem_invite
     @invite = Connection.find_by_unique_token params[:token]
     if @invite and @invite.invited_to_site? and not @invite.redeemed

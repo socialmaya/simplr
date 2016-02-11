@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   get 'messages/add_image', as: 'add_message_image'
   get 'messages/instant_messages', to: 'messages#instant_messages'
   get 'groups/:group_id/chat', to: 'messages#index', as: 'group_chat'
+  post 'messages/create_message_folder', as: 'create_message_folder'
+  get 'folders/:folder_id/show', to: 'messages#show_message_folder', as: 'show_message_folder'
+  get 'messages/instant_folder_messages', to: 'messages#instant_folder_messages'
+  get 'inbox', to: 'messages#message_folders', as: 'inbox'
 
   # sessions
   get 'sessions/new'

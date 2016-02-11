@@ -86,14 +86,14 @@ class User < ActiveRecord::Base
     self.connections.requests
   end
   
-  def messages_between? user
-    messages_between = false
+  def folder_between user
+    _folder = nil
     for folder in self.message_folders
       if folder.connections.size.eql? 2 and folder.connections.where(user_id: user.id).present?
-        messages_between = true
+        _folder = folder
       end
     end
-    return messages_between
+    return _folder
   end
   
   def message_folders

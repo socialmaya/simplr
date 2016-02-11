@@ -2,9 +2,11 @@
   <table align="center">
     <tr>
       <% for group in user.my_groups.last 4 %>
-        <td>
-          <%= image_tag group.image, class: :my_groups_group_icon %>
-        </td>
+        <% if group.image.url %>
+          <td>
+            <%= image_tag group.image, class: :my_groups_group_icon %>
+          </td>
+        <% end %>
       <% end %>
     </tr>
   </table>
