@@ -44,6 +44,7 @@ class SearchController < ApplicationController
   end
 
   private
+    # scans specific peices of text for match
     def scan_text item, query, match=false
       [:body, :name, :anon_token].each do |sym|   
         if item.respond_to? sym and item.send(sym).present? 
@@ -52,7 +53,8 @@ class SearchController < ApplicationController
       end
       return match
     end
-
+    
+    # scans text word by word for match
     def scan text, query, match=false
       for word in text.split(" ")
         for key_word in query.split(" ")
