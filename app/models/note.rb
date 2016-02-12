@@ -23,6 +23,7 @@ class Note < ActiveRecord::Base
     _actions = { post_comment: "Someone commented on your post.",
       comment_reply: "Someone replied to your comment.",
       user_follow: "Someone started following you.",
+      message_received: "You've received a message.",
       group_invite: "You've been invited to a group.",
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted." }

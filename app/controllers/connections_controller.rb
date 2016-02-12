@@ -43,7 +43,9 @@ class ConnectionsController < ApplicationController
     elsif @group
       request = current_user.request_to_join @group
       if request
+        # notifies the group creator of a users request to join the group
         Note.notify(:group_request, @group, @group.creator, current_user)
+        # notifies all made members of the request to join
         for member in @group.members
           Note.notify(:group_request, @group, member.user, current_user)
         end

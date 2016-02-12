@@ -34,7 +34,8 @@ class MessagesController < ApplicationController
     @folder = Connection.find_by_id params[:folder_id]
     @new_message = Message.new
     if @folder
-      @messages = @folder.messages
+      @messages = @folder.messages.last 5
+      set_last_im
     else
       redirect_to '/404'
     end
@@ -57,7 +58,12 @@ class MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.group_id = params[:group_id]
     @message.connection_id = params[:folder_id]
-    @message.save!
+    if @message.save and @folder
+      for member in @folder.members
+        next if member.user.eql? current_user
+        Note.notify :message_received, @folder, member.user, current_user
+      end
+    end
   end
   
   def instant_messages
@@ -69,9 +75,6 @@ class MessagesController < ApplicationController
     elsif @folder
       @folder.messages
     end
-    
-    # now just needs to account for folders inside of check and set last IM methods
-    
     for message in @messages
       @instant_messages << message if check_last_im(message)
     end
@@ -85,7 +88,6 @@ class MessagesController < ApplicationController
     @new_message = Message.new
     @group = Group.find_by_id(params[:group_id])
     if @group
-      cookies.permanent[:last_chat_id] = @group.id
       @messages ||= @group.messages.last msg_limit
       set_last_im
     end
@@ -109,6 +111,8 @@ class MessagesController < ApplicationController
       if last_im.class.eql? Hash and message.id > last_im[:message_id].to_i
         if @group and last_im[:group_id].eql? @group.id
           in_sequence = true # meaning not the last message
+        elsif @folder and last_im[:folder_id].eql? @folder.id
+          in_sequence = true # meaning not the last message
         end
       end
       return in_sequence
@@ -118,14 +122,18 @@ class MessagesController < ApplicationController
     def set_last_im
       message_id = if @instant_messages.present?
         @instant_messages.last.id
-      # last message on page load, before ajax call
+      # last group message on page load, before ajax call
       elsif @group and @group.messages.present?
         @group.messages.last.id
+      # last folder message on page load, before ajax
+      elsif @folder and @folder.messages.present?
+        @folder.messages.last.id
       else
         nil
       end
       last_im = { message_id: message_id }
-      last_im[:group_id] = @group.id
+      last_im[:group_id] = @group.id if @group
+      last_im[:folder_id] = @folder.id if @folder
       cookies[:last_im] = last_im.to_s if last_im[:message_id]
     end
     

@@ -14,6 +14,8 @@
       <%= link_to note.message, group_path(note.item_id) %>
     <% when :user_follow %>
       <%= link_to note.message, followers_path(note.user) %>
+    <% when :message_received %>
+      <%= link_to note.message, show_message_folder_path(note.item_id) %>
     <% end %>
   </p>
 </div>

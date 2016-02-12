@@ -2,6 +2,15 @@
   <%= render "messages/check_folder_messages.js" %>
 </script>
 
+<div class="card">
+  <div align="center">
+    Conversation with: <% for member in @folder.members; next if member.user.eql? current_user %>
+      <%= member.user.name %>
+      <%= unless member.eql? @folder.members.last then ", " end %>
+    <% end %>
+  </div>
+</div>
+
 <% for message in @messages %>
 	<%= render "messages/card", message: message %>
 <% end %>

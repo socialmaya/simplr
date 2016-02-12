@@ -13,6 +13,14 @@ class Connection < ActiveRecord::Base
   scope :folders, -> { where message_folder: true }
   scope :current, -> { where.not(invite: true).where.not request: true }
   
+  def members
+    if self.message_folder
+      return self.connections.where.not user_id: nil
+    else
+      return []
+    end
+  end
+  
   def invited_to_site?
     self.invite and self.user_id.nil? and self.group_id.nil?
   end
