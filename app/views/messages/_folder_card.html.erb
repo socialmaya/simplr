@@ -4,8 +4,7 @@
     <%= link_to show_message_folder_path folder do %>
       <%= unseen = folder.unseen_messages current_user; "+#{unseen}" unless unseen.zero? %>
       <% for member in folder.members; next if member.user.eql? current_user %>
-        <%= member.user.name %><%= unless member.eql? folder.members.last \
-          then ", " else ": " end %>
+        <%= member.user.name + ", " %>
       <% end %>
       <%= folder.messages.last.body.last(20) + "..." %>
     <% end %>
