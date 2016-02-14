@@ -1,0 +1,5 @@
+<h2 class="standard_page_header">Inbox <i class="fa fa-envelope"></i></h2>
+
+<% for folder in @folders %>
+  <%= render "messages/conversation_with", folder: folder %>
+<% end %>

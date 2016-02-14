@@ -35,6 +35,7 @@ class MessagesController < ApplicationController
     @new_message = Message.new
     if @folder
       @messages = @folder.messages.last 5
+      set_last_message_seen
       set_last_im
     else
       redirect_to '/404'
@@ -99,12 +100,13 @@ class MessagesController < ApplicationController
   end
 
   private
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
+    def set_last_message_seen
+      unless @folder.messages.empty?
+        @connection = @folder.connections.find_by_user_id current_user.id
+        @connection.update total_messages_seen: @folder.messages.size
       end
     end
-  
+    
     def check_last_im message
       # eval to inflate hash from string
       in_sequence = false; last_im = eval(cookies[:last_im].to_s)
@@ -135,6 +137,12 @@ class MessagesController < ApplicationController
       last_im[:group_id] = @group.id if @group
       last_im[:folder_id] = @folder.id if @folder
       cookies[:last_im] = last_im.to_s if last_im[:message_id]
+    end
+    
+    def invite_only
+      unless invited?
+        redirect_to invite_only_path
+      end
     end
     
     # Use callbacks to share common setup or constraints between actions.
