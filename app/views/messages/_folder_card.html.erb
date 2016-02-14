@@ -1,7 +1,8 @@
 <div class="card">
+  <%= render "app/time_ago", item: folder.messages.last %>
   <div align="center">
     <%= link_to show_message_folder_path folder do %>
-      <%= unseen = folder.unseen_folder_messages current_user; "+#{unseen}" unless unseen.zero? %>
+      <%= unseen = folder.unseen_messages current_user; "+#{unseen}" unless unseen.zero? %>
       <% for member in folder.members; next if member.user.eql? current_user %>
         <%= member.user.name %><%= unless member.eql? folder.members.last \
           then ", " else ": " end %>

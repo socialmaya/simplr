@@ -86,6 +86,14 @@ class User < ActiveRecord::Base
     self.connections.requests
   end
   
+  def inbox_unseen
+    unseen = 0
+    for folder in self.message_folders
+      unseen +=1 unless folder.unseen_messages(self).zero?
+    end
+    return unseen
+  end
+  
   def folder_between user
     _folder = nil
     for folder in self.message_folders

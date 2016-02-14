@@ -13,7 +13,7 @@ class Connection < ActiveRecord::Base
   scope :folders, -> { where message_folder: true }
   scope :current, -> { where.not(invite: true).where.not request: true }
   
-  def unseen_folder_messages user
+  def unseen_messages user
     if self.message_folder and self.messages.present?
       connection = self.connections.find_by_user_id user.id
       unseen = self.messages.size - connection.total_messages_seen.to_i
