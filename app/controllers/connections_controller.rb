@@ -43,6 +43,8 @@ class ConnectionsController < ApplicationController
     elsif @group
       request = current_user.request_to_join @group
       if request
+        # boolean for ajax
+        @requested = true
         # notifies the group creator of a users request to join the group
         Note.notify(:group_request, @group, @group.creator, current_user)
         # notifies all made members of the request to join
@@ -51,10 +53,11 @@ class ConnectionsController < ApplicationController
         end
       end
     elsif @user
+      # follows and sets boolean for ajax script
       connection = current_user.follow @user; @followed = true
       Note.notify(:user_follow, nil, @user, current_user) if connection
     end
-    redirect_to :back unless @followed
+    redirect_to :back unless @followed or @requested
   end
   
   # when group invite or request is accepted
@@ -75,14 +78,15 @@ class ConnectionsController < ApplicationController
     if @group and @user
       @group.remove @user
     elsif @group
-      @group.remove current_user
+      # removes user from group and sets boolean for ajax
+      @group.remove current_user; @left_group = true
     elsif @user
       current_user.unfollow @user
       @unfollowed = true
     elsif @connection
       @connection.destroy
     end
-    redirect_to :back unless @unfollowed
+    redirect_to :back unless @unfollowed or @left_group
   end
 
   def members

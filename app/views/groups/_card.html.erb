@@ -26,15 +26,6 @@
   
   <%= render "app/time_ago", item: group %>
   
-  <% if group_auth group %>
-    <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>
-  <% elsif current_user %>
-    <% if group.members.find_by_user_id current_user.id %>
-      <%= link_to 'Leave', leave_group_path(group.id), method: :delete, class: :bottom_right_link %>
-    <% elsif not group.requests.find_by_user_id current_user.id %>
-      <%= link_to 'Request to join', request_to_join_path(group.id), method: :post, class: :bottom_right_link %>
-    <% else %>
-      <%= link_to 'Request pending', group, class: :bottom_right_link %>
-    <% end %>
-  <% end %>
+  <div id="group_<%= group.id %>_card_links_anchor"></div>
+  <%= render "groups/card_links", group: group %>
 </div>
