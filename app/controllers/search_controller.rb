@@ -40,6 +40,8 @@ class SearchController < ApplicationController
           end
         end
       end
+      # removes any types not found at all, for display to view with/without commas
+      @result_types.each { |key, val| @result_types.delete(key) if val.zero?  }
     end
   end
 
