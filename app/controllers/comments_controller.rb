@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @editing = true
   end
 
   # POST /comments
@@ -81,9 +82,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @post = @comment.post
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
