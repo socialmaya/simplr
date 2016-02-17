@@ -24,7 +24,9 @@ class ConnectionsController < ApplicationController
   end
     
   def generate_invite
-    @invite = Connection.new invite: true, grant_dev_access: params[:grant_dev_access]
+    @invite = Connection.new invite: true,
+      grant_dev_access: params[:grant_dev_access],
+      grant_mod_access: params[:grant_mod_access]
     if @invite.save
       redirect_to dev_panel_path(invite_token: @invite.unique_token)
     else

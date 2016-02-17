@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214070548) do
+ActiveRecord::Schema.define(version: 20160216235225) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160214070548) do
     t.boolean  "message_folder"
     t.integer  "connection_id"
     t.integer  "total_messages_seen"
+    t.boolean  "grant_mod_access"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -122,6 +123,9 @@ ActiveRecord::Schema.define(version: 20160214070548) do
     t.string   "password_salt"
     t.string   "unique_token"
     t.boolean  "dev"
+    t.boolean  "mod"
+    t.integer  "tier"
+    t.integer  "xp"
   end
 
   create_table "views", force: :cascade do |t|

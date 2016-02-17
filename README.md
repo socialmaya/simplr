@@ -14,3 +14,8 @@ Simplr is free and open source software, as specified above by the GNU General P
 6. Run the database migrations: `bundle exec rake db:migrate`
 
 The default database is SQLite3.
+
+## Upcoming Features
+
+1. Tello-like project managment tool availabe to devs and mod level users alike.
+2. Varying ranges of user acess to the features presented by the tool envisioned above.
