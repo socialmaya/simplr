@@ -5,7 +5,7 @@
       <%= unseen = folder.unseen_messages current_user; "+#{unseen}" unless unseen.zero? %>
       <% for member in folder.members; next if member.user.eql? current_user %>
         <%= member.user.name %><%= if member.eql? folder.members.last or \
-          folder.members.last.eql? current_user then ": " else ", " end %>
+          folder.members.last.user.eql? current_user then ": " else ", " end %>
       <% end %>
       <% if folder.messages.present? %>
         <%= folder.messages.last.body.last(20) + "..." %>
