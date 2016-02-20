@@ -3,8 +3,8 @@ class Connection < ActiveRecord::Base
   belongs_to :group
   # as folder for messages
   belongs_to :connection
-  has_many :connections
-  has_many :messages
+  has_many :connections, dependent: :destroy
+  has_many :messages, dependent: :destroy
   
   before_create :gen_unique_token
   
@@ -17,6 +17,8 @@ class Connection < ActiveRecord::Base
     if self.message_folder and self.messages.present?
       connection = self.connections.find_by_user_id user.id
       unseen = self.messages.size - connection.total_messages_seen.to_i
+    else
+      unseen = 0
     end
     return unseen
   end

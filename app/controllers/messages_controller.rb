@@ -11,6 +11,12 @@ class MessagesController < ApplicationController
     # with multiple users
     elsif params[:users]
       @users = []
+      # splits user names by comma and space
+      params[:users].split(", ").each do |name|
+        user = User.find_by_name name
+        # adds to users unless name not found or is current user
+        @users << user if user and not user.eql? current_user
+      end
     end
     if @folder.save
       # initializes folder with the sending user
@@ -23,6 +29,10 @@ class MessagesController < ApplicationController
         for user in @users
           @folder.connections.create user_id: user.id
         end
+      end
+      # creates initial message if present
+      if params[:body].present?
+        @folder.messages.create body: params[:body], user_id: current_user.id
       end
       redirect_to show_message_folder_path @folder
     else
@@ -44,6 +54,13 @@ class MessagesController < ApplicationController
   
   def message_folders
     @folders = current_user.message_folders
+    # destroys any empty folders that are older than the specified time
+    @folders.each { |folder| folder.destroy if folder.messages.empty? and folder.created_at < 1.hour.ago }
+    # sorts folders chronologically by folder creation or last message creation if messages are present
+    @folders.sort_by! do |folder|
+      (folder.messages.empty? ? folder.created_at : folder.messages.last.created_at)
+    end
+    @folders.reverse!
   end
   
   def add_image

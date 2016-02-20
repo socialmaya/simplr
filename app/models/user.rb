@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
   def message_folders
     folders = []
     self.connections.where.not(connection_id: nil).each do |connection|
-      if connection.connection.message_folder
+      if connection.connection and connection.connection.message_folder
         folders << connection.connection
       end
     end

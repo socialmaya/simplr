@@ -1,5 +1,5 @@
 <div class="card">
-  <%= render "app/time_ago", item: folder.messages.last %>
+  <%= render "app/time_ago", item: (folder.messages.present? ? folder.messages.last : folder) %>
   <div align="center">
     <%= link_to show_message_folder_path folder do %>
       <%= unseen = folder.unseen_messages current_user; "+#{unseen}" unless unseen.zero? %>
@@ -7,7 +7,11 @@
         <%= member.user.name %><%= if member.eql? folder.members.last or \
           folder.members.last.eql? current_user then ": " else ", " end %>
       <% end %>
-      <%= folder.messages.last.body.last(20) + "..." %>
+      <% if folder.messages.present? %>
+        <%= folder.messages.last.body.last(20) + "..." %>
+      <% else %>
+        nothingness...
+      <% end %>
     <% end %>
   </div>
 </div>
