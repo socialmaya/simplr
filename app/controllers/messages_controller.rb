@@ -5,12 +5,14 @@ class MessagesController < ApplicationController
   # create folder between users if none exists
   def create_message_folder
     @folder = Connection.new message_folder: true
+    # initializes users list with sending user
+    @users = [current_user]
     # if with just one other user
     if params[:user_id]
-      @user = User.find_by_id params[:user_id]
+      user = User.find_by_id params[:user_id]
+      @users << @user if user
     # with multiple users
     elsif params[:users]
-      @users = []
       # splits user names by comma and space
       params[:users].split(", ").each do |name|
         user = User.find_by_name name
@@ -18,18 +20,16 @@ class MessagesController < ApplicationController
         @users << user if user and not user.eql? current_user
       end
     end
-    if @folder.save
-      # initializes folder with the sending user
-      @folder.connections.create user_id: current_user.id
-      if @user
-        # adds the recieving user to the folder
-        @folder.connections.create user_id: @user.id
-      elsif @users
-        # adds each recipient one by one to folder
-        for user in @users
-          @folder.connections.create user_id: user.id
-        end
+    # saves new folder or gets old one if present
+    if Connection.folder_with @users
+      @folder = Connection.folder_with @users
+    elsif @folder.save
+      for user in @users
+        @folder.connections.create user_id: user.id
       end
+    end
+    # redirects to folder page or back if errors occurred
+    if @folder and @folder.id
       # creates initial message if present
       if params[:body].present?
         @folder.messages.create body: params[:body], user_id: current_user.id
