@@ -13,6 +13,23 @@ class Connection < ActiveRecord::Base
   scope :folders, -> { where message_folder: true }
   scope :current, -> { where.not(invite: true).where.not request: true }
   
+  # finds message folder with specific list of users
+  def self.folder_with users=[]
+    for user in users
+      # goes through each folder in each users inbox
+      for folder in user.message_folders
+        # goes through each member in each folder, getting array for comparison
+        _users = []; folder.members.each { |member| _users << member.user if member.user }
+        # sorts and compares each array of users, returns this folder if arrays match
+        if _users.sort.eql? users.sort
+          _folder = folder
+          break
+        end
+      end
+    end
+    return _folder
+  end
+  
   def unseen_messages user
     if self.message_folder and self.messages.present?
       connection = self.connections.find_by_user_id user.id
