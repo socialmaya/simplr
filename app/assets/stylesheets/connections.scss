@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.folder_card_link {
+  padding: 5px 0px;
+}
+
+.folder_recipients_text_field {
+  width: 95%;
+  max-width: 275px;
+  display: block;
+  margin-bottom: 7.5px;
+}
+
 .invite_message {
   width: 60%;
 }
