@@ -11,7 +11,11 @@
 <% if @posts.empty? %>
   <div class="card">
     <p align="center">
-      You haven't posted anything yet.
+      <% if @user.eql? current_user %>
+        You haven't posted anything yet.
+      <% else %>
+        <%= @user.name + " hasn't posted anything yet." %>
+      <% end %>
     </p>
   </div>
 <% end %>

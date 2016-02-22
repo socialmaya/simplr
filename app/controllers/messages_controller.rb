@@ -13,12 +13,8 @@ class MessagesController < ApplicationController
       @users << @user if user
     # with multiple users
     elsif params[:users]
-      # splits user names by comma and space
-      params[:users].split(", ").each do |name|
-        user = User.find_by_name name
-        # adds to users unless name not found or is current user
-        @users << user if user and not user.eql? current_user
-      end
+      # gets each user by name from users param
+      @users = extract_users params[:users], @users
     end
     # saves new folder or gets old one if present
     if Connection.folder_with @users
@@ -117,6 +113,19 @@ class MessagesController < ApplicationController
   end
 
   private
+    def extract_users user_names="", users=[]
+      # splits user names by comma and space (", ")
+      # needs to also account for any extra white space
+      user_names.split(", ").each do |name|
+        user = User.find_by_name name
+        # adds user to users unless name not found or is current user
+        unless user.nil? or user.eql? current_user
+          users << user
+        end
+      end
+      return users
+    end
+    
     def set_last_message_seen
       unless @folder.messages.empty?
         @connection = @folder.connections.find_by_user_id current_user.id

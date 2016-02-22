@@ -13,8 +13,14 @@
 		<% end %>
 		
     <% if @group_shown %>
+      <% if group.active_chat? %>
+        <script>
+          <%= render "app/fader.js", target: "group_chat_link", target_id: group.id %>
+        </script>
+      <% end %>
       <p>
-        <%= link_to 'Chat <i class="fa fa-comments"></i>'.html_safe, group_chat_path(group) %>
+        <%= link_to 'Chat <i class="fa fa-comments"></i>'.html_safe,
+          group_chat_path(group), id: "group_chat_link_#{group.id}" %>
         <%= " | " %>
         <%= link_to ("Members#{' (' + (group.members_size).to_s + ')' unless group.members.size.zero?} " \
           + '<i class="fa fa-users"></i>').html_safe, members_path(group) %>

@@ -12,6 +12,10 @@ class Group < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def active_chat?
+    self.messages.present? and self.messages.last.created_at > 5.minute.ago
+  end
+  
   def members_size
     size = self.members.size
     size +=1 if self.creator
