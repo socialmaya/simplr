@@ -7,8 +7,6 @@ class PostsController < ApplicationController
   def add_image
   end
 
-  # GET /posts
-  # GET /posts.json
   def index
     @you_are_home = true
     @all_items = if current_user
@@ -21,8 +19,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     if @post
       @post_shown = true
@@ -33,18 +29,14 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit
     @editing = true
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
     @post.group_id = params[:group_id]
@@ -66,8 +58,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -81,8 +71,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|

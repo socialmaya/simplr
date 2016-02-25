@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216235225) do
+ActiveRecord::Schema.define(version: 20160223003136) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -109,6 +109,21 @@ ActiveRecord::Schema.define(version: 20160216235225) do
     t.datetime "updated_at", null: false
     t.string   "anon_token"
     t.integer  "index"
+  end
+
+  create_table "treasures", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "treasure_id"
+    t.string   "unique_token"
+    t.integer  "xp"
+    t.string   "loot"
+    t.string   "power"
+    t.float    "chance"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "image"
+    t.text     "body"
   end
 
   create_table "users", force: :cascade do |t|

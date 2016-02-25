@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :settings
+  # treasures
+  post 'treasures/create', as: 'create_treasure'
+  put 'treasures/update', as: 'update_treasure'
+  get 'secret/:token', to: 'treasures#show', as: 'show_treasure'
+  
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
   get 'invitation/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
@@ -66,6 +70,7 @@ Rails.application.routes.draw do
   resources :connections
   resources :messages
   resources :comments
+  resources :settings
   resources :groups
   resources :users
   resources :posts

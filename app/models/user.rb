@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :treasures
   has_many :groups
   has_many :views
 
@@ -95,7 +96,6 @@ class User < ActiveRecord::Base
   end
   
   def folder_between user
-    _folder = nil
     for folder in self.message_folders
       if folder.connections.size.eql? 2 and folder.connections.where(user_id: user.id).present?
         _folder = folder
@@ -152,15 +152,14 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def gen_unique_token
-    self.unique_token = SecureRandom.urlsafe_base64
-  end
-
-  def encrypt_password
-    if self.password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
+    def gen_unique_token
+      self.unique_token = SecureRandom.urlsafe_base64
     end
-  end
+
+    def encrypt_password
+      if self.password.present?
+        self.password_salt = BCrypt::Engine.generate_salt
+        self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
+      end
+    end
 end

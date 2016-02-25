@@ -6,7 +6,8 @@ class Group < ActiveRecord::Base
   has_many :connections, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :tags, dependent: :destroy
-  has_many :views
+  has_many :views, dependent: :destroy
+  has_many :treasures
   
   validates_uniqueness_of :name
 

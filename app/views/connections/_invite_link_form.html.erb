@@ -1,9 +1,10 @@
 <%= form_tag generate_invite_path, method: :post do %>
   <p>
-    with dev powers <%= check_box_tag :grant_dev_access %>
+    Check level of power to be granted:
   </p>
   <p>
-    with mod powers <%= check_box_tag :grant_mod_access %>
+    dev <%= check_box_tag :grant_dev_access %>
+    mod <%= check_box_tag :grant_mod_access %>
   </p>
   <p>
     <button type="submit" name="commit" id="generate_invite_button">

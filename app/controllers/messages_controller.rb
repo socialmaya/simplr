@@ -126,10 +126,13 @@ class MessagesController < ApplicationController
       return users
     end
     
+    # for displaying number of unseen folder messages
     def set_last_message_seen
       unless @folder.messages.empty?
         @connection = @folder.connections.find_by_user_id current_user.id
-        @connection.update total_messages_seen: @folder.messages.size
+        unless @folder.messages.size.eql? @connection.total_messages_seen
+          @connection.update total_messages_seen: @folder.messages.size
+        end
       end
     end
     

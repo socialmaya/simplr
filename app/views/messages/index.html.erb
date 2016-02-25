@@ -6,12 +6,20 @@
   <%= render "groups/card", group: @group %>
 <% end %>
 
-<% for message in @messages %>
-	<%= render "messages/card", message: message %>
+<% if group_auth @group or group_member_auth @group %>
+  <% for message in @messages %>
+	  <%= render "messages/card", message: message %>
+  <% end %>
+
+  <div id="instant_messages_anchor"></div>
+
+  <div id="message_form_anchor"></div>
+
+  <%= render "messages/form" %>
+<% else %>
+  <div class="card">
+    <p align="center">
+      You aren't a member of the group yet.
+    </p>
+  </div>
 <% end %>
-
-<div id="instant_messages_anchor"></div>
-
-<div id="message_form_anchor"></div>
-
-<%= render "messages/form" %>

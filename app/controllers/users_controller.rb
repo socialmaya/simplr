@@ -24,14 +24,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users
-  # GET /users.json
   def index
     @users = User.all.reverse
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
     if @user
       @post = Post.new
@@ -40,12 +36,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -59,8 +52,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
