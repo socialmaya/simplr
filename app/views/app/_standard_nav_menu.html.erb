@@ -26,7 +26,7 @@
 	  <%= link_to fa_icon("users", "Following"), following_path(current_user.id), id: :standard_nav_menu_link %>
 	  <%= link_to fa_icon("cog", "Settings"), settings_path, id: :standard_nav_menu_link %>
 	  <% if dev? %>
-  	  <%= link_to fa_icon("diamond", "Master"), dev_panel_path, id: :standard_nav_menu_link,
+  	  <%= link_to fa_icon("code", "Dev"), dev_panel_path, id: :standard_nav_menu_link,
   	    title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." %>
 	  <% end %>
   	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete, id: :standard_nav_menu_link,

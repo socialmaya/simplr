@@ -1,6 +1,8 @@
 ## Simplr - Minimalistic Social Network
 
-Simplr, a minimalistic social network with simplicity and a vibrant, reactive aesthetic as it's core values.
+Simplr is a minimalistic, invite-only social network with simplicity and exclusivity as it's core values.
+
+And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 
 Simplr is free and open source software, as specified above by the GNU General Public License.
 
