@@ -1,5 +1,7 @@
-<% if @treasure.image.url %>
-  <%= link_to loot_treasure_path(@treasure.unique_token) do %>
-    <%= image_tag @treasure.image %>
+<div class="loot_container" align="center">
+  <% if @treasure.image.url %>
+    <%= link_to loot_treasure_path(@treasure.unique_token) do %>
+      <%= image_tag @treasure.image, class: :loot_image %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

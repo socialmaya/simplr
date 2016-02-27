@@ -20,7 +20,27 @@ class User < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   def loot treasure
-    self.update xp: (self.xp.to_i + treasure.xp.to_i)
+    # duplicates treasure and assigns duplicate to user
+    treasure = treasure.dup; treasure.user_id = self.id
+    if treasure.save
+      # redeems any xp to user
+      self.update xp: (self.xp.to_i + treasure.xp.to_i)
+      # user ascends to next tier if enough xp
+      self.update tier: self.level_up if self.level_up.to_i > self.tier.to_i
+    end
+  end
+  
+  def level_up
+    case self.xp
+    when 250..499
+      1
+    when 500..999
+      2
+    when 1000..2499
+      3
+    when 2500..5000
+      4
+    end
   end
   
   def feed
