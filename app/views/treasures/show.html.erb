@@ -1,0 +1,5 @@
+<% if @treasure.image.url %>
+  <%= link_to loot_treasure_path(@treasure.unique_token) do %>
+    <%= image_tag @treasure.image %>
+  <% end %>
+<% end %>

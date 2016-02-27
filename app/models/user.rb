@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def loot treasure
+    self.update xp: (self.xp.to_i + treasure.xp.to_i)
+  end
+  
   def feed
     _feed = []
     for user in following

@@ -1,4 +1,10 @@
 class TreasuresController < ApplicationController
+  def loot
+    @treasure = Treasure.find_by_unique_token(params[:token])
+    current_user.loot @treasure
+    redirect_to :back
+  end
+  
   def create
     @treasure = Treasure.new(treasure_params)
     if @treasure.save
@@ -18,6 +24,6 @@ class TreasuresController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def treasure_params
-      params.permit(:xp, :loot, :power, :chance, :image)
+      params.require(:treasure).permit(:xp, :loot, :power, :chance, :image)
     end
 end
