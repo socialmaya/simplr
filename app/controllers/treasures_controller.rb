@@ -24,6 +24,6 @@ class TreasuresController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def treasure_params
-      params.require(:treasure).permit(:xp, :loot, :power, :chance, :image)
+      params.require(:treasure).permit(:xp, :loot, :power, :chance, :image, :body)
     end
 end

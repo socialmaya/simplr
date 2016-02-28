@@ -5,3 +5,15 @@ XP should fade in and out, maybe between different colors
 XP should be rewarded for simple things like being followed, first posts, creating a group and it becoming popular, or even setting your profile picture for the first time
 
 XP and Tier should still correspond as closely as possible to the powers one has unlocked
+
+Every treasure should return XP, whether or not it returns any kind of power
+
+Potential powers to unlock temporarily:
+  Read private messages of other people
+  Suspend users accounts for a day
+  Edit peoples posts or profiles, reverts back next day
+  Rare drop: Shutdown entire site, ability to replace home page with uploaded image
+  
+Potential counter measures to powers unlocked:
+  One-click encryption to keep private messages private
+  Show eyeballs reading messages, ability to poke an eye out

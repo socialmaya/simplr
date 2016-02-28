@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
     end
   end
   
+  # leveling should be based on a fibonacci pattern
   def level_up
     case self.xp
     when 250..499
@@ -38,8 +39,10 @@ class User < ActiveRecord::Base
       2
     when 1000..2499
       3
-    when 2500..5000
+    when 2500..4999
       4
+    when 5000..9999
+      5
     end
   end
   

@@ -1,7 +1,17 @@
 <div class="loot_container" align="center">
-  <% if @treasure.image.url %>
-    <%= link_to loot_treasure_path(@treasure.unique_token) do %>
+  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post do %>
+    <% if @treasure.image.url %>
       <%= image_tag @treasure.image, class: :loot_image %>
+    <% else %>
+	    <script>
+	      <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.unique_token %>
+	    </script>
+      <i id="treasure_icon_<%= @treasure.unique_token %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
     <% end %>
+  <% end %>
+  <% if @treasure.body.present? %>
+    <p class="treasure_body" class="<%= 'justified_body_text' if @treasure.body.size > 150 %>">
+      <%= render "app/body", item: @treasure %>
+	  </p>
   <% end %>
 </div>

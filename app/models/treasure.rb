@@ -8,8 +8,6 @@ class Treasure < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  # each treasure should return xp, whether or not it returns any kind of power
-  
   private
     def gen_unique_token
       self.unique_token = SecureRandom.urlsafe_base64

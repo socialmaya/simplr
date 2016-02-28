@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # treasures
   post 'treasures/create', as: 'create_treasure'
   put 'treasures/update', as: 'update_treasure'
-  get 'secret/:token', to: 'treasures#show', as: 'show_treasure'
-  get 'loot/:token', to: 'treasures#loot', as: 'loot_treasure'
+  get 'treasure/:token', to: 'treasures#show', as: 'show_treasure'
+  post 'treasure/:token/loot', to: 'treasures#loot', as: 'loot_treasure'
   
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
