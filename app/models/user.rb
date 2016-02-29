@@ -30,18 +30,19 @@ class User < ActiveRecord::Base
     end
   end
   
-  # leveling should be based on a fibonacci pattern
+  # leveling scales based on fibonacci sequence
   def level_up
+    fib_nums = Fibonacci.seq 15..25
     case self.xp
-    when 250..499
+    when fib_nums[0]..fib_nums[1]-1
       1
-    when 500..999
+    when fib_nums[1]..fib_nums[2]-1
       2
-    when 1000..2499
+    when fib_nums[2]..fib_nums[3]-1
       3
-    when 2500..4999
+    when fib_nums[3]..fib_nums[4]-1
       4
-    when 5000..9999
+    when fib_nums[4]..fib_nums[5]-1
       5
     end
   end
