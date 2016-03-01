@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.progress_bar_progress {
+  background: rgb(0, 255, 0);
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.progress_bar {
+  background: rgb(255, 0, 0);
+  width: 100%;
+}
+
+.progress_bar_label {
+  padding-left: 1.5px;
+  padding-bottom: 5px;
+}
+
 .user_name_link {
   font-size: 16.5px;
 }

@@ -26,25 +26,36 @@ class User < ActiveRecord::Base
       # redeems any xp to user
       self.update xp: (self.xp.to_i + treasure.xp.to_i)
       # user ascends to next tier if enough xp
-      self.update tier: self.level_up if self.level_up.to_i > self.tier.to_i
+      if level[:lvl] > self.tier.to_i
+        self.update tier: self.level[:lvl]
+      end
     end
   end
   
-  # leveling scales based on fibonacci sequence
-  def level_up
+  def level
+    lvl = 0; progress = 0.0; xp_to_nxt_lvl = 0
+    # leveling scales based on fibonacci
     fib_nums = Fibonacci.seq 15..25
-    case self.xp
-    when fib_nums[0]..fib_nums[1]-1
-      1
-    when fib_nums[1]..fib_nums[2]-1
-      2
-    when fib_nums[2]..fib_nums[3]-1
-      3
-    when fib_nums[3]..fib_nums[4]-1
-      4
-    when fib_nums[4]..fib_nums[5]-1
-      5
+    (0..fib_nums.size-1).each do |n|
+      # if next number in sequence actually present
+      if fib_nums[n+1].present?
+        # if current XP is between current and next sequence number
+        if (fib_nums[n]..fib_nums[n+1]-1).include? self.xp.to_i
+          # gets progress to next level as float for progress bar
+          progress = self.xp.to_f / (fib_nums[n+1]-1).to_f
+          # gets XP until next level is reached
+          xp_to_nxt_lvl = (fib_nums[n+1]-1) - self.xp.to_i
+          # current user level
+          lvl = n+1
+        end
+      end
     end
+    # returns current level, current progress, or XP left until next level
+    return { lvl: lvl.to_i, progress: progress, xp_left: xp_to_nxt_lvl }
+  end
+  
+  def level_progress
+    
   end
   
   def feed
