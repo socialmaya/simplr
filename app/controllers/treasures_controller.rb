@@ -1,8 +1,7 @@
 class TreasuresController < ApplicationController
   def loot
     @treasure = Treasure.find_by_unique_token(params[:token])
-    current_user.loot @treasure
-    redirect_to :back
+    @treasure = current_user.loot @treasure
   end
   
   def create

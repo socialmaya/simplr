@@ -2,6 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.xp_reward_container {
+  position: fixed;
+  top: 55px;
+  right: 10px;
+  width: 100px;
+  height: 100px;
+  background: rgb(0, 255, 0);
+  color: rgb(0, 0, 255);
+  border-radius: 3px;
+}
+
+.xp_reward {
+  position: absolute;
+  top: 17.5%;
+  left: 15%;
+  font-size: 4em;
+  font-weight: bolder;
+}
+
+.xp_reward_acronym {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 10px;
+}
+
 .loot_icon_substitute {
   margin-top: 50px;
   margin-bottom: 25px;

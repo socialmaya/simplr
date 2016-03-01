@@ -1,5 +1,5 @@
 <div class="loot_container" align="center">
-  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post do %>
+  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true do %>
     <% if @treasure.image.url %>
       <%= image_tag @treasure.image, class: :loot_image %>
     <% else %>
