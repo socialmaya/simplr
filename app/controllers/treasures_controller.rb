@@ -8,7 +8,23 @@ class TreasuresController < ApplicationController
     @from_form = true if params[:from_challenge_form]
     @treasure = Treasure.find_by_unique_token(params[:token])
     # should only loot if challenge was overcome
-    current_user.loot @treasure
+    @overcome = false
+    if @treasure.options.present?
+      params.each do |key, val|
+        if key.include? "option_"
+          puts "\nKey found: #{key}\n"
+          if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
+            puts "Correct answer: #{eval(@treasure.options)[key.to_sym]} is equal to #{@treasure.answer}"
+            @overcome = true
+          end
+        end
+      end
+    elsif @treasure.answer.present? and params[:answer]
+      if params[:answer].eql? @treasure.answer
+        @overcome = true
+      end
+    end
+    current_user.loot @treasure if @overcome
     # redirect_to another treasure if one's available
   end
   
