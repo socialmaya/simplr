@@ -5,13 +5,16 @@ class TreasuresController < ApplicationController
   end
 
   def loot
+    @from_form = true if params[:from_challenge_form]
     @treasure = Treasure.find_by_unique_token(params[:token])
-    @treasure = current_user.loot @treasure
+    # should only loot if challenge was overcome
+    current_user.loot @treasure
+    # redirect_to another treasure if one's available
   end
   
   def create
     @treasure = Treasure.new(treasure_params)
-    # builds hash of options from params
+    # builds hash of options from params, initializes with correct answer
     options = { option_0: @treasure.answer }
     params.each do |key, val|
       # if option for multiple choice

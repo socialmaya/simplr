@@ -16,17 +16,4 @@
   <% end %>
 </div>
 
-<div align="center">
-  <% unless @treasure.options.present? %>
-    <%= text_field_tag :answer, nil, placeholder: "Answer here..." %>
-  <% else %>
-    <div align="left">
-      <% eval(@treasure.options).each do |key, val| %>
-        <p style="color:white;">
-          <%= check_box_tag key %>
-          <%= val %>
-        </p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<%= render "treasures/challenge_form", treasure: @treasure %>

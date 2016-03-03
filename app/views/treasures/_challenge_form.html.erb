@@ -1,0 +1,23 @@
+<div class="treasure_challenge_form" id="challenge_form_<%= treasure.id %>" align="center">
+  <%= form_tag loot_treasure_path(treasure.unique_token), method: :post, remote: true do %>
+    <%= hidden_field_tag :token, treasure.unique_token %>
+    <%= hidden_field_tag :from_challenge_form, true %>
+    <% unless treasure.options.present? %>
+      <%= text_field_tag :answer, nil, placeholder: "Answer here..." %>
+    <% else %>
+      <div align="left">
+        <% eval(treasure.options).each do |key, val| %>
+          <p>
+            <%= check_box_tag key %>
+            <%= val %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+    <p>
+      <button type="submit" name="commit" id="standard_form_button">
+        <b>Loot <i class="fa fa-diamond"></i></b>
+      </button>
+    </p>
+  <% end %>
+</div>
