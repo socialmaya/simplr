@@ -6,6 +6,7 @@ XP should be rewarded for simple things:
   first post
   being followed
   creating a group and it becoming popular
+  using a trending hashtag for the first time
   setting your profile picture for the first time
 
 XP and Tier should still correspond as closely as possible to the powers one has unlocked
@@ -14,8 +15,8 @@ Every treasure should return XP, whether or not it returns any kind of power
 
 Potential powers to unlock temporarily:
   Read private messages of other people
-  Suspend users accounts for a day
-  Edit peoples posts or profiles, reverts back next day
+  Invade any private groups (without request)
+  Edit peoples posts, groups, or profiles, reverts back next day
   Rare drop: Shutdown entire site, ability to replace home page with uploaded image
   
 Potential counter measures to powers unlocked:

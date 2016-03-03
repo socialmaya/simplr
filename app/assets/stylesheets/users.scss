@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.tier_container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 12.5px;
+  height: 12.5px;
+  background: black;
+}
+
+.tier_number {
+  padding-top: 1.5px;
+  font-size: 7.5px;
+  color: white;
+}
+
 .progress_bar_progress {
   background: rgb(0, 255, 0);
   text-align: center;

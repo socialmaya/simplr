@@ -12,10 +12,10 @@
     <%= f.file_field :image %>
   </p>
   <p>
-    <%= f.text_field :power, placeholder: "Power to unlock" %>
+    <%= f.text_field :answer, placeholder: "Answer or solution", class: :standard_text_field %>
   </p>
   <p>
-    <%= f.text_field :loot, placeholder: "Loot to be collected" %>
+    <%= f.select :power, options_for_select(power_options) %>
   </p>
   <p>
     <%= f.select :xp, options_for_select([["Experience to be gained", nil], 0, 25, 50, 100, 500, 1000]) %>

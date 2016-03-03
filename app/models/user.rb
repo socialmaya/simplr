@@ -21,16 +21,14 @@ class User < ActiveRecord::Base
   
   def loot treasure
     # duplicates treasure and assigns duplicate to user
-    treasure = treasure.dup; treasure.user_id = self.id
-    if treasure.save
-      # redeems any xp to user
+    dup_treasure = treasure.dup; dup_treasure.user_id = self.id
+    # assigns looted treasure as parent of duplicate
+    dup_treasure.treasure_id = treasure.id
+    if dup_treasure.save
+      # redeems any xp to user from treasure looted
       self.update xp: (self.xp.to_i + treasure.xp.to_i)
-      # user ascends to next tier if enough xp
-      unless level[:lvl].eql? self.tier.to_i
-        self.update tier: self.level[:lvl]
-      end
       # returns xp to show in view
-      return treasure
+      return dup_treasure
     end
   end
   
@@ -47,8 +45,8 @@ class User < ActiveRecord::Base
           xp_to_nxt_lvl = (fib_nums[n+1]-1) - self.xp.to_i
           # gets progress to next level as float (formatted as percentage) for progress bar
           progress = (self.xp.to_i - fib_nums[n]).to_f / ((fib_nums[n+1]-1) - fib_nums[n]).to_f
-          # current user level
-          lvl = n+1
+          # gets current level and breaks out of loop
+          lvl = n; break
         end
       end
     end

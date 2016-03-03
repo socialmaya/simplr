@@ -18,6 +18,7 @@ class TreasuresController < ApplicationController
   
   def show
     @treasure = Treasure.find_by_unique_token(params[:token])
+    redirect_to '/404' unless @treasure
   end
   
   private
