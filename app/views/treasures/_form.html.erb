@@ -1,3 +1,6 @@
+<!-- resets session variable from last time -->
+<% session[:option_field] = "" %>
+
 <%= form_for Treasure.new, url: create_treasure_path, method: :post do |f| %>
   <!-- enchanted objects, so illusive in secretive grandiosity -->
   <!-- to a land of absolute treasure, where gold and gems abound in never ending abundance -->
@@ -11,9 +14,12 @@
   <p>
     <%= f.file_field :image %>
   </p>
-  <p>
-    <%= f.text_field :answer, placeholder: "Answer or solution", class: :standard_text_field %>
-  </p>
+  
+  <%= f.text_field :answer, placeholder: "Actual answer or solution", class: :standard_text_field %>
+  <div id="add_option_anchor"></div>
+  <%= link_to '<i class="fa fa-plus"></i> Another option for multiple choice'.html_safe,
+    add_treasure_option_path, remote: true, class: :treasure_form_link %>
+    
   <p>
     <%= f.select :power, options_for_select(power_options) %>
   </p>

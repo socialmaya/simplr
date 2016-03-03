@@ -13,6 +13,12 @@ XP and Tier should still correspond as closely as possible to the powers one has
 XP should fade in and out, maybe between different colors when rewarded
 Every treasure should return XP, whether or not it returns any kind of power
 
+Potential types of treasure and themes to play on:
+  Greeted by a Sphinx with a riddle that leads to another treasure
+  Mazes of hidden pages (treasure) linking to one another
+  Ancient mythology themed treasure and riddles
+  Lord of the Rings references
+
 Potential powers to unlock temporarily:
   Read private messages of other people
   Invade any private groups (without request)

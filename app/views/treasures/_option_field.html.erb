@@ -1,0 +1,5 @@
+<%= text_field_tag "option_#{session[:option_field]}".to_sym, nil,
+  placeholder: "Option #{session[:option_field]} for multiple choice",
+  class: :standard_text_field %>
+
+<div id="add_option_anchor"></div>

@@ -4,14 +4,29 @@
       <%= image_tag @treasure.image, class: :loot_image %>
     <% else %>
 	    <script>
-	      <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.unique_token %>
+	      <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.id %>
 	    </script>
-      <i id="treasure_icon_<%= @treasure.unique_token %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
+      <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
     <% end %>
   <% end %>
   <% if @treasure.body.present? %>
     <p class="treasure_body" class="<%= 'justified_body_text' if @treasure.body.size > 150 %>">
       <%= render "app/body", item: @treasure %>
 	  </p>
+  <% end %>
+</div>
+
+<div align="center">
+  <% unless @treasure.options.present? %>
+    <%= text_field_tag :answer, nil, placeholder: "Answer here..." %>
+  <% else %>
+    <div align="left">
+      <% eval(@treasure.options).each do |key, val| %>
+        <p style="color:white;">
+          <%= check_box_tag key %>
+          <%= val %>
+        </p>
+      <% end %>
+    </div>
   <% end %>
 </div>
