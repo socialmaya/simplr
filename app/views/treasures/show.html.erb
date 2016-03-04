@@ -1,5 +1,5 @@
 <div class="loot_container" align="center">
-  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true do %>
+  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true, title: "#{@treasure.name}" do %>
     <% if @treasure.image.url %>
       <%= image_tag @treasure.image, class: :loot_image %>
     <% else %>
@@ -8,11 +8,6 @@
 	    </script>
       <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
     <% end %>
-  <% end %>
-  <% if @treasure.body.present? %>
-    <p class="treasure_body" class="<%= 'justified_body_text' if @treasure.body.size > 150 %>">
-      <%= render "app/body", item: @treasure %>
-	  </p>
   <% end %>
 </div>
 

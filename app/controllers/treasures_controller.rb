@@ -7,22 +7,26 @@ class TreasuresController < ApplicationController
   def loot
     @from_form = true if params[:from_challenge_form]
     @treasure = Treasure.find_by_unique_token(params[:token])
-    # should only loot if challenge was overcome
-    @overcome = false
+    # if a multiple choice question
     if @treasure.options.present?
       params.each do |key, val|
         if key.include? "option_"
-          puts "\nKey found: #{key}\n"
           if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
-            puts "Correct answer: #{eval(@treasure.options)[key.to_sym]} is equal to #{@treasure.answer}"
             @overcome = true
+          else
+            @overcome = false
+            break
           end
         end
       end
+    # if a simple question (single choice answer)
     elsif @treasure.answer.present? and params[:answer]
       if params[:answer].eql? @treasure.answer
         @overcome = true
       end
+    # if no challenge is present
+    else
+      @overcome = true
     end
     current_user.loot @treasure if @overcome
     # redirect_to another treasure if one's available
@@ -38,8 +42,8 @@ class TreasuresController < ApplicationController
         options[key] = val
       end
     end
-    # saves options hash as string
-    @treasure.options = options.to_s
+    # saves options hash as string if more than one answer
+    @treasure.options = shuffle(options).to_s if options.size > 1
     if @treasure.save
       redirect_to show_treasure_path @treasure.unique_token
     else
@@ -56,8 +60,17 @@ class TreasuresController < ApplicationController
   end
   
   private
+    # shuffles options so correct one isn't always first
+    def shuffle options
+      vals = options.values.shuffle
+      i=0; options.each do |key, val|
+        options[key] = vals[i]; i+=1
+      end
+      return options
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def treasure_params
-      params.require(:treasure).permit(:xp, :loot, :power, :chance, :image, :body, :answer)
+      params.require(:treasure).permit(:name, :xp, :power, :chance, :image, :body, :answer)
     end
 end
