@@ -3,7 +3,7 @@
   <%= render "app/fader.js", target: "tier_number", target_id: user.id.to_s %>
 </script>
 
-<% link_path = user.level[:lvl] >= 10 ? show_treasure_path(random_treasure.unique_token) : user %>
+<% link_path = user.level[:lvl] > 9 ? show_treasure_path(Treasure.random.unique_token) : user %>
 <%= link_to link_path do %>
   <div class="tier_container" id="tier_container_<%= user.id %>">
     <div class="tier_number" id="tier_number_<%= user.id %>" align="center">

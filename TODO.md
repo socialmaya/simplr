@@ -1,8 +1,31 @@
-Simplr - To do list
+## Simplr - To do list
+
+Think of names for site, ideas and words to play on:
+  Awecity, AweCity, Aweciti
+  Utopia, UtopianDataFarm
+  Kalo (greek for invite)
+  Mythological, Esoteric
+  Eclectica, Eclectico
+  Psychedelic, Trippy
+  Ambient, Ambience
 
 User profiles:
   Profile card should be shrunk and left aligned with the progress bar right aligned next to it
   Progress bar should also be wider than the profile card, which should be squared
+
+Power to grant access to leveling system, xp, unlocking powers (except Discover), hidden treasure, etc.
+All of the above inaccessible until Discover power unlocked (door to all doors to all mazes to all prizes)
+
+Loot drops (items, trinkets, emblems, gold):
+  Emblems for stylizing posts
+  Gold, gems, currency for trade
+  Inventory for managing loot collected
+  Armor, weapons, etc for beefing up profiles
+  Emblems for stylizing avatars and user cards
+  Loot drops to be separate from powers unlocked
+  
+XP count up to total received
+Level up animation at the top with fader
 
 XP should be rewarded for simple things:
   first post

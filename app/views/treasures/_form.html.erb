@@ -24,6 +24,9 @@
     add_treasure_option_path, remote: true, class: :treasure_form_link %>
     
   <p>
+    <%= f.select :type, options_for_select(treasure_type_options) %>
+  </p>
+  <p>
     <%= f.select :power, options_for_select(power_options) %>
   </p>
   <p>

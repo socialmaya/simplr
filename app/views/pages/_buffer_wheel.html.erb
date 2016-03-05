@@ -5,7 +5,7 @@
 	  </script>
     
     <div class="avatar_container">
-      <%= link_to show_treasure_path(random_treasure.unique_token) do %>
+      <%= link_to show_treasure_path(Treasure.random.unique_token) do %>
         <% 16.times do |num| %>
           <% rgb = random_color %>
           <div class="avatar_pixel" id="loading_grid_pixel_<%= num %>"

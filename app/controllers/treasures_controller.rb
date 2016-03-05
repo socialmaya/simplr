@@ -11,7 +11,7 @@ class TreasuresController < ApplicationController
     if @treasure.options.present?
       params.each do |key, val|
         if key.include? "option_"
-          if eval(@treasure.options)[key].eql? @treasure.answer
+          if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
             @overcome = true
           else
             @overcome = false
@@ -25,7 +25,7 @@ class TreasuresController < ApplicationController
         @overcome = true
       end
     # if no challenge is present
-    elsif @treasure.answer.nil?
+    elsif not @treasure.answer.present?
       @overcome = true
     end
     current_user.loot @treasure if @overcome
@@ -38,7 +38,7 @@ class TreasuresController < ApplicationController
     params.each do |key, val|
       # if option for multiple choice
       if key.include? "option_"
-        options[key] = val
+        options[key.to_sym] = val
       end
     end
     # saves options hash as string if more than one answer
@@ -46,6 +46,7 @@ class TreasuresController < ApplicationController
     if @treasure.save
       redirect_to show_treasure_path @treasure.unique_token
     else
+      flash[:error] = "Invalid input"
       redirect_to :back
     end
   end
@@ -55,11 +56,11 @@ class TreasuresController < ApplicationController
   
   def show
     @treasure = Treasure.find_by_unique_token(params[:token])
-    redirect_to '/404' unless @treasure
+    redirect_to '/404' if @treasure.nil?
   end
   
   private
-    # shuffles options so correct one isn't always first
+    # shuffles answer options so correct one isn't always first
     def shuffle options
       vals = options.values.shuffle
       i=0; options.each do |key, val|
