@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     # if with just one other user
     if params[:user_id]
       user = User.find_by_id params[:user_id]
-      @users << @user if user
+      @users << user if user
     # with multiple users
     elsif params[:users]
       # gets each user by name from users param

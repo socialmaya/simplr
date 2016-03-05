@@ -1,6 +1,8 @@
 Simplr - To do list
 
-XP bar on profiles, progress to next Tier
+User profiles:
+  Profile card should be shrunk and left aligned with the progress bar right aligned next to it
+  Progress bar should also be wider than the profile card, which should be squared
 
 XP should be rewarded for simple things:
   first post
@@ -10,7 +12,6 @@ XP should be rewarded for simple things:
   setting your profile picture for the first time
 
 XP and Tier should still correspond as closely as possible to the powers one has unlocked
-XP should fade in and out, maybe between different colors when rewarded
 Every treasure should return XP, whether or not it returns any kind of power
 
 Potential types of treasure and themes to play on:

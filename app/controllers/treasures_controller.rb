@@ -11,7 +11,7 @@ class TreasuresController < ApplicationController
     if @treasure.options.present?
       params.each do |key, val|
         if key.include? "option_"
-          if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
+          if eval(@treasure.options)[key].eql? @treasure.answer
             @overcome = true
           else
             @overcome = false
@@ -25,11 +25,10 @@ class TreasuresController < ApplicationController
         @overcome = true
       end
     # if no challenge is present
-    else
+    elsif @treasure.answer.nil?
       @overcome = true
     end
     current_user.loot @treasure if @overcome
-    # redirect_to another treasure if one's available
   end
   
   def create

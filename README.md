@@ -4,7 +4,7 @@ Simplr is a minimalistic, invite-only social network with simplicity and exclusi
 
 And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 
-Inspiration for website: Early facebook, Scott Pilgrim vs The World, that one episode of Star Trek DS9 where the visiting aliens subject the crew to a game where Quark is gambling away their lives, and Feel Good Inc. by the Gorillaz
+Inspiration for website: Early facebook, Scott Pilgrim vs The World, that one episode of Star Trek DS9 where the visiting aliens subject the crew to a game where Quark is gambling away their lives, Feel Good Inc. by the Gorillaz, The Rocky Horror Picture Show, and lots and lots of LSD
 
 Simplr is free and open source software, as specified above by the GNU General Public License.
 

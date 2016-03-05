@@ -5,18 +5,18 @@ class Treasure < ActiveRecord::Base
   has_many :treasures
   
   before_create :gen_unique_token, :random_xp
-  validates_uniqueness_of :name
+  validates_presence_of :name
 
   mount_uploader :image, ImageUploader
   
   def self.powers
-    { read_others_messages: 'Read other peoples messages',
-      invade_groups: 'Invade private groups',
+    { invade_groups: 'Invade private groups',
       edit_posts: 'Edit posts',
       edit_profiles: 'Edit user profiles',
       edit_groups: 'Edit group profiles',
       shutdown: 'Shutdown entire website',
-      take_over: 'Take control over entire website' }
+      take_over: 'Take control over entire website',
+      read_others_messages: 'Read other peoples private messages' }
   end
   
   private

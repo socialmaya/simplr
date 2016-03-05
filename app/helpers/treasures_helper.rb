@@ -1,4 +1,8 @@
 module TreasuresHelper
+  def looted? treasure
+    true if current_user.treasures.find_by_name treasure.name
+  end
+  
   def power_options
     options = [['Power to unlock', nil], ['No power', 'no_power']]
     Treasure.powers.each do |key, val|
