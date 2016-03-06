@@ -3,6 +3,7 @@
 Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
+  Receive -53 XP from Kanye dead ends
   XP count up to total received
   Implement powers
 

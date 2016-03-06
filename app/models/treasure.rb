@@ -77,6 +77,9 @@ class Treasure < ActiveRecord::Base
         end
         self.xp ||= xp_amounts[0]
       end
+      if self.treasure_type.eql? 'kanye'
+        self.xp = -53
+      end
     end
     
     # sets a generic placeholder name unless named by user
