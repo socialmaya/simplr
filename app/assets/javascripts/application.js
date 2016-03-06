@@ -18,3 +18,12 @@
 //= require scrollView
 //= require jquery.remotipart
 //= require bonsai
+//= require jquery.kanye-ipsum.min.js
+
+$(document).ready(function() {
+  $('.kanye').kanye({
+    angry: false,
+    explicit: true,
+    paragraphs: 1
+  });
+});

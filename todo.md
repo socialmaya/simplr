@@ -7,10 +7,8 @@ Priority:
   Implement powers
 
 Think of names for site, ideas and words to play on:
-  Awecity, AweCity, Aweciti
-  Kalo (greek for invite)
+  Kaló (greek for invite)
   Mythological, Esoteric
-  Eclectica, Eclectico
   Psychedelic, Trippy
   Ambient, Ambience
 

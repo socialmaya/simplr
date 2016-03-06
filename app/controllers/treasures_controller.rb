@@ -31,7 +31,6 @@ class TreasuresController < ApplicationController
       end
       current_user.loot @treasure if @overcome
     end
-    @overcome = true
   end
   
   def create
@@ -74,6 +73,6 @@ class TreasuresController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def treasure_params
-      params.require(:treasure).permit(:name, :xp, :power, :chance, :image, :body, :answer)
+      params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer)
     end
 end

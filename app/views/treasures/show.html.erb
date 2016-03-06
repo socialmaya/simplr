@@ -1,14 +1,30 @@
-<div class="loot_container" align="center">
-  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true, title: "#{@treasure.name}" do %>
-    <% if @treasure.image.url %>
-      <%= image_tag @treasure.image, class: :loot_image %>
-    <% else %>
-	    <script>
-	      <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.id %>
-	    </script>
-      <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
+<% if @treasure.treasure_type.eql? "kanye" %>
+  <div class="card">
+    <div align="center">
+      <p class="kanye"></p>
+    </div>
+  </div>
+<% else %>
+  <div class="loot_container" align="center">
+    <%= link_to loot_treasure_path(@treasure.unique_token),
+      method: :post, remote: true, title: "#{@treasure.name}" do %>
+      <% if @treasure.image.url %>
+        <%= image_tag @treasure.image, class: :loot_image %>
+      <% else %>
+	      <script>
+	        <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.id %>
+	      </script>
+        <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<%= render "treasures/challenge_form", treasure: @treasure %>
+  <% if @treasure.body.present? %>
+    <div class="treasure_challenge_form" id="challenge_form_<%= @treasure.id %>" align="center">
+      <p class="treasure_body" class="<%= 'justified_body_text' if @treasure.body.size > 150 %>">
+        <%= render "app/body", item: treasure %>
+      </p>
+      <%= render "treasures/challenge_form", treasure: @treasure %>
+    </div>
+  <% end %>
+<% end %>

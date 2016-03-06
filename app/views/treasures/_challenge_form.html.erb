@@ -1,30 +1,23 @@
-<% if treasure.body.present? %>
-  <div class="treasure_challenge_form" id="challenge_form_<%= treasure.id %>" align="center">
-    <p class="treasure_body" class="<%= 'justified_body_text' if treasure.body.size > 150 %>">
-      <%= render "app/body", item: treasure %>
-    </p>
-    <% if (treasure.answer.present? or treasure.options.present?) and not treasure.looted_by? current_user %>
-      <%= form_tag loot_treasure_path(treasure.unique_token), method: :post, remote: true do %>
-        <%= hidden_field_tag :token, treasure.unique_token %>
-        <%= hidden_field_tag :from_challenge_form, true %>
-        <% unless treasure.options.present? %>
-          <%= text_field_tag :answer, nil, placeholder: "Answer here..." %>
-        <% else %>
-          <div align="left">
-            <% eval(treasure.options).each do |key, val| %>
-              <p>
-                <%= check_box_tag key %>
-                <%= val %>
-              </p>
-            <% end %>
-          </div>
+<% if (treasure.answer.present? or treasure.options.present?) and not treasure.looted_by? current_user %>
+  <%= form_tag loot_treasure_path(treasure.unique_token), method: :post, remote: true do %>
+    <%= hidden_field_tag :token, treasure.unique_token %>
+    <%= hidden_field_tag :from_challenge_form, true %>
+    <% unless treasure.options.present? %>
+      <%= text_field_tag :answer, nil, placeholder: "Answer here..." %>
+    <% else %>
+      <div align="left">
+        <% eval(treasure.options).each do |key, val| %>
+          <p>
+            <%= check_box_tag key %>
+            <%= val %>
+          </p>
         <% end %>
-        <p>
-          <button type="submit" name="commit" id="standard_form_button">
-            <b>Loot <i class="fa fa-diamond"></i></b>
-          </button>
-        </p>
-      <% end %>
+      </div>
     <% end %>
-  </div>
+    <p>
+      <button type="submit" name="commit" id="standard_form_button">
+        <b>Loot <i class="fa fa-diamond"></i></b>
+      </button>
+    </p>
+  <% end %>
 <% end %>
