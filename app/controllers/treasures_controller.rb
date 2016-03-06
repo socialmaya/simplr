@@ -7,28 +7,31 @@ class TreasuresController < ApplicationController
   def loot
     @from_form = true if params[:from_challenge_form]
     @treasure = Treasure.find_by_unique_token(params[:token])
-    # if a multiple choice question
-    if @treasure.options.present?
-      params.each do |key, val|
-        if key.include? "option_"
-          if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
-            @overcome = true
-          else
-            @overcome = false
-            break
+    unless @treasure.looted_by? current_user
+      # if a multiple choice question
+      if @treasure.options.present?
+        params.each do |key, val|
+          if key.include? "option_"
+            if eval(@treasure.options)[key.to_sym].eql? @treasure.answer
+              @overcome = true
+            else
+              @overcome = false
+              break
+            end
           end
         end
-      end
-    # if a simple question (single choice answer)
-    elsif @treasure.answer.present? and params[:answer]
-      if params[:answer].eql? @treasure.answer
+      # if a simple question (single choice answer)
+      elsif @treasure.answer.present? and params[:answer]
+        if params[:answer].eql? @treasure.answer
+          @overcome = true
+        end
+      # if no challenge is present
+      elsif not @treasure.answer.present?
         @overcome = true
       end
-    # if no challenge is present
-    elsif not @treasure.answer.present?
-      @overcome = true
+      current_user.loot @treasure if @overcome
     end
-    current_user.loot @treasure if @overcome
+    @overcome = true
   end
   
   def create

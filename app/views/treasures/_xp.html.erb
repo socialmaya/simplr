@@ -1,6 +1,12 @@
+<script>
+  <%= render "app/fader.js", target: "xp_reward_container", target_id: treasure.id.to_s, background: true %>
+  <%= render "app/fader.js", target: "xp_reward_acronym", target_id: treasure.id.to_s %>
+  <%= render "app/fader.js", target: "xp_reward", target_id: treasure.id.to_s %>
+</script>
+
 <div class="xp_reward_container" id="xp_reward_container_<%= treasure.id %>" hidden>
-  <span class="xp_reward_acronym">XP</span>
-  <div class="xp_reward">
+  <span class="xp_reward_acronym" id="xp_reward_acronym_<%= treasure.id %>">XP</span>
+  <div class="xp_reward" id="xp_reward_<%= treasure.id %>">
     <%= treasure.xp.to_i %>
   </div>
 </div>

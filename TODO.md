@@ -1,8 +1,13 @@
 ## Simplr - To do list
 
+Priority:
+  Level up animation at the top with fader
+  Progress bar count up xp at page load
+  XP count up to total received
+  Implement powers
+
 Think of names for site, ideas and words to play on:
   Awecity, AweCity, Aweciti
-  Utopia, UtopianDataFarm
   Kalo (greek for invite)
   Mythological, Esoteric
   Eclectica, Eclectico
@@ -12,6 +17,8 @@ Think of names for site, ideas and words to play on:
 User profiles:
   Profile card should be shrunk and left aligned with the progress bar right aligned next to it
   Progress bar should also be wider than the profile card, which should be squared
+  
+A mini game of some kind, like a card game, something that could be used dynamically as a template, over and over with different themes, so there'd be more than just QA challenges for treasure looting
 
 Power to grant access to leveling system, xp, unlocking powers (except Discover), hidden treasure, etc.
 All of the above inaccessible until Discover power unlocked (door to all doors to all mazes to all prizes)
@@ -23,9 +30,6 @@ Loot drops (items, trinkets, emblems, gold):
   Armor, weapons, etc for beefing up profiles
   Emblems for stylizing avatars and user cards
   Loot drops to be separate from powers unlocked
-  
-XP count up to total received
-Level up animation at the top with fader
 
 XP should be rewarded for simple things:
   first post

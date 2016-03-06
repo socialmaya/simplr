@@ -1,18 +1,6 @@
 <div class="card">
   <%= form_for(@post) do |f| %>
     <div align="center">
-      <% if @post.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-          <ul>
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <%= hidden_field_tag :group_id, @group.id if @group %>
       
       <% if @editing and @post.image.url %>

@@ -4,8 +4,7 @@ class Treasure < ActiveRecord::Base
   belongs_to :treasure
   has_many :treasures
   
-  before_create :gen_unique_token, :random_xp, :random_power
-  validates_presence_of :name
+  before_create :gen_unique_token, :gen_unique_name, :random_xp, :random_power
 
   mount_uploader :image, ImageUploader
   
@@ -76,6 +75,13 @@ class Treasure < ActiveRecord::Base
           i+=1
         end
         self.xp ||= xp_amounts[0]
+      end
+    end
+    
+    # sets a generic placeholder name unless named by user
+    def gen_unique_name
+      unless self.name.present?
+        self.name = "generic_#{SecureRandom.urlsafe_base64}"
       end
     end
     
