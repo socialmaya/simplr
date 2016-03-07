@@ -1,7 +1,7 @@
 <div class="loot_container" align="center">
   <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true, title: "#{@treasure.name}" do %>
-    <% if @treasure.treasure_type.eql? "kanye" %>
-      <div class="card">
+    <% if @treasure.treasure_type.eql? 'kanye' %>
+      <div class="dark_card">
         <div align="center">
           <p class="kanye"></p>
         </div>
@@ -17,7 +17,7 @@
   <% end %>
 </div>
 
-<% if @treasure.body.present? %>
+<% if @treasure.body.present? and not @treasure.treasure_type.eql? 'kanye' %>
   <div class="treasure_challenge_form" id="challenge_form_<%= @treasure.id %>" align="center">
     <p class="treasure_body" class="<%= 'justified_body_text' if @treasure.body.size > 150 %>">
       <%= render "app/body", item: treasure %>

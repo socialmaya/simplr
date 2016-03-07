@@ -74,6 +74,12 @@ textarea {
   background: grey;
 }
 
+.dark_card {
+  @include card;
+  background: rgb(10, 10, 10);
+  color: white;
+}
+
 .danger_card {
   @include card;
   background: red;
