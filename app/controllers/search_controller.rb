@@ -33,12 +33,24 @@ class SearchController < ApplicationController
             match = true if _class.eql? User
           when "groups and users", "users and groups"
             match = true if [Group, User].include? _class
+          # first treasure found, first power unlocked
+          when "discover"
+            if current_user
+              treasure = current_user.treasures.new power: 'discover'
+              # can now find hidden treasure on the site and unlock powers
+              if treasure.save
+                @discover = true
+                break
+              end
+            end
           end
           if match
             @results << item
             @result_types[item.class.to_s.downcase.to_sym] +=1
           end
         end
+        # to prevent duplicate treasures from being created
+        break if @discover
       end
       # removes any types not found at all, for display to view with/without commas
       @result_types.each { |key, val| @result_types.delete(key) if val.zero?  }

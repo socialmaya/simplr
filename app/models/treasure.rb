@@ -5,6 +5,7 @@ class Treasure < ActiveRecord::Base
   has_many :treasures
   
   before_create :gen_unique_token, :gen_unique_name, :random_xp, :random_power
+  validate :one_discovery, on: :create
 
   mount_uploader :image, ImageUploader
   
@@ -48,6 +49,15 @@ class Treasure < ActiveRecord::Base
   end
   
   private
+    def one_discovery
+      if self.user_id and self.power.eql? 'discover'
+        user = User.find_by_id(self.user_id)
+        if user and user.treasures.find_by_power self.power
+          errors.add :one_discovery, "Discover only once"
+        end
+      end
+    end
+    
     def random_power
       unless self.power.present?
         powers = Treasure.powers.keys

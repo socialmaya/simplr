@@ -20,12 +20,22 @@
 	<% end %>
 <% end %>
 
-<% if @results.empty? and @query.present? %>
+<% if @results.empty? and @query.present? and not @discover %>
 	<div class="card">
 		<p align="center">
 			There aren't any items associated with this search.
 		</p>
 	</div>
+<% elsif @discover %>
+  <script>
+    <%= render "app/fader.js", target: 'discover_power_text', target_id: '' %>
+  </script>
+  <div class="dark_card" align="center">
+    <p class="justified_body" id="discover_power_text">
+      You've unlocked the Power of Discovery.
+      You can now find hidden treasure all over the site and gain untold powers.
+    </p>
+  </div>
 <% end %>
 
 

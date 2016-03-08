@@ -20,8 +20,7 @@ class User < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   def has_power? power
-    if self.treasures.find_by_power power
-      true; else; false; end
+    true if self.treasures.find_by_power power
   end
   
   def loot treasure

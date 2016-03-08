@@ -1,6 +1,7 @@
 ## Simplr - To do list
 
 Priority:
+  Icons for loot items and powers drawn with MS Paint
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
@@ -11,15 +12,21 @@ Think of names for site, ideas and words to play on:
   Mythological, Esoteric
   Psychedelic, Trippy
   Ambient, Ambience
+  Party site
+
+Like/Dislike/Voting system:
+  There needs to be a simple way for users to show opinion of posts, comments, etc.
+  Potential forms:
+    Up/down voting system like Reddit has
+    Like alternatives: Kudos, Props, Nice
+    Multi-disposition system using icons
+    Ability to like stuff more than once
 
 User profiles:
   Profile card should be shrunk and left aligned with the progress bar right aligned next to it
   Progress bar should also be wider than the profile card, which should be squared
   
 A mini game of some kind, like a card game, something that could be used dynamically as a template, over and over with different themes, so there'd be more than just QA challenges for treasure looting
-
-Power to grant access to leveling system, xp, unlocking powers (except Discover), hidden treasure, etc.
-All of the above inaccessible until Discover power unlocked (door to all doors to all mazes to all prizes)
 
 Loot drops (items, trinkets, emblems, gold):
   Emblems for stylizing posts
@@ -28,6 +35,7 @@ Loot drops (items, trinkets, emblems, gold):
   Armor, weapons, etc for beefing up profiles
   Emblems for stylizing avatars and user cards
   Loot drops to be separate from powers unlocked
+  Icons for loot items to be drawn with MS Paint
 
 XP should be rewarded for simple things:
   first post
@@ -57,3 +65,6 @@ Potential counter measures to powers unlocked:
   One-click encryption to keep private messages private
   Show eyeballs reading messages, ability to poke an eye out
   Use back up password to revert changes to profile or posts
+  
+Users should be able to trade powers with other users
+
