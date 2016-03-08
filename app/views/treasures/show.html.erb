@@ -1,6 +1,6 @@
 <div class="loot_container" align="center">
   <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true, title: "#{@treasure.name}" do %>
-    <% if @treasure.treasure_type.eql? 'kanye' %>
+    <% if kanye? %>
       <%= render "treasures/kanye" %>
     <% elsif @treasure.image.url %>
       <%= image_tag @treasure.image, class: :loot_image %>

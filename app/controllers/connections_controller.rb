@@ -1,7 +1,30 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers]
-  before_action :invite_only, except: [:invite_only_message, :redeem_invite]
+  before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
+  
+  def peace
+    if current_user
+      current_user.update_token
+      cookies.delete(:auth_token)
+    end
+    cookies.delete(:invite_token)
+    redirect_to root_url
+  end
+  
+  # to make inviting easier in person without sending them a link
+  def backdoor
+    redirect_to '/404' if invited?
+    if params[:password].present?
+      @invite = Connection.find_by_invite_password params[:password] if params[:password]
+      # password is for one time use
+      if @invite and not @invite.redeemed
+        redirect_to redeem_invite_path(@invite.unique_token)
+      else
+        redirect_to :back
+      end
+    end
+  end
   
   def copy_invite_link
   end
@@ -27,6 +50,9 @@ class ConnectionsController < ApplicationController
     @invite = Connection.new invite: true,
       grant_dev_access: params[:grant_dev_access],
       grant_mod_access: params[:grant_mod_access]
+    if params[:password].present?
+      @invite.invite_password = params[:password]
+    end
     if @invite.save
       redirect_to dev_panel_path(invite_token: @invite.unique_token)
     else

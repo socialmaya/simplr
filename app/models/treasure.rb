@@ -9,8 +9,7 @@ class Treasure < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   def looted_by? user
-    if self.name.present? and user.treasures.find_by_name self.name
-      true; else; false; end
+    true if self.name.present? and user.treasures.find_by_name self.name
   end
   
   def self.random
@@ -33,14 +32,12 @@ class Treasure < ActiveRecord::Base
   
   def self.powers
     { # Discovers hidden treasure system, gets access to xp leveling from treasure or general
-      discover: 'Discovers secrets',
-      edit_posts: 'Edit posts',
-      edit_profiles: 'Edit user profiles',
-      edit_groups: 'Edit group profiles',
+      discover: 'Discover secrets',
       invade_groups: 'Invade private groups',
-      shutdown: 'Shutdown entire website',
-      take_over: 'Take control over entire website',
-      read_others_messages: 'Read other peoples private messages' }
+      make_follower: 'Make someone your follower',
+      steal_followers: 'Steal other peoples followers',
+      read_others_messages: 'Read other peoples private messages',
+      shutdown: 'Shutdown entire website, alter homepage', }
   end
   
   def self.types

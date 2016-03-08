@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def has_power? power
+    if self.treasures.find_by_power power
+      true; else; false; end
+  end
+  
   def loot treasure
     # duplicates treasure and assigns duplicate to user
     dup_treasure = treasure.dup; dup_treasure.user_id = self.id

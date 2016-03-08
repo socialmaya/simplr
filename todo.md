@@ -3,7 +3,6 @@
 Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
-  Receive -53 XP from Kanye dead ends
   XP count up to total received
   Implement powers
 
@@ -44,12 +43,14 @@ Potential types of treasure and themes to play on:
   Greeted by a Sphinx with a riddle that leads to another treasure
   Mazes of hidden pages (treasure) linking to one another
   Ancient mythology themed treasure and riddles
+  Pop culture/internet meme questions/riddles
   Lord of the Rings references
 
 Potential powers to unlock temporarily:
+  Make someone start following you
   Read private messages of other people
   Invade any private groups (without request)
-  Edit peoples posts, groups, or profiles, reverts back next day
+  Steal peoples followers, reassigns them to you
   Rare drop: Shutdown entire site, ability to replace home page with uploaded image
   
 Potential counter measures to powers unlocked:

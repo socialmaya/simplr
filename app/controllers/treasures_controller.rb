@@ -1,4 +1,6 @@
 class TreasuresController < ApplicationController
+  before_action :hidden_treasure
+
   # adds option field to treasure form
   def add_option
     session[:option_field] = session[:option_field].to_i + 1
@@ -62,6 +64,12 @@ class TreasuresController < ApplicationController
   end
   
   private
+    def hidden_treasure
+      unless current_user and current_user.has_power? 'discover'
+        redirect_to '/404' unless dev?
+      end
+    end
+    
     # shuffles answer options so correct one isn't always first
     def shuffle options
       vals = options.values.shuffle

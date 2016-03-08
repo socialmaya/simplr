@@ -1,0 +1,6 @@
+<div class="dark_card" align="center">
+  <p>What's the password?</p>
+  <%= form_tag backdoor_path, method: :get do %>
+    <%= text_field_tag :password, nil, placeholder: "Enter password here..." %>
+  <% end %>
+</div>

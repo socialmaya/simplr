@@ -1,4 +1,10 @@
 module TreasuresHelper
+  def kanye?
+    if @treasure and @treasure.treasure_type.eql? 'kanye'
+      true
+    end
+  end
+  
   def treasure_type_options
     options = [['Type of treasure (node type)', nil]]
     Treasure.types.each do |key, val|
