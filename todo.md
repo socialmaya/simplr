@@ -5,6 +5,7 @@ Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
+  Likes/Votes system
   Implement powers
 
 Think of names for site, ideas and words to play on:
@@ -57,6 +58,7 @@ Potential types of treasure and themes to play on:
   Lord of the Rings references
 
 Potential powers to unlock temporarily:
+  Ability to Dislike posts
   Make someone start following you
   Read private messages of other people
   Invade any private groups (without request)
@@ -69,4 +71,7 @@ Potential counter measures to powers unlocked:
   Use back up password to revert changes to profile or posts
   
 Users should be able to trade powers with other users
+
+A mini dropdown menu for posts, accessed by a down arrow link to the right of the date link:
+  Links for Edit, Delete, etc. within the mini menu
 

@@ -70,11 +70,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         Tag.extract @comment
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
+        format.html { redirect_to @comment }
       else
         format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -85,8 +83,7 @@ class CommentsController < ApplicationController
     @post = @comment.post
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to @post }
     end
   end
 
