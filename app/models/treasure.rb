@@ -49,6 +49,7 @@ class Treasure < ActiveRecord::Base
   end
   
   private
+    # prevents duplicate discover treasures from being created
     def one_discovery
       if self.user_id and self.power.eql? 'discover'
         user = User.find_by_id(self.user_id)

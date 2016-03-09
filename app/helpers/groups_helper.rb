@@ -21,7 +21,11 @@ module GroupsHelper
   end
   
   def group_member_auth group
-    current_user and group.members.find_by_user_id current_user.id
+    if current_user
+      if group.members.find_by_user_id current_user.id or current_user.has_power? 'invade_groups'
+        true
+      end
+    end
   end
   
   def group_auth group

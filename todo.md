@@ -36,6 +36,8 @@ Loot drops (items, trinkets, emblems, gold):
   Emblems for stylizing avatars and user cards
   Loot drops to be separate from powers unlocked
   Icons for loot items to be drawn with MS Paint
+  Item sets, once complete, a power is unlocked
+  Ability to trade loot items, even for powers
 
 XP should be rewarded for simple things:
   first post

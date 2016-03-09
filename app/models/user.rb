@@ -152,6 +152,23 @@ class User < ActiveRecord::Base
     end
     return folders
   end
+  
+  def initialize_settings
+    _settings = Setting.names
+    # puts names from both categories into one array
+    names = _settings[:on]; _settings[:state].each { |name| names << name }
+    # creates any new settings not yet initialized
+    unless names.size.eql? self.settings.size
+      for name in names
+        self.settings.create name: name unless self.settings.find_by_name name
+      end
+    else
+      # renames settings based on names array
+      i=0; for setting in self.settings
+        setting.update name: names[i]; i+=1
+      end
+    end
+  end
 
   def update_token
     self.generate_token
@@ -170,23 +187,6 @@ class User < ActiveRecord::Base
       user
     else
       nil
-    end
-  end
-  
-  def initialize_settings
-    _settings = Setting.names
-    # puts names from both categories into one array
-    names = _settings[:on]; _settings[:state].each { |name| names << name }
-    # creates any new settings not yet initialized
-    unless names.size.eql? self.settings.size
-      for name in names
-        self.settings.create name: name unless self.settings.find_by_name name
-      end
-    else
-      # renames settings based on names array
-      i=0; for setting in self.settings
-        setting.update name: names[i]; i+=1
-      end
     end
   end
 
