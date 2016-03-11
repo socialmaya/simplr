@@ -5,6 +5,7 @@ Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
+  Sharing/Resharing of posts
   Likes/Votes system
   Implement powers
 

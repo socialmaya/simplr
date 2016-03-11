@@ -1,6 +1,6 @@
-## Simplr - Minimalistic Social Network
+## Simplr - Minimalist Social Network
 
-Simplr is a minimalistic, invite-only social network with simplicity and exclusivity as it's core values.
+Simplr is a minimalist, invite-only social network with simplicity and exclusivity as it's core values.
 
 And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 
