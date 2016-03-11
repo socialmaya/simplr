@@ -1,0 +1,10 @@
+<% param_id = (item.class.to_s.downcase + "_id").to_sym %>
+<% link_id = "like_#{item.class.to_s.downcase}_link_#{item.id}" %>
+
+<% unless already_liked? item %>
+  <%= link_to "Like#{(' ' + item.likes.size.to_s) unless item.likes.size.zero?}", like_path(param_id => item.id),
+    method: :post, remote: true, class: :bottom_left_link, id: "like_post_link_#{item.id}" %>
+<% else %>
+  <%= link_to "Unlike #{item.likes.size.to_s}", unlike_path(param_id => item.id),
+    method: :delete, remote: true, class: :bottom_left_link, id: "like_post_link_#{item.id}" %>
+<% end %>

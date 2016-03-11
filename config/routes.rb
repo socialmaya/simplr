@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # likes
+  post 'like', to: 'likes#create', as: 'like'
+  delete 'unlike', to: 'likes#destroy', as: 'unlike'
+  
   # treasures
   post 'treasures/create', as: 'create_treasure'
   put 'treasures/update', as: 'update_treasure'
@@ -54,6 +58,7 @@ Rails.application.routes.draw do
 
   # posts
   get 'posts/add_image', as: 'add_post_image'
+  post 'share/:id', to: 'posts#share', as: 'share_post'
   
   # comments
   get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'

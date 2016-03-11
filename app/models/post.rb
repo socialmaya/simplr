@@ -3,8 +3,9 @@ class Post < ActiveRecord::Base
   belongs_to :group
   
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :tags, dependent: :destroy
-  has_many :views
+  has_many :views, dependent: :destroy
   
   validate :text_or_image?, on: :create
   

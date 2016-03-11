@@ -1,7 +1,9 @@
 ## Simplr - To do list
 
 Priority:
+  Mini dropdown menu for posts with edit, delete, etc.
   Icons for loot items and powers drawn with MS Paint
+  Less destructive, neutral powers to unlock
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
@@ -76,3 +78,4 @@ Users should be able to trade powers with other users
 A mini dropdown menu for posts, accessed by a down arrow link to the right of the date link:
   Links for Edit, Delete, etc. within the mini menu
 
+A heart beat visualization for site activity, similar to the standard heart rate monitor in hospitals
