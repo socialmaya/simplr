@@ -14,6 +14,19 @@ class PostsController < ApplicationController
   end
   
   def share
+    @dup_post = @post.dup
+    @dup_post.user_id = current_user.id
+    @dup_post.original_id = if @post.original_id
+      @post.original_id
+    else
+      @post.id
+    end
+    @dup_post.body = ""
+    if @dup_post.save
+      redirect_to root_url
+    else
+      redirect_to :back
+    end
   end
 
   def index
@@ -57,7 +70,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         Tag.extract @post #extracts any hashtags along with their position in the text
-        format.html { redirect_to (@post.group.present? ? @post.group : posts_url) }
+        format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
       else
         format.html { render :new }
       end

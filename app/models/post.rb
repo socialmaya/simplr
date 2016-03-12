@@ -13,11 +13,19 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   
+  def shares
+    Post.where original_id: self.id
+  end
+  
+  def original
+    Post.find_by_id self.original_id
+  end
+  
   private
   
   def text_or_image?
     if (self.body.nil? or self.body.empty?) and !self.image.url
-      errors.add(:post, "cannot be empty.")
+      errors.add(:post, "cannot be empty.") unless self.original_id and self.image.present?
     end
   end
 end

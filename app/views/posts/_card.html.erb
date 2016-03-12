@@ -16,10 +16,10 @@
         <p>
           <% unless @post_shown %>
             <%= link_to post do %>
-              <%= image_tag post.image, class: :standard_post_image %>
+              <%= image_tag original_post_image(post), class: :standard_post_image %>
             <% end %>
           <% else %>
-            <%= image_tag post.image, class: :standard_post_image %>
+            <%= image_tag original_post_image(post), class: :standard_post_image %>
           <% end %>
         </p>
       <% end %>
@@ -36,8 +36,24 @@
     <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
       (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
     
-    <div id="like_post_link_anchor_<%= post.id %>"></div>
-    <%= render "likes/link", item: post %>
+    <table class="bottom_left_link">
+      <tr>
+        <td>
+          <span id="like_post_link_anchor_<%= post.id %>"></span>
+          <%= render "likes/link", item: post %>
+        </td>
+        <% if current_user and not current_user.eql? post.user %>
+          <td>
+            ·
+          </td>
+          <td>
+            <%= link_to "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}",
+              share_post_path(post), method: :post, class: :standard_post_link,
+              data: { confirm: "Share this post?" } %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
   </div>
 
   <% if settings(post.user)[:post_bg_fader_on] %>
