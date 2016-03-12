@@ -1,7 +1,13 @@
 <% if post.group.nil? or group_auth post.group or group_member_auth post.group %>
   <div class="card" id="post_card_<%= post.id %>">
     <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
-    <% if post.group %>
+    <% if post.original and post.original.user %>
+      <!-- reuses group classes because they fit -->
+      <span class="posted_to_group_label">
+        shared from <%= link_to post.original.user.name, post.original.user, class: :posted_to_group_link,
+          title: "Originally posted by #{post.original.user.name}" %>
+      </span>
+    <% elsif post.group %>
       <span class="posted_to_group_label">
         posted to <%= link_to post.group.name, post.group, class: :posted_to_group_link,
           title: "Group (#{post.group.name})" %>
