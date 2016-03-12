@@ -8,9 +8,19 @@
       </span>
     <% end %>
     
-    <%= render "app/time_ago", item: post %>
-    <%= render "posts/open_menu_link", post: post %>
-
+    <table class="top_right_link">
+      <tr>
+        <td>
+          <%= render "app/time_ago", item: post %>
+        </td>
+        <% if own_item? post or dev? %>
+          <td>
+            <%= render "posts/open_menu_link", post: post %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+    
     <div align="center">
       <% if post.image.url %>
         <p>
