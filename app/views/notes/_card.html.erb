@@ -2,7 +2,7 @@
   <%= render "app/time_ago", item: note %>
   <p align="center">
     <% case note.action.to_sym %>
-    <% when :post_comment %>
+    <% when :post_comment, :post_like %>
       <%= link_to note.message, post_path(note.item_id) %>
     <% when :comment_reply %>
       <%= link_to note.message, comment_path(note.item_id) %>

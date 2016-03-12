@@ -1,5 +1,8 @@
 <% _time_ago = time_ago(time_ago_in_words(item.created_at)) %>
-<%= link_to item, class: :top_right_link do %>
+
+<% link_class = item.is_a?(Post) ? :post_time_ago_link : :top_right_link %>
+
+<%= link_to item, class: link_class do %>
   <strong><%= _time_ago %></strong>
 <% end %>
 

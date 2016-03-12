@@ -19,6 +19,7 @@ class Note < ActiveRecord::Base
   
   def action_text action
     _actions = { post_comment: "Someone commented on your post.",
+      post_like: "Someone liked your post.",
       comment_reply: "Someone replied to your comment.",
       user_follow: "Someone started following you.",
       message_received: "You've received a message.",

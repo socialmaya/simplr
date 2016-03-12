@@ -1,0 +1,5 @@
+<div class="post_mini_menu" id="post_mini_menu_<%= post.id %>">
+  <div>
+    <%= link_to 'Edit', edit_post_path(post) if own_item? post or dev? %>
+  </div>
+</div>

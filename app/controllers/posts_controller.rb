@@ -1,13 +1,19 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :share]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :share, :open_menu, :close_menu]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only
   
-  def share
+  def open_menu
+  end
+  
+  def close_menu
   end
   
   def add_image
+  end
+  
+  def share
   end
 
   def index

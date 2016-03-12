@@ -9,7 +9,10 @@ class LikesController < ApplicationController
       like.anon_token = anon_token
     end
     if like.save
-      @like = like
+      if (current_user and not @item.user.eql? current_user) or (anon_token and not @item.anon_token.eql? anon_token)
+        Note.notify :post_like, @item, (@item.user ? @item.user : @item.anon_token),
+          (current_user ? current_user : anon_token)
+      end
     end
   end
   

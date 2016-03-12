@@ -7,6 +7,9 @@
           title: "Group (#{post.group.name})" %>
       </span>
     <% end %>
+    
+    <%= render "app/time_ago", item: post %>
+    <%= render "posts/open_menu_link", post: post %>
 
     <div align="center">
       <% if post.image.url %>
@@ -29,15 +32,9 @@
     </div>
 		
 	  <div id="post_comments_anchor_<%= post.id %>"></div>
-
-    <%= render "app/time_ago", item: post %>
     
     <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
       (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
-    
-    <div class="mini_dropdown_menu" hidden>
-      <%= link_to 'Edit', edit_post_path(post) if own_item? post or dev? %>
-    </div>
     
     <div id="like_post_link_anchor_<%= post.id %>"></div>
     <%= render "likes/link", item: post %>
