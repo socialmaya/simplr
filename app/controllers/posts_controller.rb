@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     end
     @dup_post.body = ""
     if @dup_post.save
+      Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
       redirect_to root_url
     else
       redirect_to :back
