@@ -3,13 +3,13 @@
     <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
     <% if post.original and post.original.user %>
       <!-- reuses group classes because they fit -->
-      <span class="posted_to_group_label">
-        shared from <%= link_to post.original.user.name, post.original.user, class: :posted_to_group_link,
+      <span class="posted_label">
+        shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
           title: "Originally posted by #{post.original.user.name}" %>
       </span>
     <% elsif post.group %>
-      <span class="posted_to_group_label">
-        posted to <%= link_to post.group.name, post.group, class: :posted_to_group_link,
+      <span class="posted_label">
+        posted to <%= link_to post.group.name, post.group, class: :posted_link,
           title: "Group (#{post.group.name})" %>
       </span>
     <% end %>
@@ -41,7 +41,7 @@
       <% end %>
 
       <% if post.body.present? %>
-	      <p class="standard_body" class="<%= justified_body post %>" id="post_body_text_<%= post.id %>">
+	      <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
           <%= render "app/body", item: post %>
 		    </p>
 		  <% end %>

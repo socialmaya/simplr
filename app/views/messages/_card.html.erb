@@ -6,7 +6,7 @@
       <p><%= image_tag message.image, class: :message_image %></p>
     <% end %>
     <% if message.body.present? %>
-      <div class="message_body_text" class="<%= justified_body message %>">
+      <div class="message_body_text <%= justified_body message %>">
         <%= render "app/body", item: message %>
       </div>
     <% end %>
