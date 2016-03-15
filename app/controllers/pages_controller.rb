@@ -31,6 +31,8 @@ class PagesController < ApplicationController
     @all_items = relevant_items
     @items = paginate @all_items
     @char_codes = char_codes @items
+    # records being seen
+    @items.each {|item| seent item}
   end
   
   def relevant_items

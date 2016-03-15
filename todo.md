@@ -1,14 +1,12 @@
 ## Simplr - To do list
 
 Priority:
-  Mini dropdown menu for posts with edit, delete, etc.
   Icons for loot items and powers drawn with MS Paint
   Less destructive, neutral powers to unlock
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
-  Sharing/Resharing of posts
-  Likes/Votes system
+  See who liked your post
   Implement powers
 
 Think of names for site, ideas and words to play on:
@@ -60,10 +58,12 @@ Potential types of treasure and themes to play on:
   Pop culture/internet meme questions/riddles
   Lord of the Rings references
 
-Potential powers to unlock temporarily:
+Potential powers to unlock:
   Ability to Dislike posts
+  Take someone elses power(s)
   Make someone start following you
   Read private messages of other people
+  See who's seeing your posts or comments
   Invade any private groups (without request)
   Steal peoples followers, reassigns them to you
   Rare drop: Shutdown entire site, ability to replace home page with uploaded image

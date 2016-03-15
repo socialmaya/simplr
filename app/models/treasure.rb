@@ -5,7 +5,7 @@ class Treasure < ActiveRecord::Base
   has_many :treasures
   
   before_create :gen_unique_token, :gen_unique_name, :random_xp, :random_power
-  validate :one_discovery, on: :create
+  validate :one_discovery, :unique_name, on: :create
 
   mount_uploader :image, ImageUploader
   
@@ -49,6 +49,16 @@ class Treasure < ActiveRecord::Base
   end
   
   private
+    # unique names but doesn't interfere with looting
+    def unique_name
+      if self.user_id.nil? and self.name.present?
+        _treasure = Treasure.find_by_name self.name
+        if _treasure
+          errors.add :unique_name, "Name must be unique"
+        end
+      end
+    end
+    
     # prevents duplicate discover treasures from being created
     def one_discovery
       if self.user_id and self.power.eql? 'discover'

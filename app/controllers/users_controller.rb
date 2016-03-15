@@ -33,6 +33,8 @@ class UsersController < ApplicationController
       @post = Post.new
       @posts = @user.posts.last(10).reverse
       @user_shown = true
+      # records being seen
+      seent @user
     end
   end
 

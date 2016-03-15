@@ -41,6 +41,8 @@ class PostsController < ApplicationController
     @items = paginate @all_items
     @char_codes = char_codes @items
     @post = Post.new
+    # records user viewing posts
+    @items.each {|item| seent item}
   end
 
   def show
@@ -48,6 +50,7 @@ class PostsController < ApplicationController
       @post_shown = true
       @comment = Comment.new
       @comments = @post.comments
+      seent @post
     else
       redirect_to '/404'
     end

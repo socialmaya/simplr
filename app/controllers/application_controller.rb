@@ -4,7 +4,36 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :invited?
+    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :invited?, :seen?, :seent
+    
+  def seent item
+    views = if item.is_a? User
+      View.where profile_id: item.id
+    else
+      item.views
+    end
+    unless seen? item
+      if current_user
+        views.create user_id: current_user.id
+      else
+        views.create anon_token: anon_token
+      end
+    end
+  end
+  
+  def seen? item
+    # accounts for profile views
+    views = if item.is_a? User
+      View.where profile_id: item.id
+    else
+      item.views
+    end
+    if current_user
+      true if views.where(user_id: current_user.id).present?
+    else
+      true if views.where(anon_token: anon_token).present?
+    end
+  end
     
   def settings user=current_user
     if user
