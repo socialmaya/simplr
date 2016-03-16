@@ -63,6 +63,7 @@ class UsersController < ApplicationController
     def grant_dev_access
       # grants dev powers sent with invite
       if cookies[:grant_dev_access]
+        # deletes to prevent creation of multiple devs
         cookies.delete(:grant_dev_access)
         @user.dev = true
       end
