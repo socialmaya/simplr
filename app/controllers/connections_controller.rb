@@ -15,14 +15,17 @@ class ConnectionsController < ApplicationController
   # to make inviting easier in person without sending them a link
   def backdoor
     redirect_to '/404' if invited?
+    # for one-use password invites
     if params[:password].present?
       @invite = Connection.find_by_invite_password params[:password] if params[:password]
-      # password is for one time use
-      if @invite and not @invite.redeemed
-        redirect_to redeem_invite_path(@invite.unique_token)
-      else
-        redirect_to :back
-      end
+    # for initializing web server with dev at start up
+    elsif (Connection.all.size + User.all.size).zero?
+      @invite = Connection.create invite: true, grant_dev_access: true
+    end
+    if @invite and not @invite.redeemed
+      redirect_to redeem_invite_path(@invite.unique_token)
+    elsif params[:password].present?
+      redirect_to :back
     end
   end
   
