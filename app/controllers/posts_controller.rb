@@ -86,7 +86,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         Tag.extract @post
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post }
       else
         format.html { render :edit }
       end

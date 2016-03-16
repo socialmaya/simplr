@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       cookies.permanent[:logged_in_before] = true
       redirect_to root_url
     else
-      redirect_to :back, notice: "This username may already be taken."
+      redirect_to :back
     end
   end
 
