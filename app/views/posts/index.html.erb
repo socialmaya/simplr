@@ -10,7 +10,12 @@
 <% if @items.empty? %>
   <div class="card">
     <p align="center">
-      There aren't any posts yet.
+      <% if current_user and current_user.following.size.zero? %>
+        You aren't following anyone yet.
+        <%= link_to "Click here", search_path(query: 'users') %> to search for people to follow.
+      <% else %>
+        There aren't any posts yet.
+      <% end %>
     </p>
   </div>
 <% end %>
