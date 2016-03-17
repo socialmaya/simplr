@@ -182,7 +182,14 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate login, password
-    user = self.find_by_name login; user = self.find_by_email login unless user
+    user = self.find_by_name login
+    # in case the their name is capitalized
+    user ||= self.find_by_name login.capitalize
+    # in case their name is all lower case
+    user ||= self.find_by_name login.downcase
+    # in case they're logging in by email
+    user ||= self.find_by_email login
+    # if user found and password matches decrypted one saved in db
     if user && user.password == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
