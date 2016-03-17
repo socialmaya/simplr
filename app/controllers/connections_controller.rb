@@ -2,6 +2,7 @@ class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers]
   before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
+  before_action :bots_to_404
   
   def peace
     if current_user
@@ -141,6 +142,10 @@ class ConnectionsController < ApplicationController
   end
 
   private
+    def bots_to_404
+      redirect_to '/404' if request.bot?
+    end
+    
     def invite_only
       unless invited?
         redirect_to invite_only_path
