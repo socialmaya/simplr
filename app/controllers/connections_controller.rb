@@ -4,6 +4,20 @@ class ConnectionsController < ApplicationController
   before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
   before_action :bots_to_404
   
+  def invite_someone
+    unless current_user and current_user.has_power? 'invite_someone'
+      redirect_to '/404'
+    else
+      if params[:invite_token]
+        @invite = Connection.find_by_unique_token params[:invite_token]
+        if @invite
+          @invite_link = root_url; @invite_link.slice!(-1)
+          @invite_link +=redeem_invite_path(@invite.unique_token)
+        end
+      end
+    end
+  end
+  
   def peace
     if current_user
       current_user.update_token
@@ -58,7 +72,12 @@ class ConnectionsController < ApplicationController
       @invite.invite_password = params[:password]
     end
     if @invite.save
-      redirect_to dev_panel_path(invite_token: @invite.unique_token)
+      if dev?
+        redirect_to dev_panel_path(invite_token: @invite.unique_token)
+      # redirects to different page if power unlocked for one time invite
+      elsif current_user.has_power? 'invite_someone'
+        redirect_to invite_someone_path(invite_token: @invite.unique_token)
+      end
     else
       redirect_to :back
     end

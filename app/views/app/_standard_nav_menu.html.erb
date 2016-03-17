@@ -21,14 +21,19 @@
 	<% unless current_user %>
   	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, id: :standard_nav_menu_link,
   	  title: "Click here to sign up and see way less ads." %>
+  	  
   	<%= link_to fa_icon("sign-in", "Log in"), sessions_new_path, id: :standard_nav_menu_link %>
   <% else %>
 	  <%= link_to fa_icon("users", "Following"), following_path(current_user.id), id: :standard_nav_menu_link %>
+	  
 	  <%= link_to fa_icon("cog", "Settings"), settings_path, id: :standard_nav_menu_link %>
-	  <% if dev? %>
-  	  <%= link_to fa_icon("code", "Dev"), dev_panel_path, id: :standard_nav_menu_link,
-  	    title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." %>
-	  <% end %>
+	  
+	  <%= link_to fa_icon("code", "Dev"), dev_panel_path, id: :standard_nav_menu_link,
+	    title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." if dev? %>
+	    
+	  <%= link_to fa_icon("star", "Invite"), invite_someone_path, id: :standard_nav_menu_link,
+	    title: "Invite someone to the site." if current_user.has_power? 'invite_someone' %>
+	    
   	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete, id: :standard_nav_menu_link,
   	  title: "Click here to destroy your cookie.", data: { confirm: "Are you sure?" } %>
 	<% end %>

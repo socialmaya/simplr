@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
   get 'invitation/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
+  get 'invite_someone', to: 'connections#invite_someone', as: 'invite_someone'
   get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'

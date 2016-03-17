@@ -35,6 +35,7 @@ class Treasure < ActiveRecord::Base
     { # Discovers hidden treasure system, gets access to xp leveling from treasure or general
       discover: 'Discover secrets',
       invade_groups: 'Invade private groups',
+      invite_someone: 'Invite someone to the site',
       make_follower: 'Make someone your follower',
       steal_followers: 'Steal other peoples followers',
       read_others_messages: 'Read other peoples private messages',
