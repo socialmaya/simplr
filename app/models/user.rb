@@ -19,8 +19,14 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  def has_power? power
-    true if self.treasures.find_by_power power
+  # optional arg to check if power present AND not expired
+  def has_power? power, not_expired=nil
+    treasure = self.treasures.find_by_power power
+    if treasure and not_expired
+      return !treasure.expired
+    else
+      return treasure
+    end
   end
   
   def loot treasure

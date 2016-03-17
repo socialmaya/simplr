@@ -6,15 +6,19 @@ Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
+  RGB color forms for settings
   See who liked your post
   Implement powers
 
 Think of names for site, ideas and words to play on:
-  Kaló (greek for invite)
+  Kaló, Omcircle, etc.....
   Mythological, Esoteric
   Psychedelic, Trippy
   Ambient, Ambience
+  Buddhist/Hindu
   Party site
+  Cyberpunk
+  Vaporwave
 
 Like/Dislike/Voting system:
   There needs to be a simple way for users to show opinion of posts, comments, etc.

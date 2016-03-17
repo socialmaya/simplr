@@ -10,6 +10,8 @@
         <%= Comment.all.size %> comments,
         <%= Message.all.size %> messages,
         <%= Connection.folders.size %> conversations,
+        <%= Connection.invites.size %> invites,
+        <%= Connection.invites.where(redeemed: true).size %> redeemed invites,
         <%= Treasure.all.size %> treasures
     </p>
     <%= link_to 'Reinitialize all user settings <i class="fa fa-cog"></i>'.html_safe,

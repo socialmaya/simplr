@@ -74,9 +74,13 @@ class ConnectionsController < ApplicationController
     if @invite.save
       if dev?
         redirect_to dev_panel_path(invite_token: @invite.unique_token)
-      # redirects to different page if power unlocked for one time invite
-      elsif current_user.has_power? 'invite_someone'
+      # redirects to different page if power unlocked for one-time invite and not yet used
+      elsif current_user.has_power? 'invite_someone', :not_expired
+        # power to invite expires after one-time-use
+        current_user.has_power?('invite_someone').update expired: true
         redirect_to invite_someone_path(invite_token: @invite.unique_token)
+      else
+        redirect_to root_url
       end
     else
       redirect_to :back
