@@ -6,9 +6,11 @@
           <%= name + ": " %>
           <%= check_box_tag name.to_sym, nil, settings[name.to_sym] if category.eql? :on %>
           <% if category.eql? :state %>
-            <% colors = color_options; colors[0][0] = "Set to #{settings[name.to_sym]}" \
-              if settings[name.to_sym].present? %>
-            <%= select_tag name.to_sym, options_for_select(colors) %>
+            <%= fields_for name.to_sym do |f| %>
+              <% [:r, :g, :b].each do |color| %>
+                <%= f.select color, options_for_select(rgb_options(name, color)) %>
+              <% end %>
+            <% end %>
           <% end %>
         </p>
       <% end %>
