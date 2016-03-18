@@ -10,9 +10,10 @@
 <% if @items.empty? %>
   <div class="card">
     <p align="center">
-      <% if current_user and current_user.following.size.zero? %>
-        You aren't following anyone yet.
-        <%= link_to "Click here", search_path(query: 'users') %> to search for people to follow.
+      <% if current_user and current_user.following.size.zero? or current_user.my_groups.size.zero? %>
+        Your feed is currently empty. Try
+        <%= link_to "searching", search_path(query: 'users and groups') %>
+        for people to follow or groups to join.
       <% else %>
         There aren't any posts yet.
       <% end %>
