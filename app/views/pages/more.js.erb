@@ -3,7 +3,7 @@
 var anchor = $("#more_content_anchor");
 var buffer_wheel = $("#buffer_wheel");
 
-if (typeof last_item_id === 'undefined' || last_item_id > <%= @items.last.id %>) {
+if (typeof last_item_id === 'undefined' || last_item_id > <%= @items.first.id %>) {
   var last_item_id = <%= @items.last.id %>;
   anchor.after("<%=j render 'pages/more_content' %>");
   anchor.remove();
