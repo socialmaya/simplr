@@ -3,7 +3,7 @@
     <% Setting.names.each do |category, names| %>
       <% for name in names %>
         <p>
-          <%= name + ": " %>
+          <%= setting_titles[name.to_sym] + ": " %>
           <%= check_box_tag name.to_sym, nil, settings[name.to_sym] if category.eql? :on %>
           <% if category.eql? :state %>
             <%= fields_for name.to_sym do |f| %>
