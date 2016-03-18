@@ -3,7 +3,7 @@ module SettingsHelper
     # initializes options with nil color label
     options = [[color.to_s.upcase, nil]]
     # inserts rgb color range
-    (0..255).each do |n|
+    (0..255).step(5).each do |n|
       options << n
     end
     # replaces initial element if already set
