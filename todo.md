@@ -1,6 +1,7 @@
 ## Simplr - To do list
 
 Priority:
+  Fix infinite scroll overload glitch
   Icons for loot items and powers drawn with MS Paint
   Less destructive, neutral powers to unlock
   Level up animation at the top with fader

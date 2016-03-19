@@ -1,7 +1,10 @@
 <% if @instant_messages.present? %>
   var anchor = $("#instant_messages_anchor");
   
-  if (typeof last_message_id === 'undefined' || last_message_id < <%= @instant_messages.first.id %>) {
+  if ( typeof last_message_id === 'undefined'
+    || last_message_id < <%= @instant_messages.first.id %>
+    || last_message_id !== <%= @instant_messages.last.id %> )
+  {
     var last_message_id = <%= @instant_messages.last.id %>;
     anchor.after("<%=j render 'messages/instant_messages' %>");
     anchor.remove(); $("#instant_messages_anchor").scrollView();
