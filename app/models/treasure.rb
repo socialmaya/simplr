@@ -9,13 +9,14 @@ class Treasure < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  def looted_by? user
-    true if self.name.present? and user.treasures.find_by_name self.name
-  end
-  
-  def self.random
+  def self.random user=nil
     _treasure = nil
-    treasures = self.where(treasure_id: nil)
+    # only gets parent treasures
+    _treasures = self.where(treasure_id: nil)
+    treasures = []; for treasure in _treasures
+      # only gets treasures that haven't been looted yet if user supplied
+      treasures << treasure unless user and treasure.looted_by? user
+    end
     if treasures.present?
       rand_num = rand 0..treasures.size-1
       i=0; for treasure in treasures
@@ -29,6 +30,10 @@ class Treasure < ActiveRecord::Base
       _treasure = self.create
     end
     return _treasure
+  end
+  
+  def looted_by? user
+    true if self.name.present? and user.treasures.find_by_name self.name
   end
   
   def self.powers
