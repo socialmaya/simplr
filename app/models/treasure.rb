@@ -15,7 +15,9 @@ class Treasure < ActiveRecord::Base
     _treasures = self.where(treasure_id: nil)
     treasures = []; for treasure in _treasures
       # only gets treasures that haven't been looted yet if user supplied
-      treasures << treasure unless user and treasure.looted_by? user
+      unless user and treasure.looted_by? user or treasure.power.eql? 'discover'
+        treasures << treasure
+      end
     end
     if treasures.present?
       rand_num = rand 0..treasures.size-1
@@ -78,6 +80,8 @@ class Treasure < ActiveRecord::Base
     def random_power
       unless self.power.present?
         powers = Treasure.powers.keys
+        # never return discover as random
+        powers.delete_if {|p| p.eql? 'discover'}
         i=1; for power in powers
           if rand(0..i).zero?
             self.power = power.to_s
