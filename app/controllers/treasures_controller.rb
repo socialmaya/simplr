@@ -31,7 +31,7 @@ class TreasuresController < ApplicationController
       elsif not @treasure.answer.present?
         @overcome = true
       end
-      current_user.loot @treasure
+      current_user.loot @treasure if @overcome
     end
   end
   
