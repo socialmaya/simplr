@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   post 'posts/:id/share', to: 'posts#share', as: 'share_post'
   get 'posts/:id/open_menu', to: 'posts#open_menu', as: 'open_post_menu'
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'
+  put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
   
   # comments
   get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'

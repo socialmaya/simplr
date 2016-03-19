@@ -3,4 +3,5 @@
   <%= link_to "Delete", @post, method: :delete,
       data: { confirm: "Are you sure you want to permanently delete this post?" },
       class: :post_mini_menu_link %>
+  <%= link_to 'Hide', hide_post_path(post), method: :put, class: :post_mini_menu_link if dev? %>
 </div>

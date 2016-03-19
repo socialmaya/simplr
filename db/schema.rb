@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317194646) do
+ActiveRecord::Schema.define(version: 20160319065418) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160317194646) do
     t.string   "anon_token"
     t.integer  "group_id"
     t.integer  "original_id"
+    t.boolean  "hidden"
   end
 
   create_table "settings", force: :cascade do |t|

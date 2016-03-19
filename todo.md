@@ -78,7 +78,4 @@ Potential counter measures to powers unlocked:
   
 Users should be able to trade powers with other users
 
-A mini dropdown menu for posts, accessed by a down arrow link to the right of the date link:
-  Links for Edit, Delete, etc. within the mini menu
-
 A heart beat visualization for site activity, similar to the standard heart rate monitor in hospitals
