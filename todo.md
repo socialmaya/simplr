@@ -6,7 +6,6 @@ Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
-  RGB color forms for settings
   See who liked your post
   Implement powers
 

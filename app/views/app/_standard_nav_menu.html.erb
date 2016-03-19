@@ -32,7 +32,7 @@
 	    title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." if dev? %>
 	    
 	  <%= link_to fa_icon("star", "Invite"), invite_someone_path, id: :standard_nav_menu_link,
-	    title: "Invite someone to the site." if current_user.has_power? 'invite_someone', :not_expired %>
+	    title: "Invite someone to the site." if current_user.has_power? 'invite_someone', :not_expired and not dev? %>
 	    
   	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete, id: :standard_nav_menu_link,
   	  title: "Click here to destroy your cookie.", data: { confirm: "Are you sure?" } %>
