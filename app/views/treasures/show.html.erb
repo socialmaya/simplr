@@ -1,14 +1,19 @@
 <div class="loot_container" align="center">
-  <%= link_to loot_treasure_path(@treasure.unique_token), method: :post, remote: true, title: "#{@treasure.name}" do %>
-    <% if kanye? %>
-      <%= render "treasures/kanye" %>
-    <% elsif @treasure.image.url %>
-      <%= image_tag @treasure.image, class: :loot_image %>
-    <% else %>
-	    <script>
-	      <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.id %>
-	    </script>
-      <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
+  <% if @treasure.treasure_type.eql? 'game' %>
+    <%= render "treasures/div_game", treasure: @treasure %>
+  <% else %>
+    <%= link_to loot_treasure_path(@treasure.unique_token),
+      method: :post, remote: true, title: "#{@treasure.name}" do %>
+      <% if kanye? %>
+        <%= render "treasures/kanye" %>
+      <% elsif @treasure.image.url %>
+        <%= image_tag @treasure.image, class: :loot_image %>
+      <% else %>
+	      <script>
+	        <%= render "app/fader.js", target: "treasure_icon", target_id: @treasure.id %>
+	      </script>
+        <i id="treasure_icon_<%= @treasure.id %>" class="fa fa-diamond fa-5x loot_icon_substitute"></i>
+      <% end %>
     <% end %>
   <% end %>
 </div>

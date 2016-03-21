@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.div_game_div {
+  width: 50px;
+  height: 50px;
+  background: white;
+}
+
+.div_game_center_object {
+  width: 50px;
+  height: 50px;
+  background: white;
+}
+
 .treasure_challenge_form {
   position: relative;
   max-width: 350px;

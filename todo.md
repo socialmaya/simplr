@@ -78,4 +78,10 @@ Potential counter measures to powers unlocked:
   
 Users should be able to trade powers with other users
 
+A minigame of color fading divs, fading also in opacity:
+  moving in differnt directions, changing height/width
+  Moving around a center object that is the goal
+  Goal is to track the pattern of the divs changing/moving and click the center object
+  Limited number of tries, try failed when center clicked and covered by div
+
 A heart beat visualization for site activity, similar to the standard heart rate monitor in hospitals

@@ -27,9 +27,9 @@ class SearchController < ApplicationController
             end
           end
           case @query
-          when "groups"
+          when "groups", "Groups"
             match = true if _class.eql? Group
-          when "users"
+          when "users", "Users"
             match = true if _class.eql? User
           when "groups and users", "users and groups"
             match = true if [Group, User].include? _class

@@ -52,6 +52,7 @@ class Treasure < ActiveRecord::Base
   def self.types
     { portal: 'Portal - leads to another treasure',
       maze: 'Maze - choose between two or more',
+      game: 'Game - Play and win to receive a prize',
       prize: 'Prize - rewarded with power or high XP',
       kanye: 'Kanye - nothing but text (dead end)' }
   end
