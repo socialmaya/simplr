@@ -79,6 +79,9 @@ class ConnectionsController < ApplicationController
         # power to invite expires after one-time-use
         current_user.has_power?('invite_someone').update expired: true
         redirect_to invite_someone_path(invite_token: @invite.unique_token)
+      # gatekeepers have indefinite access to invite privilge
+      elsif current_user.gatekeeper
+        redirect_to invite_someone_path(invite_token: @invite.unique_token)
       else
         redirect_to root_url
       end
