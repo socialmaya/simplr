@@ -65,8 +65,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :production do
-#  gem 'unicorn'
-#  gem 'pg'
+  gem 'unicorn'
+  gem 'pg'
 end
 
 group :development, :test do
