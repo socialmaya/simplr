@@ -1,0 +1,7 @@
+<% for power in @powers %>
+  <div class="dark_card">
+    <p align="center">
+      <%= power.power.gsub("_", " ").capitalize + ": #{Treasure.powers[power.power.to_sym]}" %>
+    </p>
+  </div>
+<% end %>

@@ -39,14 +39,15 @@ class Treasure < ActiveRecord::Base
   end
   
   def self.powers
-    { # Discovers hidden treasure system, gets access to xp leveling from treasure or general
+    { # Discover: access to hidden treasure system, to xp leveling from treasure or general
+      # Discover is never returned as random
       discover: 'Discover secrets',
       invade_groups: 'Invade private groups',
       invite_someone: 'Invite someone to the site',
+      steal_powers: 'Steal someone elses power',
       make_follower: 'Make someone your follower',
       steal_followers: 'Steal other peoples followers',
-      read_others_messages: 'Read other peoples private messages',
-      shutdown: 'Shutdown entire website, alter homepage', }
+      shutdown: 'Shutdown entire website, alter homepage' }
   end
   
   def self.types

@@ -1,5 +1,9 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure
+  
+  def powers
+    @powers = current_user.active_powers.reverse
+  end
 
   # adds option field to treasure form
   def add_option

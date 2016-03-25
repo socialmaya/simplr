@@ -10,7 +10,7 @@ Priority:
   Implement powers
 
 Think of names for site, ideas and words to play on:
-  Kaló, Omcircle, etc.....
+  Kaló, Omcircle, Omwai, etc.
   Mythological, Esoteric
   Psychedelic, Trippy
   Ambient, Ambience
@@ -65,16 +65,10 @@ Potential powers to unlock:
   Ability to Dislike posts
   Take someone elses power(s)
   Make someone start following you
-  Read private messages of other people
   See who's seeing your posts or comments
   Invade any private groups (without request)
   Steal peoples followers, reassigns them to you
   Rare drop: Shutdown entire site, ability to replace home page with uploaded image
-  
-Potential counter measures to powers unlocked:
-  One-click encryption to keep private messages private
-  Show eyeballs reading messages, ability to poke an eye out
-  Use back up password to revert changes to profile or posts
   
 Users should be able to trade powers with other users
 

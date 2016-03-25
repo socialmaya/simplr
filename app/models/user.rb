@@ -29,6 +29,14 @@ class User < ActiveRecord::Base
     end
   end
   
+  def active_powers
+    powers = []
+    self.treasures.where.not(power: nil).where(expired: [nil, false]).each do |power|
+      powers << power unless powers.any? { |_power| power.power.eql? _power.power }
+    end
+    return powers
+  end
+  
   def loot treasure
     # duplicates treasure and assigns duplicate to user
     dup_treasure = treasure.dup; dup_treasure.user_id = self.id

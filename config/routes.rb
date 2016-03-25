@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'treasures/:token', to: 'treasures#show', as: 'show_treasure'
   post 'treasures/:token/loot', to: 'treasures#loot', as: 'loot_treasure'
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
+  get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
