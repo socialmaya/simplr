@@ -1,8 +1,10 @@
 class Treasure < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  belongs_to :secret
   belongs_to :treasure
   has_many :treasures
+  has_many :secrets
   
   before_create :gen_unique_token, :gen_unique_name, :random_xp, :random_power
   validate :one_discovery, :unique_name, on: :create
