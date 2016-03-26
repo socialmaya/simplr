@@ -72,6 +72,9 @@ Potential powers to unlock:
   
 Users should be able to trade powers with other users
 
+Riddles and hints left as comments, posts, messages, etc:
+  Leading to secrets and treasure, left as links or riddles leading to links
+
 A minigame of color fading divs, fading also in opacity:
   moving in differnt directions, changing height/width
   Moving around a center object that is the goal

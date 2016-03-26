@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325040226) do
+ActiveRecord::Schema.define(version: 20160326092427) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -102,6 +102,21 @@ ActiveRecord::Schema.define(version: 20160325040226) do
     t.boolean  "hidden"
   end
 
+  create_table "secrets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "secret_id"
+    t.string   "unique_token"
+    t.string   "name"
+    t.text     "body"
+    t.string   "image"
+    t.integer  "xp"
+    t.string   "node_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "treasure_id"
+  end
+
   create_table "settings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
@@ -142,6 +157,7 @@ ActiveRecord::Schema.define(version: 20160325040226) do
     t.string   "name"
     t.boolean  "expired"
     t.datetime "expires_at"
+    t.integer  "secret_id"
   end
 
   create_table "users", force: :cascade do |t|
