@@ -8,6 +8,7 @@ Priority:
   XP count up to total received
   See who liked your post
   Implement powers
+  Karma system
 
 Think of names for site, ideas and words to play on:
   Kaló, Omcircle, Omwai, etc.

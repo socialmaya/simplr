@@ -6,6 +6,8 @@ class Secret < ActiveRecord::Base
   
   has_many :secrets
   has_many :treasures
+  
+  before_create :gen_unique_token
 
   mount_uploader :image, ImageUploader
   
