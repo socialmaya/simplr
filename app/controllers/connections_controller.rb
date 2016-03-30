@@ -2,6 +2,7 @@ class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers]
   before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
+  before_action :user_access, only: [:invites, :followers]
   before_action :bots_to_404
   
   def invite_someone
@@ -160,7 +161,7 @@ class ConnectionsController < ApplicationController
   end
 
   def following
-    @following = @user.following
+    @following = @user.following.last(10).reverse
   end
 
   def followers
@@ -168,6 +169,17 @@ class ConnectionsController < ApplicationController
   end
 
   private
+    def user_access
+      if current_user
+        unless @user.eql? current_user or dev? or \
+          (action_name.eql? 'followers' and current_user.has_power? 'steal_followers', :not_expired)
+          redirect_to '/404'
+        end
+      else
+        redirect_to '/404'
+      end
+    end
+    
     def bots_to_404
       redirect_to '/404' if request.bot?
     end

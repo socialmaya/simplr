@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get 'user/:user_id/their_groups', to: 'groups#their_groups', as: 'their_groups'
   get 'groups/:group_id/members', to: 'connections#members', as: 'members'
   get 'users/:user_id/invites', to: 'connections#invites', as: 'invites'
-  get 'group/:group_id/requests', to: 'connections#requests', as: 'requests'
+  get 'groups/:group_id/requests', to: 'connections#requests', as: 'requests'
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'my_groups', to: 'groups#my_groups', as: 'my_groups'
   

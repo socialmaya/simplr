@@ -6,9 +6,9 @@ Priority:
   Level up animation at the top with fader
   Progress bar count up xp at page load
   XP count up to total received
+  Karma system, based off XP
   See who liked your post
   Implement powers
-  Karma system
 
 Think of names for site, ideas and words to play on:
   Kaló, Omcircle, Omwai, etc.
