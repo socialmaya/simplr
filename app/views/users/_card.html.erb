@@ -7,6 +7,11 @@
       </p>
     <% end %>
     
+    <% if defined? @followers and not current_user.eql? @user \
+      and current_user.has_power? 'steal_followers', :not_expired %>
+      <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :top_right_link %>
+    <% end %>
+    
     <p>
       <%= link_to user.name, user, class: :user_name_link %>
       <% if user.body.present? %>

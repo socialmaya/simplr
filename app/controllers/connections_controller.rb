@@ -1,6 +1,6 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
-    :members, :invites, :requests, :following, :followers]
+    :members, :invites, :requests, :following, :followers, :steal_follower]
   before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
   before_action :user_access, only: [:invites, :followers]
   before_action :bots_to_404
@@ -166,6 +166,17 @@ class ConnectionsController < ApplicationController
 
   def followers
     @followers = @user.followers.last(10).reverse
+  end
+  
+  def steal_follower
+    @follower = User.find_by_id params[:follower_id]
+    if @user and @follower
+      @connection = @follower.connections.find_by_other_user_id @user.id
+      if @connection and not @follower.eql? current_user
+        @connection.update other_user_id: current_user.id
+      end
+    end
+    redirect_to :back
   end
 
   private

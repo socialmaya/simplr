@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'
   get 'users/:user_id/following', to: 'connections#following', as: 'following'
   get 'users/:user_id/followers', to: 'connections#followers', as: 'followers'
+  put 'users/:user_id/steal/:follower_id', to: 'connections#steal_follower', as: 'steal_follower'
 
   # user to group connections
   post 'groups/:group_id/request_to_join', to: 'connections#create', as: 'request_to_join'
