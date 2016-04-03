@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    grant_dev_access
+    # access rights from invite
+    grant_access_rights
     if @user.save
       if params[:remember_me]
         cookies.permanent[:auth_token] = @user.auth_token
@@ -60,12 +61,17 @@ class UsersController < ApplicationController
   end
 
   private
-    def grant_dev_access
+    def grant_access_rights
       # grants dev powers sent with invite
       if cookies[:grant_dev_access]
         # deletes to prevent creation of multiple devs
         cookies.delete(:grant_dev_access)
         @user.dev = true
+      end
+      # grants power of gatekeeper
+      if cookies[:grant_gk_access]
+        cookies.delete(:grant_gk_access)
+        @user.gatekeeper = true
       end
     end
     

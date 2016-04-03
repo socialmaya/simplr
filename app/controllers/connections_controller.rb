@@ -6,7 +6,7 @@ class ConnectionsController < ApplicationController
   before_action :bots_to_404
   
   def invite_someone
-    unless current_user and current_user.has_power? 'invite_someone'
+    unless current_user and (current_user.has_power? 'invite_someone' or current_user.gatekeeper)
       redirect_to '/404'
     else
       if params[:invite_token]
@@ -58,6 +58,7 @@ class ConnectionsController < ApplicationController
       if @invite.redeemed
         cookies.permanent[:invite_token] = @invite.unique_token
         cookies[:grant_dev_access] = @invite.grant_dev_access
+        cookies[:grant_gk_access] = @invite.grant_gk_access
       end
       redirect_to new_user_path
     else
@@ -68,7 +69,8 @@ class ConnectionsController < ApplicationController
   def generate_invite
     @invite = Connection.new invite: true,
       grant_dev_access: params[:grant_dev_access],
-      grant_mod_access: params[:grant_mod_access]
+      grant_mod_access: params[:grant_mod_access],
+      grant_gk_access: params[:grant_gk_access]
     if params[:password].present?
       @invite.invite_password = params[:password]
     end
