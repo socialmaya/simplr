@@ -25,7 +25,9 @@ class Post < ActiveRecord::Base
   
   def text_or_image?
     if (self.body.nil? or self.body.empty?) and !self.image.url
-      errors.add(:post, "cannot be empty.") unless self.original_id and self.image.present?
+      unless self.original_id and (self.body.present? or self.image.present?)
+        errors.add(:post, "cannot be empty.")
+      end
     end
   end
 end

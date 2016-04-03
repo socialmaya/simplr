@@ -27,9 +27,9 @@ class PostsController < ApplicationController
     else
       @post.id
     end
-    @dup_post.body = ""
     @dup_post.group_id = nil
     if @dup_post.save
+      Tag.extract @dup_post
       Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
       redirect_to root_url
     else
