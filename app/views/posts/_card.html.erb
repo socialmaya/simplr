@@ -8,6 +8,11 @@
         shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
           title: "Originally posted by #{post.original.user.name}" %>
       </span>
+    <% elsif post.original and post.original.anon_token %>
+      <span class="posted_label">
+        shared from <%= link_to "anon", search_path(query: post.original.anon_token), class: :posted_link,
+          title: "Originally posted by #{post.original.anon_token}" %>
+      </span>
     <% elsif post.group %>
       <span class="posted_label">
         posted to <%= link_to post.group.name, post.group, class: :posted_link,
