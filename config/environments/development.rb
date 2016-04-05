@@ -35,6 +35,9 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  
+  # precompiles all images
+  config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif] 
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
