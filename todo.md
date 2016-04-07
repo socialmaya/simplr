@@ -20,14 +20,6 @@ Think of names for site, ideas and words to play on:
   Cyberpunk
   Vaporwave
 
-Like/Dislike/Voting system:
-  There needs to be a simple way for users to show opinion of posts, comments, etc.
-  Potential forms:
-    Up/down voting system like Reddit has
-    Like alternatives: Kudos, Props, Nice
-    Multi-disposition system using icons
-    Ability to like stuff more than once
-
 User profiles:
   Profile card should be shrunk and left aligned with the progress bar right aligned next to it
   Progress bar should also be wider than the profile card, which should be squared

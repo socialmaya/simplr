@@ -7,7 +7,11 @@
 <% if @followers.empty? %>
   <div class="card">
     <p align="center">
-      This user doesn't have any followers yet.
+      <% if current_user and current_user.eql? @user %>
+        You don't have any followers yet.
+      <% else %>
+        This user doesn't have any followers yet.
+      <% end %>
     </p>
   </div>
 <% end %>

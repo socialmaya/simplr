@@ -172,10 +172,14 @@ class ConnectionsController < ApplicationController
   
   def steal_follower
     @follower = User.find_by_id params[:follower_id]
-    if @user and @follower
+    # if both users found and power has not been used yet
+    if @user and @follower and current_user.has_power? 'steal_followers', :not_expired
+      # finds the connection between user being followed and the follower
       @connection = @follower.connections.find_by_other_user_id @user.id
+      # if connection is found and the follower is not the current_user
       if @connection and not @follower.eql? current_user
         @connection.update other_user_id: current_user.id
+        current_user.has_power?('steal_followers').update expired: true
       end
     end
     redirect_to :back

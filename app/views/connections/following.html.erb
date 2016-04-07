@@ -7,7 +7,12 @@
 <% if @following.empty? %>
   <div class="card">
     <p align="center">
-      This user isn't following anyone yet.
+      <% if current_user and current_user.eql? @user %>
+        You haven't started following anyone yet.
+        <%= link_to "Click here", search_path(query: "users") %> to find other users to follow.
+      <% else %>
+        This user isn't following anyone yet.
+      <% end %>
     </p>
   </div>
 <% end %>
