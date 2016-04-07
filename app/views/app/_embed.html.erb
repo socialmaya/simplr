@@ -7,7 +7,8 @@
 	<iframe width="90%" height="315" src="<%= word %>" frameborder="0" allowfullscreen>
 	</iframe></br>
 <% elsif word =~ /\A#{URI::regexp}\z/ or word.include? "http://" or word.include? ".se" \
-  and word != "in:" and not word.include? "::" and not word.include? ":)" %>
+  and word != "in:" and not ["::", ":)", ":]", "c:"].any? { |i| word.include? i } %>
+  <!-- if word is a link to an image file, renders image as standard image -->
 	<% if word.include? ".jpg" or word.include? ".png" or word.include? ".gif" %>
 		<div align="center"><%= image_tag word, class: :standard_image %></div>
 	<% else %>
