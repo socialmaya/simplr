@@ -4,7 +4,7 @@
 
 <%= render "posts/card", post: @post %>
 
-<% if @likes.present? %>
+<% if @likes.where.not(user_id: nil).present? %>
   <div class="card">
     <div align="center">
       Liked by:
