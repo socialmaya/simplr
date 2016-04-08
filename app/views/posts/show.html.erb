@@ -4,6 +4,18 @@
 
 <%= render "posts/card", post: @post %>
 
+<% if @likes.present? %>
+  <div class="card">
+    <div align="center">
+      Liked by:
+      <% for like in @likes %>
+        <%= link_to like.user.name, like.user if like.user %>
+        <%= ", " unless like.eql? @likes.last %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% for comment in @comments %>
   <%= render "comments/card", comment: comment %>
 <% end %>

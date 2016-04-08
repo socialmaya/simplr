@@ -11,7 +11,7 @@ Priority:
   Implement powers
 
 Think of names for site, ideas and words to play on:
-  Kaló, Omcircle, Omwai, etc.
+  Kaló, Omcircle, Omwai, Vaporscape, etc.
   Mythological, Esoteric
   Psychedelic, Trippy
   Ambient, Ambience
@@ -25,6 +25,8 @@ User profiles:
   Progress bar should also be wider than the profile card, which should be squared
   
 A mini game of some kind, like a card game, something that could be used dynamically as a template, over and over with different themes, so there'd be more than just QA challenges for treasure looting
+
+Card game with cards made with photoshop or html, like pokemon or magic
 
 Loot drops (items, trinkets, emblems, gold):
   Emblems for stylizing posts
