@@ -4,20 +4,7 @@
 
 <%= render "posts/card", post: @post %>
 
-<% if @likes.present? %>
-  <div class="card">
-    <div align="center">
-      Liked by:
-        <% user_likes = @likes.where.not(user_id: nil); anon_likes = @likes.where.not(anon_token: nil) %>
-        <% for like in user_likes %>
-          <%= link_to like.user.name, like.user if like.user %>
-          <%= ", " unless like.eql? user_likes.last %>
-        <% end %>
-        <%= "and" if user_likes.present? and anon_likes.present? %>
-        <%= "#{anon_likes.size} anon(s)" if anon_likes.present? %>
-    </div>
-  </div>
-<% end %>
+<%= render "posts/liked_and_viewed_by" %>
 
 <% for comment in @comments %>
   <%= render "comments/card", comment: comment %>

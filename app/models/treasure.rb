@@ -44,6 +44,7 @@ class Treasure < ActiveRecord::Base
     { # Discover: access to hidden treasure system, to xp leveling from treasure or general
       # Discover is never returned as random
       discover: 'Discover secrets',
+      see_views: "See who's viewing posts",
       invade_groups: 'Invade private groups',
       invite_someone: 'Invite someone to the site',
       steal_powers: 'Steal someone elses power',

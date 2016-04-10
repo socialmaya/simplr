@@ -1,0 +1,33 @@
+<% if @likes.present? %>
+  <div class="card">
+    <div align="center">
+      Liked by:
+        <% user_likes = @likes.where.not(user_id: nil); anon_likes = @likes.where.not(anon_token: nil) %>
+        <% for like in user_likes %>
+          <%= link_to like.user.name, like.user if like.user %><%= ", " \
+            unless like.eql? user_likes.last %>
+        <% end %>
+        <%= "and" if user_likes.present? and anon_likes.present? %>
+        <%= "#{anon_likes.size} anon(s)" if anon_likes.present? %>
+    </div>
+  </div>
+<% end %>
+
+<% if @views.present? and (current_user and current_user.has_power? 'see_views' or dev?) %>
+  <div class="dark_card">
+    <script>
+      <%= render "app/fader.js", target: "seen_by_text", target_id: "0" %>
+    </script>
+    <div align="center" id="seen_by_text_0">
+      Seen by:
+        <% user_views = @views.where.not(user_id: nil); anon_views = @views.where.not(anon_token: nil) %>
+        <% for view in user_views %>
+          <%= link_to view.user.name, view.user, class: :white_link if view.user %><%= ", " \
+            unless view.eql? user_views.last %>
+        <% end %>
+        <%= "and" if user_views.present? and anon_views.present? %>
+        <%= "#{anon_views.size} anon(s)" if anon_views.present? %>
+        <i class="fa fa-eye"></i>
+    </div>
+  </div>
+<% end %>

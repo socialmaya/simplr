@@ -57,6 +57,7 @@ class PostsController < ApplicationController
       @comment = Comment.new
       @comments = @post.comments
       @likes = @post.likes
+      @views = @post.views
       seent @post
     else
       redirect_to '/404'

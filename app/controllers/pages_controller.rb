@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  def resume
+  end
+  
   def more
     if session[:page].nil? or session[:page] * page_size <= relevant_items.size
       if session[:page]
