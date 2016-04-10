@@ -22,6 +22,7 @@ class Note < ActiveRecord::Base
       post_like: "Someone liked your post.",
       post_share: "Someone shared your post.",
       comment_reply: "Someone replied to your comment.",
+      also_commented: "Someone also commented on this post.",
       user_follow: "Someone started following you.",
       message_received: "You've received a message.",
       group_invite: "You've been invited to a group.",

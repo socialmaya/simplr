@@ -52,6 +52,11 @@ class CommentsController < ApplicationController
       elsif @comment.post
         @post = @comment.post
         Note.notify :post_comment, @post, @post.user, current_user unless current_user.eql? @post.user
+        # notify everyone else that's commented on the post
+        for user in @post.commenters
+          Note.notify :also_commented, @post, user, current_user unless current_user.eql? user
+        end
+        # only redirects if not ajax
         unless params[:ajax_req]
           redirect_to @post
         else

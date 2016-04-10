@@ -13,6 +13,16 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   
+  def commenters
+    _commenters = []
+    for comment in self.comments
+      unless comment.user and _commenters.include? comment.user or comment.anon_token.present?
+        _commenters << comment.user
+      end
+    end
+    return _commenters
+  end
+  
   def shares
     Post.where original_id: self.id
   end
