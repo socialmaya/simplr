@@ -11,7 +11,7 @@ Priority:
   Implement powers
 
 Think of names for site, ideas and words to play on:
-  Kaló, Omcircle, Omwai, Vaporscape, etc.
+  Socialmaya, Kaló, Omcircle, Omwai, Vaporscape, etc.
   Mythological, Esoteric
   Psychedelic, Trippy
   Ambient, Ambience
