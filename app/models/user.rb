@@ -126,9 +126,12 @@ class User < ActiveRecord::Base
   def my_groups
     _my_groups = []
     self.groups.each { |group| _my_groups << group }
+    # gets only the connections to groups already joined
     self.connections.current.where.not(group_id: nil).each do |connection|
       _my_groups << connection.group if connection.group
     end
+    # sorts by the time the connection was established (time of joining)
+    _my_groups.sort_by! { |connection| connection.created_at }
     return _my_groups
   end
 
