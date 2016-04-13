@@ -2,7 +2,7 @@
   <table align="center">
     <tr>
       <% _groups = []; user.my_groups.each { |group| _groups << group if group.image.url } %>
-      <% for group in _groups.reverse.last 4 %>
+      <% for group in _groups.last(4).reverse %>
         <td>
           <%= image_tag group.image, class: :my_groups_group_icon %>
         </td>
