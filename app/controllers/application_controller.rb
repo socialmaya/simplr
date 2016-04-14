@@ -4,10 +4,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :invited?, :seen?, :seent
+    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?,
+    :invited?, :seen?, :seent, :get_site_title
   
   # redirects to resume for I, Forrest Wilkins, the creator of this website
   before_action :forrest_to_resume, except: [:resume]
+  
+  def get_site_title
+    case request.host
+    when 'forrestwilkins.com'
+      'Forrest Wilkins'
+    else
+      'Social Maya'
+    end
+  end
     
   def seent item
     views = if item.is_a? User
