@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :invited?, :seen?, :seent
     
+  before_action :forrest_to_resume
+    
   def seent item
     views = if item.is_a? User
       View.where profile_id: item.id
@@ -129,5 +131,13 @@ class ApplicationController < ActionController::Base
   
   def browser
     Browser.new(:ua => request.env['HTTP_USER_AGENT'].to_s, :accept_language => "en-us")
+  end
+  
+  private
+  
+  def forrest_to_resume
+    if request.host.eql? 'forrestwilkins.com'
+      redirect_to resume_path
+    end
   end
 end
