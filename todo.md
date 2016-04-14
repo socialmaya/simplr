@@ -2,6 +2,7 @@
 
 Priority:
   Icons for loot items and powers drawn with MS Paint
+  Randomly generated pixels leading to treasure
   Less destructive, neutral powers to unlock
   Level up animation at the top with fader
   Progress bar count up xp at page load
