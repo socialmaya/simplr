@@ -78,7 +78,7 @@ Rails.application.routes.draw do
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
 
   # pages
-  get 'pages/resume', as: 'resume'
+  get 'resume', to: 'pages#resume', as: 'resume'
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
   get 'pages/more'
