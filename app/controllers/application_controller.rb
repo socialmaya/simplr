@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :invited?, :seen?, :seent
-    
+  
+  # redirects to resume for I, Forrest Wilkins, the creator of this website
   before_action :forrest_to_resume, except: [:resume]
     
   def seent item
