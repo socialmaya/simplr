@@ -27,6 +27,8 @@ class SearchController < ApplicationController
             end
           end
           case @query
+          when "posts", "Posts"
+            match = true if _class.eql? Post and not item.group
           when "groups", "Groups"
             match = true if _class.eql? Group
           when "users", "Users"
