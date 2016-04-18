@@ -1,12 +1,12 @@
-## Om - Social Network
+## Social Maya ॐ
 
-Om is a social network with simplicity and exclusivity as it's core values.
+Social Maya is a social network with simplicity and exclusivity as it's core values.
 
 And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 
-Om is free and open source software, as specified above by the GNU General Public License.
+Social Maya is free and open source software, as specified above by the GNU General Public License.
 
-## Setting up Om server
+## Setting up Social Maya server
 
 1. Download the package or clone the repo.
 2. Install Ruby version 2.2 using RVM or the Ruby Installer
