@@ -1,4 +1,5 @@
 <div class="card">
+  <%= render "app/random_pixels" %>
   <%= form_for((@replying ? @reply : @comment)) do |f| %>
     
     <%= hidden_field_tag :post_id, @post.id if @post %>
