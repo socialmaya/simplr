@@ -5,10 +5,17 @@ class ApplicationController < ActionController::Base
   
   helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?,
-    :invited?, :seen?, :seent, :get_site_title
+    :invited?, :seen?, :seent, :get_site_title, :record_last_visit
   
   # redirects to resume for I, Forrest Wilkins, the creator of this website
   before_action :forrest_to_resume, except: [:resume]
+  
+  def record_last_visit
+    if current_user and cookies[:last_active_at].nil? or cookies[:last_active_at].to_datetime < 1.hour.ago
+      current_user.update last_active_at: DateTime.current
+      cookies[:last_active_at] = DateTime.current
+    end
+  end
   
   def get_site_title
     case request.host

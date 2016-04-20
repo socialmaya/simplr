@@ -7,6 +7,10 @@
       </p>
     <% end %>
     
+    <% if dev? and user.last_active_at.present? %>
+      <%= link_to "Last vist: #{user.last_active_at.strftime("%F")}", user, class: :bottom_right_link %>
+    <% end %>
+    
     <% if defined? @followers and not current_user.eql? @user \
       and current_user.has_power? 'steal_followers', :not_expired %>
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :top_right_link %>

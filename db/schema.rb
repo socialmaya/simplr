@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403204200) do
+ActiveRecord::Schema.define(version: 20160420053515) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -163,8 +163,8 @@ ActiveRecord::Schema.define(version: 20160403204200) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "auth_token"
     t.string   "image"
     t.text     "body"
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 20160403204200) do
     t.boolean  "mod"
     t.integer  "xp"
     t.boolean  "gatekeeper"
+    t.datetime "last_active_at"
   end
 
   create_table "views", force: :cascade do |t|

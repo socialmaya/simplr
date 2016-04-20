@@ -49,6 +49,8 @@ class PostsController < ApplicationController
     @post = Post.new
     # records user viewing posts
     @items.each {|item| seent item}
+    # records current time for last visit
+    record_last_visit
   end
 
   def show
