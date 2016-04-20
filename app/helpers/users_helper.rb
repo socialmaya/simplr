@@ -1,6 +1,6 @@
 module UsersHelper
   def featured_users
-    User.where.not(image: nil).last(4)
+    User.where.not(image: nil).last(4).reverse
   end
   
   def user_mentioned word
