@@ -26,6 +26,14 @@ class SearchController < ApplicationController
               end
             end
           end
+          # scans comments of current item
+          if item.respond_to? :comments and not _class.eql? User
+            item.comments.each do |comment|
+              match = true if scan_text comment, @query
+              break if match
+            end
+          end
+          # a case for keywords used
           case @query
           when "posts", "Posts"
             match = true if _class.eql? Post and not item.group
