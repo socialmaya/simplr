@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # groups
+  get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
+  
   # users
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
   

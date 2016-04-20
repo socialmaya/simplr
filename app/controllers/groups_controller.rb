@@ -4,6 +4,10 @@ class GroupsController < ApplicationController
   before_action :dev_only, only: [:index]
   before_action :invite_only
   
+  def hide_featured_groups
+    cookies.permanent[:hide_featured_groups] = true
+  end
+  
   def their_groups
     @user = User.find_by_id params[:user_id]
     @groups = @user.my_groups.reverse

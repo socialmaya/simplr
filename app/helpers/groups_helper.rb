@@ -1,4 +1,8 @@
 module GroupsHelper
+  def featured_groups
+    Group.where.not(image: nil).last(4).reverse
+  end
+  
   def group_invite_options
     options = [["Choose a group", nil]]
     for group in my_groups
