@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # users
+  get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
+  
   # likes
   post 'like', to: 'likes#create', as: 'like'
   delete 'unlike', to: 'likes#destroy', as: 'unlike'

@@ -1,4 +1,8 @@
 module UsersHelper
+  def featured_users
+    User.where.not(image: nil).last(4)
+  end
+  
   def user_mentioned word
     User.find_by_name(word.slice(word.index("@")+1..word.size)) if word.include? "@"
   end

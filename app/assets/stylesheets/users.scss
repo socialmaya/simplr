@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.featured_user_name {
+  text-align: center;
+  font-size: 8.5px;
+  padding: 0px 15px;
+}
+
+.featured_user_avatar {
+  width: 35px;
+  height: 35px;
+  padding: 0px 15px;
+  padding-top: 7.5px;
+}
+
 .tier_container {
   position: absolute;
   top: 0px;
