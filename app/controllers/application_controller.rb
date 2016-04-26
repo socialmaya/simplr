@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :forrest_to_resume, except: [:resume]
   
   def record_last_visit
-    if current_user and cookies[:last_active_at].nil? or cookies[:last_active_at].to_datetime < 1.hour.ago
+    if current_user and (cookies[:last_active_at].nil? or cookies[:last_active_at].to_datetime < 1.hour.ago)
       current_user.update last_active_at: DateTime.current
       cookies[:last_active_at] = DateTime.current
     end
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     end
     unless seen? item
       if current_user
-        views.create user_id: current_user.id unless current_user.eql? item.user_id
+        views.create user_id: current_user.id unless current_user.eql? item.user
       else
         views.create anon_token: anon_token unless anon_token.eql? item.anon_token
       end
