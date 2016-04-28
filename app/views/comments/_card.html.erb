@@ -2,6 +2,17 @@
   <%= render "users/avatar_card_link", user: comment.user, token: comment.anon_token %>
   
   <div align="center">
+    <% if comment.image.url %>
+      <p>
+        <% unless @comment_shown %>
+          <%= link_to comment do %>
+            <%= image_tag comment.image, class: :standard_post_image %>
+          <% end %>
+        <% else %>
+          <%= image_tag comment.image, class: :standard_post_image %>
+        <% end %>
+      </p>
+    <% end %>
     <% if comment.body.present? %>
 	    <p class="comment_body <%= justified_body comment %>">
         <%= render "app/body", item: comment %>

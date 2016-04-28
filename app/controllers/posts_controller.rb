@@ -87,7 +87,7 @@ class PostsController < ApplicationController
         Tag.extract @post #extracts any hashtags along with their position in the text
         format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
       else
-        format.html { render :new }
+        format.html { redirect_to root_url }
       end
     end
   end

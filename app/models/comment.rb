@@ -7,11 +7,19 @@ class Comment < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :tags, dependent: :destroy
   
-  validates_presence_of :body
+  validate :text_or_image?, on: :create
   
   mount_uploader :image, ImageUploader
   
   def replies
     self.comments
+  end
+  
+  private
+  
+  def text_or_image?
+    if (self.body.nil? or self.body.empty?) and !self.image.url
+      errors.add(:comment, "cannot be empty.")
+    end
   end
 end
