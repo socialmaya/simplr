@@ -21,6 +21,7 @@ class Note < ActiveRecord::Base
     _actions = { post_comment: "Someone commented on your post.",
       post_like: "Someone liked your post.",
       post_share: "Someone shared your post.",
+      comment_like: "Someone liked your comment.",
       comment_reply: "Someone replied to your comment.",
       also_commented: "Someone also commented on this post.",
       user_follow: "Someone started following you.",

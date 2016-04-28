@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     end
     if like.save
       if (current_user and not @item.user.eql? current_user) or (anon_token and not @item.anon_token.eql? anon_token)
-        Note.notify :post_like, @item, (@item.user ? @item.user : @item.anon_token),
+        Note.notify "#{@item.class.to_s.downcase}_like".to_sym, @item, (@item.user ? @item.user : @item.anon_token),
           (current_user ? current_user : anon_token)
       end
     end
@@ -29,7 +29,7 @@ class LikesController < ApplicationController
     def set_item
       @item = if params[:post_id]
         Post.find_by_id params[:post_id]
-      elsif params[:post_id]
+      elsif params[:comment_id]
         Comment.find_by_id params[:comment_id]
       end
     end
