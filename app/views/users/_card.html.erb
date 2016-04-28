@@ -16,7 +16,7 @@
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :top_right_link %>
     <% end %>
     
-    <p>
+    <p class="user_card_name_and_bio">
       <%= link_to user.name, user, class: :user_name_link %>
       <% if user.body.present? %>
         <%= render "app/body", item: user %>

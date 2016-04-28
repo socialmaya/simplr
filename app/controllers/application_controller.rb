@@ -34,7 +34,9 @@ class ApplicationController < ActionController::Base
     end
     unless seen? item
       if current_user
-        views.create user_id: current_user.id unless current_user.eql? item.user
+        unless current_user.eql? item or (!item.is_a? User and current_user.eql? item.user)
+          views.create user_id: current_user.id
+        end
       else
         views.create anon_token: anon_token unless anon_token.eql? item.anon_token
       end
