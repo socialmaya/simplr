@@ -8,7 +8,7 @@
     <% end %>
     
     <% if dev? and user.last_active_at.present? %>
-      <%= link_to "Last visit: #{user.last_active_at.strftime("%F")}", user, class: :bottom_right_link %>
+      <%= render "app/time_ago", item: user, time: user.last_active_at %>
     <% end %>
     
     <% if defined? @followers and not current_user.eql? @user \
