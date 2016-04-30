@@ -44,6 +44,18 @@
             <%= image_tag original_post_image(post), class: :standard_post_image %>
           <% end %>
         </p>
+      <% elsif original_post_pictures(post).present? %>
+        <% original_post_pictures(post).each do |picture| %>
+          <p>
+            <% unless @post_shown %>
+              <%= link_to post do %>
+                <%= image_tag picture.image, class: :standard_post_image %>
+              <% end %>
+            <% else %>
+              <%= image_tag picture.image, class: :standard_post_image %>
+            <% end %>
+          </p>
+        <% end %>
       <% end %>
 
       <% if post.body.present? %>

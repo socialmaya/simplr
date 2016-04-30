@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
     case request.host
     when 'forrestwilkins.com'
       'Forrest Wilkins'
+    when 'anrcho.com'
+      'Anrcho'
     else
       'Social Maya'
     end

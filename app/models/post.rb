@@ -6,6 +6,9 @@ class Post < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :views, dependent: :destroy
+  has_many :pictures, dependent: :destroy
+  
+  accepts_nested_attributes_for :pictures
   
   validate :text_or_image?, on: :create
   
@@ -34,8 +37,9 @@ class Post < ActiveRecord::Base
   private
   
   def text_or_image?
-    if (self.body.nil? or self.body.empty?) and !self.image.url
-      unless self.original_id and (self.body.present? or self.image.present?)
+    if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
+      unless original_id and (body.present? or (Post.find_by_id(original_id) \
+        and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
         errors.add(:post, "cannot be empty.")
       end
     end

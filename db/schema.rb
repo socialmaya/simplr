@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420053515) do
+ActiveRecord::Schema.define(version: 20160430195709) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(version: 20160420053515) do
     t.integer  "item_id"
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "body"
@@ -101,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160420053515) do
     t.integer  "group_id"
     t.integer  "original_id"
     t.boolean  "hidden"
+    t.boolean  "photoset"
   end
 
   create_table "secrets", force: :cascade do |t|

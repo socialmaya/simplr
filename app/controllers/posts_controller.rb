@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   def share
     @dup_post = @post.dup
     @dup_post.user_id = current_user.id
+    # assigns id of shared post or the original if present
     @dup_post.original_id = if @post.original_id
       @post.original_id
     else
@@ -82,8 +83,18 @@ class PostsController < ApplicationController
     else
       @post.anon_token = anon_token
     end
+    # sets as photoset for validation
+    if params[:pictures]
+      @post.photoset = true
+    end
     respond_to do |format|
       if @post.save
+        if params[:pictures]
+          # builds photoset for post
+          params[:pictures][:image].each do |image|
+            @post.pictures.create image: image
+          end
+        end
         Tag.extract @post #extracts any hashtags along with their position in the text
         format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
       else
@@ -139,6 +150,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :body, :image)
+      params.require(:post).permit(:user_id, :body, :image, pictures_attributes: [:id, :post_id, :image])
     end
 end
