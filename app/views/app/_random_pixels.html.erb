@@ -1,4 +1,4 @@
-<% if rand > 0.5 and current_user and current_user.has_power? 'discover' %>
+<% if rand > 0.75 and current_user and current_user.has_power? 'discover' %>
   <% temp_token = rand_string %>
   <%= link_to show_treasure_path(Treasure.random(current_user).unique_token) do %>
     <div class="random_pixel" id="random_pixel_<%= temp_token %>"
