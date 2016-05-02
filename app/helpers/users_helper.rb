@@ -1,6 +1,11 @@
 module UsersHelper
   def featured_users
-    User.where.not(image: nil).last(4).reverse
+    featured = []
+    User.where.not(image: nil).each do |user|
+      # featured unless logged in and already joined
+      featured << user unless current_user and (current_user.eql? user or current_user.following.include? user)
+    end
+    return featured.last(4).reverse
   end
   
   def user_mentioned word

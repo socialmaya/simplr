@@ -1,6 +1,11 @@
 module GroupsHelper
   def featured_groups
-    Group.where.not(image: nil).last(4).reverse
+    featured = []
+    Group.where.not(image: nil).each do |group|
+      # featured unless logged in and already joined
+      featured << group unless my_groups.include? group
+    end
+    return featured.last(4).reverse
   end
   
   def my_group_options
