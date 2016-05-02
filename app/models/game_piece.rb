@@ -1,11 +1,9 @@
-class Secret < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :group
-  belongs_to :secret
+class GamePiece < ActiveRecord::Base
+  belongs_to :game_piece
   belongs_to :treasure
+  belongs_to :secret
+  belongs_to :user
   
-  has_many :secrets
-  has_many :treasures
   has_many :game_pieces
   
   before_create :gen_unique_token
