@@ -3,7 +3,7 @@ module GroupsHelper
     Group.where.not(image: nil).last(4).reverse
   end
   
-  def group_invite_options
+  def my_group_options
     options = [["Choose a group", nil]]
     for group in my_groups
       options << [group.name, group.id]

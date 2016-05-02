@@ -11,6 +11,9 @@ class PostsController < ApplicationController
   def close_menu
   end
   
+  def add_group_id
+  end
+  
   def add_image
   end
   
@@ -142,6 +145,7 @@ class PostsController < ApplicationController
     def reset_page_num
       reset_page
     end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find_by_id(params[:id])
@@ -150,6 +154,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :body, :image, pictures_attributes: [:id, :post_id, :image])
+      params.require(:post).permit(:user_id, :group_id, :body, :image, pictures_attributes: [:id, :post_id, :image])
     end
 end

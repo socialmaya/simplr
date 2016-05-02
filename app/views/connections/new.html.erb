@@ -7,7 +7,7 @@
           Invite <%= link_to @user.name, @user %> to one of your groups
         </p>
       
-        <p><%= select_tag :group_id, options_for_select(group_invite_options) %></p>
+        <p><%= select_tag :group_id, options_for_select(my_group_options) %></p>
 	
         <button type="submit" name="commit" class="standard_form_button">
           <b>Invite <i class="fa fa-cube"></i></b>
