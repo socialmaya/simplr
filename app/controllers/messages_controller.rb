@@ -28,7 +28,8 @@ class MessagesController < ApplicationController
     if @folder and @folder.id
       # creates initial message if present
       if params[:body].present?
-        @folder.messages.create body: params[:body], user_id: current_user.id
+        @folder.messages.create body: params[:body],
+          user_id: current_user.id, sender_token: current_user.unique_token
       end
       redirect_to show_message_folder_path @folder
     else
@@ -72,6 +73,8 @@ class MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.group_id = params[:group_id]
     @message.connection_id = params[:folder_id]
+    # to be used as the key for encrypting the message
+    @message.sender_token = current_user.unique_token
     if @message.save and @folder
       for member in @folder.members
         next if member.user.eql? current_user
