@@ -8,7 +8,8 @@
           folder.members.last.user.eql? current_user then ": " else ", " end %>
       <% end %>
       <% if folder.messages.present? %>
-        <%= folder.messages.last.body.last(20) + "..." %>
+        <% last_message = folder.messages.last %>
+        <%= (last_message.sender_token.present? ? decrypt_message(last_message) : last_message.body).last(20) + "..." %>
       <% else %>
         nothingness...
       <% end %>
