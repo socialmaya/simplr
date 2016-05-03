@@ -73,6 +73,9 @@ Rails.application.routes.draw do
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
   
+  # pictures
+  delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
+  
   # comments
   get 'comments/add_image', as: 'add_comment_image'
   get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'

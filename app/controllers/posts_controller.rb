@@ -17,6 +17,12 @@ class PostsController < ApplicationController
   def add_image
   end
   
+  def remove_picture
+    @picture_id = params[:picture_id]
+    @picture = Picture.find_by_id @picture_id
+    @picture.destroy
+  end
+  
   def hide
     @post.update hidden: true
     redirect_to root_url
@@ -109,6 +115,11 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        if params[:pictures]
+          params[:pictures][:image].each do |image|
+            @post.pictures.create image: image
+          end
+        end
         Tag.extract @post
         format.html { redirect_to @post }
       else
