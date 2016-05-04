@@ -1,3 +1,11 @@
+<% if params[:already_redeemed] %>
+  <div class="card">
+    <p align="center">
+      Invitation already redeemed.
+    </p>
+  </div>
+<% end %>
+
 <% unless current_user %>
   <%= render "connections/invited_message" %>
   <%= render 'form' %>

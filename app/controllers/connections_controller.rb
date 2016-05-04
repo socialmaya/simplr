@@ -53,14 +53,19 @@ class ConnectionsController < ApplicationController
   
   def redeem_invite
     @invite = Connection.find_by_unique_token params[:token]
-    if @invite and @invite.invited_to_site? and not @invite.redeemed
-      @invite.update redeemed: true
-      if @invite.redeemed
-        cookies.permanent[:invite_token] = @invite.unique_token
-        cookies[:grant_dev_access] = @invite.grant_dev_access
-        cookies[:grant_gk_access] = @invite.grant_gk_access
+    if @invite and @invite.invited_to_site?
+      if !@invite.redeemed
+        @invite.update redeemed: true
+        if @invite.redeemed
+          cookies.permanent[:invite_token] = @invite.unique_token
+          cookies[:grant_dev_access] = @invite.grant_dev_access
+          cookies[:grant_gk_access] = @invite.grant_gk_access
+        end
+      # if invite already redeemed in current browser
+      elsif @invite.redeemed and invited?
+        @already_redeemed = true
       end
-      redirect_to new_user_path
+      redirect_to new_user_path(@already_redeemed ? { already_redeemed: true } : nil)
     else
       redirect_to '/404'
     end
