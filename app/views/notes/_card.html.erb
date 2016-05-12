@@ -1,21 +1,21 @@
 <div class="card" id="note_card_<%= note.id %>">
   <%= render "app/time_ago", item: note %>
   <p align="center">
-    <% case note.action.to_sym %>
+    <% message = namify_note_message(note); case note.action.to_sym %>
     <% when :post_comment, :also_commented, :post_like, :post_share %>
-      <%= link_to note.message, post_path(note.item_id) %>
+      <%= link_to message, post_path(note.item_id) %>
     <% when :comment_like, :comment_reply %>
-      <%= link_to note.message, comment_path(note.item_id) %>
+      <%= link_to message, comment_path(note.item_id) %>
     <% when :group_invite %>
-      <%= link_to note.message, invites_path(note.user) %>
+      <%= link_to message, invites_path(note.user) %>
     <% when :group_request %>
-      <%= link_to note.message, requests_path(note.item_id) %>
+      <%= link_to message, requests_path(note.item_id) %>
     <% when :group_request_accepted %>
-      <%= link_to note.message, group_path(note.item_id) %>
+      <%= link_to message, group_path(note.item_id) %>
     <% when :user_follow %>
-      <%= link_to note.message, followers_path(note.user) %>
+      <%= link_to message, followers_path(note.user) %>
     <% when :message_received %>
-      <%= link_to note.message, show_message_folder_path(note.item_id) %>
+      <%= link_to message, show_message_folder_path(note.item_id) %>
     <% end %>
   </p>
 </div>
