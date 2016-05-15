@@ -3,7 +3,7 @@
   
   <% if dev? and user.last_active_at.present? %>
     <%= render "app/time_ago", item: user, time: user.last_active_at,
-      position: :bottom_left_link, time_label: "Last active " %>
+      position: :bottom_right_link, time_label: "Last active " %>
   <% end %>
   
   <div align="center">
