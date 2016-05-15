@@ -11,8 +11,10 @@ module GroupsHelper
   def my_group_options
     options = [["Choose a group", nil]]
     for group in my_groups
-      # inserts group as an invite option unless invitee is already a member
-      options << [group.name, group.id] unless @user and @user.my_groups.include? group
+      # inserts group as an invite option unless invitee is already a member or already invited
+      unless @user and (@user.my_groups.include? group or @user.invites.find_by_group_id group.id)
+        options << [group.name, group.id]
+      end
     end
     return options
   end
