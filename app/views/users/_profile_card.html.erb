@@ -1,5 +1,11 @@
 <div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/tier", user: user %>
+  
+  <% if dev? and user.last_active_at.present? %>
+    <%= render "app/time_ago", item: user, time: user.last_active_at,
+      position: :bottom_left_link, time_label: "Last active " %>
+  <% end %>
+  
   <div align="center">
     <% if user.image.url %>
       <% if @user_shown %>
