@@ -30,7 +30,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.reverse
+    active_users = []; User.where.not(last_active_at: nil).each { |user| active_users << user }
+    active_users.sort_by! { |user| user.last_active_at }.reverse!
+    inactive_users = []; User.where(last_active_at: nil).each { |user| inactive_users << user }
+    inactive_users.sort!.reverse!
+    @users = active_users + inactive_users
   end
 
   def show
