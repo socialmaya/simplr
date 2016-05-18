@@ -24,6 +24,10 @@
         <%= " | " %>
         <%= link_to ("Members#{' (' + (group.members_size).to_s + ')' unless group.members.size.zero?} " \
           + '<i class="fa fa-users"></i>').html_safe, members_path(group) %>
+        <% if group_member_auth group %>
+          <%= " | " %>
+          <%= link_to 'Invite <i class="fa fa-cubes"></i>'.html_safe, invite_from_group_path(group) %>
+        <% end %>
       </p>
     <% else %>
       <%= link_to "Members: #{group.members_size}", members_path(group), class: :bottom_left_link %>

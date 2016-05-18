@@ -1,4 +1,15 @@
 module UsersHelper
+  def following_options
+    options = [["Choose a user", nil]]
+    for user in current_user.following
+      # inserts user as an invite option unless they're already a member of this group or already invited
+      unless @group and (@group.members.find_by_user_id user.id or @group.invites.find_by_user_id user.id)
+        options << [user.name, user.id]
+      end
+    end
+    return options
+  end
+  
   def featured_users
     featured = []
     User.where.not(image: nil).each do |user|
