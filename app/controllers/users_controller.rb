@@ -30,10 +30,13 @@ class UsersController < ApplicationController
   end
 
   def index
+    # creates array of active users and sorts by date last active
     active_users = []; User.where.not(last_active_at: nil).each { |user| active_users << user }
     active_users.sort_by! { |user| user.last_active_at }.reverse!
+    # creates array of inactive users and just sorts by time of creation
     inactive_users = []; User.where(last_active_at: nil).each { |user| inactive_users << user }
     inactive_users.sort!.reverse!
+    # adds both arrays together for finale
     @users = active_users + inactive_users
   end
 

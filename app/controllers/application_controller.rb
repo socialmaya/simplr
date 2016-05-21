@@ -40,7 +40,8 @@ class ApplicationController < ActionController::Base
           views.create user_id: current_user.id
         end
       else
-        views.create anon_token: anon_token unless anon_token.eql? item.anon_token
+        # unless posted by current anon and item seen is not a user
+        views.create anon_token: anon_token unless !item.is_a? User and anon_token.eql? item.anon_token
       end
     end
   end

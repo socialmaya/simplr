@@ -47,12 +47,23 @@
         </p>
       <% elsif original_post_pictures(post).present? %>
         <p>
-          <% original_post_pictures(post).each do |picture| %>
-            <% unless @post_shown %>
-              <%= link_to post do %>
-                <%= image_tag picture.image, class: :standard_post_image %>
-              <% end %>
-            <% else %>
+          <% unless @post_shown %>
+            <%= link_to post do %>
+              <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
+            <% end %>
+            <table align="center">
+              <tr>
+                <% for picture in original_post_pictures(post).all[1..-1] %>
+                  <td>
+                    <%= link_to post do %>
+                      <%= image_tag picture.image, class: :my_groups_group_icon %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            </table>
+          <% else %>
+            <% original_post_pictures(post).each do |picture| %>
               <%= image_tag picture.image, class: :standard_post_image %>
             <% end %>
           <% end %>
