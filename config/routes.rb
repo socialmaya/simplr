@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   # posts
   get 'posts/add_image', as: 'add_post_image'
   get 'posts/add_group_id', as: 'add_post_group_id'
+  get 'posts/:id/add_photoset', to: 'posts#add_photoset', as: 'add_post_photoset'
   post 'posts/:id/share', to: 'posts#share', as: 'share_post'
   get 'posts/:id/open_menu', to: 'posts#open_menu', as: 'open_post_menu'
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'

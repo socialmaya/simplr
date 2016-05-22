@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :share, :hide, :open_menu, :close_menu]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :share,
+    :hide, :open_menu, :close_menu, :add_photoset]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only
@@ -15,6 +16,9 @@ class PostsController < ApplicationController
   end
   
   def add_image
+  end
+  
+  def add_photoset
   end
   
   def remove_picture
