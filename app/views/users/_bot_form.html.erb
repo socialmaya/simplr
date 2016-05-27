@@ -1,0 +1,20 @@
+<div class="card">
+  <%= form_for(User.new) do |f| %>
+    <div align="center">
+      <p>
+        Create bots to perform various tasks
+      </p>
+      <p>
+        <%= f.text_field :name, placeholder: "Bot name", class: :standard_text_field %>
+      </p>
+      <p>
+        <%= f.text_area :body, placeholder: "Description", class: :standard_text_field %>
+      </p>
+	    <p>
+        <button type="submit" name="commit" class="standard_form_button">
+	        <b>Create <i class="fa fa-cog"></i></b>
+        </button>
+      </p>
+    </div>
+  <% end %>
+</div>
