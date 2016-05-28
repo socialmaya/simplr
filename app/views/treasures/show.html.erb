@@ -2,12 +2,7 @@
   <% if @treasure.treasure_type.eql? 'game' %>
     <%= render "treasures/div_game", treasure: @treasure %>
   <% elsif @treasure.treasure_type.eql? 'hype' %>
-    <script>
-      <%= render "app/fader.js", target: "hype_nugget", target_id: @treasure.id %>
-    </script>
-    <div class="hype_nugget" id="hype_nugget_<%= @treasure.id %>">
-      H Y P E
-    </div>
+    <%= render "pages/load_screen" %>
   <% else %>
     <%= link_to loot_treasure_path(@treasure.unique_token),
       method: :post, remote: true, title: "#{@treasure.name}" do %>

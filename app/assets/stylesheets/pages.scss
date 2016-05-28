@@ -2,6 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.load_fib_bar {
+  width: 100%;
+}
+
+#vertical_load_screen {
+  position: relative;
+}
+
+#loading_label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 17.25px;
+  color: white;
+}
+
+#still_loading_label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  right: 15px
+}
+
 #standard_nav_menu {
   position: fixed;
   top: 0px;
