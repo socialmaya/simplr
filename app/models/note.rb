@@ -28,7 +28,8 @@ class Note < ActiveRecord::Base
       message_received: "You've received a message.",
       group_invite: "You've been invited to a group.",
       group_request: "Someone requested to join a group.",
-      group_request_accepted: "You're request to join a group was accepted." }
+      group_request_accepted: "You're request to join a group was accepted.",
+      hype_received: "Someone sent you some H Y P E" }
     return _actions[action.to_sym]
   end
   

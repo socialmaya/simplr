@@ -1,6 +1,15 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure
   
+  def hype
+    @user = User.find_by_id params[:user_id]
+    hype_nugget = Treasure.new treasure_type: :hype, user_id: @user.id
+    if hype_nugget.save
+      Note.notify :hype_received, hype_nugget, @user, current_user
+    end
+    redirect_to :back
+  end
+  
   def powers
     @powers = current_user.active_powers.reverse
   end

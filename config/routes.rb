@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'treasures/:token/loot', to: 'treasures#loot', as: 'loot_treasure'
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
+  post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
   
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
