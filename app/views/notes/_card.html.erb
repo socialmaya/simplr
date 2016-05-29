@@ -17,7 +17,7 @@
     <% when :message_received %>
       <%= link_to message, show_message_folder_path(note.item_id) %>
     <% when :hype_received %>
-      <%= link_to message, show_treasure_path(note.unique_token) %>
+      <%= link_to message, show_treasure_path(token: note.item_token) %>
     <% end %>
   </p>
 </div>

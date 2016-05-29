@@ -5,7 +5,7 @@ class TreasuresController < ApplicationController
     @user = User.find_by_id params[:user_id]
     hype_nugget = Treasure.new treasure_type: :hype, user_id: @user.id
     if hype_nugget.save
-      Note.notify :hype_received, hype_nugget, @user, current_user
+      Note.notify :hype_received, hype_nugget.unique_token, @user, current_user
     end
     redirect_to :back
   end

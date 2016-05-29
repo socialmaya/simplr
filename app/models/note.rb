@@ -7,12 +7,15 @@ class Note < ActiveRecord::Base
   def self.notify action, item=nil, receiver=nil, sender=nil
     self.create(
       action: action,
-      item_id: (item.nil? ? nil : item.id),
+      item_id: (item.is_a?(String) ? nil : (item.nil? ? nil : item.id)),
+      # item saved as token if String object given for item argument
+      item_token: (item.is_a?(String) ? item : nil),
       # if one of the users is signed up / registered
       user_id: (receiver.is_a?(String) ? nil : (receiver.nil? ? nil : receiver.id)),
       sender_id: (sender.is_a?(String) ? nil : (sender.nil? ? nil : sender.id)),
       # if one of the users is anonymous / not signed up
-      anon_token: (receiver.is_a?(String) ? receiver : ((item and item.anon_token.present?) ? item.anon_token : nil)),
+      anon_token: (receiver.is_a?(String) ? receiver : ((item and !item.is_a?(String) \
+        and item.anon_token.present?) ? item.anon_token : nil)),
       sender_token: (sender.is_a?(String) ? sender : nil)
     )
   end
