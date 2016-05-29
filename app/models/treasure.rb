@@ -13,6 +13,10 @@ class Treasure < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def giver
+    User.find_by_id(self.giver_id)
+  end
+  
   def self.random user=nil
     _treasure = nil
     # only gets parent treasures
