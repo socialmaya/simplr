@@ -3,7 +3,8 @@ class TreasuresController < ApplicationController
   
   def hype
     @user = User.find_by_id params[:user_id]
-    hype_nugget = Treasure.new treasure_type: :hype, user_id: @user.id
+    hype_nugget = Treasure.new treasure_type: :hype, power: :hype_others,
+      user_id: @user.id, giver_id: current_user.id
     if hype_nugget.save
       Note.notify :hype_received, hype_nugget.unique_token, @user, current_user
     end

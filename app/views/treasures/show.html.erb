@@ -2,7 +2,7 @@
   <% if @treasure.treasure_type.eql? 'game' %>
     <%= render "treasures/div_game", treasure: @treasure %>
   <% elsif @treasure.treasure_type.eql? 'hype' %>
-    <%= render "pages/load_screen" %>
+    <%= render "treasures/hype_screen" %>
   <% else %>
     <%= link_to loot_treasure_path(@treasure.unique_token),
       method: :post, remote: true, title: "#{@treasure.name}" do %>
