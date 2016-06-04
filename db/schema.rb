@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601203455) do
+ActiveRecord::Schema.define(version: 20160604071820) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "unique_token"
+    t.string   "name"
+    t.text     "body"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "bots", force: :cascade do |t|
     t.string   "unique_token"
     t.string   "name"
     t.text     "body"

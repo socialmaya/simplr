@@ -97,10 +97,10 @@ Rails.application.routes.draw do
   get 'pages/toggle_menu', as: 'toggle_menu'
   get 'pages/more'
   
-  # bot tasks
-  post 'bot_tasks/create_bot', as: 'create_bot'
+  # bots
+  post 'bots/create', as: 'create_bot'
   get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
-  get 'bots/:id', to: 'bot_task#show', as: 'show_bot'
+  get 'bots/:id', to: 'bot_tasks#show', as: 'show_bot'
 
   resources :connections
   resources :messages

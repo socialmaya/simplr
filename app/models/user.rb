@@ -5,14 +5,13 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
-  has_many :bot_tasks, dependent: :destroy
   has_many :treasures
   has_many :groups
   has_many :views
 
+  validates_uniqueness_of :name
   validates_presence_of :name, length: { minimum: 3 }
   validates_presence_of :password, length: { minimum: 4 }
-  validates_uniqueness_of :name
   validates_confirmation_of :password
 
   before_create :encrypt_password, :generate_token, :gen_unique_token
