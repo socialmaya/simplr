@@ -96,6 +96,11 @@ Rails.application.routes.draw do
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
   get 'pages/more'
+  
+  # bot tasks
+  post 'bot_tasks/create_bot', as: 'create_bot'
+  get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
+  get 'bots/:id', to: 'bot_task#show', as: 'show_bot'
 
   resources :connections
   resources :messages

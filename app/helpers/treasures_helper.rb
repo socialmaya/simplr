@@ -1,4 +1,5 @@
 module TreasuresHelper
+  # logic works just like Poke on FB
   def hypeable? user
     able = false
     if current_user and user

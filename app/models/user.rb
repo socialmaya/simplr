@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :bot_tasks, dependent: :destroy
   has_many :treasures
   has_many :groups
   has_many :views
