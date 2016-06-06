@@ -1,26 +1,3 @@
-<script>
-  <%= render "posts/infinite_scroll.js" %>
-</script>
-
 <%= render "posts/form" %>
 
-<div id="feed_container_anchor"></div>
-<%= render "posts/feed_container" %>
-
-<% if @items.empty? %>
-  <div class="card">
-    <p align="center">
-      <% if current_user and current_user.following.size.zero? or current_user.my_groups.size.zero? %>
-        Your feed is currently empty since you haven't followed anyone or joined any groups yet. Try
-        <%= link_to "searching", search_path(query: 'users and groups') %>
-        for
-        <%= link_to "people", search_path(query: 'users') %>
-        to follow or
-        <%= link_to "groups", search_path(query: 'groups') %>
-        to join.
-      <% else %>
-        There aren't any posts yet.
-      <% end %>
-    </p>
-  </div>
-<% end %>
+<%= render "posts/main_feed_container" %>

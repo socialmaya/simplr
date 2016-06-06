@@ -9,7 +9,17 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
+    unless current_user
+      @user = User.new
+      # gets preview items for invitee
+      @all_items = Post.global.reverse
+      @items = paginate @all_items
+      @char_codes = char_codes @items
+      # records user viewing posts
+      @items.each {|item| seent item}
+      # records current time for last visit
+      record_last_visit
+    end
   end
   
   def create

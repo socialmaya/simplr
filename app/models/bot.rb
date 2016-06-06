@@ -2,6 +2,8 @@ class Bot < ActiveRecord::Base
   has_many :bot_tasks, dependent: :destroy
   
   before_create :generate_token, :gen_unique_token, :gen_unique_bot_name
+
+  mount_uploader :image, ImageUploader
   
   private  
     def gen_unique_token
