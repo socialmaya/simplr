@@ -1,4 +1,8 @@
 module GroupsHelper
+  def visible_to_anons? group
+    true if group and group.open
+  end
+  
   def featured_groups
     featured = []
     Group.where.not(image: nil).each do |group|

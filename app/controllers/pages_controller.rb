@@ -44,7 +44,7 @@ class PagesController < ApplicationController
       if current_user
         return current_user.feed
       else
-        return Post.global.reverse
+        return Post.all.reverse
       end
     elsif params[:group_id]
       @group_shown = true

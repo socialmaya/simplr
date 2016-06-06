@@ -1,4 +1,4 @@
-<% if (post.group.nil? or group_auth post.group or group_member_auth post.group \
+<% if (visible_to_anons? post.group or post.group.nil? or group_auth post.group or group_member_auth post.group \
   or (current_user and post.user and current_user.following? post.user)) \
   and not (post.hidden and not own_item? post) %>
   <div class="card" id="post_card_<%= post.id %>">

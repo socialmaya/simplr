@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     unless current_user
       @user = User.new
       # gets preview items for invitee
-      @all_items = Post.global.reverse
+      @all_items = Post.all.reverse
       @items = paginate @all_items
       @char_codes = char_codes @items
       # records user viewing posts

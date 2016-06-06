@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606160401) do
+ActiveRecord::Schema.define(version: 20160606173617) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160606160401) do
     t.string   "image"
     t.integer  "user_id"
     t.string   "unique_token"
+    t.boolean  "open"
   end
 
   create_table "likes", force: :cascade do |t|
