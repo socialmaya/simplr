@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   
   def new
     unless current_user
+      reset_page
       @user = User.new
       # gets preview items for invitee
       @all_items = Post.all.reverse
