@@ -22,9 +22,8 @@ class ConnectionsController < ApplicationController
   def peace
     if current_user
       current_user.update_token
-      cookies.delete(:auth_token)
     end
-    cookies.delete(:invite_token)
+    cookies.clear
     redirect_to root_url
   end
   
