@@ -1,11 +1,1 @@
-<div class="card">
-  <div align="center">
-    <p><%= @bot.name %></p>
-    <p><%= @bot.body %></p>
-    <% @bot.bot_tasks.each do |task| %>
-      <p>
-        <%= task.name %>
-      </p>
-    <% end %>
-  </div>
-</div>
+<%= render "bots/card", bot: @bot %>

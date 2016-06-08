@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :anon_token, :current_user, :mobile?, :browser, :get_location,
+  helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?,
     :invited?, :seen?, :seent, :get_site_title, :record_last_visit
   
@@ -120,6 +120,15 @@ class ApplicationController < ActionController::Base
       end
     end
     return codes
+  end
+  
+  # returns anon_token or current_user
+  def current_identity
+    if current_user
+      return current_user
+    else
+      return anon_token
+    end
   end
   
   def anon_token

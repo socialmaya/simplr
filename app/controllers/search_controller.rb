@@ -10,9 +10,9 @@ class SearchController < ApplicationController
     session[:query] = @query; @results = []; @results_shown = true
     if @query.present?
       # to display different result types found for each query
-      @result_types = { group: 0, user: 0, post: 0, comment: 0 }
+      @result_types = { group: 0, user: 0, bot: 0, post: 0, comment: 0 }
       # loops through each model and through each item in each model
-      [Group, User, Post, Comment].each do |_class|
+      [Group, User, Bot, Post, Comment].each do |_class|
         _class.all.reverse.each do |item|
           match = false; match_by_tag = false
           # scans all text for query
@@ -70,7 +70,7 @@ class SearchController < ApplicationController
   private
     # scans specific peices of text for match
     def scan_text item, query, match=false
-      [:body, :name, :anon_token].each do |sym|   
+      [:body, :name, :anon_token, :unique_token].each do |sym|   
         if item.respond_to? sym and item.send(sym).present? 
           match = true if scan item.send(sym), query
         end

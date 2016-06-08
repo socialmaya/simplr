@@ -47,15 +47,18 @@ class CommentsController < ApplicationController
     if @comment.save
       Tag.extract @comment
       if @comment.comment
-        Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_user \
-          unless current_user.eql? @comment.comment.user
+        Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_identity \
+          unless current_user.eql? @comment.comment.user \
+          or (anon_token and anon_token.eql? @comment.anon_token)
         redirect_to @comment.comment
       elsif @comment.post
         @post = @comment.post
-        Note.notify :post_comment, @post, @post.user, current_user unless current_user.eql? @post.user
+        Note.notify :post_comment, @post, @post.user, current_identity \
+          unless current_user.eql? @post.user \
+          or (anon_token and anon_token.eql? @post.anon_token)
         # notify everyone else that's commented on the post
         for user in @post.commenters
-          Note.notify :also_commented, @post, user, current_user unless current_user.eql? user
+          Note.notify :also_commented, @post, user, current_identity unless current_user and current_user.eql? user
         end
         # only redirects if not ajax
         unless params[:ajax_req]

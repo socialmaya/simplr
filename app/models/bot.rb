@@ -3,7 +3,7 @@ class Bot < ActiveRecord::Base
   has_many :bot_tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  before_create :gen_unique_token, :gen_unique_bot_name
+  before_create :gen_uniqueness
 
   mount_uploader :image, ImageUploader
   
@@ -42,10 +42,15 @@ class Bot < ActiveRecord::Base
   end
   
   private
+    def gen_uniqueness
+      gen_unique_token
+      gen_unique_bot_name
+    end
+    
     # sets a generic bot name for bot unless named by user
     def gen_unique_bot_name
       unless self.name.present?
-        self.name = "bot_#{SecureRandom.urlsafe_base64}"
+        self.name = "bot_" + self.unique_token
       end
     end
     
