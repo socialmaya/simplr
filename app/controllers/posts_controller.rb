@@ -90,7 +90,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.group_id = params[:group_id]
+    @group = Group.find_by_id params[:group_id]
+    # check to see if user is a member of group if ones selected
+    @post.group_id = @group.id if current_user and @group and \
+      (current_user.my_groups.include? @group or @group.user.eql? current_user)
     if current_user
       @post.user_id = current_user.id
     else
