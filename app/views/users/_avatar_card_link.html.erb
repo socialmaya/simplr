@@ -10,4 +10,6 @@
   <% end %>
 <% elsif defined?(token) and token.present? %>
   <%= render "users/anon_avatar", token: token, position: :token_card_link %>
+<% elsif defined?(bot) and bot and bot.unique_token.present? %>
+  <%= render "users/anon_avatar", token: bot.unique_token, position: :token_card_link %>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606173617) do
+ActiveRecord::Schema.define(version: 20160608213048) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160606173617) do
     t.text     "body"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "bot_id"
   end
 
   create_table "bots", force: :cascade do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160606173617) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "image"
+    t.integer  "user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160606173617) do
     t.datetime "updated_at", null: false
     t.string   "anon_token"
     t.string   "image"
+    t.integer  "bot_id"
   end
 
   create_table "connections", force: :cascade do |t|

@@ -72,9 +72,13 @@ class PostsController < ApplicationController
       @post_shown = true
       @comment = Comment.new
       @comments = @post.comments
+      # manifests table flipping/resetting bot
+      Bot.manifest_bots [:reset_table], { comments: @comments }
       @likes = @post.likes
-      @views = @post.views
+      # records views
       seent @post
+      # gets views
+      @views = @post.views
     else
       redirect_to '/404'
     end

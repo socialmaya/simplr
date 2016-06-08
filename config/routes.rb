@@ -100,7 +100,6 @@ Rails.application.routes.draw do
   # bots
   post 'bots/create', as: 'create_bot'
   get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
-  get 'bots/:id', to: 'bot_tasks#show', as: 'show_bot'
 
   resources :connections
   resources :messages
@@ -110,6 +109,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :notes
+  resources :bots
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

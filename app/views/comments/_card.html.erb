@@ -1,5 +1,5 @@
 <div class="card">
-  <%= render "users/avatar_card_link", user: comment.user, token: comment.anon_token %>
+  <%= render "users/avatar_card_link", user: comment.user, bot: comment.bot, token: comment.anon_token %>
   
   <div align="center">
     <% if comment.image.url %>
