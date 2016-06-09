@@ -1,6 +1,7 @@
 class BotTask < ActiveRecord::Base
   belongs_to :bot
   
+  before_create :gen_unique_token
   validate :named?, on: :create
   
   def self.task_types

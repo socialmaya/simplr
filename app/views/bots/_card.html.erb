@@ -1,7 +1,9 @@
 <div class="card">
   <%= render "users/avatar_card_link", bot: bot %>
   <div align="center">
-    <p><%= bot.name %></p>
+    <%= link_to bot do %>
+      <p><%= bot.name %></p>
+    <% end %>
     <p><%= "Description: " + bot.body if bot.body.present? %></p>
     <% unless bot.bot_tasks.empty? %>
       <%= label_tag "Tasks:" %>

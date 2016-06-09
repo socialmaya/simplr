@@ -53,6 +53,7 @@ class Treasure < ActiveRecord::Base
       hype_others: 'Hype up other users',
       see_views: "See who's viewing posts",
       invade_groups: 'Invade private groups',
+      create_bots: 'Create bots to perform tasks',
       invite_someone: 'Invite someone to the site',
       steal_powers: 'Steal someone elses power',
       make_follower: 'Make someone your follower',

@@ -1,11 +1,12 @@
 class BotsController < ApplicationController
   before_action :invite_only
   before_action :bots_to_404
-  before_action :dev_only
+  before_action :secure_bots
   
   def my_bots
     @user = User.find_by_id params[:id]
     @bots = Bot.where(user_id: @user.id) if @user
+    Bot.manifest_bots [:grow]
   end
   
   def index
@@ -36,8 +37,8 @@ class BotsController < ApplicationController
   end
   
   private
-    def dev_only
-      redirect_to '/404' unless dev?
+    def secure_bots
+      redirect_to '/404' unless dev? or current_user.has_power?('create_bots')
     end
     
     def bots_to_404

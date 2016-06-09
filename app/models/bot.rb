@@ -9,8 +9,8 @@ class Bot < ActiveRecord::Base
   
   def self.manifest_bots tasks=[], items={}
     for task in tasks
-      if Bot.exists_with_task? task
-        bot = Bot.last_with_task task
+      if Bot.available_for_task? task
+        bot = Bot.next_up_for_task task
         case task
         when :reset_table
           comments = items[:comments]
@@ -18,27 +18,33 @@ class Bot < ActiveRecord::Base
             comment = comments.new bot_id: bot.id, body: "┬─┬﻿ ノ( ゜-゜ノ)"
             comment.save
           end
+        when :grow
+        
         end
       end
     end
   end
   
-  def self.last_with_task task
+  # the next availbe bot for the given task
+  def self.next_up_for_task task_name
     bots_with_task = []
     for bot in Bot.all
-      bots_with_task << bot if bot.bot_tasks.find_by_name task.to_s
+      task = bot.bot_tasks.find_by_name task_name.to_s
+      bots_with_task << bot if task and not task.currently_running
     end
     return bots_with_task.last
   end
 
-  def self.exists_with_task? task
-    exists_with_task = false
+  # if any bots are currently available for the given task
+  def self.available_for_task? task_name
+    available = false
     for bot in Bot.all
-      if bot.bot_tasks.find_by_name task.to_s
-        exists_with_task = true
+      task = bot.bot_tasks.find_by_name task_name.to_s
+      if task and not task.currently_running
+        available = true
       end
     end
-    return exists_with_task
+    return available
   end
   
   private
