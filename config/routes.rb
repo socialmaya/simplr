@@ -100,6 +100,7 @@ Rails.application.routes.draw do
   # bots
   post 'bots/create', as: 'create_bot'
   get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
+  get 'users/:id/my_bots', to: 'bots#my_bots', as: 'my_bots'
 
   resources :connections
   resources :messages

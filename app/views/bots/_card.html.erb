@@ -2,11 +2,12 @@
   <%= render "users/avatar_card_link", bot: bot %>
   <div align="center">
     <p><%= bot.name %></p>
-    <p><%= bot.body %></p>
-    <% bot.bot_tasks.each do |task| %>
-      <p>
-        <%= task.name %>
-      </p>
+    <p><%= "Description: " + bot.body if bot.body.present? %></p>
+    <% unless bot.bot_tasks.empty? %>
+      <%= label_tag "Tasks:" %>
+      <% bot.bot_tasks.each do |task| %>
+        <%= task.name %><%= ", " unless task.eql? bot.bot_tasks.last %>
+      <% end %>
     <% end %>
   </div>
 </div>
