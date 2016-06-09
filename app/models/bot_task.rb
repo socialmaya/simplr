@@ -5,8 +5,8 @@ class BotTask < ActiveRecord::Base
   
   def self.task_types
     { reset_table: 'Reset Tables - (╯°□°)╯︵ ┻━┻  ... ┬─┬﻿ ノ( ゜-゜ノ)',
-      multiply: 'Multiply - Enable bot to reproduce with other bots',
-      learn: 'Collect Data - Collect or gather data from users' }
+      grow: 'Grow - Enable bot to reproduce with other bots',
+      learn: 'Learn - Collect or gather data from users' }
   end
   
   private
