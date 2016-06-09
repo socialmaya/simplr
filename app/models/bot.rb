@@ -1,7 +1,10 @@
 class Bot < ActiveRecord::Base
   belongs_to :user
+  belongs_to :bot
+  has_many :bots, dependent: :destroy
   has_many :bot_tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
   
   before_create :gen_uniqueness
 
@@ -19,7 +22,13 @@ class Bot < ActiveRecord::Base
             comment.save
           end
         when :grow
-        
+          # sets bot to currently growing at given page
+          _task = bot.bot_tasks.find_by_name(task.to_s)
+          if _task and _task.update currently_running: true
+            bot.page = items[:controller] + " " + items[:action]
+            bot.save
+          end
+          # bot needs to join with another at same page
         end
       end
     end

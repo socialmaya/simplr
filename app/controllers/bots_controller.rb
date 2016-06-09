@@ -5,8 +5,8 @@ class BotsController < ApplicationController
   
   def my_bots
     @user = User.find_by_id params[:id]
-    @bots = Bot.where(user_id: @user.id) if @user
-    Bot.manifest_bots [:grow]
+    @bots = Bot.where(user_id: @user.id).reverse if @user
+    Bot.manifest_bots [:grow], { controller: controller_name, action: action_name }
   end
   
   def index
