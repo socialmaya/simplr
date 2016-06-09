@@ -3,10 +3,19 @@ class BotsController < ApplicationController
   before_action :bots_to_404
   before_action :secure_bots
   
+  def destroy_all
+    Bot.destroy_all
+    redirect_to dev_panel_path
+  end
+  
   def my_bots
     @user = User.find_by_id params[:id]
     @bots = Bot.where(user_id: @user.id).reverse if @user
-    Bot.manifest_bots [:grow], { controller: controller_name, action: action_name }
+    Bot.manifest_bots [:grow], {
+      controller: controller_name,
+      action: action_name,
+      id: params[:id].to_s
+    }
   end
   
   def index

@@ -25,13 +25,62 @@ class Bot < ActiveRecord::Base
           # sets bot to currently growing at given page
           _task = bot.bot_tasks.find_by_name(task.to_s)
           if _task and _task.update currently_running: true
-            bot.page = items[:controller] + " " + items[:action]
+            bot.page = [items[:controller], items[:action], items[:id]].to_s
             bot.save
           end
-          # bot needs to join with another at same page
+          # bot joins with another growing bot if present on same page and compatible
+          other_bot = bot.currently_running_same_task_nearby(task).last
+          compatibility = bot.determine_compatibility other_bot
+          if compatibility[:compatible]
+            parent_bot = Bot.find_by_id compatibility[:parent_id]
+            # creates baby bot on same page and with tokens pointing back to both parents
+            baby_bot = parent_bot.bots.new page: parent_bot.page, parent_tokens: compatibility[:parent_tokens]
+            if baby_bot.save
+              # starts baby bot off with same task
+              baby_bot.bot_tasks.create name: "grow"
+            end
+          end
         end
       end
     end
+  end
+  
+  # to determine parent compatibility
+  def determine_compatibility bot
+    # compatibility hash also contains the surname id
+    compatibility = { compatible: false, parent_id: nil, parent_tokens: nil }
+    if bot
+      # gets number occurance counts for both bots
+      self_count = self.unique_token.scan(/\d+/).count
+      other_count = bot.unique_token.scan(/\d+/).count
+      # puts both in array for number occurance comparison
+      both_counts = [self_count, other_count].sort
+      # checks the difference for number occurance
+      if (both_counts[0]...both_counts[1]).size >= 2
+        compatibility[:compatible] = true
+        # sets parent_tokens here for easier access above
+        compatibility[:parent_tokens] = [self.unique_token, bot.unique_token].to_s
+        # the parent with the largest occurance of numbers
+        compatibility[:parent_id] = if self_count > other_count
+          self.id
+        else
+          bot.id
+        end
+      end
+    end
+    return compatibility
+  end
+  
+  # returns all other bots currently running given task at same page
+  def currently_running_same_task_nearby task_name
+    currently_running = []
+    for bot in Bot.all
+      task = bot.bot_tasks.find_by_name task_name.to_s
+      if task and task.currently_running and bot.page.present? and bot.page.eql? self.page
+        currently_running << bot unless bot.eql? self
+      end
+    end
+    return  currently_running
   end
   
   # the next availbe bot for the given task
