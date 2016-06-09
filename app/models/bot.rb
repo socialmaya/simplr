@@ -29,7 +29,7 @@ class Bot < ActiveRecord::Base
             bot.save
           end
           # bot joins with another growing bot if present on same page and compatible
-          other_bot = bot.currently_running_same_task_nearby(task).last
+          other_bot = bot.currently_running_same_task_nearby task
           compatibility = bot.determine_compatibility other_bot
           if compatibility[:compatible]
             parent_bot = Bot.find_by_id compatibility[:parent_id]
@@ -50,9 +50,8 @@ class Bot < ActiveRecord::Base
     # compatibility hash also contains the surname id
     compatibility = { compatible: false, parent_id: nil, parent_tokens: nil }
     if bot
-      # gets number occurance counts for both bots
-      self_count = self.unique_token.scan(/\d+/).count
-      other_count = bot.unique_token.scan(/\d+/).count
+      # gets number occurance counts (gender) for both bots
+      self_count = self.gender; other_count = bot.gender
       # puts both in array for number occurance comparison
       both_counts = [self_count, other_count].sort
       # checks the difference for number occurance
@@ -71,8 +70,8 @@ class Bot < ActiveRecord::Base
     return compatibility
   end
   
-  # returns all other bots currently running given task at same page
   def currently_running_same_task_nearby task_name
+    # gets pool of bots currently running given task on same page
     currently_running = []
     for bot in Bot.all
       task = bot.bot_tasks.find_by_name task_name.to_s
@@ -80,7 +79,8 @@ class Bot < ActiveRecord::Base
         currently_running << bot unless bot.eql? self
       end
     end
-    return  currently_running
+    # randomly chooses bot from pool and returns it
+    return currently_running[rand(0...currently_running.size)]
   end
   
   # the next availbe bot for the given task
@@ -103,6 +103,10 @@ class Bot < ActiveRecord::Base
       end
     end
     return available
+  end
+  
+  def gender
+    self.unique_token.scan(/\d+/).count
   end
   
   private

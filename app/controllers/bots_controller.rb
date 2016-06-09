@@ -39,7 +39,7 @@ class BotsController < ApplicationController
           task.save unless @bot.bot_tasks.find_by_name val
         end
       end
-      redirect_to bot_path(@bot)
+      redirect_to my_bots_path(current_user)
     else
       redirect_to :back
     end
