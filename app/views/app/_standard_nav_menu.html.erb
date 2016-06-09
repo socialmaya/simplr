@@ -37,7 +37,7 @@
     <% end %>
     
 	  <%= link_to fa_icon("cogs", "Bots"), my_bots_path(current_user), class: :standard_nav_menu_link,
-      title: "My bots - Click here to manage all of the bots you've created." if dev? %>
+      title: "My bots - Click here to manage all of the bots you've created." if dev? and current_user.bots.present? %>
 	    
 	  <%= link_to fa_icon("fort-awesome", "Gatekeeper"), invite_someone_path,
 	    class: :standard_nav_menu_link, title: "Invite someone to the site." \
