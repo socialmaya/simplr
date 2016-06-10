@@ -11,7 +11,7 @@ class BotsController < ApplicationController
   def my_bots
     @user = User.find_by_id params[:id]
     @bots = Bot.where(user_id: @user.id).reverse if @user
-    Bot.manifest_bots [:grow], { page: [controller_name, action_name, params[:id]] }
+    Bot.manifest_bots [:grow], { page: request.original_url }
   end
   
   def index
@@ -20,6 +20,7 @@ class BotsController < ApplicationController
   
   def show
     @bot = Bot.find_by_id params[:id]
+    @tasks = @bot.bot_tasks
   end
   
   def create

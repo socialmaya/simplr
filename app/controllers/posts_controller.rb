@@ -73,7 +73,7 @@ class PostsController < ApplicationController
       @comment = Comment.new
       @comments = @post.comments
       # manifests table flipping/resetting bot
-      Bot.manifest_bots [:reset_table], { comments: @comments }
+      Bot.manifest_bots [:reset_table, :grow], { comments: @comments, page: request.original_url }
       @likes = @post.likes
       # records views
       seent @post
