@@ -6,10 +6,39 @@
     <% end %>
     <p><%= "Description: " + bot.body if bot.body.present? %></p>
     <% unless bot.bot_tasks.empty? %>
-      <%= label_tag "Tasks:" %>
-      <% bot.bot_tasks.each do |task| %>
-        <%= task.name %><%= ", " unless task.eql? bot.bot_tasks.last %>
-      <% end %>
+      <p>
+        <%= label_tag "Tasks:" %>
+        <% bot.bot_tasks.each do |task| %>
+          <%= task.name %><%= ", " unless task.eql? bot.bot_tasks.last %>
+        <% end %>
+      </p>
+    <% end %>
+    <% unless bot.children.empty? %>
+      <p>
+        <%= label_tag "Babies:" %>
+        <% bot.children.each do |baby| %>
+          <%= link_to "baby_#{bot.children.index(baby)}", bot_path(baby),
+            title: baby.name %><%= ", " unless baby.eql? bot.children.last %>
+        <% end %>
+      </p>
+    <% end %>
+    <% unless bot.parents.empty? %>
+      <p>
+        <%= label_tag "Parents:" %>
+        <% bot.parents.each do |parent| %>
+          <%= link_to "parent_#{bot.parents.index(parent)}", bot_path(parent),
+            title: parent.name %><%= ", " unless parent.eql? bot.parents.last %>
+        <% end %>
+      </p>
+    <% end %>
+    <% unless bot.mates.empty? %>
+      <p>
+        <%= label_tag "Mates:" %>
+        <% bot.mates.each do |mate| %>
+          <%= link_to "mate_#{bot.mates.index(mate)}", bot_path(mate),
+            title: mate.name %><%= ", " unless mate.eql? bot.mates.last %>
+        <% end %>
+      </p>
     <% end %>
   </div>
 </div>

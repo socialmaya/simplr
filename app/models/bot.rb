@@ -105,6 +105,32 @@ class Bot < ActiveRecord::Base
     return available
   end
   
+  def children
+    _children = []
+    for child in Bot.where.not(parent_tokens: nil)
+      _children << child if eval(child.parent_tokens).include? self.unique_token
+    end
+    return _children
+  end
+  
+  def parents
+    _parents = []
+    for bot in Bot.all
+      _parents << bot if self.parent_tokens.present? and eval(self.parent_tokens).include? bot.unique_token
+    end
+    return _parents
+  end
+  
+  def mates
+    _mates = []
+    for child in self.children
+      for parent in child.parents
+        _mates << parent unless self.eql? parent
+      end
+    end
+    return _mates
+  end
+  
   def gender
     self.unique_token.scan(/\d+/).count
   end
