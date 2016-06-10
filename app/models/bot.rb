@@ -12,36 +12,39 @@ class Bot < ActiveRecord::Base
   
   def self.manifest_bots tasks=[], items={}
     for task in tasks
-      # initializes any bots standing idle for task (no page presence)
-      Bot.idle_for_task(task, items[:page].to_s).each do |bot|
+      # initializes any bots standing idle for task
+      Bot.idle_for_task(task).each do |bot|
         _task = bot.bot_tasks.find_by_name(task.to_s)
         _task.update page: items[:page].to_s if _task
       end
-      # if any bots are ready for task on given page 
+      # if any bots are performing task on given page
       if BotTask.where(name: task, page: items[:page].to_s).present?
-        # needs to get array of bots ready for task on page
-        # and ability to get certain number of random bots from array
-        # needs to account for number of bots required for particular tasks
+        # gets array of bots performing task on page
+        bot_pool = Bot.for_task_on_page task, items[:page]
         case task
         when :reset_table
+          bot = bot_pool.sample
           comments = items[:comments]
           if comments.present? and comments.last.body.include? "(╯°□°)╯︵ ┻━┻"
             comment = comments.new bot_id: bot.id, body: "┬─┬﻿ ノ( ゜-゜ノ)"
             comment.save
           end
         when :grow
-          # bot joins with another growing bot if present on same page and compatible
-          other_bot = bot.currently_running_same_task_nearby task
-          compatibility = bot.determine_compatibility other_bot
-          if compatibility[:compatible]
-            parent_bot = Bot.find_by_id compatibility[:parent_id]
-            # potential to spawn more than one child bot
-            rand(1..2).times do
-              # creates baby bot with tokens pointing back to both parents
-              baby_bot = parent_bot.bots.new parent_tokens: compatibility[:parent_tokens]
-              if baby_bot.save
-                # starts baby bot off with same task
-                baby_bot.bot_tasks.create name: "grow"
+          if bot_pool.size > 1
+            # bot joins with another growing bot if present on same page and compatible
+            samples = bot_pool.sample 2; bot = samples[0]; other_bot = samples[1]
+            compatibility = bot.determine_compatibility other_bot
+            if compatibility[:compatible]
+              parent_bot = Bot.find_by_id compatibility[:parent_id]
+              # potential to spawn more than one child bot
+              rand(1..2).times do
+                # creates baby bot with tokens pointing back to both parents
+                baby_bot = parent_bot.bots.new parent_tokens: compatibility[:parent_tokens]
+                if baby_bot.save
+                  # starts baby bot off with same task
+                  baby_bot.bot_tasks.create name: "grow"
+                  # doesn't get initialized to page until next refresh
+                end
               end
             end
           end
@@ -50,7 +53,19 @@ class Bot < ActiveRecord::Base
     end
   end
   
-  def self.idle_for_task task_name, page
+  # returns pool of bots for task on page
+  def self.for_task_on_page task_name, page
+    on_page = []
+    for bot in Bot.all
+      task = bot.bot_tasks.find_by_name task_name
+      if task.page.eql? page.to_s
+        on_page << bot
+      end
+    end
+    return on_page
+  end
+  
+  def self.idle_for_task task_name
     idle = []
     for bot in Bot.all
       task = bot.bot_tasks.find_by_name task_name
