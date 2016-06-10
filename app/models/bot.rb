@@ -12,8 +12,16 @@ class Bot < ActiveRecord::Base
   
   def self.manifest_bots tasks=[], items={}
     for task in tasks
-      if Bot.available_for_task? task
-        bot = Bot.next_up_for_task task
+      # initializes any bots standing idle for task (no page presence)
+      Bot.idle_for_task(task, items[:page].to_s).each do |bot|
+        _task = bot.bot_tasks.find_by_name(task.to_s)
+        _task.update page: items[:page].to_s if _task
+      end
+      # if any bots are ready for task on given page 
+      if BotTask.where(name: task, page: items[:page].to_s).present?
+        # needs to get array of bots ready for task on page
+        # and ability to get certain number of random bots from array
+        # needs to account for number of bots required for particular tasks
         case task
         when :reset_table
           comments = items[:comments]
@@ -22,32 +30,19 @@ class Bot < ActiveRecord::Base
             comment.save
           end
         when :grow
-          # sets bot to currently growing at given page
-          _task = bot.bot_tasks.find_by_name(task.to_s)
-          if _task and _task.update currently_running: true
-            bot.page = [items[:controller], items[:action], items[:id]].to_s
-            bot.save
-          end
           # bot joins with another growing bot if present on same page and compatible
           other_bot = bot.currently_running_same_task_nearby task
           compatibility = bot.determine_compatibility other_bot
           if compatibility[:compatible]
             parent_bot = Bot.find_by_id compatibility[:parent_id]
             # potential to spawn more than one child bot
-            babies_made = 0; rand(1..2).times do
-              # creates baby bot on same page and with tokens pointing back to both parents
-              baby_bot = parent_bot.bots.new page: parent_bot.page, parent_tokens: compatibility[:parent_tokens]
+            rand(1..2).times do
+              # creates baby bot with tokens pointing back to both parents
+              baby_bot = parent_bot.bots.new parent_tokens: compatibility[:parent_tokens]
               if baby_bot.save
                 # starts baby bot off with same task
                 baby_bot.bot_tasks.create name: "grow"
-                babies_made += 1
               end
-            end
-            # one of the parents get to rest if more than one baby
-            if babies_made > 1
-              _task = parent_bot.bot_tasks.find_by_name("grow")
-              # also frees up extra bots to be paired for later
-              _task.update(currently_running: false) if _task
             end
           end
         end
@@ -55,43 +50,15 @@ class Bot < ActiveRecord::Base
     end
   end
   
-  def currently_running_same_task_nearby task_name
-    # gets pool of bots currently running given task on same page
-    currently_running = []
+  def self.idle_for_task task_name, page
+    idle = []
     for bot in Bot.all
-      task = bot.bot_tasks.find_by_name task_name.to_s
-      if task and task.currently_running and bot.page.present? and bot.page.eql? self.page
-        currently_running << bot unless bot.eql? self
+      task = bot.bot_tasks.find_by_name task_name
+      unless task.page.present?
+        idle << bot
       end
     end
-    # randomly chooses bot from pool and returns it
-    unless currently_running.empty?
-      return currently_running[rand(0...currently_running.size)]
-    else
-      return nil
-    end
-  end
-  
-  # the next availbe bot for the given task
-  def self.next_up_for_task task_name
-    bots_with_task = []
-    for bot in Bot.all
-      task = bot.bot_tasks.find_by_name task_name.to_s
-      bots_with_task << bot if task and not task.currently_running
-    end
-    return bots_with_task.last
-  end
-
-  # if any bots are currently available for the given task
-  def self.available_for_task? task_name
-    available = false
-    for bot in Bot.all
-      task = bot.bot_tasks.find_by_name task_name.to_s
-      if task and not task.currently_running
-        available = true
-      end
-    end
-    return available
+    return idle
   end
   
   # to determine parent compatibility
