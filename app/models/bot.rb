@@ -33,41 +33,26 @@ class Bot < ActiveRecord::Base
           compatibility = bot.determine_compatibility other_bot
           if compatibility[:compatible]
             parent_bot = Bot.find_by_id compatibility[:parent_id]
-            # creates baby bot on same page and with tokens pointing back to both parents
-            baby_bot = parent_bot.bots.new page: parent_bot.page, parent_tokens: compatibility[:parent_tokens]
-            if baby_bot.save
-              # starts baby bot off with same task
-              baby_bot.bot_tasks.create name: "grow"
+            # potential to spawn more than one child bot
+            babies_made = 0; rand(1..2).times do
+              # creates baby bot on same page and with tokens pointing back to both parents
+              baby_bot = parent_bot.bots.new page: parent_bot.page, parent_tokens: compatibility[:parent_tokens]
+              if baby_bot.save
+                # starts baby bot off with same task
+                baby_bot.bot_tasks.create name: "grow"
+                babies_made += 1
+              end
+            end
+            # one of the parents get to rest if more than one baby
+            if babies_made > 1
+              _task = parent_bot.bot_tasks.find_by_name("grow")
+              # also frees up extra bots to be paired for later
+              _task.update(currently_running: false) if _task
             end
           end
         end
       end
     end
-  end
-  
-  # to determine parent compatibility
-  def determine_compatibility bot
-    # compatibility hash also contains the surname id
-    compatibility = { compatible: false, parent_id: nil, parent_tokens: nil }
-    if bot
-      # gets number occurance counts (gender) for both bots
-      self_count = self.gender; other_count = bot.gender
-      # puts both in array for number occurance comparison
-      both_counts = [self_count, other_count].sort
-      # checks the difference for number occurance
-      if (both_counts[0]...both_counts[1]).size >= 2
-        compatibility[:compatible] = true
-        # sets parent_tokens here for easier access above
-        compatibility[:parent_tokens] = [self.unique_token, bot.unique_token].to_s
-        # the parent with the largest occurance of numbers
-        compatibility[:parent_id] = if self_count > other_count
-          self.id
-        else
-          bot.id
-        end
-      end
-    end
-    return compatibility
   end
   
   def currently_running_same_task_nearby task_name
@@ -80,7 +65,11 @@ class Bot < ActiveRecord::Base
       end
     end
     # randomly chooses bot from pool and returns it
-    return currently_running[rand(0...currently_running.size)]
+    unless currently_running.empty?
+      return currently_running[rand(0...currently_running.size)]
+    else
+      return nil
+    end
   end
   
   # the next availbe bot for the given task
@@ -105,6 +94,41 @@ class Bot < ActiveRecord::Base
     return available
   end
   
+  # to determine parent compatibility
+  def determine_compatibility bot
+    # compatibility hash also contains the surname id
+    compatibility = { compatible: false, parent_id: nil, parent_tokens: nil }
+    if bot
+      # gets number occurance counts (gender) for both bots
+      self_count = self.gender; other_count = bot.gender
+      # puts both in array for number occurance comparison
+      both_counts = [self_count, other_count].sort
+      # checks the difference for number occurance
+      if (both_counts[0]...both_counts[1]).size >= 2 and not self.related? bot
+        compatibility[:compatible] = true
+        # sets parent_tokens here for easier access above
+        compatibility[:parent_tokens] = [self.unique_token, bot.unique_token].to_s
+        # the parent with the largest occurance of numbers
+        compatibility[:parent_id] = if self_count > other_count
+          self.id
+        else
+          bot.id
+        end
+      end
+    end
+    return compatibility
+  end
+  
+  def related? other_bot
+    related = false
+    [:children, :parents, :siblings].each do |sym|
+      if self.send(sym).include? other_bot
+        related = true
+      end
+    end
+    return related
+  end
+  
   def children
     _children = []
     for child in Bot.where.not(parent_tokens: nil)
@@ -121,11 +145,25 @@ class Bot < ActiveRecord::Base
     return _parents
   end
   
+  def siblings
+    _siblings = []
+    for parent in self.parents
+      for child in parent.children
+        unless _siblings.include? child or self.eql? child
+          _siblings << child
+        end
+      end
+    end
+    return _siblings
+  end
+  
   def mates
     _mates = []
     for child in self.children
       for parent in child.parents
-        _mates << parent unless self.eql? parent
+        unless _mates.include? parent or self.eql? parent
+          _mates << parent
+        end
       end
     end
     return _mates
