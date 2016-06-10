@@ -58,7 +58,7 @@ class Bot < ActiveRecord::Base
     on_page = []
     for bot in Bot.all
       task = bot.bot_tasks.find_by_name task_name
-      if task.page.eql? page.to_s
+      if task and task.page.eql? page.to_s
         on_page << bot
       end
     end
@@ -69,7 +69,7 @@ class Bot < ActiveRecord::Base
     idle = []
     for bot in Bot.all
       task = bot.bot_tasks.find_by_name task_name
-      unless task.page.present?
+      if task and not task.page.present?
         idle << bot
       end
     end
