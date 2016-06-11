@@ -18,6 +18,10 @@ module ApplicationHelper
     SecureRandom.urlsafe_base64.gsub(/[^0-9a-z]/i, '')
   end
   
+  def clean_a_token token
+    return token.gsub(/[^0-9a-z]/i, '')
+  end
+  
   def time_ago(_time_ago)
     _time_ago = _time_ago + " ago"
     if _time_ago.include? "about"
