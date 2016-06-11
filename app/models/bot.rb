@@ -37,17 +37,20 @@ class Bot < ActiveRecord::Base
             if compatibility[:compatible]
               parent_bot = Bot.find_by_id compatibility[:parent_id]
               # potential to spawn more than one child bot
-              rand(1..2).times do
-                # creates baby bot with tokens pointing back to both parents
-                baby_bot = parent_bot.bots.new parent_tokens: compatibility[:parent_tokens]
-                if baby_bot.save
-                  # starts baby bot off with same task
-                  baby_bot.bot_tasks.create name: "grow"
+              rand(1..compatibility[:difference]).times do
+                # creates child bot with tokens pointing back to both parents
+                child_bot = parent_bot.bots.new parent_tokens: compatibility[:parent_tokens]
+                if child_bot.save
+                  # starts child bot off with same task
+                  child_bot.bot_tasks.create name: "grow"
                   # doesn't get initialized to page until next refresh
                 end
               end
             end
           end
+        when :learn
+          bot = bot_pool.sample
+          # bot to start saving data within task attributes or some other model
         end
       end
     end
@@ -78,16 +81,19 @@ class Bot < ActiveRecord::Base
   
   # to determine parent compatibility
   def determine_compatibility bot
-    # compatibility hash also contains the surname id
-    compatibility = { compatible: false, parent_id: nil, parent_tokens: nil }
+    compatibility = { compatible: false }
     if bot
       # gets number occurance counts (gender) for both bots
       self_count = self.gender; other_count = bot.gender
       # puts both in array for number occurance comparison
       both_counts = [self_count, other_count].sort
-      # checks the difference for number occurance
-      if (both_counts[0]...both_counts[1]).size >= 2 and not self.related? bot
+      # sets the difference based on number occurance in tokens
+      difference = (both_counts[0]...both_counts[1]).size
+      # checks the difference and relation for compatibility
+      if difference >= 2 and not self.related? bot
         compatibility[:compatible] = true
+        # difference between will determine how many potential children
+        compatibility[:difference] = difference
         # sets parent_tokens here for easier access above
         compatibility[:parent_tokens] = [self.unique_token, bot.unique_token].to_s
         # the parent with the largest occurance of numbers
