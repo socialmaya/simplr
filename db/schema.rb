@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610040156) do
+ActiveRecord::Schema.define(version: 20160611231522) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -231,7 +231,6 @@ ActiveRecord::Schema.define(version: 20160610040156) do
     t.integer  "xp"
     t.boolean  "gatekeeper"
     t.datetime "last_active_at"
-    t.boolean  "bot"
   end
 
   create_table "views", force: :cascade do |t|
@@ -243,6 +242,7 @@ ActiveRecord::Schema.define(version: 20160610040156) do
     t.datetime "updated_at", null: false
     t.integer  "comment_id"
     t.integer  "profile_id"
+    t.string   "ip_address"
   end
 
 end

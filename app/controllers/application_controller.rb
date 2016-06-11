@@ -36,12 +36,15 @@ class ApplicationController < ActionController::Base
     end
     unless seen? item
       if current_user
+        # unless item is the current user or item is not a user at all and belongs to user
         unless current_user.eql? item or (!item.is_a? User and current_user.eql? item.user)
-          views.create user_id: current_user.id
+          views.create user_id: current_user.id, ip_address: request.remote_ip
         end
       else
-        # unless posted by current anon and item seen is not a user
-        views.create anon_token: anon_token unless !item.is_a? User and anon_token.eql? item.anon_token
+        # unless the 'non-User' item was posted by current anon
+        unless !item.is_a? User and anon_token.eql? item.anon_token
+          views.create anon_token: anon_token, ip_address: request.remote_ip
+        end
       end
     end
   end
