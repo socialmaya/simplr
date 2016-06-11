@@ -30,6 +30,9 @@ gem 'koala' # for facebook
 gem 'tumblr_client'
 gem 'twitter'
 
+# name generation
+gem 'name-generator'
+
 # machine learning
 # gem 'cabalist'
 

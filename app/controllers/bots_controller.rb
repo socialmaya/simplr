@@ -2,6 +2,7 @@ class BotsController < ApplicationController
   before_action :invite_only
   before_action :bots_to_404
   before_action :secure_bots
+  before_action :grow_bots, only: [:my_bots, :show]
   
   def destroy_all
     Bot.destroy_all
@@ -11,7 +12,6 @@ class BotsController < ApplicationController
   def my_bots
     @user = User.find_by_id params[:id]
     @bots = Bot.where(user_id: @user.id).reverse if @user
-    Bot.manifest_bots [:grow], { page: request.original_url }
   end
   
   def index
@@ -43,6 +43,10 @@ class BotsController < ApplicationController
   end
   
   private
+    def grow_bots
+      Bot.manifest_bots [:grow], { page: request.original_url }
+    end
+    
     def secure_bots
       redirect_to '/404' unless dev? or current_user.has_power?('create_bots')
     end

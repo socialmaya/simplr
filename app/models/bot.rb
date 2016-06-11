@@ -164,7 +164,8 @@ class Bot < ActiveRecord::Base
     # sets a generic bot name for bot unless named by user
     def gen_unique_bot_name
       unless self.name.present?
-        self.name = "bot_" + self.unique_token
+        name = $name_generator.next_name
+        self.name = "#{name}_" + self.unique_token
       end
     end
     

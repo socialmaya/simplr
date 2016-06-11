@@ -1,16 +1,5 @@
 <%= render "bots/card", bot: @bot %>
 
 <% for task in @tasks %>
-  <div class="card">
-    <div align="center">
-      <%= task.name %>
-      <% if task.page.present? %>
-        running at <%= link_to task.page do %>
-          <%= task.page %>
-        <% end %>
-      <% else %>
-        not yet started
-      <% end %>
-    </div>
-  </div>
+  <%= render "bot_tasks/card", task: task %>
 <% end %>

@@ -2,7 +2,7 @@
   <%= render "users/avatar_card_link", bot: bot %>
   <%= render "app/time_ago", item: bot %>
   <div align="center">
-    <%= link_to bot do %>
+    <%= link_to bot, title: bot.name do %>
       <p><%= bot.name %></p>
     <% end %>
     <p><%= "Description: " + bot.body if bot.body.present? %></p>
@@ -14,32 +14,16 @@
         <% end %>
       </p>
     <% end %>
-    <% unless bot.children.empty? %>
-      <p>
-        <%= label_tag "Babies:" %>
-        <% bot.children.each do |baby| %>
-          <%= link_to "baby_#{bot.children.index(baby)}", bot_path(baby),
-            title: baby.name %><%= ", " unless baby.eql? bot.children.last %>
-        <% end %>
-      </p>
-    <% end %>
-    <% unless bot.parents.empty? %>
-      <p>
-        <%= label_tag "Parents:" %>
-        <% bot.parents.each do |parent| %>
-          <%= link_to "parent_#{bot.parents.index(parent)}", bot_path(parent),
-            title: parent.name %><%= ", " unless parent.eql? bot.parents.last %>
-        <% end %>
-      </p>
-    <% end %>
-    <% unless bot.mates.empty? %>
-      <p>
-        <%= label_tag "Mates:" %>
-        <% bot.mates.each do |mate| %>
-          <%= link_to "mate_#{bot.mates.index(mate)}", bot_path(mate),
-            title: mate.name %><%= ", " unless mate.eql? bot.mates.last %>
-        <% end %>
-      </p>
+    <% [:children, :parents, :siblings, :mates].each do |sym| %>
+      <% unless bot.send(sym).empty? %>
+        <p>
+          <%= label_tag "#{sym.to_s.capitalize}:" %>
+          <% bot.send(sym).each do |_bot| %>
+            <%= link_to bot_nick_name(_bot.name), bot_path(_bot),
+              title: _bot.name %><%= ", " unless _bot.eql? bot.send(sym).last %>
+          <% end %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 </div>
