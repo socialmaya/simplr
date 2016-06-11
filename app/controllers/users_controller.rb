@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @preview_items = true
       @user = User.new
       # gets preview items for invitee
-      @items = Post.last(10).reverse
+      @items = Post.preview_posts.last(10).reverse
       # records user viewing posts
       @items.each {|item| seent item}
       # records current time for last visit

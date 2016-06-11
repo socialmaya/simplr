@@ -16,6 +16,16 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   
+  def self.preview_posts
+    posts = []
+    for group in Group.where(open: true)
+      for post in group.posts
+        posts << post
+      end
+    end
+    return posts.sort
+  end
+  
   def commenters
     _commenters = []
     for comment in self.comments
