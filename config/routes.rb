@@ -104,6 +104,7 @@ Rails.application.routes.draw do
   delete 'bots/destroy_all', as: 'destroy_all_bots'
   
   # proposals
+  get 'motions', to: 'proposals#index', as: 'proposals'
   get 'motion/:token', to: 'proposals#show', as: 'show_proposal'
   get 'proposals/:token/show_image', to: 'proposals#show_image', as: 'proposal_image'
   get 'proposals/switch_section/:section', to: 'proposals#switch_section', as: 'switch_section'
