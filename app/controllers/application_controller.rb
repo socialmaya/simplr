@@ -165,6 +165,10 @@ class ApplicationController < ActionController::Base
     return token
   end
   
+  def anrcho?
+    request.host.eql? "anrcho.com"
+  end
+  
   def invited?
     cookies[:invite_token].present? and Connection.find_by_unique_token(cookies[:invite_token]) or current_user
   end
