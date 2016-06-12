@@ -4,7 +4,7 @@ class View < ActiveRecord::Base
   belongs_to :post
   belongs_to :comment
   
-  def get_location
+  def get_locale
     ip = self.ip_address
     address = nil; locale = nil
     geoip = GeoIP.new('GeoLiteCity.dat').city(ip)

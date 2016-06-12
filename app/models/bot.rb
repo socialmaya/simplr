@@ -5,15 +5,15 @@ class Bot < ActiveRecord::Base
   has_many :bot_tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  
   before_create :gen_uniqueness
 
   mount_uploader :image, ImageUploader
   
   def self.manifest_bots tasks=[], items={}
     for task in tasks
-      # initializes any bots standing idle for task
-      Bot.idle_for_task(task).each do |bot|
+      # initializes some bots standing idle for task
+      idle_bots = Bot.idle_for_task(task)
+      idle_bots.sample(rand(1..idle_bots.size)).each do |bot|
         _task = bot.bot_tasks.find_by_name(task.to_s)
         _task.update page: items[:page].to_s if _task
       end
