@@ -7,8 +7,24 @@ class ApplicationController < ActionController::Base
     :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?,
     :invited?, :seen?, :seent, :get_site_title, :record_last_visit
   
+  include SimpleCaptcha::ControllerHelpers
+  
   # redirects to resume for I, Forrest Wilkins, the creator of this website
   before_action :forrest_to_resume, except: [:resume]
+  
+  # redirects to proposals index for anrcho.com
+  before_action :anrcho_to_proposals, except: [:index]
+  
+  def build_proposal_feed section, group=nil
+    reset_page; session[:current_proposal_section] = section.to_s
+    proposals = if group then group.proposals else Proposal.globals end
+    @all_items = proposals.send(section.to_sym).sort_by { |proposal| proposal.rank }
+    @char_codes = char_codes @all_items
+    @items = paginate @all_items
+    for item in @items
+      seent item
+    end
+  end
   
   def record_last_visit
     if current_user and (cookies[:last_active_at].nil? or cookies[:last_active_at].to_datetime < 1.hour.ago)
@@ -140,6 +156,7 @@ class ApplicationController < ActionController::Base
         cookies[:token_timestamp].to_datetime < 1.week.ago
         cookies.permanent[:token] = SecureRandom.urlsafe_base64
         cookies.permanent[:token_timestamp] = DateTime.current
+        cookies.permanent[:simple_captcha_validated] = ""
       end
       token = cookies[:token].to_s
     else
@@ -169,10 +186,15 @@ class ApplicationController < ActionController::Base
   end
   
   private
-  
-  def forrest_to_resume
-    if request.host.eql? 'forrestwilkins.com'
-      redirect_to resume_path
+    def anrcho_to_proposals
+      if request.host.eql? 'anrcho.com'
+        redirect_to proposals_path
+      end
     end
-  end
+    
+    def forrest_to_resume
+      if request.host.eql? 'forrestwilkins.com'
+        redirect_to resume_path
+      end
+    end
 end

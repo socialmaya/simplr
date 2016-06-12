@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611231522) do
+ActiveRecord::Schema.define(version: 20160612030028) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,11 +42,12 @@ ActiveRecord::Schema.define(version: 20160611231522) do
     t.integer  "post_id"
     t.integer  "comment_id"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "anon_token"
     t.string   "image"
     t.integer  "bot_id"
+    t.integer  "proposal_id"
   end
 
   create_table "connections", force: :cascade do |t|
@@ -155,6 +156,27 @@ ActiveRecord::Schema.define(version: 20160611231522) do
     t.boolean  "photoset"
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.string   "unique_token"
+    t.string   "anon_token"
+    t.string   "group_token"
+    t.integer  "group_id"
+    t.integer  "proposal_id"
+    t.string   "title"
+    t.text     "body"
+    t.string   "image"
+    t.string   "action"
+    t.string   "revised_action"
+    t.boolean  "ratified"
+    t.boolean  "requires_revision"
+    t.boolean  "revised"
+    t.integer  "version"
+    t.integer  "ratification_point"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "misc_data"
+  end
+
   create_table "secrets", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
@@ -186,10 +208,11 @@ ActiveRecord::Schema.define(version: 20160611231522) do
     t.integer  "group_id"
     t.integer  "comment_id"
     t.string   "tag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "anon_token"
     t.integer  "index"
+    t.integer  "proposal_id"
   end
 
   create_table "treasures", force: :cascade do |t|
@@ -238,11 +261,27 @@ ActiveRecord::Schema.define(version: 20160611231522) do
     t.string   "anon_token"
     t.integer  "group_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "comment_id"
     t.integer  "profile_id"
     t.string   "ip_address"
+    t.integer  "proposal_id"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "proposal_id"
+    t.integer  "comment_id"
+    t.integer  "vote_id"
+    t.string   "unique_token"
+    t.string   "anon_token"
+    t.text     "body"
+    t.string   "flip_state"
+    t.boolean  "verified"
+    t.integer  "proposal_version"
+    t.boolean  "moot"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end

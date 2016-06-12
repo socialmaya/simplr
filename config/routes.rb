@@ -102,6 +102,30 @@ Rails.application.routes.draw do
   get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
   get 'users/:id/my_bots', to: 'bots#my_bots', as: 'my_bots'
   delete 'bots/destroy_all', as: 'destroy_all_bots'
+  
+  # proposals
+  get 'motion/:token', to: 'proposals#show', as: 'show_proposal'
+  get 'proposals/:token/show_image', to: 'proposals#show_image', as: 'proposal_image'
+  get 'proposals/switch_section/:section', to: 'proposals#switch_section', as: 'switch_section'
+  get 'proposals/switch_sub_section/:section', to: 'proposals#switch_sub_section', as: 'switch_sub_section'
+  get 'history/:token', to: 'proposals#old_versions', as: 'old_versions'
+  get 'proposals/load_section_links', to: 'proposals#load_section_links'
+  get 'proposals/add_image', as: 'add_proposal_image'
+  post 'proposals/create', as: 'create_proposal'
+  
+  # votes
+  get 'vote/:token', to: 'votes#show', as: 'show_vote'
+  get 'for/:token', to: 'votes#new_up_vote', as: 'new_up_vote'
+  get 'against/:token', to: 'votes#new_down_vote', as: 'new_down_vote'
+  post 'votes/cast_up_vote', to: 'votes#cast_up_vote', as: 'cast_up_vote'
+  post 'votes/cast_down_vote', to: 'votes#cast_down_vote', as: 'cast_down_vote'
+  post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
+  get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
+  post 'votes/confirm_humanity', as: 'confirm_humanity'
+  
+  resources :proposals do
+    resources :comments
+  end
 
   resources :connections
   resources :messages

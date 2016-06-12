@@ -13,9 +13,11 @@ class Bot < ActiveRecord::Base
     for task in tasks
       # initializes some bots standing idle for task
       idle_bots = Bot.idle_for_task(task)
-      idle_bots.sample(rand(1..idle_bots.size)).each do |bot|
-        _task = bot.bot_tasks.find_by_name(task.to_s)
-        _task.update page: items[:page].to_s if _task
+      if idle_bots.present?
+        idle_bots.sample(rand(1..idle_bots.size)).each do |bot|
+          _task = bot.bot_tasks.find_by_name(task.to_s)
+          _task.update page: items[:page].to_s if _task
+        end
       end
       # if any bots are performing task on given page
       if BotTask.where(name: task, page: items[:page].to_s).present?

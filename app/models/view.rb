@@ -3,6 +3,7 @@ class View < ActiveRecord::Base
   belongs_to :group
   belongs_to :post
   belongs_to :comment
+  belongs_to :proposal
   
   def get_locale
     ip = self.ip_address

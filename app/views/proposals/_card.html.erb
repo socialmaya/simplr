@@ -1,0 +1,23 @@
+<div class="card" id="proposal_card_<%= proposal.id %>">
+	<div class="card_corner_cut_out"></div>
+  <%= render "proposals/time_ago", proposal: proposal %>
+  <!-- shows type of proposal to be motioned -->
+  <%= render "proposals/action_type", proposal: proposal %>
+  <!-- to be triggered when user casts the ending vote -->
+  <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
+  <%= render "proposals/ratification_glimmer", proposal: proposal %>
+  <%= render "users/avatar_card_link", token: proposal.anon_token %>
+  <%= render "proposals/seent", proposal: proposal %>
+  <%= render "proposals/history_icon_link", proposal: proposal %>
+  <div id="proposal_card_spacer"></div>
+  <div align="center">
+    <%= render "proposals/content", proposal: proposal %>
+	  <!-- anchor for reinserting the link table -->
+	  <div id="link_table_anchor_<%= proposal.id %>"></div>
+	  <!-- link table encapsulated as partial -->
+	  <%= render "proposals/link_table", proposal: proposal %>
+	  <!-- anchor for inserting new comment form -->
+	  <div id="new_form_anchor_<%= proposal.id %>"></div>
+  </div>
+</div>
+

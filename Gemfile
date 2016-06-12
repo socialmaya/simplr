@@ -33,6 +33,10 @@ gem 'twitter'
 # name generation
 gem 'name-generator'
 
+# passphrase generation
+gem 'phonetic_alphabet'
+gem 'passphrase'
+
 # machine learning
 # gem 'cabalist'
 
