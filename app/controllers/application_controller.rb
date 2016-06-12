@@ -191,7 +191,7 @@ class ApplicationController < ActionController::Base
   
   private
     def anrcho_to_proposals
-      if request.host.eql? 'anrcho.com' and request.original_url.size <= "https://anrcho.com/".size
+      if request.host.eql? 'anrcho.com' and request.original_url.count("/").eql? 2
         redirect_to proposals_path
       end
     end
