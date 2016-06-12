@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :anrcho?
+    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :anrcho?,
     :invited?, :seen?, :seent, :get_site_title, :record_last_visit
   
   include SimpleCaptcha::ControllerHelpers
