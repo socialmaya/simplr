@@ -24,9 +24,6 @@ class ProposalsController < ApplicationController
     if current_user
       cookies.delete(:auth_token)
     end
-    if cookies[:loads].to_i.zero?
-      # @loading = true
-    end
     build_feed :main
   end
   
