@@ -191,7 +191,8 @@ class ApplicationController < ActionController::Base
   
   private
     def anrcho_to_proposals
-      if request.host.eql? 'anrcho.com'
+      if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
+        cookies.permanent[:at_anrcho] = true.to_s
         redirect_to proposals_path
       end
     end
