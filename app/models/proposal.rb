@@ -27,7 +27,7 @@ class Proposal < ActiveRecord::Base
     elsif requires_revision?
       self.update requires_revision: true
       puts "\nProposal #{self.id} now requires revision."
-      Note.notify :proposal_blocked, self
+      Note.notify :proposal_blocked, self, self.anon_token
       return nil
     elsif self.revised
       puts "\nProposal #{self.id} has been deprecated."
@@ -39,7 +39,7 @@ class Proposal < ActiveRecord::Base
     if self.proposal
       case action.to_sym
       when :revision
-        Note.notify :proposal_revised, self
+        Note.notify :proposal_revised, self, self.anon_token
         new_version = self.proposal.dup
         new_version.assign_attributes({
           requires_revision: false,
@@ -58,22 +58,8 @@ class Proposal < ActiveRecord::Base
     # proposals to groups
     elsif self.group
       case action.to_sym
-      when :add_hashtags
-        Hashtag.add_from self.misc_data, self.group
-      when :add_locale
-        self.group.set_location self.misc_data
       when :disband_early
         self.group.destroy!
-      when :update_banner
-        Banner.create(
-          group_token: self.group.token,
-          image: self.image
-        )
-      when :update_manifesto
-        Manifesto.create(
-          group_token: self.group.token,
-          body: self.body
-        )
       when :postpone_expiration
         self.group.update expires_at: (Date.today + 14).to_s
       when :set_ratification_threshold
@@ -90,7 +76,7 @@ class Proposal < ActiveRecord::Base
       end
     end
     self.update ratified: true
-    Note.notify :ratified, self
+    Note.notify :ratified, self, self.anon_token
     puts "\nProposal #{self.id} has been ratified.\n"
   end
   
@@ -199,8 +185,8 @@ class Proposal < ActiveRecord::Base
   def old_versions
     versions = self.proposals.where.not(action: "revision").
       where("version < '#{ self.version.to_i }'").sort_by do |version|
-      version.version
-    end
+        version.version
+      end
     return versions
   end
   

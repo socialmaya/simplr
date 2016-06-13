@@ -16,7 +16,7 @@ class Vote < ActiveRecord::Base
   def could_be_reversed? token
     could_be = false
     if self.verified
-      unless (self.votes.find_by_anon_token token or self.proposal.token.eql? token)
+      unless (self.votes.find_by_anon_token token or self.proposal.anon_token.eql? token)
         could_be = true
       end
     end

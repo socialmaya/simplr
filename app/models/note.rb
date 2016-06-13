@@ -32,7 +32,13 @@ class Note < ActiveRecord::Base
       group_invite: "You've been invited to a group.",
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted.",
-      hype_received: "Someone sent you some H Y P E" }
+      hype_received: "Someone sent you some H Y P E",
+      # proposal notification actions
+      ratified: "Your proposal has been ratified.",
+      proposal_blocked: "Someone blocked your proposal.",
+      revision_submitted: "Someone proposed a revision to your proposal.",
+      proposal_revised: "Your proposal has been revised.",
+      commented_vote: "Someone commented on your vote." }
     return _actions[action.to_sym]
   end
   

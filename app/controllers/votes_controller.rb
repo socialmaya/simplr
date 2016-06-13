@@ -30,7 +30,7 @@ class VotesController < ApplicationController
   def reverse
     @vote = Vote.find_by_unique_token params[:token]
     if @vote.could_be_reversed? anon_token
-      @vote.votes.create flip_state: 'down', token: anon_token
+      @vote.votes.create flip_state: 'down', anon_token: anon_token
       if @vote.votes_to_reverse <= 0
         if @vote.up?
           @vote.proposal.update ratified: false
