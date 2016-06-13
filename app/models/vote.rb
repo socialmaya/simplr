@@ -13,10 +13,10 @@ class Vote < ActiveRecord::Base
     self.proposal.ratification_threshold - self.votes.where(flip_state: 'down').size
   end
   
-  def could_be_reversed? current_token
+  def could_be_reversed? token
     could_be = false
     if self.verified
-      unless (self.votes.find_by_token current_token or self.proposal.token.eql? current_token)
+      unless (self.votes.find_by_anon_token token or self.proposal.token.eql? token)
         could_be = true
       end
     end
@@ -27,7 +27,7 @@ class Vote < ActiveRecord::Base
     _verifiable = false
     unless self.verified
       if self.unique_token.present?
-        unless current_token.eql? self.token
+        unless current_token.eql? self.anon_token
           _verifiable = true
         end
       end
@@ -36,10 +36,10 @@ class Vote < ActiveRecord::Base
   end
   
   def self.up_vote obj, token, body=""
-    unless token.eql? obj.token
-      vote = obj.votes.find_by_token(token) if obj.votes.find_by_token(token)
+    unless token.eql? obj.anon_token
+      vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
       if not vote
-        vote = obj.votes.create flip_state: 'up', token: token, body: body
+        vote = obj.votes.create flip_state: 'up', anon_token: token, body: body
       else
         vote.body = body if body.present?
         vote.flip_state = 'up'
@@ -51,10 +51,10 @@ class Vote < ActiveRecord::Base
   end
   
   def self.down_vote obj, token, body=""
-    unless token.eql? obj.token
-      vote = obj.votes.find_by_token(token) if obj.votes.find_by_token(token)
+    unless token.eql? obj.anon_token
+      vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
       if not vote
-        vote = obj.votes.create flip_state: 'down', token: token, body: body
+        vote = obj.votes.create flip_state: 'down', anon_token: token, body: body
       else
         vote.body = body if body.present?
         vote.flip_state = 'down'

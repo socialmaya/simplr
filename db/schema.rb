@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612030028) do
+ActiveRecord::Schema.define(version: 20160613001954) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -202,6 +202,15 @@ ActiveRecord::Schema.define(version: 20160612030028) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "simple_captcha_data", force: :cascade do |t|
+    t.string   "key",        limit: 40
+    t.string   "value",      limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], name: "idx_key"
+
   create_table "tags", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -213,6 +222,7 @@ ActiveRecord::Schema.define(version: 20160612030028) do
     t.string   "anon_token"
     t.integer  "index"
     t.integer  "proposal_id"
+    t.integer  "vote_id"
   end
 
   create_table "treasures", force: :cascade do |t|

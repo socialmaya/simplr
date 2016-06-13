@@ -1,5 +1,3 @@
-<!-- votes -->
-
 <% unless votes.size.zero? %>
   <% path_to_proposal = show_proposal_path(token: @proposal.unique_token, votes: true) %>
   
@@ -21,10 +19,9 @@
     <div class="voter_tokens_container">
       <% for vote in votes.last 6 %>
         <div class="voter_token_container">
-          <%= render "token/avatar", token: vote.token %>
+          <%= render "users/anon_avatar", token: vote.anon_token %>
         </div>
       <% end %>
     </div>
   </div>
 <% end %>
-

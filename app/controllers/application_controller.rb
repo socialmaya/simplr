@@ -93,26 +93,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def get_location
-    address = nil; locale = nil
-    ip = request.remote_ip
-    geoip = GeoIP.new('GeoLiteCity.dat').city(ip)
-    if defined? geoip and geoip
-      if geoip.latitude and geoip.longitude
-        geocoder = Geocoder.search("#{geoip.latitude}, #{geoip.longitude}").first
-        if geocoder and geocoder.formatted_address
-          address = geocoder.formatted_address
-        end
-      end
-    end
-    locale = if address.present?
-      { address: address, lat: geoip.latitude, lon: geoip.longitude }
-    else
-      {}
-    end
-    return locale
-  end
-  
   def paginate items, _page_size=page_size
     return items.
       # drops first several posts if :feed_page

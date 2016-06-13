@@ -1,7 +1,7 @@
 <!-- proposals -->
 
 <div align="center" id="new_proposal_form">
-	<%= form_for @proposal do |f| %>
+	<%= form_for @proposal, url: create_proposal_path, method: :post do |f| %>
 		<%= hidden_field_tag :group_id, @group.id if @group %>
 		<script><%= render 'proposals/select_change.js', f_builder: f %></script>
 		<p>

@@ -25,3 +25,28 @@
   top: 5px;
   left: 38.5px;
 }
+
+.voter_token_container {
+  float: left;
+  align: center;
+  padding: 9.5px 9.5px 5px 7.5px;
+  background: black;
+  margin: 5px 5px;
+}
+
+.voter_tokens_container {
+  float: left;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.voter_tokens_label {
+  position: absolute;
+  top: 2.5px;
+  left: 5px;
+  font-size: 11px;
+}
+
+#voter_links_card {
+  min-height: 60px;
+}
