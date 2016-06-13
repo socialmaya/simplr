@@ -52,4 +52,9 @@ class Group < ActiveRecord::Base
   def requests
     self.connections.requests
   end
+  
+  private
+    def gen_unique_token
+      self.unique_token = SecureRandom.urlsafe_base64
+    end
 end

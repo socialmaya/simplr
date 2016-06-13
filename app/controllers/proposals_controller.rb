@@ -91,7 +91,7 @@ class ProposalsController < ApplicationController
   
   # Proposal sections: :voting, :revision, :ratified
   def switch_section
-    @group = Group.find_by_token params[:group_token]
+    @group = Group.where.not(unique_token: nil).find_by_unique_token params[:group_token]
     build_feed params[:section], @group
   end
   
@@ -101,30 +101,29 @@ class ProposalsController < ApplicationController
   end
   
   private
-  
-  def build_feed section, group=nil
-    build_proposal_feed section, group
-  end
-  
-  def build_action
-    action = params[:proposal][:action]
-    action = params[:proposal_action] unless action.present?
-    case (action.present? ? action : "").to_sym
-    when :add_locale, :meetup
-      @proposal.misc_data = request.remote_ip.to_s
-    when :revision
-      @proposal.action = "revision"
-      @proposal.proposal_id = params[:proposal_id]
-      @proposal.revised_action = params[:revised_action]
-      @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
+    def build_feed section, group=nil
+      build_proposal_feed section, group
     end
-  end
-  
-  def proposal_params
-    params[:proposal].permit(:title, :body, :action, :image, :misc_data)
-  end
-  
-  def bots_to_404
-    redirect_to '/404' if request.bot?
-  end
+    
+    def build_action
+      action = params[:proposal][:action]
+      action = params[:proposal_action] unless action.present?
+      case (action.present? ? action : "").to_sym
+      when :add_locale, :meetup
+        @proposal.misc_data = request.remote_ip.to_s
+      when :revision
+        @proposal.action = "revision"
+        @proposal.proposal_id = params[:proposal_id]
+        @proposal.revised_action = params[:revised_action]
+        @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
+      end
+    end
+    
+    def proposal_params
+      params[:proposal].permit(:title, :body, :action, :image, :misc_data)
+    end
+    
+    def bots_to_404
+      redirect_to '/404' if request.bot?
+    end
 end

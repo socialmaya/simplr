@@ -205,8 +205,7 @@ class Proposal < ActiveRecord::Base
   end
   
   private
-  
-  def gen_unique_token
-    self.unique_token = SecureRandom.urlsafe_base64
-  end
+    def gen_unique_token
+      self.unique_token = SecureRandom.urlsafe_base64
+    end
 end
