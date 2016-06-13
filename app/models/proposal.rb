@@ -27,7 +27,7 @@ class Proposal < ActiveRecord::Base
     elsif requires_revision?
       self.update requires_revision: true
       puts "\nProposal #{self.id} now requires revision."
-      Note.notify :proposal_blocked, self, self.anon_token
+      Note.notify :proposal_blocked, self.unique_token, self.anon_token
       return nil
     elsif self.revised
       puts "\nProposal #{self.id} has been deprecated."
@@ -39,7 +39,7 @@ class Proposal < ActiveRecord::Base
     if self.proposal
       case action.to_sym
       when :revision
-        Note.notify :proposal_revised, self, self.anon_token
+        Note.notify :proposal_revised, self.unique_token, self.anon_token
         new_version = self.proposal.dup
         new_version.assign_attributes({
           requires_revision: false,
@@ -71,12 +71,11 @@ class Proposal < ActiveRecord::Base
     else
       case action.to_sym
       when :update_manifesto
-        Manifesto.create body: self.body
       when :meetup
       end
     end
     self.update ratified: true
-    Note.notify :ratified, self, self.anon_token
+    Note.notify :ratified, self.unique_token, self.anon_token
     puts "\nProposal #{self.id} has been ratified.\n"
   end
   

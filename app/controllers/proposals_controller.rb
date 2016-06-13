@@ -41,7 +41,7 @@ class ProposalsController < ApplicationController
     if @proposal.save
       Tag.extract @proposal
       if @proposal.proposal
-        Note.notify :revision_submitted, @proposal.proposal
+        Note.notify :revision_submitted, @proposal.proposal.unique_token
         redirect_to show_proposal_path(token: @proposal.proposal.unique_token, revisions: true)
       elsif @proposal.group
         redirect_to group_path(@proposal.group.token)
