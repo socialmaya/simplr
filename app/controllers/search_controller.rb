@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_action :invite_only
+  before_action :secure_search
   
   def toggle_dropdown
     @tags = Tag.trending
@@ -93,8 +93,8 @@ class SearchController < ApplicationController
       return match
     end
     
-    def invite_only
-      unless invited?
+    def secure_search
+      unless invited? or anrcho?
         redirect_to invite_only_path
       end
     end
