@@ -39,9 +39,6 @@ class ProposalsController < ApplicationController
     @proposal.anon_token = anon_token
     build_action
     if @proposal.save
-      if params[:local]
-        set_location @proposal
-      end
       Tag.extract @proposal
       if @proposal.proposal
         Note.notify :revision_submitted, @proposal.proposal

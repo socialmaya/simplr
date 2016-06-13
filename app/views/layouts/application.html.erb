@@ -5,6 +5,13 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    
+    <% if request.host.eql? "anrcho.com" or cookies[:at_anrcho] %>
+      <%= favicon_link_tag "favicons/anrcho.ico" %>
+    <% else %>
+      <%= favicon_link_tag "favicons/social_maya.ico" %>
+    <% end %>
+    
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
   <body>
