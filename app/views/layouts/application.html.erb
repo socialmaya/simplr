@@ -8,6 +8,8 @@
     
     <% if request.host.eql? "anrcho.com" or cookies[:at_anrcho] %>
       <%= favicon_link_tag "favicons/anrcho.ico" %>
+    <% elsif request.host.eql? "forrestwilkins.com" %>
+      <%= favicon_link_tag "favicons/glitch_om.ico" %>
     <% else %>
       <%= favicon_link_tag "favicons/social_maya.ico" %>
     <% end %>
