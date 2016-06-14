@@ -34,13 +34,15 @@ class ApplicationController < ActionController::Base
   end
   
   def get_site_title
-    case request.host
-    when 'forrestwilkins.com'
-      'Forrest Wilkins'
-    when 'anrcho.com'
+    if anrcho?
       'Anrcho'
     else
-      'Social Maya'
+      case request.host
+      when 'forrestwilkins.com'
+        'Forrest Wilkins'
+      else
+        'Social Maya'
+      end
     end
   end
     

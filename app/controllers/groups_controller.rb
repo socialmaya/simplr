@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
-  before_action :invite_only
+  before_action :invite_only, except: [:new, :create, :show]
+  before_action :invited_or_anrcho, only: [:new, :create, :show]
   
   def hide_featured_groups
     cookies.permanent[:hide_featured_groups] = true
@@ -95,6 +96,12 @@ class GroupsController < ApplicationController
   end
 
   private
+    def invited_or_anrcho
+      unless invited? or anrcho?
+        redirect_to invite_only_path
+      end
+    end
+    
     def invite_only
       unless invited?
         redirect_to invite_only_path

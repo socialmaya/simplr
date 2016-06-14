@@ -3,9 +3,9 @@ class Vote < ActiveRecord::Base
   belongs_to :comment
   belongs_to :vote
   
+  has_many :comments
   has_many :votes
   has_many :tags
-  has_many :comments
   
   before_create :gen_unique_token
   

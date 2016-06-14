@@ -1,7 +1,7 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
-  before_action :invite_only, except: [:backdoor, :invite_only_message, :redeem_invite]
+  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite]
   before_action :user_access, only: [:invites, :followers]
   before_action :bots_to_404
   
