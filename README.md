@@ -6,7 +6,7 @@ And there are rumors, murmurs of hidden treasure, of secret magic and powers to 
 
 Beware, for there are also digital life-forms now inhabiting the site and they will spy on you.
 
-Anrcho is now being hosted from within Social Maya at https://anrcho.com.
+Anrcho is now being hosted from within Social Maya, at https://anrcho.com, no invite necessary.
 
 Social Maya is free and open source software, as specified above by the GNU General Public License.
 
