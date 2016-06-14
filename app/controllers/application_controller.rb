@@ -146,7 +146,7 @@ class ApplicationController < ActionController::Base
   end
   
   def anrcho?
-    request.host.eql? "anrcho.com"
+    request.host.eql? "anrcho.com" or cookies[:at_anrcho].present?
   end
   
   def invited?

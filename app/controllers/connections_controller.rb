@@ -48,8 +48,7 @@ class ConnectionsController < ApplicationController
   end
   
   def invite_only_message
-    # never shows invite only message for anrcho users
-    if request.host.eql? 'anrcho.com' and cookies[:at_anrcho].present?
+    if anrcho?
       redirect_to proposals_path
     end
   end
