@@ -6,7 +6,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     
-    <% if request.host.eql? "anrcho.com" or cookies[:at_anrcho] %>
+    <% if anrcho? %>
       <%= favicon_link_tag "favicons/anrcho.ico" %>
     <% elsif request.host.eql? "forrestwilkins.com" %>
       <%= favicon_link_tag "favicons/glitch_om.ico" %>
