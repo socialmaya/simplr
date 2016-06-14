@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613201502) do
+ActiveRecord::Schema.define(version: 20160614052224) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -151,13 +151,14 @@ ActiveRecord::Schema.define(version: 20160613201502) do
     t.integer  "user_id"
     t.text     "body"
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "anon_token"
     t.integer  "group_id"
     t.integer  "original_id"
     t.boolean  "hidden"
     t.boolean  "photoset"
+    t.string   "unique_token"
   end
 
   create_table "proposals", force: :cascade do |t|
