@@ -19,24 +19,21 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
   
-  # GET /groups
-  # GET /groups.json
   def index
     @groups = Group.global.reverse
   end
 
-  # GET /groups/1
-  # GET /groups/1.json
   def show
     if @group
       @group_shown = true
-      # reset_page
-      # @all_items = @group.posts.reverse
-      @items = @group.posts.last(10).reverse
-      # @char_codes = char_codes @items
-      @post = Post.new
-      # records posts being seen
-      @items.each {|item| seent item}
+      unless anrcho?
+        @items = @group.posts.last(10).reverse
+        @post = Post.new
+        # records posts being seen
+        @items.each {|item| seent item}
+      else    
+        build_proposal_feed :all, @group
+      end
       # records group being seen
       seent @group
     else
@@ -44,18 +41,14 @@ class GroupsController < ApplicationController
     end
   end
 
-  # GET /groups/new
   def new
     @group = Group.new
   end
 
-  # GET /groups/1/edit
   def edit
     @editing = true
   end
 
-  # POST /groups
-  # POST /groups.json
   def create
     @group = Group.new(group_params)
     if current_user
@@ -73,8 +66,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /groups/1
-  # PATCH/PUT /groups/1.json
   def update
     respond_to do |format|
       if @group.update(group_params)
@@ -86,8 +77,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # DELETE /groups/1
-  # DELETE /groups/1.json
   def destroy
     @group.destroy
     respond_to do |format|

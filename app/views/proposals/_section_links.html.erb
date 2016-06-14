@@ -1,6 +1,6 @@
 <!-- proposals -->
 
-<% group_token = @group ? @group.token : nil %>
+<% group_token = @group ? @group.unique_token : nil %>
 
 <script>
   <%= render "proposals/fader.js" %>

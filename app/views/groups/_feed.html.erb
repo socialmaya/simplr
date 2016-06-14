@@ -1,7 +1,5 @@
-<!-- groups -->
-
-<% @items.each do |post| %>
-  <%= render "posts/card", post: post %>
+<% @items.each do |item| %>
+  <%= render "#{item.class.to_s.downcase.pluralize}/card", item.class.to_s.downcase.to_sym => item %>
 <% end %>
 
 <% unless @items.size < page_size %>
