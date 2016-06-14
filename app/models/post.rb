@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   
   accepts_nested_attributes_for :pictures
   
+  before_create :gen_unique_token
+  
   validate :text_or_image?, on: :create
   
   mount_uploader :image, ImageUploader
@@ -45,13 +47,16 @@ class Post < ActiveRecord::Base
   end
   
   private
-  
-  def text_or_image?
-    if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
-      unless original_id and (body.present? or (Post.find_by_id(original_id) \
-        and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
-        errors.add(:post, "cannot be empty.")
+    def gen_unique_token
+      self.unique_token = SecureRandom.urlsafe_base64
+    end
+    
+    def text_or_image?
+      if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
+        unless original_id and (body.present? or (Post.find_by_id(original_id) \
+          and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
+          errors.add(:post, "cannot be empty.")
+        end
       end
     end
-  end
 end

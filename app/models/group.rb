@@ -10,9 +10,12 @@ class Group < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :treasures
   
-  validates_uniqueness_of :name
+  before_create :gen_unique_token
 
   mount_uploader :image, ImageUploader
+  
+  scope :global, -> { where.not(name: nil).where anon_token: nil }
+  scope :anrcho, -> { where.not(anon_token: nil).where name: nil }
   
   def active_chat?
     self.messages.present? and self.messages.last.created_at > 5.minute.ago

@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all.reverse
+    @groups = Group.global.reverse
   end
 
   # GET /groups/1

@@ -47,7 +47,7 @@ class ProposalsController < ApplicationController
         Note.notify :revision_submitted, @proposal.proposal.unique_token
         redirect_to show_proposal_path(token: @proposal.proposal.unique_token, revisions: true)
       elsif @proposal.group
-        redirect_to group_path(@proposal.group.token)
+        redirect_to group_path(@proposal.group)
       else
         redirect_to proposals_path
       end
