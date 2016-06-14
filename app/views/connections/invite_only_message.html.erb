@@ -2,6 +2,10 @@
   <%= render "app/bg_fader.js" %>
 </script>
 
+<script>
+  <%= render "app/fader.js", target: "invite_only_header", target_id: "" %>
+</script>
+
 <h2 id="invite_only_header">
   Social Maya is invite-only <i class="fa fa-warning"></i>
 </h2>
@@ -14,7 +18,12 @@
 
 <%= render "sessions/form" %>
 
-<script>
-  <%= render "app/fader.js", target: "invite_only_header", target_id: "" %>
-</script>
+<div class="dark_card">
+  <p class="justified_body_text" align="center">
+    Haven't been invited yet? Try <%= link_to "Anrcho.com", "https://anrcho.com", id: :anrcho_link_text, title: "Anrcho - Change the World Securely" %> instead and change the world securely with local comrades. Anrcho is designed to help people organize through consensus, on a peer to peer basis, and without hierarchy.
+  </p>
+</div>
 
+<script>
+  <%= render "app/fader.js", target: "anrcho_link_text", target_id: "" %>
+</script>
