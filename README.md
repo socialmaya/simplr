@@ -4,6 +4,10 @@ Social Maya is a social network with simplicity and exclusivity as it's core val
 
 And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 
+Beware, for there are also digital life-forms now inhabiting the site and they will spy on you.
+
+Anrcho is now being hosted from within Social Maya at https://anrcho.com.
+
 Social Maya is free and open source software, as specified above by the GNU General Public License.
 
 ## Setting up Social Maya server
