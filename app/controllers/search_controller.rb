@@ -13,7 +13,15 @@ class SearchController < ApplicationController
       @result_types = { group: 0, user: 0, bot: 0, post: 0, proposal: 0, comment: 0 }
       # loops through each model and through each item in each model
       [Group, User, Bot, Post, Proposal, Comment].each do |_class|
-        _class.all.reverse.each do |item|
+        # accounts for difference in groups for anrcho
+        all_items = if anrcho? and _class.eql? Group
+          Group.anrcho
+        elsif _class.eql? Group
+          Group.global
+        else
+          _class.all
+        end
+        all_items.reverse.each do |item|
           match = false; match_by_tag = false
           # scans all text for query
           match = true if scan_text item, @query

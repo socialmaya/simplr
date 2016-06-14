@@ -16,7 +16,9 @@
 <% for item in @results %>
 	<% if item.present? and item.class.present? %>
 		<% _class = item.class.to_s.downcase %>
-		<%= render "#{_class.pluralize}/card", _class.to_sym => item %>
+		<!-- accounts for groups created from anrcho -->
+		<%= render "#{_class.pluralize}/#{item.is_a? Group and item.anon_token.present? ? 'anrcho_card' : 'card'}",
+		  _class.to_sym => item %>
 	<% end %>
 <% end %>
 

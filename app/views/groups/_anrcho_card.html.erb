@@ -3,7 +3,7 @@
   <%= render "app/time_ago", item: group %>
   <%= render "app/seent", item: group %>
 	<div align="center">
-		<% group_link_path = @group_shown ? search_path(query: group.unique_token) : group_path(group.unique_token) %>
+		<% group_link_path = @group_shown ? search_path(query: group.unique_token) : group_path(group) %>
 		<p><%= link_to "Group #{group.unique_token}", group_link_path %></p>
 		
 		<% if group.body.present? %>
