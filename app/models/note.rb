@@ -45,6 +45,6 @@ class Note < ActiveRecord::Base
   private
   
   def write_message
-    self.message = self.action_text self.action if self.action.present?
+    self.message = self.action_text self.action
   end
 end
