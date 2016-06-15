@@ -55,6 +55,7 @@ class ProposalsController < ApplicationController
   def show
     @group = @proposal.group if @proposal
     if @proposal
+      Note.create message: "Request protocol: #{request.protocol}"
       @proposal_shown = true
       seent @proposal
       
