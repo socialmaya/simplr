@@ -1,23 +1,16 @@
 class ProposalsController < ApplicationController
+  before_filter :set_proposal, only: [:old_versions, :show]
   before_filter :bots_to_404
   
   def tutorial
   end
   
   def old_versions
-    @proposal = Proposal.find_by_unique_token params[:token]
     @old_versions = @proposal.old_versions
   end
   
   def load_section_links
     @group = Group.find_by_token(params[:group_token])
-  end
-  
-  def show_image
-    @proposal = Proposal.find_by_unique_token params[:token]
-    unless @proposal
-      redirect_to '/404'
-    end
   end
   
   def add_image
@@ -50,7 +43,7 @@ class ProposalsController < ApplicationController
         Note.notify :revision_submitted, @proposal.proposal.unique_token
         redirect_to show_proposal_path(token: @proposal.proposal.unique_token, revisions: true)
       elsif @proposal.group
-        redirect_to group_path(@proposal.group)
+        redirect_to show_group_path(@proposal.group.unique_token)
       else
         redirect_to proposals_path
       end
@@ -60,7 +53,6 @@ class ProposalsController < ApplicationController
   end
   
   def show
-    @proposal = Proposal.find_by_unique_token(params[:token])
     @group = @proposal.group if @proposal
     if @proposal
       @proposal_shown = true
@@ -107,6 +99,10 @@ class ProposalsController < ApplicationController
   end
   
   private
+    def set_proposal
+      @proposal = Proposal.find_by_unique_token(params[:token])
+    end
+    
     def build_feed section, group=nil
       build_proposal_feed section, group
     end

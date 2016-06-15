@@ -1,6 +1,6 @@
 <div class="card" id="proposal_card_<%= proposal.id %>">
 	<div class="card_corner_cut_out"></div>
-  <%= render "app/time_ago", item: proposal %>
+  <%= render "proposals/time_ago", item: proposal %>
   <!-- shows type of proposal to be motioned -->
   <%= render "proposals/action_type", proposal: proposal %>
   <!-- to be triggered when user casts the ending vote -->

@@ -31,8 +31,13 @@ class GroupsController < ApplicationController
         @post = Post.new
         # records posts being seen
         @items.each {|item| seent item}
-      else    
-        build_proposal_feed :all, @group
+      else
+        # only goes to anrcho groups if token used
+        if params[:token].present?
+          build_proposal_feed :all, @group
+        else
+          redirect_to '/404'
+        end
       end
       # records group being seen
       seent @group
@@ -56,13 +61,16 @@ class GroupsController < ApplicationController
     else
       @group.anon_token = anon_token
     end
-    respond_to do |format|
-      if @group.save
-        Tag.extract @group
-        format.html { redirect_to @group }
+    if @group.save
+      Tag.extract @group
+      if @group.anon_token
+        # goes to anrcho group if anon_token present
+        redirect_to show_group_path(@group.unique_token)
       else
-        format.html { render :new }
+        redirect_to @group
       end
+    else
+      render :new
     end
   end
 
@@ -70,9 +78,9 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update(group_params)
         Tag.extract @group
-        format.html { redirect_to @group }
+        redirect_to @group
       else
-        format.html { render :edit }
+        render :edit
       end
     end
   end
@@ -113,7 +121,9 @@ class GroupsController < ApplicationController
     
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.find_by_id(params[:id])
+      # sets group with token for anrcho groups
+      @group ||= Group.find_by_unique_token(params[:token])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

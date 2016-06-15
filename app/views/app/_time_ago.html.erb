@@ -8,6 +8,7 @@
 
 <% _time_ago = time_label + _time_ago if defined?(time_label) %>
 
-<%= link_to item, class: link_class do %>
+<!-- Accounts for anrcho groups and uses token link instead -->
+<%= link_to (anrcho? and item.is_a?(Group) ? show_group_path(item.unique_token) : item), class: link_class do %>
   <strong><%= _time_ago %></strong>
 <% end %>
