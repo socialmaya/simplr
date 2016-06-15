@@ -1,8 +1,8 @@
+# to ensure that all helper calls actually reflect the use of OpenSSL
+Rails.application.routes.default_url_options[:protocol] = 'https'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  
-  # to ensure that all helper calls actually reflect the use of OpenSSL
-  config.force_ssl = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
