@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
   # redirects to proposals index for anrcho.com
   before_action :anrcho_to_proposals, except: [:index]
   
+  # to ensure that all helper calls actually reflect the use of OpenSSL
+  def default_url_options(options={})
+    options.merge({ protocol: 'https' })
+  end
+  
   def build_proposal_feed section, group=nil
     reset_page; session[:current_proposal_section] = section.to_s
     proposals = if group then group.proposals else Proposal.globals end

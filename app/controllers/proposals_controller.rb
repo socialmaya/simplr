@@ -55,6 +55,7 @@ class ProposalsController < ApplicationController
   def show
     @group = @proposal.group if @proposal
     if @proposal
+      puts "\nRequest protocol: #{request.protocol}\n"
       @proposal_shown = true
       seent @proposal
       
