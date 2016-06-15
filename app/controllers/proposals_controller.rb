@@ -1,6 +1,9 @@
 class ProposalsController < ApplicationController
   before_filter :bots_to_404
   
+  def tutorial
+  end
+  
   def old_versions
     @proposal = Proposal.find_by_unique_token params[:token]
     @old_versions = @proposal.old_versions

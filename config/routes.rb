@@ -104,15 +104,16 @@ Rails.application.routes.draw do
   delete 'bots/destroy_all', as: 'destroy_all_bots'
   
   # proposals
+  get 'tutorial', to: 'proposals#tutorial', as: 'tutorial'
   get 'motions', to: 'proposals#index', as: 'proposals'
-  get 'motion/:token', to: 'proposals#show', as: 'show_proposal'
-  get 'proposals/:token/show_image', to: 'proposals#show_image', as: 'proposal_image'
-  get 'proposals/switch_section/:section', to: 'proposals#switch_section', as: 'switch_section'
-  get 'proposals/switch_sub_section/:section', to: 'proposals#switch_sub_section', as: 'switch_sub_section'
+  get 'motions/:token', to: 'proposals#show', as: 'show_proposal'
+  get 'motions/:token/show_image', to: 'proposals#show_image', as: 'proposal_image'
+  get 'motions/switch_section/:section', to: 'proposals#switch_section', as: 'switch_section'
+  get 'motions/switch_sub_section/:section', to: 'proposals#switch_sub_section', as: 'switch_sub_section'
   get 'history/:token', to: 'proposals#old_versions', as: 'old_versions'
-  get 'proposals/load_section_links', to: 'proposals#load_section_links'
-  get 'proposals/add_image', as: 'add_proposal_image'
-  post 'proposals/create', as: 'create_proposal'
+  get 'motions/load_section_links', to: 'proposals#load_section_links'
+  get 'motions/add_image', to: 'proposals#add_image', as: 'add_proposal_image'
+  post 'motions/create', to: 'proposals#create', as: 'create_proposal'
   
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
