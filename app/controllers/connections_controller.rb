@@ -32,7 +32,7 @@ class ConnectionsController < ApplicationController
     redirect_to '/404' if invited?
     # for one-use password invites
     if params[:password].present?
-      @invite = Connection.find_by_invite_password params[:password] if params[:password]
+      @invite = Connection.where(invite_password: params[:password]).last if params[:password]
     # for initializing web server with dev at start up
     elsif (Connection.all.size + User.all.size).zero?
       @invite = Connection.create invite: true, grant_dev_access: true
