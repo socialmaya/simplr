@@ -26,6 +26,7 @@ class Group < ActiveRecord::Base
     if (self.expires_at.nil? and self.created_at.to_date < 1.week.ago) \
       or (self.expires_at.present? and self.expires_at.to_date.eql? Date.today) \
       or (self.view_limit.present? and self.views.size >= self.view_limit)
+      self.destroy!
       return true
     else
       return false

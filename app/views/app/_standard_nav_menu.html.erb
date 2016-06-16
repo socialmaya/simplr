@@ -14,14 +14,14 @@
 	
 	<%= link_to fa_icon("search", "Search"), search_path, class: :standard_nav_menu_link,
 	  title: "Search for groups, users, posts, comments, etc." %>
+	  
+  <%= link_to fa_icon("cubes", "Groups"), (anrcho? ? my_anon_groups_path : my_groups_path),
+    class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
 	
 	<% if anrcho? %>
 	  <%= link_to fa_icon("question-circle", "How the Site Works"), tutorial_path, class: :standard_nav_menu_link,
 	    title: "Click here to see how the site works." %>
 	<% else %>
-	  <%= link_to fa_icon("cubes", "Groups"), my_groups_path, class: :standard_nav_menu_link,
-	    title: "Click to see all of the groups you're in." %>
-	
 	  <% unless current_user %>
     	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, class: :standard_nav_menu_link,
     	  title: "Click here to sign up and see way less ads." %>

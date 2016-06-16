@@ -59,8 +59,8 @@ class ApplicationController < ActionController::Base
           views.create user_id: current_user.id, ip_address: request.remote_ip
         end
       else
-        # unless the 'non-User' item was posted by current anon
-        unless !item.is_a? User and anon_token.eql? item.anon_token
+        # unless the non-user, non-group item was posted by current anon
+        unless !item.is_a? User and !item.is_a? Group and anon_token.eql? item.anon_token
           views.create anon_token: anon_token, ip_address: request.remote_ip
         end
       end

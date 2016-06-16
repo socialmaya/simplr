@@ -2,8 +2,9 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
-  before_action :invite_only, except: [:new, :create, :show]
+  before_action :invite_only, except: [:new, :create, :show, :my_anon_groups]
   before_action :invited_or_anrcho, only: [:new, :create, :show]
+  before_action :anrcho_only, only: [:my_anon_groups]
   
   def hide_featured_groups
     cookies.permanent[:hide_featured_groups] = true
@@ -17,6 +18,20 @@ class GroupsController < ApplicationController
 
   def my_groups
     @group = Group.new
+  end
+  
+  def my_anon_groups
+    unless current_user
+      Group.delete_all_old
+      # a list of all groups viewed so far
+      views = View.where(anon_token: anon_token).where.not(group_id: nil)
+      @groups = []; for view in views
+        if view.group and view.group.anon_token and not view.group.expires?
+          @groups << view.group unless @groups.include? view.group
+        end
+      end
+      @groups.reverse!
+    end
   end
   
   def index
@@ -33,8 +48,8 @@ class GroupsController < ApplicationController
         @items.each {|item| seent item}
       else
         Group.delete_all_old
-        # only goes to anrcho groups if token used
-        if params[:token].present?
+        # only goes to anrcho groups if token used and not expired
+        if @group and params[:token].present? and not @group.expires?
           build_proposal_feed :all, @group
         else
           redirect_to '/404'
@@ -94,6 +109,12 @@ class GroupsController < ApplicationController
   end
 
   private
+    def anrcho_only
+      unless anrcho?
+        redirect_to '/404'
+      end
+    end
+    
     def invited_or_anrcho
       unless invited? or anrcho?
         redirect_to invite_only_path
