@@ -1,6 +1,6 @@
 ## Social Maya ॐ
 
-Social Maya is a social network with simplicity and exclusivity as it's core values.
+Social Maya is a social network designed to connect creatives and intellectuals.
 
 And there are rumors, murmurs of hidden treasure, of secret magic and powers to be won.
 

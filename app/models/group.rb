@@ -10,12 +10,27 @@ class Group < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :treasures
   
-  before_create :gen_unique_token
+  before_create :gen_unique_token, :gen_passphrase
 
   mount_uploader :image, ImageUploader
   
   scope :global, -> { where.not(name: nil).where anon_token: nil }
   scope :anrcho, -> { where.not(anon_token: nil).where name: nil }
+  
+  def self.delete_all_old
+    # ephemerality for all anrcho groups
+    anrcho.delete_all "created_at < '#{1.week.ago}'"
+  end
+  
+  def expires?
+    if (self.expires_at.nil? and self.created_at.to_date < 1.week.ago) \
+      or (self.expires_at.present? and self.expires_at.to_date.eql? Date.today) \
+      or (self.view_limit.present? and self.views.size >= self.view_limit)
+      return true
+    else
+      return false
+    end
+  end
   
   def active_chat?
     self.messages.present? and self.messages.last.created_at > 5.minute.ago
@@ -57,6 +72,15 @@ class Group < ActiveRecord::Base
   end
   
   private
+    def gen_passphrase
+      if self.pass_protected
+        pass = Passphrase::Passphrase.new(
+          number_of_words: 1, languages: ["english"]
+        ); pass = pass.passphrase.to_s.to_p
+        self.passphrase = pass
+      end
+    end
+    
     def gen_unique_token
       self.unique_token = SecureRandom.urlsafe_base64
     end

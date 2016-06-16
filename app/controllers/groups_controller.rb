@@ -32,6 +32,7 @@ class GroupsController < ApplicationController
         # records posts being seen
         @items.each {|item| seent item}
       else
+        Group.delete_all_old
         # only goes to anrcho groups if token used
         if params[:token].present?
           build_proposal_feed :all, @group
