@@ -109,6 +109,11 @@ class Bot < ActiveRecord::Base
     return compatibility
   end
   
+  def old?
+    # old if older than a certain percentage of population
+    true
+  end
+  
   def related? other_bot
     related = false
     [:children, :parents, :siblings].each do |sym|

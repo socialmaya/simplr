@@ -4,7 +4,8 @@
     <% for bot in bots.sample(rand(1..bots.size)) %>
       <% unless @bot_pool.include? bot; @bot_pool << bot %>
         <%= link_to bot_path(bot), title: bot.name do %>
-          <div class="growing_bot_pixel" id="bot_pixel_<%= clean_a_token bot.unique_token %>"
+          <div class="<%= bot.old? ? 'old_' : nil %>growing_bot_pixel"
+            id="bot_pixel_<%= clean_a_token bot.unique_token %>"
             style="top:<%= rand 1..100 %>%;left:<%= rand 1..100 %>%;">
           </div>
         <% end %>

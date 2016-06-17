@@ -7,5 +7,13 @@
   width: 1.5px;
   height: 1.5px;
   background: green;
+}
+
+.old_growing_bot_pixel {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background: green;
+  opacity: 0.5;
   z-index: 0;
 }
