@@ -2,6 +2,9 @@ class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show]
   before_filter :bots_to_404
   
+  def contributors
+  end
+  
   def tutorial
   end
   

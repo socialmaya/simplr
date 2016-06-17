@@ -19,6 +19,9 @@
     class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
 	
 	<% if anrcho? %>
+	  <%= link_to fa_icon("users", "Contributors"), contributors_path, class: :standard_nav_menu_link,
+	    title: "Click here to see who's contributed to Anrcho." %>
+	    
 	  <%= link_to fa_icon("question-circle", "How the Site Works"), tutorial_path, class: :standard_nav_menu_link,
 	    title: "Click here to see how the site works." %>
 	<% else %>
