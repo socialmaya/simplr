@@ -1,7 +1,14 @@
-<% for bot in Bot.for_task_on_page(:grow, request.original_url) %>
-  <%= link_to bot_path(bot), title: bot.name do %>
-    <div class="growing_bot_pixel" id="bot_pixel_<%= clean_a_token bot.unique_token %>"
-      style="top:<%= rand 1..100 %>%;left:<%= rand 1..100 %>%;">
-    </div>
+<% if defined? @bot_pool %>
+  <% bots = Bot.for_task_on_page(:grow, request.original_url) %>
+  <% unless bots.empty? %>
+    <% for bot in bots.sample(rand(1..bots.size)) %>
+      <% unless @bot_pool.include? bot; @bot_pool << bot %>
+        <%= link_to bot_path(bot), title: bot.name do %>
+          <div class="growing_bot_pixel" id="bot_pixel_<%= clean_a_token bot.unique_token %>"
+            style="top:<%= rand 1..100 %>%;left:<%= rand 1..100 %>%;">
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

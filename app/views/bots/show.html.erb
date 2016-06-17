@@ -1,7 +1,7 @@
+<% @bot_pool = [] %>
+
 <%= render "bots/card", bot: @bot %>
 
 <% for task in @tasks %>
   <%= render "bot_tasks/card", task: task %>
 <% end %>
-
-<%= render "bots/growing" %>
