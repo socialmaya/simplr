@@ -2,7 +2,7 @@
 
 Social Maya is a social network designed to connect creatives and intellectuals.
 
-Anrcho is now being hosted from within Social Maya, at https://anrcho.com, no invite necessary.
+Anrcho is now being hosted from within Social Maya, at https://anrcho.com, no invite necessary. Anrcho is an anonymous voting platform for the digital proletariat. There you can organize through direct democracy and build consensus with the members of your community.
 
 Social Maya is free and open source software, as specified above by the GNU General Public License.
 
@@ -16,3 +16,13 @@ Social Maya is free and open source software, as specified above by the GNU Gene
 6. Run the database migrations: `bundle exec rake db:migrate`
 
 The default database is SQLite3.
+
+## Tools to get Involved and Collaborate for Anrcho
+
+Cloud9: https://ide.c9.io/ethanwilkins/anrcho
+
+Trello: https://trello.com/b/h48L52IW
+
+IRC channel on Freenode: #anrcho
+
+SEO Keywords: voting platform, constitution
