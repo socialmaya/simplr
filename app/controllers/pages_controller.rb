@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :set_human
+  
   def resume
   end
   
@@ -29,26 +31,29 @@ class PagesController < ApplicationController
   end
   
   private
-  
-  def build_feed_data
-    @all_items = relevant_items
-    @items = paginate @all_items
-    @char_codes = char_codes @items
-    # records being seen
-    @items.each {|item| seent item}
-  end
-  
-  def relevant_items
-    if params[:posts]
-      @home_shown = true
-      if current_user
-        return current_user.feed
-      else
-        return Post.all.reverse
-      end
-    elsif params[:group_id]
-      @group_shown = true
-      return Group.find_by_id(params[:group_id]).posts.reverse
+    def set_human
+      cookies.permanent[:probably_human] = true unless current_user
     end
-  end
+    
+    def build_feed_data
+      @all_items = relevant_items
+      @items = paginate @all_items
+      @char_codes = char_codes @items
+      # records being seen
+      @items.each {|item| seent item}
+    end
+    
+    def relevant_items
+      if params[:posts]
+        @home_shown = true
+        if current_user
+          return current_user.feed
+        else
+          return Post.all.reverse
+        end
+      elsif params[:group_id]
+        @group_shown = true
+        return Group.find_by_id(params[:group_id]).posts.reverse
+      end
+    end
 end

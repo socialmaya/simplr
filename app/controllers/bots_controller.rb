@@ -1,6 +1,5 @@
 class BotsController < ApplicationController
   before_action :invite_only
-  before_action :bots_to_404
   before_action :secure_bots
   before_action :grow_bots, only: [:my_bots, :show]
   
@@ -49,10 +48,6 @@ class BotsController < ApplicationController
     
     def secure_bots
       redirect_to '/404' unless dev? or current_user.has_power?('create_bots')
-    end
-    
-    def bots_to_404
-      redirect_to '/404' if request.bot?
     end
     
     def invite_only

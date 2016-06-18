@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :anrcho?,
-    :invited?, :seen?, :seent, :get_site_title, :record_last_visit
+    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :anrcho?, :invited?,
+    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
   
   # redirects to proposals index for anrcho.com
   before_action :anrcho_to_proposals, except: [:index]
+  
+  # bots go to 404 for all pages
+  before_action :bots_to_404
   
   def build_proposal_feed section, group=nil
     reset_page; session[:current_proposal_section] = section.to_s
@@ -61,7 +64,7 @@ class ApplicationController < ActionController::Base
       else
         # unless the non-user, non-group item was posted by current anon
         unless !item.is_a? User and !item.is_a? Group and anon_token.eql? item.anon_token
-          views.create anon_token: anon_token, ip_address: request.remote_ip
+          views.create anon_token: anon_token, ip_address: request.remote_ip if probably_human
         end
       end
     end
@@ -147,6 +150,14 @@ class ApplicationController < ActionController::Base
     return token
   end
   
+  # ensures only humans are counted for views
+  # mainly used for the first proposals in main feed
+  def probably_human
+    # set by 'pages/more' since only humans 'want more'
+    # a way to see if the user is probably a human
+    cookies[:human]
+  end
+  
   def anrcho?
     request.host.eql? "anrcho.com" or cookies[:at_anrcho].present?
   end
@@ -183,5 +194,9 @@ class ApplicationController < ActionController::Base
       if request.host.eql? 'forrestwilkins.com'
         redirect_to resume_path
       end
+    end
+    
+    def bots_to_404
+      redirect_to '/404' if request.bot?
     end
 end

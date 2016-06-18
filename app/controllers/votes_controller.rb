@@ -1,6 +1,4 @@
 class VotesController < ApplicationController
-  before_filter :bots_to_404
-  
   def new_up_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal and not @proposal.anon_token.eql? anon_token
@@ -67,9 +65,4 @@ class VotesController < ApplicationController
     @comments = @vote.comments
     @new_comment = Comment.new
   end
-  
-  private
-    def bots_to_404
-      redirect_to '/404' if request.bot?
-    end
 end

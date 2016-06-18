@@ -3,7 +3,6 @@ class ConnectionsController < ApplicationController
     :members, :invites, :requests, :following, :followers, :steal_follower]
   before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite]
   before_action :user_access, only: [:invites, :followers]
-  before_action :bots_to_404
   
   def invite_someone
     unless current_user and (current_user.has_power? 'invite_someone' or current_user.gatekeeper)
@@ -202,10 +201,6 @@ class ConnectionsController < ApplicationController
       else
         redirect_to '/404'
       end
-    end
-    
-    def bots_to_404
-      redirect_to '/404' if request.bot?
     end
     
     def invite_only

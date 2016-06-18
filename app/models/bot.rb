@@ -110,8 +110,13 @@ class Bot < ActiveRecord::Base
   end
   
   def old?
-    # old if older than a certain percentage of population
-    true
+    # old if older than 3/4's of population
+    younger = Bot.where("created_at < '#{self.created_at}'").size
+    if younger.to_f / Bot.all.size.to_f > 0.75
+      true
+    else
+      false
+    end
   end
   
   def related? other_bot

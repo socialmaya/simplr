@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only
-  before_action :bots_to_404
   
   def open_menu
   end
@@ -148,10 +147,6 @@ class PostsController < ApplicationController
   end
 
   private
-    def bots_to_404
-      redirect_to '/404' if request.bot?
-    end
-    
     def invite_only
       unless invited?
         redirect_to invite_only_path

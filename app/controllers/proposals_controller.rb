@@ -1,6 +1,5 @@
 class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show]
-  before_filter :bots_to_404
   
   def contributors
   end
@@ -126,9 +125,5 @@ class ProposalsController < ApplicationController
     
     def proposal_params
       params[:proposal].permit(:title, :body, :action, :image, :misc_data)
-    end
-    
-    def bots_to_404
-      redirect_to '/404' if request.bot?
     end
 end
