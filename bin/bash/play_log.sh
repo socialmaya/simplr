@@ -2,13 +2,13 @@
 
 echo -e "\nFetching latest access log...\n"
 
-ssh root@104.131.182.123 'cp /var/log/nginx/access.log ~/ && chmod 755 ~/access.log'
+ssh root@socialmaya.com 'cp /var/log/nginx/access.log ~/ && chmod 755 ~/access.log'
 
-echo "get access.log" | sftp root@104.131.182.123
+echo "get access.log" | sftp root@socialmaya.com
 
 echo -e "\nCleaning up...\n"
 
-ssh root@104.131.182.123 'rm ~/access.log'
+ssh root@socialmaya.com 'rm ~/access.log'
 
 echo -e "Playing log...\n"
 
