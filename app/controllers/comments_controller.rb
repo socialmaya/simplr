@@ -39,6 +39,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
     @comment.comment_id = params[:comment_id]
+    @comment.proposal_id = params[:proposal_id]
     if current_user
       @comment.user_id = current_user.id
     else
@@ -67,6 +68,9 @@ class CommentsController < ApplicationController
           @comment = Comment.new
           @comments = @post.comments.last 5
         end
+      elsif @comment.proposal
+        Note.notify :proposal_comment, @comment.proposal, @comment.proposal.anon_token
+        redirect_to show_proposal_path @comment.proposal.unique_token
       end
     else
       redirect_to :back

@@ -3,6 +3,7 @@ class Comment < ActiveRecord::Base
   belongs_to :bot
   belongs_to :post
   belongs_to :comment
+  belongs_to :proposal
   
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
