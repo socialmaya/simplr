@@ -1,0 +1,4 @@
+var table = $("#mini_photoset_table_<%= @post.id %>");
+
+table.after("<%=j render "posts/inline_photoset", post: @post %>");
+table.remove();

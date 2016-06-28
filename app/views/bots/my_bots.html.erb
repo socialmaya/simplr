@@ -1,0 +1,7 @@
+<% @bot_pool = [] %>
+
+<%= render "bots/form" %>
+
+<% for bot in @bots %>
+  <%= render "bots/card", bot: bot %>
+<% end %>

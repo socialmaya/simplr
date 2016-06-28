@@ -1,0 +1,21 @@
+<% @groups = my_groups.reverse %>
+
+<%= render "groups/form" %>
+
+<% @groups.each do |group| %>
+  <%= render "groups/card", group: group %>
+<% end %>
+
+<% if @groups.empty? %>
+  <div class="card">
+    <p align="center">
+      <% if current_user %>
+        You aren't in any groups yet. <%= link_to "Click here",
+          search_path(query: "groups") %> to search for groups to join.
+      <% else %>
+        <%= link_to "Click here", new_user_path %> to sign up and start joining groups. Or <%= link_to "click here",
+          sessions_new_path %> to log in if you've already signed up.
+      <% end %>
+    </p>
+  </div>
+<% end %>

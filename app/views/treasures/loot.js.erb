@@ -1,0 +1,11 @@
+<% if @treasure %>
+  <% if @from_form %>
+    $("#challenge_form_<%= @treasure.id %>").fadeOut();
+  <% end %>
+  <% if @overcome %>
+    $("#universal_anchor").after("<%=j render 'treasures/xp', treasure: @treasure %>");
+    var xp_reward = $("#xp_reward_container_<%= @treasure.id %>");
+    xp_reward.fadeIn(1500);
+    xp_reward.fadeOut(5000);
+  <% end %>
+<% end %>

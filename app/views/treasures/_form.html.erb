@@ -1,0 +1,43 @@
+<!-- resets session variable from last time -->
+<% session[:option_field] = "" %>
+
+<%= form_for Treasure.new, url: create_treasure_path, method: :post do |f| %>
+  <!-- enchanted objects, so illusive in secretive grandiosity -->
+  <!-- to a land of absolute treasure, where gold and gems abound in never ending abundance -->
+  <!-- Master of Secrets, Game Makers, Engineers of Fun and Joy, we bid you the tools of your own genesis -->
+  <p>
+    Create secret treasures as a Master of Secrets
+  </p>
+  <p>
+    <%= f.text_field :name, placeholder: "Think of a cool name...", class: :standard_text_field %>
+  </p>
+  <p>
+    <%= f.text_area :body, placeholder: "Write a caption, question, or riddle..." %>
+  </p>
+  <p>
+    <%= f.file_field :image %>
+  </p>
+  
+  <%= f.text_field :answer, placeholder: "Actual answer or solution", class: :standard_text_field %>
+  <div id="add_option_anchor"></div>
+  <%= link_to '<i class="fa fa-plus"></i> Another option for multiple choice'.html_safe,
+    add_treasure_option_path, remote: true, class: :treasure_form_link %>
+    
+  <p>
+    <%= f.select :treasure_type, options_for_select(treasure_type_options) %>
+  </p>
+  <p>
+    <%= f.select :power, options_for_select(power_options) %>
+  </p>
+  <p>
+    <%= f.select :xp, options_for_select([["Experience to be gained", nil], 0, 25, 50, 100, 500, 1000]) %>
+  </p>
+  <p>
+    <%= f.select :chance, options_for_select([["Chance of power", nil], ["0%", 0.0], ["50%", 0.5], ["100%", 1.0]]) %>
+  </p>
+  <p>
+    <button type="submit" name="commit" id="generate_invite_button">
+      <b>Create secret treasure <i class="fa fa-diamond"></i></b>
+    </button>
+  </p>
+<% end %>

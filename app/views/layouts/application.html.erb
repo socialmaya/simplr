@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= get_site_title %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    
+    <% if anrcho? %>
+      <%= favicon_link_tag "favicons/anrcho.ico" %>
+    <% elsif request.host.eql? "forrestwilkins.com" %>
+      <%= favicon_link_tag "favicons/glitch_om.ico" %>
+    <% else %>
+      <%= favicon_link_tag "favicons/social_maya.ico" %>
+    <% end %>
+    
+	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <%= render "app/header" if invited? or anrcho? %>
+    <%= yield %>
+    <%= render "app/footer" %>
+  </body>
+</html>

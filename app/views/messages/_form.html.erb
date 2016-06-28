@@ -1,0 +1,26 @@
+<div class="card" id="new_message_form">
+	<div align="center">
+		<%= form_for @new_message, url: messages_path, method: :post, remote: true do |f| %>
+			<%= hidden_field_tag :folder_id, @folder.id if @folder %>
+			<%= hidden_field_tag :group_id, @group.id if @group %>
+			<table>
+				<tr>
+					<td>
+						<%= link_to add_message_image_path, remote: true do %>
+							<i class="fa fa-picture-o"></i>
+						<% end %>
+					</td>
+					<td>
+						<%= f.text_area :body, placeholder: "Send a message..." %>
+					</td>
+					<td>
+				    <button type="submit" name="commit">
+				      <i class="fa fa-send"></i>
+				    </button>
+					</td>
+				</tr>
+			</table>
+			<div id="hidden_file_field" hidden><%= f.file_field :image %></div>
+		<% end %>
+	</div>
+</div>

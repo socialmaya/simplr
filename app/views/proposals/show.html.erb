@@ -1,0 +1,43 @@
+<!-- proposals -->
+
+<% if @group.present? %>
+  <%= render "app/lineage", line: { group: @group, proposal: @proposal } %>
+<% end %>
+
+<%= render "proposals/card", proposal: @proposal %>
+<%= render "proposals/sub_section_links", proposal: @proposal %>
+
+<% if @show_votes %>
+  <%= render "votes/voter_links", label: "For", votes: @up_votes %>
+  <%= render "votes/voter_links", label: "Against", votes: @down_votes %>
+  <%= render "votes/confirm_humanity" %>
+  <% for vote in @votes %>
+    <%= render "votes/card", vote: vote if vote.body.present? %>
+  <% end %>
+  
+<% elsif @show_revisions %>
+	<% for revision in @revisions %>
+		<%= render "proposals/card", proposal: revision %>
+	<% end %>
+	<% unless @proposal.revised %>
+	  <div class="card">
+		  <%= render "proposals/new_revision" %>
+	  </div>
+	<% end %>
+	
+<% elsif @show_comments %>
+	<% for comment in @comments %>
+		<%= render "comments/card", comment: comment %>
+	<% end %>
+	<div class="card">
+		<div align="center">
+			<%= form_for @comment, url: proposal_comments_path(@proposal), method: :post do |f| %>
+				<%= hidden_field_tag :proposal_shown, true %>
+				<p>
+					<%= f.text_area :body, placeholder: "Leave a comment..." %>
+				</p>
+				<%= f.submit "Submit" %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

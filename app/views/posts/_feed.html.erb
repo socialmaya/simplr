@@ -1,0 +1,13 @@
+<!-- posts -->
+
+<% @items.each do |post| %>
+  <%= render "posts/card", post: post %>
+  <%= render "users/featured" %>
+  <%= render "groups/featured" %>
+<% end %>
+
+<% unless @items.size < page_size or @preview_items %>
+	<div id="more_content_anchor"></div>
+<% end %>
+
+<%= render "app/color_settings" %>

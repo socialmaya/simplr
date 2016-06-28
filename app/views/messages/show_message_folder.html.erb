@@ -1,0 +1,15 @@
+<script>
+  <%= render "messages/check_folder_messages.js" %>
+</script>
+
+<%= render "messages/folder_card", folder: @folder %>
+
+<% for message in @messages %>
+	<%= render "messages/card", message: message %>
+<% end %>
+
+<div id="instant_messages_anchor"></div>
+
+<div id="message_form_anchor"></div>
+
+<%= render "messages/form" %>

@@ -1,0 +1,128 @@
+<% if (visible_to_anons? post.group or post.group.nil? or group_auth post.group or group_member_auth post.group \
+  or (current_user and post.user and current_user.following? post.user)) \
+  and not (post.hidden and not own_item? post) %>
+  <div class="card" id="post_card_<%= post.id %>">
+    <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
+    <% if post.original and post.original.user %>
+      <!-- reuses group classes because they fit -->
+      <span class="posted_label">
+        shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
+          title: "Originally posted by #{post.original.user.name}" %>
+      </span>
+    <% elsif post.original and post.original.anon_token %>
+      <span class="posted_label">
+        shared from <%= link_to "anon", search_path(query: post.original.anon_token), class: :posted_link,
+          title: "Originally posted by #{post.original.anon_token}" %>
+      </span>
+    <% elsif post.group %>
+      <span class="posted_label">
+        posted to <%= link_to post.group.name, post.group, class: :posted_link,
+          title: "Group (#{post.group.name})" %>
+      </span>
+    <% end %>
+    
+    <table class="top_right_link">
+      <tr>
+        <td>
+          <%= render "app/time_ago", item: post %>
+        </td>
+        <% if own_item? post or dev? %>
+          <td>
+            <%= render "posts/open_menu_link", post: post %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+    
+    <div align="center">
+      <% if post.image.url %>
+        <p>
+          <% unless @post_shown %>
+            <%= link_to post do %>
+              <%= image_tag original_post_image(post), class: :standard_post_image %>
+            <% end %>
+          <% else %>
+            <%= image_tag original_post_image(post), class: :standard_post_image %>
+          <% end %>
+        </p>
+      <% elsif original_post_pictures(post).present? %>
+        <p>
+          <% unless @post_shown %>
+            <%= link_to post do %>
+              <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
+            <% end %>
+            <% if original_post_pictures(post).all[1..-1].present? %>
+              <table id="mini_photoset_table_<%= post.id %>">
+                <tr>
+                  <% for picture in original_post_pictures(post).all[1..-1] %>
+                    <td>
+                      <%= link_to add_post_photoset_path(post), remote: true, title: "Click here to enlarge." do %>
+                        <%= image_tag picture.image, class: :my_groups_group_icon %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              </table>
+            <% end %>
+          <% else %>
+            <% original_post_pictures(post).each do |picture| %>
+              <%= image_tag picture.image, class: :standard_post_image %>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
+
+      <% if post.body.present? %>
+	      <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
+          <%= render "app/body", item: post %>
+		    </p>
+		  <% end %>
+    </div>
+		
+	  <div id="post_comments_anchor_<%= post.id %>"></div>
+    
+    <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
+      (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
+    
+    <table class="bottom_left_link">
+      <tr>
+        <td>
+          <span id="like_post_link_anchor_<%= post.id %>"></span>
+          <%= render "likes/link", item: post %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
+          <% if current_user and not current_user.eql? post.user %>
+            <%= link_to share_text, share_post_path(post), method: :post, class: :standard_post_link,
+              data: { confirm: "Share this post?" } %>
+          <% else %>
+              <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <% if settings(post.user)[:post_bg_fader_on] %>
+    <script>
+      <%= render "app/fader.js", target: "post_card", target_id: post.id, background: true, slow: true %>
+    </script>
+  <% elsif settings(post.user)[:post_bg_color].present? %>
+    <script>
+      <%= render "posts/bg_color.js", post: post %>
+    </script>
+  <% end %>
+
+  <% if settings(post.user)[:post_txt_fader_on] %>
+    <script>
+      <%= render "app/fader.js", target: "post_body_text", target_id: post.id %>
+    </script>
+  <% elsif settings(post.user)[:post_txt_color].present? %>
+    <script>
+      <%= render "posts/txt_color.js", post: post %>
+    </script>
+  <% end %>
+<% end %>

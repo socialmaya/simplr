@@ -1,0 +1,15 @@
+<% if current_user and current_user.has_power? 'discover' %>
+  <script>
+    <%= render "app/fader.js", target: "tier_container", target_id: user.id.to_s, background: true %>
+    <%= render "app/fader.js", target: "tier_number", target_id: user.id.to_s %>
+  </script>
+
+  <% link_path = user.level[:lvl] > 9 ? show_treasure_path(Treasure.random(current_user).unique_token) : user %>
+  <%= link_to link_path do %>
+    <div class="tier_container" id="tier_container_<%= user.id %>">
+      <div class="tier_number" id="tier_number_<%= user.id %>" align="center">
+        <%= user.level[:lvl] %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,97 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.load_fib_bar {
+  width: 100%;
+}
+
+#vertical_load_screen {
+  position: relative;
+}
+
+#loading_label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 17.25px;
+  color: white;
+}
+
+#still_loading_label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  right: 15px
+}
+
+#standard_nav_menu {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  margin-bottom: 15px;
+  z-index: 5;
+}
+
+.standard_nav_menu_link {
+	color: white;
+	font-size: 25px;
+	display: block;
+	padding: 7.5px 5px;
+	background: black;
+}
+
+#menu_link_container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 47.5px;
+  height: 40.5px;
+  background: black;
+  z-index: 1;
+}
+
+#toggle_menu_link {
+	position: fixed;
+	top: 7.5px;
+	left: 12.5px;
+	color: white;
+	font-size: 13px;
+	z-index: 2;
+}
+
+#return_home_link {
+  position: absolute;
+  top: 12.5px;
+  left: 75px;
+  color: white;
+}
+
+#scroll_to_top_link_icon {
+  position: absolute;
+  top: 12.5px;
+  left: 17.5px;
+}
+
+#scroll_to_top_link_container {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 47.5px;
+  height: 40.5px;
+  background: black;
+  z-index: 1;
+}
+
+#scroll_to_top_link {
+  color: white;
+  font-size: 20px;
+  display: none;
+}
+
+#vertical_load_screen {
+  position: relative;
+}

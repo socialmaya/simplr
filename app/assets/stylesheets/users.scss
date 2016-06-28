@@ -1,0 +1,98 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user_card_name_and_bio {
+  width: 85%;
+}
+
+.featured_user_name {
+  text-align: center;
+  font-size: 8.5px;
+  padding: 0px 15px;
+}
+
+.featured_user_avatar {
+  width: 35px;
+  height: 35px;
+  padding: 0px 15px;
+  padding-top: 7.5px;
+}
+
+.tier_container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 12.5px;
+  height: 12.5px;
+  background: black;
+}
+
+.tier_number {
+  padding-top: 1.5px;
+  font-size: 7.5px;
+  color: white;
+}
+
+.progress_bar_progress {
+  background: rgb(0, 255, 0);
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.progress_bar {
+  background: rgb(255, 0, 0);
+  width: 100%;
+}
+
+.progress_bar_label {
+  padding-left: 1.5px;
+  padding-bottom: 5px;
+}
+
+.user_name_link {
+  font-size: 16.5px;
+}
+
+.profile_picture {
+  width: 90%;
+  padding: 10px;
+}
+
+.user_avatar_link {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.user_avatar_image {
+  width: 25.5px;
+  height: 23px;
+}
+
+.current_token_link {
+	position: absolute;
+	right: 11.5px;
+	top: 10px;
+}
+
+.avatar_container {
+	width: 25px;
+	height: 25px;
+}
+
+.avatar_pixel {
+	width: 5.5px;
+	height: 5.5px;
+	float: right;
+}
+
+.token_card_link {
+	position: absolute;
+	left: -2px;
+	top: 0px;
+}
+
+.user_card_links_containor {
+  padding-bottom: 7.5px;
+}
