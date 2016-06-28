@@ -1,8 +1,0 @@
-<div id="search_dropdown" align="center">
-  <%= render "search/form" %>
-  <% for tag in @tags %>
-    <p>
-      <%= link_to tag.tag, search_path(query: tag.tag) %>
-    </p>
-  <% end %>
-</div>

@@ -1,5 +1,0 @@
-<% for picture in original_post_pictures(post).all[1..-1] %>
-  <%= link_to post do %>
-    <%= image_tag picture.image, class: :standard_post_image %>
-  <% end %>
-<% end %>

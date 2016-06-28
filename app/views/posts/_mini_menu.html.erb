@@ -1,7 +1,0 @@
-<div class="post_mini_menu" id="post_mini_menu_<%= post.id %>">
-  <%= link_to 'Edit', edit_post_path(post), class: :post_mini_menu_link if own_item? post or dev? %>
-  <%= link_to "Delete", @post, method: :delete,
-      data: { confirm: "Are you sure you want to permanently delete this post?" },
-      class: :post_mini_menu_link %>
-  <%= link_to 'Hide', hide_post_path(post), method: :put, class: :post_mini_menu_link if dev? %>
-</div>

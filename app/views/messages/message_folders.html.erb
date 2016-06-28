@@ -1,7 +1,0 @@
-<h2 class="standard_page_header">Inbox <i class="fa fa-envelope"></i></h2>
-
-<%= render "connections/folder_form" %>
-
-<% for folder in @folders %>
-  <%= render "messages/folder_card", folder: folder %>
-<% end %>
