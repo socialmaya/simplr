@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = @user.auth_token
       end
       cookies.permanent[:logged_in_before] = true
+      cookies.permanent[:human] = true
       redirect_to root_url
     else
       redirect_to :back, notice: "Invalid username, email, or password"
