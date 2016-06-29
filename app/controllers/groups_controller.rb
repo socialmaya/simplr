@@ -91,13 +91,11 @@ class GroupsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @group.update(group_params)
-        Tag.extract @group
-        redirect_to @group
-      else
-        render :edit
-      end
+    if @group.update(group_params)
+      Tag.extract @group
+      redirect_to @group
+    else
+      render :edit
     end
   end
 
