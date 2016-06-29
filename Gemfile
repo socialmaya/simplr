@@ -37,6 +37,9 @@ gem 'name-generator'
 gem 'phonetic_alphabet'
 gem 'passphrase'
 
+# chat bot
+gem 'lita'
+
 # machine learning
 # gem 'cabalist'
 

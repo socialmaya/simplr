@@ -61,6 +61,7 @@ class ConnectionsController < ApplicationController
           cookies.permanent[:invite_token] = @invite.unique_token
           cookies[:grant_dev_access] = @invite.grant_dev_access
           cookies[:grant_gk_access] = @invite.grant_gk_access
+          cookies.permanent[:human] = true
         end
       # if invite already redeemed in current browser
       elsif @invite.redeemed and invited?
