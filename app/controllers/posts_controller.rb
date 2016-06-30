@@ -3,34 +3,35 @@ class PostsController < ApplicationController
     :hide, :open_menu, :close_menu, :add_photoset]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
-  before_action :invite_only
-  
+  before_action :invite_only, except: [:show]
+  before_action :invited_or_token_used, only: [:show]
+
   def open_menu
   end
-  
+
   def close_menu
   end
-  
+
   def add_group_id
   end
-  
+
   def add_image
   end
-  
+
   def add_photoset
   end
-  
+
   def remove_picture
     @picture_id = params[:picture_id]
     @picture = Picture.find_by_id @picture_id
     @picture.destroy
   end
-  
+
   def hide
     @post.update hidden: true
     redirect_to root_url
   end
-  
+
   def share
     @dup_post = @post.dup
     @dup_post.user_id = current_user.id
@@ -147,26 +148,34 @@ class PostsController < ApplicationController
   end
 
   private
+    def invited_or_token_used
+      unless invited? or (params[:token] and params[:token].size > 20)
+        redirect_to '/404'
+      end
+    end
+
     def invite_only
       unless invited?
         redirect_to invite_only_path
       end
     end
-    
+
     def secure_post
       set_post
       unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev?
         redirect_to '/404'
       end
     end
-    
+
     def reset_page_num
       reset_page
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find_by_id(params[:id])
+      @post ||= Post.find_by_id(params[:token])
+      @post ||= Post.find_by_unique_token(params[:token])
       redirect_to '/404' unless @post
     end
 

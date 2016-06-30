@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   get 'posts/:id/open_menu', to: 'posts#open_menu', as: 'open_post_menu'
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
-  get 'posts/:token/show', to: 'posts#show', as: 'show_post'
+  get 'posts/:token', to: 'posts#show', as: 'show_post'
 
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
