@@ -1,0 +1,18 @@
+<div class="message_bubble">
+  <%= render "app/time_ago", item: message %>
+
+  <div class="message_content">
+    <%= render "users/mini_avatar", item: message %>
+    <% if message.body.present? %>
+      <span class="message_body_text <%= justified_body message %>">
+        <%= render "app/body", item: message %>
+      </span>
+    <% end %>
+
+    <% if message.image.url %>
+      <div align="center">
+        <%= image_tag message.image, class: :message_image %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -10,5 +10,5 @@
 
 <!-- Accounts for anrcho groups and uses token link instead -->
 <%= link_to (anrcho? and item.is_a?(Group) ? show_group_path(item.unique_token) : item), class: link_class do %>
-  <strong><%= _time_ago %></strong>
+  <strong style="<%= item.is_a?(Message) ? 'color:white;' : '' %>"><%= _time_ago %></strong>
 <% end %>

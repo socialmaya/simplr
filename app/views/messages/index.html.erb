@@ -8,7 +8,7 @@
 
 <% if group_auth @group or group_member_auth @group %>
   <% for message in @messages %>
-	  <%= render "messages/card", message: message %>
+	  <%= render "messages/bubble", message: message %>
   <% end %>
 
   <div id="instant_messages_anchor"></div>

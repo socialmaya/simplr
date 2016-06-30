@@ -1,0 +1,9 @@
+<% if item.user and item.user.image %>
+  <div class="mini_comment_avatar">
+    <%= link_to item.user, title: "#{item.user.name}" do %>
+      <%= image_tag item.user.image, class: :user_avatar_image %>
+    <% end %>
+  </div>
+<% elsif item.anon_token %>
+  <%= render "users/anon_avatar", token: item.anon_token, position: :mini_comment_avatar %>
+<% end %>

@@ -1,7 +1,7 @@
 <div class="card">
   <%= form_for(@user) do |f| %>
   	<%= link_to "Already signed up?", sessions_new_path, class: :top_right_link %>
-    
+
     <div align="center">
       <p>
         <%= f.text_field :name, placeholder: "Nickname", class: :standard_text_field %>
@@ -14,7 +14,7 @@
         </button>
       </p>
     </div>
-    
+
 	  <div id="remember_me_check_box">
 		  Remember me <%= check_box_tag :remember_me, 1, params[:remember_me] %>
 	  </div>
