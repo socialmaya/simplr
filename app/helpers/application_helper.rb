@@ -2,26 +2,26 @@ module ApplicationHelper
   def justified_body item
     'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 150
   end
-  
+
   def fa_icon icon, label='', size=''
     str = %Q[<i class="fa fa-#{icon}#{' ' + size if size.present?}"></i>] + " " + label
     return str.html_safe
   end
-  
+
 	def random_color as_str=nil
 		rgb = []; 3.times { rgb << Random.rand(1..255) }
 		rgb = "#{ rgb[0] }, #{ rgb[1] }, #{ rgb[2] }" if as_str
 		return rgb
 	end
-	
+
   def rand_string
     SecureRandom.urlsafe_base64.gsub(/[^0-9a-z]/i, '')
   end
-  
+
   def clean_a_token token
     return token.gsub(/[^0-9a-z]/i, '')
   end
-  
+
   def time_ago(_time_ago)
     _time_ago = _time_ago + " ago"
     if _time_ago.include? "about"

@@ -1,17 +1,17 @@
 <div class="card">
   <%= render "groups/avatar_card_link", group: group %>
-  
+
   <div align="center">
     <p>
       <%= link_to group.name, group %>
     </p>
-    
+
     <% if group.body.present? %>
 	    <p class="<%= 'justified_body_text' if group.body.size > 150 %>">
         <%= render "app/body", item: group %>
 		  </p>
 		<% end %>
-		
+
     <% if @group_shown %>
       <% if group.active_chat? %>
         <script>
@@ -24,7 +24,7 @@
         <%= " | " %>
         <%= link_to ("Members#{' (' + (group.members_size).to_s + ')' unless group.members.size.zero?} " \
           + '<i class="fa fa-users"></i>').html_safe, members_path(group) %>
-        <% if group_member_auth group %>
+        <% if group_member_auth group or group_auth group %>
           <%= " | " %>
           <%= link_to 'Invite <i class="fa fa-cubes"></i>'.html_safe, invite_from_group_path(group) %>
         <% end %>
@@ -33,9 +33,9 @@
       <%= link_to "Members: #{group.members_size}", members_path(group), class: :bottom_left_link %>
     <% end %>
   </div>
-  
+
   <%= render "app/time_ago", item: group %>
-  
+
   <div id="group_<%= group.id %>_card_links_anchor"></div>
   <%= render "groups/card_links", group: group %>
 </div>

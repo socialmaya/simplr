@@ -3,14 +3,14 @@ Rails.application.routes.draw do
   get 'my_anon_groups', to: 'groups#my_anon_groups', as: 'my_anon_groups'
   get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
   get 'group/:token', to: 'groups#show', as: 'show_group'
-  
+
   # users
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
-  
+
   # likes
   post 'like', to: 'likes#create', as: 'like'
   delete 'unlike', to: 'likes#destroy', as: 'unlike'
-  
+
   # treasures
   post 'treasures/create', as: 'create_treasure'
   put 'treasures/update', as: 'update_treasure'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
-  
+
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
   get 'invite/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
-  
+
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
   delete 'users/:user_id/unfollow', to: 'connections#destroy', as: 'unfollow'
@@ -47,13 +47,13 @@ Rails.application.routes.draw do
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'groups/:group_id/invite', to: 'connections#new', as: 'invite_from_group'
   get 'my_groups', to: 'groups#my_groups', as: 'my_groups'
-  
+
   # settings
   put 'settings/update', as: 'update_settings'
   put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev_panel', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
-  
+
   # messages
   get 'messages/add_image', as: 'add_message_image'
   get 'messages/instant_messages', to: 'messages#instant_messages'
@@ -77,10 +77,10 @@ Rails.application.routes.draw do
   get 'posts/:id/open_menu', to: 'posts#open_menu', as: 'open_post_menu'
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
-  
+
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
-  
+
   # comments
   get 'comments/add_image', as: 'add_comment_image'
   get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'
@@ -98,13 +98,13 @@ Rails.application.routes.draw do
   get 'pages/scroll_to_top', as: 'scroll_to_top'
   get 'pages/toggle_menu', as: 'toggle_menu'
   get 'pages/more'
-  
+
   # bots
   post 'bots/create', as: 'create_bot'
   get 'add_task_field', to: 'bot_tasks#add_task', as: 'add_task_field'
   get 'users/:id/my_bots', to: 'bots#my_bots', as: 'my_bots'
   delete 'bots/destroy_all', as: 'destroy_all_bots'
-  
+
   # proposals
   get 'contributors', to: 'proposals#contributors', as: 'contributors'
   get 'tutorial', to: 'proposals#tutorial', as: 'tutorial'
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
   get 'history/:token', to: 'proposals#old_versions', as: 'old_versions'
   get 'motions/load_section_links', to: 'proposals#load_section_links'
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
-  
+
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
   get 'for/:token', to: 'votes#new_up_vote', as: 'new_up_vote'
@@ -126,7 +126,7 @@ Rails.application.routes.draw do
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
-  
+
   resources :proposals do
     resources :comments
   end

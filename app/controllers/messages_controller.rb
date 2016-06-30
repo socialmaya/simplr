@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show]
   before_action :invite_only
-  
+
   # create folder between users if none exists
   def create_message_folder
     @folder = Connection.new message_folder: true
@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def show_message_folder
     @folder = Connection.find_by_id params[:folder_id]
     @new_message = Message.new
@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
       redirect_to '/404'
     end
   end
-  
+
   def message_folders
     @folders = current_user.message_folders
     # destroys any empty folders that are older than the specified time
@@ -59,12 +59,10 @@ class MessagesController < ApplicationController
     end
     @folders.reverse!
   end
-  
+
   def add_image
   end
 
-  # POST /messages
-  # POST /messages.json
   def create
     @new_message = Message.new # for ajax, new form
     @group = Group.find_by_id params[:group_id]
@@ -82,7 +80,7 @@ class MessagesController < ApplicationController
       end
     end
   end
-  
+
   def instant_messages
     @group = Group.find_by_id(params[:group_id])
     @folder = Connection.find_by_id(params[:folder_id])
@@ -98,8 +96,6 @@ class MessagesController < ApplicationController
     set_last_im
   end
 
-  # GET /messages
-  # GET /messages.json
   def index
     msg_limit = 3 # how many to display
     @new_message = Message.new
@@ -110,8 +106,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # GET /messages/1
-  # GET /messages/1.json
   def show
   end
 
@@ -128,7 +122,7 @@ class MessagesController < ApplicationController
       end
       return users
     end
-    
+
     # for displaying number of unseen folder messages
     def set_last_message_seen
       unless @folder.messages.empty?
@@ -138,7 +132,7 @@ class MessagesController < ApplicationController
         end
       end
     end
-    
+
     def check_last_im message
       # eval to inflate hash from string
       in_sequence = false; last_im = eval(cookies[:last_im].to_s)
@@ -151,7 +145,7 @@ class MessagesController < ApplicationController
       end
       return in_sequence
     end
-    
+
     # keeps track of last message loaded
     def set_last_im
       message_id = if @instant_messages.present?
@@ -170,13 +164,13 @@ class MessagesController < ApplicationController
       last_im[:folder_id] = @folder.id if @folder
       cookies[:last_im] = last_im.to_s if last_im[:message_id]
     end
-    
+
     def invite_only
       unless invited?
         redirect_to invite_only_path
       end
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
