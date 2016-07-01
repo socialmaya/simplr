@@ -7,11 +7,11 @@
 				<tr>
 					<td>
 						<%= link_to add_message_image_path, remote: true do %>
-							<i class="fa fa-picture-o white_link"></i>
+							<i class="fa fa-picture-o dark_link"></i>
 						<% end %>
 					</td>
 					<td>
-						<%= f.text_area :body, placeholder: "Send a message..." %>
+						<%= f.text_area :body, placeholder: "Send a message...", class: :dark_text_area %>
 					</td>
 					<td>
 				    <button type="submit" name="commit">
