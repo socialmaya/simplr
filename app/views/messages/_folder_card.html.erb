@@ -1,5 +1,11 @@
-<div class="card">
-  <%= render "app/time_ago", item: (folder.messages.present? ? folder.messages.last : folder) %>
+<% if @folder_shown %>
+  <script>
+    <%= render "app/fader.js", target: "folder_card", target_id: folder.id.to_s, background: true %>
+  </script>
+<% end %>
+
+<div class="card" id="folder_card_<%= folder.id %>">
+  <%= render "app/time_ago", item: (folder.messages.present? ? folder.messages.last : folder), black_link: true %>
   <div class="folder_card_link" align="center">
     <%= link_to show_message_folder_path folder do %>
       <%= unseen = folder.unseen_messages current_user; "+#{unseen}" unless unseen.zero? %>

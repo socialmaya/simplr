@@ -41,6 +41,7 @@ class MessagesController < ApplicationController
     @folder = Connection.find_by_id params[:folder_id]
     @new_message = Message.new
     if @folder
+      @folder_shown = true
       @messages = @folder.messages.last 5
       set_last_message_seen
       set_last_im

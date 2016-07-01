@@ -16,5 +16,5 @@
 
 <!-- Accounts for anrcho groups and uses token link instead -->
 <%= link_to link_path, :class => link_class do %>
-  <strong style="<%= item.is_a?(Message) ? 'color:white;' : '' %>"><%= _time_ago %></strong>
+  <strong style="<%= defined?(black_link) ? 'color:black;' : '' %>"><%= _time_ago %></strong>
 <% end %>
