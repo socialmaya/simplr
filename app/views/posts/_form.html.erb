@@ -17,7 +17,7 @@
       <% end %>
 
       <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""),
-        placeholder: "Post something cool...", class: :dark_text_area %>
+        placeholder: "Post something awesome...", class: :dark_text_area %>
 
 		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
 			  <i class="fa fa-picture-o fa-2x dark_link"></i>
