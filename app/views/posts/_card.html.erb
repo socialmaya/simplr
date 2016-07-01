@@ -38,7 +38,7 @@
       <% if post.image.url %>
         <p>
           <% unless @post_shown %>
-            <%= link_to post do %>
+            <%= link_to show_post_path(post.unique_token) do %>
               <%= image_tag original_post_image(post), class: :standard_post_image %>
             <% end %>
           <% else %>
@@ -48,7 +48,7 @@
       <% elsif original_post_pictures(post).present? %>
         <p>
           <% unless @post_shown %>
-            <%= link_to post do %>
+            <%= link_to show_post_path(post.unique_token) do %>
               <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
             <% end %>
             <% if original_post_pictures(post).all[1..-1].present? %>
