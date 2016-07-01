@@ -1,5 +1,7 @@
 <% if @instant_messages.present? %>
   var anchor = $("#instant_messages_anchor");
+  var seen_anchor = $("#last_message_views_anchor");
+  var seen_views = $("#last_message_views_<%= @folder.id %>");
   
   if ( typeof last_message_id === 'undefined'
     || last_message_id < <%= @instant_messages.first.id %>
@@ -8,5 +10,8 @@
     var last_message_id = <%= @instant_messages.last.id %>;
     anchor.after("<%=j render 'messages/instant_messages' %>");
     anchor.remove(); $("#instant_messages_anchor").scrollView();
+    // updates last message views list
+    seen_views.remove();
+    seen_anchor.after("<%=j render 'messages/seen', message: @instant_messages.last %>")
   }
 <% end %>
