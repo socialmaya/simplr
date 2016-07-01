@@ -12,9 +12,6 @@
   font-size: 12px;
 }
 
-.message_content {
-}
-
 .message_bubble {
   position: relative;
   padding: 15px 7.5px;
@@ -30,9 +27,16 @@
   padding-top: 12.5px;
 }
 
-.message_body_text {
-  position: relative;
-  top: 3.5px;
-  left: 7.5px;
+.left_message_body_text {
+  float: left;
+  padding-top: 2.5px;
+  padding-left: 2.5px;
+  width: 82.5%;
+}
+
+.right_message_body_text {
+  float: right;
+  padding-top: 2.5px;
+  padding-right: 2.5px;
   width: 82.5%;
 }

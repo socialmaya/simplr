@@ -5,13 +5,14 @@
 
 <% if user_views.present? or anon_views.present? %>
   <div class="last_message_views" align="right" id="last_message_views_<%= @folder.id %>">
-    Seen by:
+    Seen by
       <% for view in user_views %>
         <%= link_to view.user.name, view.user, class: :small_dark_link if view.user %><%= ", " \
           unless view.eql? user_views.last %>
       <% end %>
       <%= "and" if user_views.present? and anon_views.present? %>
       <%= "#{anon_views.size} anon(s)" if anon_views.present? %>
+      <%= "#{time_ago(time_ago_in_words(message.created_at))}" %>
       <i class="fa fa-eye"></i>
   </div>
 <% end %>
