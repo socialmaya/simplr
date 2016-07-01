@@ -158,6 +158,19 @@ textarea {
   text-align: center;
 }
 
+.dark_text_area {
+  background: rgb(25, 25, 25);
+  color: white;
+}
+
+.dark_form_button {
+  @include standard_form_element;
+  height: 35px;
+  background: rgb(25, 25, 25);
+  color: rgb(175, 175, 175);
+  border-color: rgb(10, 10, 10);
+}
+
 .discrete_title {
   color: gray;
   font-size: 11px;
