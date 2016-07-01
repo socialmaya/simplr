@@ -10,6 +10,10 @@
 
 <div id="instant_messages_anchor"></div>
 
-<div id="message_form_anchor"></div>
+<%= render "messages/seen", message: @messages.last %>
+
+<div id="last_message_views_anchor"></div>
 
 <%= render "messages/form" %>
+
+<div id="message_form_anchor"></div>

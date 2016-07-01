@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.last_message_views {
+  position: relative;
+  margin: 0 auto;
+  max-width: 550px;
+  padding-bottom: 5px;
+  width: 94.5%;
+  color: rgb(175, 175, 175);
+  font-size: 12px;
+}
+
 .message_content {
 }
 
