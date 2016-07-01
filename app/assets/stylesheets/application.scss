@@ -158,6 +158,15 @@ textarea {
   text-align: center;
 }
 
+.dark_text_field {
+  @include standard_form_element;
+  margin-bottom: 7.5px;
+  display: block;
+  background: rgb(25, 25, 25);
+  color: white;
+  border-width: 1px;
+}
+
 .dark_text_area {
   background: rgb(25, 25, 25);
   color: white;
