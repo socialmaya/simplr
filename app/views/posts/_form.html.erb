@@ -20,7 +20,7 @@
         placeholder: "Post something cool...", class: :dark_text_area %>
 
 		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
-			  <i class="fa fa-picture-o fa-2x white_link"></i>
+			  <i class="fa fa-picture-o fa-2x dark_link"></i>
 		  <% end %>
 		  <p id="hidden_file_field" hidden>
 		    <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
@@ -28,7 +28,7 @@
 
       <% if current_user and current_user.my_groups.present? and not @group %>
 		    <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
-			    <i class="fa fa-cubes fa-2x white_link"></i>
+			    <i class="fa fa-cubes fa-2x dark_link"></i>
 		    <% end %>
 		    <p id="hidden_group_id_field" hidden>
 		      <%= select_tag :group_id, options_for_select(my_group_options) %>
