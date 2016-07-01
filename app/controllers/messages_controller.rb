@@ -44,6 +44,9 @@ class MessagesController < ApplicationController
       @messages = @folder.messages.last 5
       set_last_message_seen
       set_last_im
+      for message in @messages
+        seent message
+      end
     else
       redirect_to '/404'
     end
@@ -91,7 +94,10 @@ class MessagesController < ApplicationController
       @folder.messages
     end
     for message in @messages
-      @instant_messages << message if check_last_im(message)
+      if check_last_im(message)
+        @instant_messages << message
+        seent message
+      end
     end
     set_last_im
   end

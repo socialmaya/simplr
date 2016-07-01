@@ -3,6 +3,8 @@ class Message < ActiveRecord::Base
   belongs_to :group
   belongs_to :connection
   
+  has_many :views
+  
   validate :body_or_image
   
   before_create :encrypt_message
