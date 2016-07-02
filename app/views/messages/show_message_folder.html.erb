@@ -12,7 +12,7 @@
 
 <div id="last_message_views_anchor"></div>
 
-<%= render "messages/seen", message: @messages.last %>
+<%= render "messages/seen", message: @messages.last if @messages.present? %>
 
 <div id="message_form_anchor"></div>
 
