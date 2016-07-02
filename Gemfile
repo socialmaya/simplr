@@ -38,7 +38,7 @@ gem 'phonetic_alphabet'
 gem 'passphrase'
 
 # chat bot
-gem 'lita'
+# gem 'lita'
 
 # machine learning
 # gem 'cabalist'

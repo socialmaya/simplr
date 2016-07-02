@@ -10,8 +10,9 @@
     var last_message_id = <%= @instant_messages.last.id %>;
     anchor.after("<%=j render 'messages/instant_messages' %>");
     anchor.remove(); $("#instant_messages_anchor").scrollView();
-    // updates last message views list
-    seen_views.remove();
-    seen_anchor.after("<%=j render 'messages/seen', message: @instant_messages.last %>")
   }
+  
+  // updates last message views list
+  seen_views.remove();
+  seen_anchor.after("<%=j render 'messages/seen', message: @instant_messages.last %>");
 <% end %>
