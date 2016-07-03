@@ -1,9 +1,12 @@
 <div class="message_bubble">
-  <%= render "users/mini_avatar", item: message, position: (own_item?(message) ? :right_mini_avatar : :left_mini_avatar) %>
+  <%= render "users/mini_avatar", item: message,
+    position: (own_item?(message) ? :right_mini_avatar : :left_mini_avatar) %>
   
   <% if message.body.present? %>
     <div class="<%= own_item?(message) ? 'right' : 'left' %>_message_body_text">
-      <div style="<%= 'float:right;' if own_item?(message) %>"><%= render "app/body", item: message %></div>
+      <div style="<%= 'float:right;' if own_item?(message) %>">
+        <%= render "app/body", item: message %>
+      </div>
     </div>
   <% end %>
   

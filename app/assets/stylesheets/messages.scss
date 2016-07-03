@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.message_button_container {
+  padding-bottom: 5px;
+}
+
 .last_message_views {
   position: relative;
   margin: 0 auto;
@@ -36,6 +40,6 @@
 .right_message_body_text {
   float: right;
   padding-top: 2.5px;
-  padding-right: 2.5px;
+  padding-right: 10px;
   width: 82.5%;
 }

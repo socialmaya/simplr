@@ -26,6 +26,11 @@ class ConnectionsController < ApplicationController
     redirect_to root_url
   end
   
+  # A digital portal to a digital dimension
+  # enables users to enter site without invite
+  def portal
+  end
+  
   # to make inviting easier in person without sending them a link
   def backdoor
     redirect_to '/404' if invited?
