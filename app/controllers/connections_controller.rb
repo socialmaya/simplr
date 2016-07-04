@@ -29,6 +29,10 @@ class ConnectionsController < ApplicationController
   # A digital portal to a digital dimension
   # enables users to enter site without invite
   def portal
+    @portal = Portal.find_by_unique_token params[:token]
+    if @portal
+      
+    end
   end
   
   # to make inviting easier in person without sending them a link

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701024345) do
+ActiveRecord::Schema.define(version: 20160703233421) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160701024345) do
     t.boolean  "grant_mod_access"
     t.string   "invite_password"
     t.boolean  "grant_gk_access"
+    t.boolean  "portal"
   end
 
   create_table "game_pieces", force: :cascade do |t|

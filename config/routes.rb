@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
-  get 'portal', to: 'connections#portal', as: 'portal'
+  get 'portal/:token', to: 'connections#portal', as: 'portal'
 
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'

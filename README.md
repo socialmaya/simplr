@@ -1,6 +1,6 @@
 ## Social Maya ॐ
 
-Social Maya is a social network designed to connect creatives and intellectuals.
+Social Maya, a totally organic, non-GMO social network designed to connect awesome people.
 
 Anrcho is now being hosted from within Social Maya, at https://anrcho.com, no invite necessary. Anrcho is an anonymous voting platform for the digital proletariat. There you can organize through direct democracy and build consensus with the members of your community.
 
