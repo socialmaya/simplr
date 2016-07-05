@@ -53,16 +53,15 @@ class Connection < ActiveRecord::Base
   end
   
   private
-  
-  # not currently in use
-  def unique_to_user
-    connections = User.find_by_id(self.user_id).connections
-    if connections.find_by_other_user_id self.other_user_id or connections.find_by_group_id self.group_id
-      errors.add(:connection, "already exists.")
+    # not currently in use
+    def unique_to_user
+      connections = User.find_by_id(self.user_id).connections
+      if connections.find_by_other_user_id self.other_user_id or connections.find_by_group_id self.group_id
+        errors.add(:connection, "already exists.")
+      end
     end
-  end
 
-  def gen_unique_token
-    self.unique_token = SecureRandom.urlsafe_base64
-  end
+    def gen_unique_token
+      self.unique_token = SecureRandom.urlsafe_base64
+    end
 end

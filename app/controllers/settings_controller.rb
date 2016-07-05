@@ -7,11 +7,19 @@ class SettingsController < ApplicationController
   end
   
   def dev_panel
+    # creates the invite link to be copied and shared
     if params[:invite_token]
       @invite = Connection.find_by_unique_token params[:invite_token]
       if @invite
         @invite_link = root_url; @invite_link.slice!(-1)
         @invite_link +=redeem_invite_path(@invite.unique_token)
+      end
+    # creates the portal link to be copied and shared
+    elsif params[:portal_token]
+      @portal = Portal.find_by_unique_token params[:portal_token]
+      if @portal
+        @portal_link = root_url; @portal_link.slice!(-1)
+        @portal_link +=enter_portal_path(@portal.unique_token)
       end
     end
   end

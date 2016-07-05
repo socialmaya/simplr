@@ -1,0 +1,13 @@
+<%= form_tag generate_portal_path, method: :post do %>
+  <p>
+    <%= select_tag :remaining_uses, options_for_select(select_number_options("Choose number of uses", 10)) %>
+  </p>
+  <p>
+    <%= select_tag :remaining_days, options_for_select(select_number_options("Choose number of days open", 10)) %>
+  </p>
+  <p>
+    <button type="submit" name="commit" id="generate_invite_button">
+      <b>Generate portal to site <i class="fa fa-bolt"></i></b>
+    </button>
+  </p>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703233421) do
+ActiveRecord::Schema.define(version: 20160704201949) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -147,6 +147,14 @@ ActiveRecord::Schema.define(version: 20160703233421) do
     t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "portals", force: :cascade do |t|
+    t.string   "unique_token"
+    t.datetime "expires_at"
+    t.integer  "remaining_uses"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "posts", force: :cascade do |t|

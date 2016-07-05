@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
 
+  # portals
+  get 'portal/:token', to: 'connections#enter_portal', as: 'enter_portal'
+  post 'generate_portal', to: 'connections#generate_portal', as: 'generate_portal'
+
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
   get 'invite/:token', to: 'connections#redeem_invite', as: 'redeem_invite'
@@ -27,7 +31,6 @@ Rails.application.routes.draw do
   get 'invite_only', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
-  get 'portal/:token', to: 'connections#portal', as: 'portal'
 
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
