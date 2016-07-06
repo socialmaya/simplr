@@ -60,7 +60,7 @@ class ConnectionsController < ApplicationController
   def enter_portal # enables users to enter site without invite
     @portal = Portal.find_by_unique_token params[:token]
     if @portal
-      if @portal.remaining_uses.to_i > 0 and @portal.expires_at < DateTime.current
+      if @portal.remaining_uses.to_i > 0 and DateTime.current < @portal.expires_at
         invite = Connection.new invite: true, redeemed: true
         if invite.save
           @portal.update remaining_uses: @portal.remaining_uses - 1
