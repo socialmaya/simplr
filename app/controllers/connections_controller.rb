@@ -1,7 +1,7 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
-  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :enter_portal]
+  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite]
   before_action :user_access, only: [:invites, :followers]
   
   def invite_someone
@@ -49,46 +49,6 @@ class ConnectionsController < ApplicationController
   def invite_only_message
     if anrcho?
       redirect_to proposals_path
-    end
-  end
-  
-  # page that actually shows the portal
-  def portal
-  end
-  
-  # A digital portal to a digital dimension
-  def enter_portal # enables users to enter site without invite
-    @portal = Portal.find_by_unique_token params[:token]
-    if @portal
-      if @portal.remaining_uses.to_i > 0 and DateTime.current < @portal.expires_at
-        invite = Connection.new invite: true, redeemed: true
-        if invite.save
-          @portal.update remaining_uses: @portal.remaining_uses - 1
-          cookies.permanent[:invite_token] = invite.unique_token
-          cookies.permanent[:human] = true
-          redirect_to new_user_path
-        end
-      else
-        @portal.destroy
-        redirect_to root_url
-      end
-    else
-      redirect_to '/404'
-    end
-  end
-  
-  def generate_portal
-    @portal = Portal.new
-    @portal.remaining_uses = params[:remaining_uses]
-    if params[:remaining_days].present?
-      @portal.expires_at = params[:remaining_days].to_i.days.from_now.to_datetime
-    end
-    if @portal.save
-      if dev?
-        redirect_to dev_panel_path(portal_token: @portal.unique_token)
-      else
-        redirect_to :back
-      end
     end
   end
   
@@ -233,10 +193,6 @@ class ConnectionsController < ApplicationController
   end
 
   private
-    def portal_params
-      params.require(:portal).permit(:remaining_uses, :expires_at)
-    end
-    
     def user_access
       if current_user
         unless @user.eql? current_user or dev? or \

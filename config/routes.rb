@@ -21,8 +21,10 @@ Rails.application.routes.draw do
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
 
   # portals
-  get 'portal/:token', to: 'connections#enter_portal', as: 'enter_portal'
-  post 'generate_portal', to: 'connections#generate_portal', as: 'generate_portal'
+  get 'portals', to: 'portals#index', as: 'portals'
+  get 'portals/:token', to: 'portals#show', as: 'show_portal'
+  get 'portal/:token', to: 'portals#enter', as: 'enter_portal'
+  post 'generate_portal', to: 'portals#create', as: 'generate_portal'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
