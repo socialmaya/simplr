@@ -80,7 +80,7 @@ class ConnectionsController < ApplicationController
   def generate_portal
     @portal = Portal.new
     @portal.remaining_uses = params[:remaining_uses]
-    if params[:remaining_days]
+    if params[:remaining_days].present?
       @portal.expires_at = params[:remaining_days].to_i.days.from_now.to_datetime
     end
     if @portal.save
