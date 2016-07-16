@@ -13,7 +13,10 @@ class PortalsController < ApplicationController
   # A digital portal to a digital dimension
   def enter # enables users to enter site without invite
     @portal = Portal.find_by_unique_token params[:token]
-    if @portal
+    # goes back home if users already invited, saving portal space
+    if invited?
+      redirect_to root_url
+    elsif @portal
       if @portal.remaining_uses.to_i > 0 and DateTime.current < @portal.expires_at
         invite = Connection.new invite: true, redeemed: true
         if invite.save
