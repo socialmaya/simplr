@@ -1,5 +1,6 @@
 class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
+  before_action :dev_only, only: [:index]
   
   def index
     @portals = Portal.all.reverse
@@ -49,7 +50,21 @@ class PortalsController < ApplicationController
     end
   end
   
+  def destroy
+    @portal = Portal.find_by_unique_token params[:token]
+    if @portal
+      @portal.destroy
+    end
+    redirect_to :back
+  end
+  
   private
+    def dev_only
+      unless dev?
+        redirect_to '/404'
+      end
+    end
+    
     def invite_only
       unless invited?
         redirect_to invite_only_path

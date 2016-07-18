@@ -12,7 +12,7 @@
         <%= Connection.folders.size %> conversations,
         <%= Connection.invites.size %> invites,
         <%= Connection.invites.where(redeemed: true).size %> redeemed invites,
-        <%= Portal.all.size %> portals open,
+        <%= link_to "#{Portal.all.size} portals open", portals_path %>,
         <%= Treasure.all.size %> treasures,
         <%= link_to "#{Bot.all.size} bots", bots_path %>
     </p>
