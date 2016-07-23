@@ -39,7 +39,7 @@ class Note < ActiveRecord::Base
       revision_submitted: "Someone proposed a revision to your proposal.",
       proposal_revised: "Your proposal has been revised.",
       proposal_comment: "Someone commented on your proposal.",
-      commented_vote: "Someone commented on your vote." }
+      vote_comment: "Someone commented on your vote." }
     return _actions[action.to_sym]
   end
   
