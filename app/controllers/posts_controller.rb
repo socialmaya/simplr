@@ -174,11 +174,11 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       if params[:token]
-        @post = Post.find_by_id(params[:token])
-        @post ||= Post.find_by_unique_token(params[:token])
+        @post = Post.find_by_unique_token(params[:token])
+        @post ||= Post.find_by_id(params[:token])
       else
-        @post = Post.find_by_id(params[:id])
-        @post ||= Post.find_by_unique_token(params[:id])
+        @post = Post.find_by_unique_token(params[:id])
+        @post ||= Post.find_by_id(params[:id])
       end
       redirect_to '/404' unless @post
     end
