@@ -68,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if @post
+    if @post and params[:token].to_s.size >= 20
       @post_shown = true
       @comment = Comment.new
       @comments = @post.comments
