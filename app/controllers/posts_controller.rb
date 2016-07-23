@@ -125,7 +125,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
       if @post.update(post_params)
         if params[:pictures]
           params[:pictures][:image].each do |image|
@@ -133,11 +132,10 @@ class PostsController < ApplicationController
           end
         end
         Tag.extract @post
-        format.html { redirect_to @post }
+        redirect_to show_post_path @post.unique_token
       else
-        format.html { render :edit }
+        render :edit
       end
-    end
   end
 
   def destroy
