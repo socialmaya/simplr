@@ -54,6 +54,9 @@
 	    <%= link_to fa_icon("code", "Dev"), dev_panel_path, class: :standard_nav_menu_link,
 	      title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." if dev? %>
 	      
+      <%= link_to fa_icon("users", "Anrcho"), (ENV['RAILS_ENV'].eql?('development') ? '/motions' : 'https://anrcho.com'),
+        class: :standard_nav_menu_link, id: :power_nav_menu_link %>
+	      
     	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete,
     	  class: :standard_nav_menu_link, title: "Click here to destroy your cookie.",
     	  data: { confirm: "Are you sure?" } %>

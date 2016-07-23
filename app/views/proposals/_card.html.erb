@@ -3,6 +3,12 @@
   <%= render "proposals/time_ago", item: proposal %>
   <!-- shows type of proposal to be motioned -->
   <%= render "proposals/action_type", proposal: proposal %>
+  
+  <% if proposal.ratified %>
+    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
+      show_proposal_path(proposal.unique_token), class: :verified_label %>
+  <% end %>
+  
   <!-- to be triggered when user casts the ending vote -->
   <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
   <%= render "proposals/ratification_glimmer", proposal: proposal %>

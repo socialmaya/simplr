@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :bot
+  belongs_to :vote
   belongs_to :post
   belongs_to :comment
   belongs_to :proposal
