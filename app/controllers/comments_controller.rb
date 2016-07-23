@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :invite_only
+  before_action :invite_only, except: [:show, :create, :add_image]
+  before_action :invite_only_or_anrcho, only: [:show, :create, :add_image]
+  
+  def add_image
+  end
   
   def toggle_mini_index
     @post = Post.find_by_id params[:post_id]
@@ -40,6 +44,7 @@ class CommentsController < ApplicationController
     @comment.post_id = params[:post_id]
     @comment.comment_id = params[:comment_id]
     @comment.proposal_id = params[:proposal_id]
+    @comment.vote_id = params[:vote_id]
     if current_user
       @comment.user_id = current_user.id
     else
@@ -63,14 +68,17 @@ class CommentsController < ApplicationController
         end
         # only redirects if not ajax
         unless params[:ajax_req]
-          redirect_to @post
+          redirect_to show_post_path(@comment.post.unique_token)
         else
           @comment = Comment.new
           @comments = @post.comments.last 5
         end
       elsif @comment.proposal
         Note.notify :proposal_comment, @comment.proposal, @comment.proposal.anon_token
-        redirect_to show_proposal_path @comment.proposal.unique_token
+        redirect_to show_proposal_path @comment.proposal.unique_token, comments: true
+      elsif @comment.vote
+        Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
+        redirect_to show_vote_path @comment.vote.unique_token 
       end
     else
       redirect_to :back
@@ -101,6 +109,12 @@ class CommentsController < ApplicationController
   end
 
   private
+    def invite_only_or_anrcho
+      unless invited? or anrcho?
+        redirect_to '/404'
+      end
+    end
+  
     def invite_only
       unless invited?
         redirect_to invite_only_path
@@ -114,6 +128,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:user_id, :post_id, :comment_id, :body, :image)
+      params.require(:comment).permit(:user_id, :post_id, :comment_id, :proposal_id, :vote_id, :body, :image)
     end
 end

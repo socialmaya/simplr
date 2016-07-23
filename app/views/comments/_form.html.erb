@@ -3,9 +3,11 @@
 <div class="dark_card">
   <%= render "app/random_pixels" %>
   <%= form_for((@replying ? @reply : @comment)) do |f| %>
-    
     <%= hidden_field_tag :post_id, @post.id if @post %>
     <%= hidden_field_tag(:comment_id, @comment.id) if @replying %>
+    
+    <%= hidden_field_tag :proposal_id, @proposal.id if @proposal %>
+    <%= hidden_field_tag :vote_id, @vote.id if @vote %>
     
     <div align="center">
       <%= f.text_area :body, placeholder: "Leave a #{ @replying ? 'reply' : 'comment' }...", class: :dark_text_area %>

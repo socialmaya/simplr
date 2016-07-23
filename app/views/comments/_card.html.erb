@@ -22,8 +22,10 @@
   
   <%= render "app/time_ago", item: comment %>
   
-  <span id="like_comment_link_anchor_<%= comment.id %>"></span>
-  <%= render "likes/link", item: comment, bottom_left: true %>
+  <% unless anrcho? %>
+    <span id="like_comment_link_anchor_<%= comment.id %>"></span>
+    <%= render "likes/link", item: comment, bottom_left: true %>
+  <% end %>
   
   <%= link_to "Edit", edit_comment_path(comment), class: :bottom_right_link unless anrcho? %>
 </div>
