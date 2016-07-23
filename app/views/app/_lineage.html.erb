@@ -17,7 +17,8 @@
         <% when :proposal %>
           <%= link_to "Proposal", show_proposal_path(val.unique_token), id: (:last_in_line if last_in_line) %>
         <% when :group %>
-          <%= link_to "Group (#{val.name})", group_path(val), id: (:last_in_line if last_in_line) %>
+          <%= link_to "Group#{" (" + val.name + ")" unless anrcho?}",
+            group_path(val), id: (:last_in_line if last_in_line) %>
         <% end %>
         <%= '<b> > </b>'.html_safe unless last_in_line %>
       <% end %>
