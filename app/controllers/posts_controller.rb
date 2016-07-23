@@ -178,6 +178,7 @@ class PostsController < ApplicationController
         @post ||= Post.find_by_unique_token(params[:token])
       else
         @post = Post.find_by_id(params[:id])
+        @post ||= Post.find_by_unique_token(params[:id])
       end
       redirect_to '/404' unless @post
     end
