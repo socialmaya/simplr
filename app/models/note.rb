@@ -35,6 +35,7 @@ class Note < ActiveRecord::Base
       hype_received: "Someone sent you some H Y P E",
       # proposal notification actions
       ratified: "Your proposal has been ratified.",
+      proposal_up_voted: "Someone supported your proposal.",
       proposal_blocked: "Someone blocked your proposal.",
       revision_submitted: "Someone proposed a revision to your proposal.",
       proposal_revised: "Your proposal has been revised.",

@@ -74,7 +74,7 @@ class CommentsController < ApplicationController
           @comments = @post.comments.last 5
         end
       elsif @comment.proposal
-        Note.notify :proposal_comment, @comment.proposal, @comment.proposal.anon_token
+        Note.notify :proposal_comment, @comment.proposal.unique_token, @comment.proposal.anon_token
         redirect_to show_proposal_path @comment.proposal.unique_token, comments: true
       elsif @comment.vote
         Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
