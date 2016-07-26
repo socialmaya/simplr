@@ -1,0 +1,13 @@
+<% form_id = @comment.proposal.id %>
+<% form_path = create_proposal_comment_path(@proposal.id, ajax_req: true) %>
+
+<div id="new_comment_form_<%= form_id %>">
+	<%= form_for @comment, url: form_path, method: :post, remote: true do |f| %>
+		<p>
+			<%= f.text_area :body, placeholder: "Leave a comment..." %>
+		</p>
+		<%= f.submit "Comment" %>
+	<% end %>
+</div>
+
+

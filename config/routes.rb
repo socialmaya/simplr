@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   # comments
   get 'comments/add_image', as: 'add_comment_image'
   get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'
+  post 'motions/:proposal_id/comments/create', to: 'comments#create', as: 'create_proposal_comment'
 
   # notes
   get 'notes/index', as: 'notes'

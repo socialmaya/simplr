@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :invite_only, except: [:show, :create, :add_image]
-  before_action :invite_only_or_anrcho, only: [:show, :create, :add_image]
+  before_action :invite_only, except: [:new, :show, :create, :add_image]
+  before_action :invite_only_or_anrcho, only: [:new, :show, :create, :add_image]
   
   def add_image
   end
@@ -29,7 +29,12 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    if params[:proposal_id]
+      @proposal = Proposal.find_by_id params[:proposal_id]
+      @comment = @proposal.comments.new
+    else
+      @comment = Comment.new
+    end
   end
 
   # GET /comments/1/edit
@@ -74,8 +79,9 @@ class CommentsController < ApplicationController
           @comments = @post.comments.last 5
         end
       elsif @comment.proposal
-        Note.notify :proposal_comment, @comment.proposal.unique_token, @comment.proposal.anon_token
-        redirect_to show_proposal_path @comment.proposal.unique_token, comments: true
+        @proposal = @comment.proposal
+        Note.notify :proposal_comment, @proposal.unique_token, @proposal.anon_token
+        redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
         Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
         redirect_to show_vote_path @comment.vote.unique_token 
