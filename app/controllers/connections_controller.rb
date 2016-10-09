@@ -19,9 +19,6 @@ class ConnectionsController < ApplicationController
   end
   
   def peace
-    if User.size.zero?
-      User.create name: "Forrest", password: "reeds", dev: true
-    end
     if current_user
       current_user.update_token
     end
