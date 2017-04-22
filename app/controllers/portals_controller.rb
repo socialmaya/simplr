@@ -5,7 +5,7 @@ class PortalsController < ApplicationController
   def index
     @portals = Portal.all.reverse
     for portal in @portals
-      if DateTime.current < portal.expires_at
+      if DateTime.current > portal.expires_at
         portal.destroy
       end
     end

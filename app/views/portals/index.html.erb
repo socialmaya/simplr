@@ -3,3 +3,11 @@
 <% for portal in @portals %>
   <%= render "portals/card", portal: portal %>
 <% end %>
+
+<% if @portals.empty? %>
+  <div class="card" align="center">
+    <p>
+      No portals are currently open.
+    </p>
+  </div>
+<% end %>
