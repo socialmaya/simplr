@@ -1,6 +1,10 @@
 class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show]
   
+  def add_form
+    @proposal = Proposal.new
+  end
+  
   def contributors
   end
   

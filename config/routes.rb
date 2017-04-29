@@ -125,6 +125,7 @@ Rails.application.routes.draw do
   get 'history/:token', to: 'proposals#old_versions', as: 'old_versions'
   get 'motions/load_section_links', to: 'proposals#load_section_links'
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
+  get 'make_a_motion', to: 'proposals#add_form', as: 'add_proposal_form'
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'

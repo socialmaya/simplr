@@ -1,45 +1,54 @@
 <div class="dark_card">
-  <%= form_for(@post) do |f| %>
-    <div align="center">
-      <%= hidden_field_tag :group_id, @group.id if @group %>
-      
-      <% if @editing and @post.pictures.present? %>
-        <% for picture in @post.pictures %>
-          <% if picture.image.url %>
-            <div id="post_picture_<%= picture.id %>">
-              <%= image_tag picture.image, class: :standard_post_image %>
-              <%= link_to "Remove", remove_post_picture_path(picture), method: :delete, remote: true,
-                class: "remove_post_picture_link white_link", title: "Click to remove this picture from the set",
-                data: { confirm: "Are you sure you?" } %>
-            </div>
+  <div id="regular_post_form">
+    <%= form_for(@post) do |f| %>
+      <div align="center">
+        <%= hidden_field_tag :group_id, @group.id if @group %>
+        
+        <% if @editing and @post.pictures.present? %>
+          <% for picture in @post.pictures %>
+            <% if picture.image.url %>
+              <div id="post_picture_<%= picture.id %>">
+                <%= image_tag picture.image, class: :standard_post_image %>
+                <%= link_to "Remove", remove_post_picture_path(picture), method: :delete, remote: true,
+                  class: "remove_post_picture_link white_link", title: "Click to remove this picture from the set",
+                  data: { confirm: "Are you sure you?" } %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
 
-      <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""),
-        placeholder: "Post something awesome...", class: :dark_text_area %>
+        <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""),
+          placeholder: "Post something awesome...", class: :dark_text_area %>
 
-		  <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
-			  <i class="fa fa-picture-o fa-2x dark_link"></i>
-		  <% end %>
-		  <p id="hidden_file_field" hidden>
-		    <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
-		  </p>
-
-      <% if current_user and current_user.my_groups.present? and not @group %>
-		    <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
-			    <i class="fa fa-cubes fa-2x dark_link"></i>
+		    <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
+			    <i class="fa fa-picture-o fa-2x dark_link"></i>
 		    <% end %>
-		    <p id="hidden_group_id_field" hidden>
-		      <%= select_tag :group_id, options_for_select(my_group_options) %>
+		    <p id="hidden_file_field" hidden>
+		      <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
 		    </p>
-		  <% end %>
 
-      <p>
-	      <button type="submit" name="commit" class="dark_form_button">
-	        <b><%= @post.id.nil? ? "Post" : "Save" %> <i class="fa fa-pencil"></i></b>
-	      </button>
-	    </p></br>
-    </div>
-  <% end %>
+        <% if current_user and current_user.my_groups.present? and not @group %>
+		      <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
+			      <i class="fa fa-cubes fa-2x dark_link"></i>
+		      <% end %>
+		      <p id="hidden_group_id_field" hidden>
+		        <%= select_tag :group_id, options_for_select(my_group_options) %>
+		      </p>
+		    <% end %>
+		    
+		    <%= link_to add_proposal_form_path, remote: true, title: "Make a motion" do %>
+			    <i class="fa fa-snowflake-o fa-2x dark_link" id="add_proposal_form_link"></i>
+		    <% end %>
+        <script>
+          <%= render "app/fader.js", target: "add_proposal_form_link", target_id: "" %>
+        </script>
+
+        <p>
+	        <button type="submit" name="commit" class="dark_form_button">
+	          <b><%= @post.id.nil? ? "Post" : "Save" %> <i class="fa fa-pencil"></i></b>
+	        </button>
+	      </p></br>
+      </div>
+    <% end %>
+  </div>
 </div>
