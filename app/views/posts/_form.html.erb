@@ -19,29 +19,13 @@
 
         <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""),
           placeholder: "Post something awesome...", class: :dark_text_area %>
-
-		    <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
-			    <i class="fa fa-picture-o fa-2x dark_link"></i>
-		    <% end %>
-		    <p id="hidden_file_field" hidden>
-		      <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
-		    </p>
-
-        <% if current_user and current_user.my_groups.present? and not @group %>
-		      <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
-			      <i class="fa fa-cubes fa-2x dark_link"></i>
-		      <% end %>
-		      <p id="hidden_group_id_field" hidden>
-		        <%= select_tag :group_id, options_for_select(my_group_options) %>
-		      </p>
-		    <% end %>
-		    
-		    <%= link_to add_proposal_form_path, remote: true, title: "Make a motion" do %>
-			    <i class="fa fa-snowflake-o fa-2x dark_link" id="add_proposal_form_link"></i>
-		    <% end %>
-        <script>
-          <%= render "app/fader.js", target: "add_proposal_form_link", target_id: "" %>
-        </script>
+              
+        <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
+          <i class="fa fa-picture-o fa-2x dark_link"></i>
+        <% end %>
+        <p id="hidden_file_field" hidden>
+          <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
+        </p>
 
         <p>
 	        <button type="submit" name="commit" class="dark_form_button">
@@ -50,5 +34,20 @@
 	      </p></br>
       </div>
     <% end %>
-  </div>
-</div>
+  </div> <!-- reg post form end -->
+  <% if current_user and current_user.my_groups.present? and not @group %>
+    <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
+      <i class="fa fa-cubes fa-2x dark_link"></i>
+    <% end %>
+    <p id="hidden_group_id_field" hidden>
+      <%= select_tag :group_id, options_for_select(my_group_options) %>
+    </p>
+  <% end %>
+  
+  <%= link_to add_proposal_form_path, remote: true, title: "Make a motion" do %>
+    <i class="fa fa-snowflake-o fa-2x dark_link" id="add_proposal_form_link"></i>
+  <% end %>
+  <script>
+    <%= render "app/fader.js", target: "add_proposal_form_link", target_id: "" %>
+  </script>
+</div> <!-- card end -->
