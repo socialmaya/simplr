@@ -51,7 +51,7 @@ class ProposalsController < ApplicationController
       elsif @proposal.group
         redirect_to show_group_path(@proposal.group.unique_token)
       else
-        redirect_to proposals_path
+        redirect_to root_url
       end
     else
       redirect_to :back
