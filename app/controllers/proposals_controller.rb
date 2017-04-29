@@ -3,6 +3,7 @@ class ProposalsController < ApplicationController
   
   def add_form
     @proposal = Proposal.new
+    @post = Post.new
   end
   
   def contributors

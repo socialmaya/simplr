@@ -1,2 +1,10 @@
-$("#regular_post_form").after("<%=j render 'proposals/new' %>");
-$("#regular_post_form").remove();
+var post_form = $("#new_post_form");
+var proposal_form = $("#new_proposal_form");
+
+if (post_form.length) {
+  post_form.after("<%=j render 'proposals/new' %>");
+  post_form.remove();
+} else if (proposal_form.length) {
+  proposal_form.after("<%=j render 'posts/form' %>");
+  proposal_form.remove();
+}
