@@ -3,7 +3,7 @@
   <p align="center">
     <% message = namify_note_message(note); case note.action.to_sym %>
     <% when :post_comment, :also_commented, :post_like, :post_share %>
-      <%= link_to message, post_path(note.item_id) %>
+      <%= link_to message, show_post_path(note.unique_token) %>
     <% when :comment_like, :comment_reply %>
       <%= link_to message, comment_path(note.item_id) %>
     <% when :group_invite %>
