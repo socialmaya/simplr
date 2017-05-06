@@ -2,7 +2,9 @@
 
 <% if this_user_current? %>
   <%= render "users/progress_bar", user: @user if @user.xp %>
-  <%= render "posts/form" %>
+  <div class="dark_card">
+    <%= render "posts/form" %>
+  </div>
 <% end %>
 
 <% for post in @posts %>
