@@ -217,14 +217,14 @@ class User < ActiveRecord::Base
 
   private
   
-    def gen_unique_token
-      self.unique_token = SecureRandom.urlsafe_base64
-    end
+  def gen_unique_token
+    self.unique_token = SecureRandom.urlsafe_base64
+  end
 
-    def encrypt_password
-      if self.password.present?
-        self.password_salt = BCrypt::Engine.generate_salt
-        self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
-      end
+  def encrypt_password
+    if self.password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
     end
+  end
 end
