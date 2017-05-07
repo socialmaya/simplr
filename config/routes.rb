@@ -119,6 +119,7 @@ Rails.application.routes.draw do
   get 'tutorial', to: 'proposals#tutorial', as: 'tutorial'
   get 'motions', to: 'proposals#index', as: 'proposals'
   get 'motions/add_image', to: 'proposals#add_image', as: 'add_proposal_image'
+  get 'motions/add_group', to: 'proposals#add_group_id', as: 'add_proposal_group_id'
   get 'motions/:token', to: 'proposals#show', as: 'show_proposal'
   get 'motions/switch_section/:section', to: 'proposals#switch_section', as: 'switch_section'
   get 'motions/switch_sub_section/:section', to: 'proposals#switch_sub_section', as: 'switch_sub_section'

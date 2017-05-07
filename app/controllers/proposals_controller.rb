@@ -20,6 +20,9 @@ class ProposalsController < ApplicationController
     @group = Group.find_by_token(params[:group_token])
   end
   
+  def add_group_token
+  end
+  
   def add_image
   end
   
