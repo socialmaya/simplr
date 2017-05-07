@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, length: { minimum: 4 }
   validates_confirmation_of :password
 
-  before_save :encrypt_password, :generate_token, :gen_unique_token
+  before_create :encrypt_password, :generate_token, :gen_unique_token
   after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
@@ -216,6 +216,7 @@ class User < ActiveRecord::Base
   end
 
   private
+  
     def gen_unique_token
       self.unique_token = SecureRandom.urlsafe_base64
     end
