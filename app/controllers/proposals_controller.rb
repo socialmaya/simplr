@@ -44,6 +44,7 @@ class ProposalsController < ApplicationController
   
   def create
     @proposal = Proposal.new(proposal_params)
+    @proposal.user_id = current_user.id if current_user
     @proposal.group_id = params[:group_id]
     @proposal.anon_token = anon_token
     build_action
