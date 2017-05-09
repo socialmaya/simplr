@@ -12,7 +12,7 @@
   <!-- to be triggered when user casts the ending vote -->
   <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
   <%= render "proposals/ratification_glimmer", proposal: proposal %>
-  <%= render "users/avatar_card_link", token: proposal.anon_token %>
+  <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
   <%= render "app/seent", item: proposal %>
   <%= render "proposals/history_icon_link", proposal: proposal %>
   <div id="proposal_card_spacer"></div>
