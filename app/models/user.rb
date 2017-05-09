@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :settings, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :proposals, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :bots, dependent: :destroy
@@ -75,17 +76,25 @@ class User < ActiveRecord::Base
   
   def feed
     _feed = []
+    # all posts from users followed
     for user in following
       user.posts.each { |post| _feed << post }
     end
+    # all posts from my groups
     for group in my_groups
       group.posts.each do |post|
         _feed << post unless _feed.include? post
       end
     end
+    # all of users own posts
     self.posts.each do |post|
       _feed << post unless _feed.include? post
     end
+    # gets all proposals for feed
+    Proposal.all.each do |proposal|
+      _feed << proposal unless _feed.include? proposal
+    end
+    # sorts posts/proposals chronologically
     _feed.sort_by! { |item| item.created_at }
     return _feed.reverse
   end

@@ -1,6 +1,7 @@
 class Proposal < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :group
+  belongs_to :user
   
   has_many :proposals
   has_many :comments
