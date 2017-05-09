@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
+  #private
   
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64
