@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name, length: { minimum: 3 }
   validates_presence_of :password, length: { minimum: 4 }
-  validates_confirmation_of :password
+  #validates_confirmation_of :password
 
   before_create :encrypt_password, :generate_token, :gen_unique_token
   after_create :initialize_settings
