@@ -3,11 +3,11 @@ class Proposal < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   
-  has_many :proposals
-  has_many :comments
-  has_many :tags
-  has_many :votes
-  has_many :views
+  has_many :proposals, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :views, dependent: :destroy
   
   before_create :gen_unique_token
   validates_presence_of :body
