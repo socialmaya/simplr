@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     @all_items = if current_user
       current_user.feed
     else
-      Post.all.reverse
+      User.first.posts.reverse
     end
     @items = paginate @all_items
     @char_codes = char_codes @items
