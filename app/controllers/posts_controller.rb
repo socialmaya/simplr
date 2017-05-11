@@ -5,6 +5,10 @@ class PostsController < ApplicationController
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only, except: [:show]
   before_action :invited_or_token_used, only: [:show]
+  
+  def read_more
+    @post = Post.find_by_id params[:post_id]
+  end
 
   def open_menu
   end

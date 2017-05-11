@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   post 'posts/:id/share', to: 'posts#share', as: 'share_post'
   get 'posts/:id/open_menu', to: 'posts#open_menu', as: 'open_post_menu'
   get 'posts/:id/close_menu', to: 'posts#close_menu', as: 'close_post_menu'
+  get 'posts/read_more/:post_id', to: 'posts#read_more', as: 'read_more'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
   get 'posts/:token', to: 'posts#show', as: 'show_post'
 

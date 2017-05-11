@@ -73,9 +73,17 @@
       <% end %>
 
       <% if post.body.present? %>
-	      <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
-          <%= render "app/body", item: post %>
-		    </p>
+        <% body_size = 500 %>
+        <% if post.body.size < body_size %>
+	        <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
+            <%= render "app/body", item: post %>
+		      </p>
+		    <% else %>
+	        <p class="standard_body justified_body_text" id="post_body_text_<%= post.id %>">
+            <%= post.body[0..body_size] + "... " %>
+            <%= link_to "Read more", read_more_path(post.id), remote: true %>
+		      </p>
+		    <% end %>
 		  <% end %>
     </div>
 		
