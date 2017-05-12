@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511205609) do
+ActiveRecord::Schema.define(version: 20170512184911) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 20170511205609) do
     t.integer  "index"
     t.integer  "proposal_id"
     t.integer  "vote_id"
+    t.integer  "message_id"
   end
 
   create_table "treasures", force: :cascade do |t|

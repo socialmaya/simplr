@@ -3,7 +3,8 @@ class Message < ActiveRecord::Base
   belongs_to :group
   belongs_to :connection
   
-  has_many :views
+  has_many :views, dependent: :destroy
+  has_many :tags, dependent: :destroy
   
   validate :body_or_image
   

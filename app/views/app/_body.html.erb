@@ -14,7 +14,8 @@
 		      <%= render "app/fader.js", target: "trending_tag", target_id: unique_id %>
 		    </script>
 		  <% end %>
-			<%= link_to tag.tag, search_path(query: tag.tag), id: "trending_tag_#{unique_id}" %>
+			<%= link_to tag.tag, search_path(query: tag.tag), id: "trending_tag_#{unique_id}",
+			  style: (@folder ? "color:white;" : nil) %>
 			<%= " " %>
 		<% end %>
 	<% end %>
