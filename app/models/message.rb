@@ -7,7 +7,8 @@ class Message < ActiveRecord::Base
   
   validate :body_or_image
   
-  before_create :encrypt_message
+  # encryption of messages turned off for now
+  #before_create :encrypt_message
   
   mount_uploader :image, ImageUploader
   

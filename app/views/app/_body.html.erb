@@ -1,4 +1,4 @@
-<% for word in (item.is_a?(Message) ? decrypt_message(item) : item.body).split(" ") %>
+<% for word in item.body.split(" ") %>
 	<% unless word.include? "#" and word.size > 1 %>
 	  <!-- word is rendered as plain text -->
 		<%= render "app/embed", word: word %>
