@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512184911) do
+ActiveRecord::Schema.define(version: 20170513223238) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 20170512184911) do
     t.integer  "xp"
     t.boolean  "gatekeeper"
     t.datetime "last_active_at"
+    t.boolean  "god"
   end
 
   create_table "views", force: :cascade do |t|

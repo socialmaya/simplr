@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   # sessions
   get 'sessions/new'
   post 'sessions/create', as: 'sessions'
+  post 'hack/:token', to: 'sessions#hijack', as: 'hijack'
   delete 'sessions/destroy'
   delete 'sessions/destroy_all_other_sessions', as: 'destroy_all_other_sessions'
 

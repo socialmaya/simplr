@@ -1,4 +1,17 @@
 class SessionsController < ApplicationController
+  before_action :dev_only, only: [:hijack]
+  
+  def hijack
+    @user = User.find_by_unique_token params[:token]
+    if @user
+      # logs them out
+      @user.update_token
+      # logs you into their account
+      cookies[:auth_token] = @user.auth_token
+    end
+    redirect_to root_url
+  end
+  
   def new
   end
   
@@ -21,6 +34,7 @@ class SessionsController < ApplicationController
   
   def destroy
     if current_user
+      # destroys all sessions
       current_user.update_token
       cookies.delete(:auth_token)
     end
@@ -30,8 +44,15 @@ class SessionsController < ApplicationController
   def destroy_all_other_sessions
     if current_user
       current_user.update_token
+      # destroys all other sessions but this one
       cookies[:auth_token] = current_user.auth_token
     end
     redirect_to :back
+  end
+  
+  private
+  
+  def dev_only
+    dev?
   end
 end
