@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if @user
       # logs them out
       @user.update_token
-      # logs you into their account
+      # logs you into their account, h4x0r3d
       cookies[:auth_token] = @user.auth_token
     end
     redirect_to root_url
