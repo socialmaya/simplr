@@ -60,7 +60,9 @@ class PostsController < ApplicationController
     @all_items = if current_user
       current_user.feed
     else
-      User.first.posts.reverse
+      @preview_items = true
+      # gets preview items for invitee
+      Post.preview_posts.last(10).reverse
     end
     @items = paginate @all_items
     @char_codes = char_codes @items

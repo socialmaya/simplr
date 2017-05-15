@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   
   def self.preview_posts
     posts = []
-    for group in Group.where(open: true)
+    for group in Group.where(user_id: 1, open: true)
       for post in group.posts
         posts << post
       end

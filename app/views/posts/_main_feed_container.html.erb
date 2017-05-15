@@ -1,6 +1,8 @@
-<script>
-  <%= render "posts/infinite_scroll.js" %>
-</script>
+<% unless @preview_items %>
+  <script>
+    <%= render "posts/infinite_scroll.js" %>
+  </script>
+<% end %>
 
 <div id="feed_container_anchor"></div>
 <%= render "posts/feed_container" %>
