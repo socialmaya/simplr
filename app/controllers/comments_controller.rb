@@ -80,7 +80,8 @@ class CommentsController < ApplicationController
         end
       elsif @comment.proposal
         @proposal = @comment.proposal
-        Note.notify :proposal_comment, @proposal.unique_token, @proposal.anon_token
+        Note.notify :proposal_comment, @proposal.unique_token, @proposal.anon_token \
+          unless @proposal.anon_token.eql? anon_token
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
         Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
