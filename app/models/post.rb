@@ -20,12 +20,22 @@ class Post < ActiveRecord::Base
   
   def self.preview_posts
     posts = []
+    # gets all posts by first user from open groups
     for group in Group.where(open: true)
       for post in group.posts
         posts << post if post.user_id.eql? 1
       end
     end
-    return posts.sort
+    # gets all anonymous posts
+    for post in Post.where(user_id: nil).where.not(anon_token: nil)
+      posts << post unless posts.include? post
+    end
+    # gets all non group proposals in voting stage
+    for proposal in Proposal.globals.voting
+      posts << proposal
+    end
+    posts.sort_by! { |item| item.created_at }
+    return posts
   end
   
   def commenters
