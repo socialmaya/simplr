@@ -1,18 +1,16 @@
-<script>
-  <%= render "app/bg_fader.js" %>
-</script>
+
 
 <script>
   <%= render "app/fader.js", target: "invite_only_header", target_id: "" %>
 </script>
 
 <h2 id="invite_only_header">
-  Social Maya is invite-only <i class="fa fa-warning"></i>
+  Social Maya - A secret place for cool art ॐ
 </h2>
 
-<div class="card">
+<div class="dark_card">
   <p align="center">
-    Feel free to use the form below to log in if you've already been invited and are a registered user.
+    Feel free to use the form below to log in if you've already been invited and are a registered user. Try finding another way if you haven't been invited yet. There are many paths to Maya.
   </p>
 </div>
 
@@ -20,7 +18,7 @@
 
 <div class="dark_card">
   <p class="justified_body_text" align="center">
-    Haven't been invited yet? Try <%= link_to "Anrcho.com", "https://anrcho.com", id: :anrcho_link_text, title: "Anrcho - Change the World Securely" %> instead and change the world securely with local comrades. Anrcho is designed to help people organize through consensus, on a peer to peer basis, and with minimal hierarchy.
+    Haven't been invited yet? Try <%= link_to "Anrcho", proposals_path, id: :anrcho_link_text, title: "Anrcho - Change the World Securely" %> instead and change the world securely with local comrades. Anrcho is designed to help people organize through consensus, on a peer to peer basis, and with minimal hierarchy.
   </p>
 </div>
 
