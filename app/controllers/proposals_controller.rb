@@ -32,7 +32,7 @@ class ProposalsController < ApplicationController
 #      cookies.delete(:auth_token)
 #    end
     # for use in development
-    cookies.permanent[:at_anrcho] ||= true.to_s
+    # cookies.permanent[:at_anrcho] ||= true.to_s
     build_feed :main
   end
   
