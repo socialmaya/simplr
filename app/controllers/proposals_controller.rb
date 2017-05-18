@@ -28,6 +28,7 @@ class ProposalsController < ApplicationController
   
   def index
     @anrcho = true
+    @proposal = Proposal.new
 #    if current_user
 #      # if user had visited social_maya via anrcho
 #      cookies.delete(:auth_token)
@@ -57,7 +58,7 @@ class ProposalsController < ApplicationController
       elsif @proposal.group
         redirect_to show_group_path(@proposal.group.unique_token)
       else
-        redirect_to root_url
+        redirect_to proposals_path
       end
     else
       redirect_to :back
