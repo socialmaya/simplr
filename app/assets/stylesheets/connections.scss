@@ -35,3 +35,10 @@
   height: 35px;
   background: white;
 }
+
+// for mobile
+@media screen and (max-width: 975px) {
+  #invite_only_header {
+    font-size: 18px;
+  }
+}
