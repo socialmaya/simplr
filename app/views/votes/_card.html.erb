@@ -3,7 +3,7 @@
 <% if vote.present? and vote.body.present? %>
   <div class="card">
     <div class="card_corner_cut_out"></div>
-    <%= render "users/avatar_card_link", token: vote.anon_token %>
+    <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
     <%= render "votes/time_ago", vote: vote %>
 	  
 	  <div align="center">

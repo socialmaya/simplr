@@ -2,20 +2,20 @@ class VotesController < ApplicationController
   def new_up_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal and not @proposal.anon_token.eql? anon_token
-      @up_vote = Vote.up_vote(@proposal, anon_token)
+      @up_vote = Vote.up_vote(@proposal, current_user, anon_token)
     end
   end
   
   def new_down_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal and not @proposal.anon_token.eql? anon_token
-      @down_vote = Vote.down_vote(@proposal, anon_token)
+      @down_vote = Vote.down_vote(@proposal, current_user, anon_token)
     end
   end
   
   def cast_up_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
-    @up_vote = Vote.up_vote(@proposal, anon_token, params[:body])
+    @up_vote = Vote.up_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @up_vote
     if @up_vote.body.to_s.size > 5
       Note.notify :proposal_up_voted, @proposal.unique_token, @up_vote.anon_token
@@ -24,7 +24,7 @@ class VotesController < ApplicationController
   
   def cast_down_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
-    @down_vote = Vote.down_vote(@proposal, anon_token, params[:body])
+    @down_vote = Vote.down_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @down_vote
   end
   

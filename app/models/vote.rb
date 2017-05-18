@@ -2,6 +2,7 @@ class Vote < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :comment
   belongs_to :vote
+  belongs_to :user
   
   has_many :comments
   has_many :votes
@@ -35,11 +36,13 @@ class Vote < ActiveRecord::Base
     return _verifiable
   end
   
-  def self.up_vote obj, token, body=""
-    unless token.eql? obj.anon_token
+  def self.up_vote obj, user, token, body=""
+    unless token.eql? obj.anon_token or (user and user.id.eql? obj.user_id)
       vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
       if not vote
-        vote = obj.votes.create flip_state: 'up', anon_token: token, body: body
+        vote = obj.votes.new flip_state: 'up', anon_token: token, body: body
+        vote.user_id = user.id if user
+        vote.save
       else
         vote.body = body if body.present?
         vote.flip_state = 'up'
@@ -50,11 +53,13 @@ class Vote < ActiveRecord::Base
     return vote
   end
   
-  def self.down_vote obj, token, body=""
-    unless token.eql? obj.anon_token
+  def self.down_vote obj, user, token, body=""
+    unless token.eql? obj.anon_token or (user and user.id.eql? obj.user_id)
       vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
       if not vote
-        vote = obj.votes.create flip_state: 'down', anon_token: token, body: body
+        vote = obj.votes.new flip_state: 'down', anon_token: token, body: body
+        vote.user_id = user.id if user
+        vote.save
       else
         vote.body = body if body.present?
         vote.flip_state = 'down'

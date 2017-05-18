@@ -19,7 +19,13 @@
     <div class="voter_tokens_container">
       <% for vote in votes.last 6 %>
         <div class="voter_token_container">
-          <%= render "users/anon_avatar", token: vote.anon_token %>
+          <% if vote.anon_token %>
+            <%= render "users/anon_avatar", token: vote.anon_token %>
+          <% elsif vote.user %>
+            <%= link_to user_path(vote.user), title: "#{vote.user.name}" do %>
+              <%= image_tag vote.user.image, class: :user_avatar_image %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>
