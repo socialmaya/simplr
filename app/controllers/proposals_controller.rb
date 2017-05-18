@@ -27,6 +27,7 @@ class ProposalsController < ApplicationController
   end
   
   def index
+    @anrcho = true
 #    if current_user
 #      # if user had visited social_maya via anrcho
 #      cookies.delete(:auth_token)
