@@ -27,6 +27,7 @@ class ConnectionsController < ApplicationController
   end
   
   def zen
+    cookies.clear
     cookies[:zen] = true
     redirect_to root_url
   end
