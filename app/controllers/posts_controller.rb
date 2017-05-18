@@ -64,7 +64,11 @@ class PostsController < ApplicationController
       # gets preview items for invitee
       Post.preview_posts.last(10).reverse
     end
-    @items = paginate @all_items
+    @items = if @preview_items
+      @all_items
+    else
+      paginate @all_items
+    end    
     @char_codes = char_codes @items
     @post = Post.new
     # records user viewing posts
