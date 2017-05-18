@@ -1,11 +1,13 @@
-<% unless @preview_items %>
+<% if @preview_items %>
+  <%= render "posts/feed" %>
+<% else %>
   <script>
     <%= render "posts/infinite_scroll.js" %>
   </script>
-<% end %>
 
-<div id="feed_container_anchor"></div>
-<%= render "posts/feed_container" %>
+  <div id="feed_container_anchor"></div>
+  <%= render "posts/feed_container" %>
+<% end %>
 
 <% if @items.empty? %>
   <div class="card">
