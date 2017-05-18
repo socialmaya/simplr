@@ -1,7 +1,7 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
-  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite]
+  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :zen]
   before_action :user_access, only: [:invites, :followers]
   
   def invite_someone
@@ -23,6 +23,11 @@ class ConnectionsController < ApplicationController
       current_user.update_token
     end
     cookies.clear
+    redirect_to root_url
+  end
+  
+  def zen
+    cookies[:zen] = true
     redirect_to root_url
   end
   

@@ -27,10 +27,10 @@ class ProposalsController < ApplicationController
   end
   
   def index
-    if current_user
-      # if user had visited social_maya via anrcho
-      cookies.delete(:auth_token)
-    end
+#    if current_user
+#      # if user had visited social_maya via anrcho
+#      cookies.delete(:auth_token)
+#    end
     # for use in development
     cookies.permanent[:at_anrcho] ||= true.to_s
     build_feed :main

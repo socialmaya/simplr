@@ -27,5 +27,5 @@
     <%= render "likes/link", item: comment, bottom_left: true %>
   <% end %>
   
-  <%= link_to "Edit", edit_comment_path(comment), class: :bottom_right_link unless anrcho? %>
+  <%= link_to "Edit", edit_comment_path(comment), class: :bottom_right_link unless comment.proposal %>
 </div>
