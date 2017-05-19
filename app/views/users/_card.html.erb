@@ -13,7 +13,7 @@
     
     <% if defined? @followers and not current_user.eql? @user \
       and current_user.has_power? 'steal_followers', :not_expired %>
-      <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :top_right_link %>
+      <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :bottom_right_link %>
     <% end %>
     
     <p class="user_card_name_and_bio">
