@@ -1,6 +1,6 @@
 module VotesHelper
   def humanity_confirmed?
-    cookies[:simple_captcha_validated].present?
+    cookies[:simple_captcha_validated].present? or current_user
   end
   
   def recently_up_voted? proposal
