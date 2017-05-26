@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
   get 'zen', to: 'connections#zen', as: 'zen'
+  get 'zenful', to: 'connections#zen'
 
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
