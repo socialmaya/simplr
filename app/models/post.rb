@@ -30,8 +30,8 @@ class Post < ActiveRecord::Base
     for post in Post.where(user_id: nil).where.not(anon_token: nil)
       posts << post unless posts.include? post
     end
-    # gets all non group proposals in voting stage
-    for proposal in Proposal.globals.voting
+    # gets all non group proposals not in revision
+    for proposal in Proposal.globals.main
       posts << proposal
     end
     posts.sort_by! { |item| item.created_at }
