@@ -91,8 +91,8 @@ class User < ActiveRecord::Base
     self.posts.each do |post|
       _feed << post unless _feed.include? post
     end
-    # gets all proposals for feed
-    Proposal.globals.voting.each do |proposal|
+    # gets all active or ratified global proposals for feed
+    Proposal.globals.main.each do |proposal|
       _feed << proposal unless _feed.include? proposal
     end
     # sorts posts/proposals chronologically
