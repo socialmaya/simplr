@@ -3,7 +3,12 @@
   <p align="center">
     <% message = namify_note_message(note); case note.action.to_sym %>
     <% when :post_comment, :also_commented, :post_like, :post_share %>
-      <%= link_to message, show_post_path(Post.find_by_id(note.item_id).unique_token) %>
+      <% post = Post.find_by_id note.item_id %>
+      <% if post %>
+        <%= link_to message, show_post_path(Post.find_by_id(note.item_id).unique_token) %>
+      <% else %>
+        <%= message %> Content no longer available.
+      <% end %>
     <% when :comment_like, :comment_reply %>
       <%= link_to message, comment_path(note.item_id) %>
     <% when :group_invite %>
