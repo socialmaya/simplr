@@ -53,7 +53,9 @@ class UsersController < ApplicationController
   def show
     if @user
       @post = Post.new
-      @posts = @user.posts.last(10).reverse
+      @posts = @user.posts + @user.proposals.globals.main
+      @posts.sort_by! { |p| p.created_at }
+      @posts = @posts.last(10).reverse
       @user_shown = true
       # records being seen
       seent @user
