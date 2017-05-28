@@ -2,8 +2,9 @@ class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show]
   
   def add_form
-    @proposal = Proposal.new
-    @post = Post.new
+    @group = Group.find_by_id params[:group_id]
+    @proposal = if @group then @group.proposals.new else Proposal.new end
+    @post = if @group then @group.posts.new else Post.new end
   end
   
   def contributors

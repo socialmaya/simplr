@@ -1,16 +1,24 @@
-<% unless anrcho? %>
-  <!-- Shows Social Maya group -->
-  <%= render "groups/card", group: @group %>
+<%= render "groups/card", group: @group %>
 
-  <% if group_auth @group and @group.requests.present? %>
-    <div class="card">
-      <div align="center">
-        <%= link_to "There are requests pending.", requests_path(@group) %>
-      </div>
+<% if group_auth @group and @group.requests.present? %>
+  <div class="card">
+    <div align="center">
+      <%= link_to "There are requests pending.", requests_path(@group) %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-  <% if group_auth @group or group_member_auth @group %>
+<% if group_auth @group or group_member_auth @group %>
+  <% if @group.proposals.size > @group.posts.size %>
+    <div class="dark_card">
+      <%= render "proposals/new" %>
+    </div>
+    <!-- allows user to switch between differen proposal categories -->
+    <%= render "proposals/section_links" if @all_items.present? %>
+    
+    <div id="feed_container_anchor"></div>
+    <%= render "proposals/feed_container", parents: "groups" %>
+  <% else %>
     <div class="dark_card">
       <%= render "posts/form" %>
     </div>
@@ -18,26 +26,12 @@
       <%= render "posts/card", post: post %>
     <% end %>
   <% end %>
+<% end %>
 
-  <% if @items.empty? %>
-    <div class="card">
-      <p align="center">
-        There aren't any posts yet.
-      </p>
-    </div>
-  <% end %>
-<% else %>
-  <!-- Shows Anrcho group -->
-  <% unless @expired %>
-	  <%= render "groups/anrcho_card", group: @group %>
-    <!-- allows user to switch between differen proposal categories -->
-    <%= render "proposals/section_links" if @all_items.present? %>
-    
-    <div id="feed_container_anchor"></div>
-    <%= render "proposals/feed_container", parents: "groups" %>
-  <% else %>
-	  <div class="card">
-		  <p align="center"><%= if @is_a_token then "This group no longer exists." else "Invalid token." end %></p>
-	  </div>
-  <% end %>
+<% if @items.empty? %>
+  <div class="card">
+    <p align="center">
+      There aren't any posts yet.
+    </p>
+  </div>
 <% end %>

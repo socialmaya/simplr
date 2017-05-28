@@ -41,20 +41,11 @@ class GroupsController < ApplicationController
   def show
     if @group
       @group_shown = true
-      unless anrcho?
-        @items = @group.posts.last(10).reverse
-        @post = Post.new
-        # records posts being seen
-        @items.each {|item| seent item}
-      else
-        Group.delete_all_old
-        # only goes to anrcho groups if token used and not expired
-        if @group and params[:token].present? and not @group.expires?
-          build_proposal_feed :all, @group
-        else
-          redirect_to '/404'
-        end
-      end
+      @items = @group.posts.last(10).reverse
+      @post = Post.new
+      @proposal = Proposal.new
+      # records posts being seen
+      @items.each {|item| seent item}
       # records group being seen
       seent @group
     else
