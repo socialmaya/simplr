@@ -15,8 +15,9 @@
           title: "Originally posted by #{post.original.anon_token}" %>
       </span>
     <% elsif post.group %>
+      <% group_name = if post.group.name.size > 15 then post.group.name[0..9] + "..." else post.group.name end %>
       <span class="posted_label">
-        posted to <%= link_to post.group.name, post.group, class: :posted_link,
+        posted to <%= link_to group_name, post.group, class: :posted_link,
           title: "Group (#{post.group.name})" %>
       </span>
     <% end %>
