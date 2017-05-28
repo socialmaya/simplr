@@ -98,7 +98,8 @@ class Proposal < ActiveRecord::Base
       update_manifesto: "New manifesto",
       request_feature: "New feature",
       bug_fix: "Fix to a bug",
-      just_a_test: "Test motion" }
+      just_a_test: "Test motion",
+      grant_title: "Grant title" }
   end
   
   def self.group_action_types
@@ -191,7 +192,10 @@ class Proposal < ActiveRecord::Base
   end
   
   private
-    def gen_unique_token
+  
+  def gen_unique_token
+    begin
       self.unique_token = SecureRandom.urlsafe_base64
-    end
+    end while Proposal.exists? unique_token: self.unique_token
+  end
 end

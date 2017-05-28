@@ -44,9 +44,11 @@
   <% end %>
 </div> <!-- reg post form end -->
 
-<%= link_to add_proposal_form_path, remote: true, title: "Make a motion" do %>
-  <i class="fa fa-snowflake-o fa-2x dark_link" id="add_proposal_form_link"></i>
+<%= link_to add_proposal_form_path, remote: true, title: "Make a motion",
+  class: "dark_link bottom_left_link", id: :add_proposal_form_link do %>
+  Make a motion <i class="fa fa-hand-o-up"></i>
 <% end %>
+
 <script>
   <%= render "app/fader.js", target: "add_proposal_form_link", target_id: "" %>
 </script>

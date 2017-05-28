@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :treasures
   
-  before_create :gen_unique_token, :gen_passphrase
+  before_create :gen_uniqueness, :gen_passphrase
 
   mount_uploader :image, ImageUploader
   
@@ -73,16 +73,31 @@ class Group < ActiveRecord::Base
   end
   
   private
-    def gen_passphrase
-      if self.pass_protected
-        pass = Passphrase::Passphrase.new(
-          number_of_words: 1, languages: ["english"]
-        ); pass = pass.passphrase.to_s.to_p
-        self.passphrase = pass
-      end
+  
+  def gen_uniqueness
+    gen_unique_token
+    gen_unique_name
+  end
+  
+  def gen_unique_name
+    unless self.name.present?
+      name = $name_generator.next_name
+      self.name = "#{name}_" + self.unique_token
     end
-    
-    def gen_unique_token
+  end
+  
+  def gen_passphrase
+    if self.pass_protected
+      pass = Passphrase::Passphrase.new(
+        number_of_words: 1, languages: ["english"]
+      ); pass = pass.passphrase.to_s.to_p
+      self.passphrase = pass
+    end
+  end
+  
+  def gen_unique_token
+    begin
       self.unique_token = SecureRandom.urlsafe_base64
-    end
+    end while Group.exists? unique_token: self.unique_token
+  end
 end

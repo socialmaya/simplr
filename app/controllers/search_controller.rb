@@ -65,6 +65,7 @@ class SearchController < ApplicationController
           if match
             @results << item
             @result_types[item.class.to_s.downcase.to_sym] +=1
+            @group_found_by_tag = if item.is_a?(Group) and match_by_tag then true end
           end
         end
         # to prevent duplicate treasures from being created

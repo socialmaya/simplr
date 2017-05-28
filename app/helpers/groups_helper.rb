@@ -3,11 +3,19 @@ module GroupsHelper
     true if group and group.open
   end
   
+  def group_structure_options
+    options = [["Choose a social structure", nil],
+      ["Model of consensus", "consensus"],
+      ["Direct democracy", "direct"],
+      ["Autocratic (default)", "autocratic"]]
+    return options
+  end
+  
   def featured_groups
     featured = []
     Group.where.not(image: nil).each do |group|
       # featured unless logged in and already joined
-      featured << group unless my_groups.include? group
+      featured << group unless my_groups.include? group or group.hidden
     end
     return featured.last(4).reverse
   end

@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
     unless current_user # signed up and and logged in
       if cookies[:token_timestamp].nil? or \
         cookies[:token_timestamp].to_datetime < 1.week.ago
-        cookies.permanent[:token] = SecureRandom.urlsafe_base64
+        cookies.permanent[:token] = $name_generator.next_name + "_" + SecureRandom.urlsafe_base64
         cookies.permanent[:token_timestamp] = DateTime.current
         cookies.permanent[:simple_captcha_validated] = ""
       end

@@ -57,16 +57,19 @@ class Post < ActiveRecord::Base
   end
   
   private
-    def gen_unique_token
+  
+  def gen_unique_token
+    begin
       self.unique_token = SecureRandom.urlsafe_base64
-    end
+    end while Post.exists? unique_token: self.unique_token
+  end
     
-    def text_or_image?
-      if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
-        unless original_id and (body.present? or (Post.find_by_id(original_id) \
-          and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
-          errors.add(:post, "cannot be empty.")
-        end
+  def text_or_image?
+    if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
+      unless original_id and (body.present? or (Post.find_by_id(original_id) \
+        and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
+        errors.add(:post, "cannot be empty.")
       end
     end
+  end
 end

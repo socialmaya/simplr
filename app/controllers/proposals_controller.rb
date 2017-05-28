@@ -28,6 +28,7 @@ class ProposalsController < ApplicationController
   
   def index
     @anrcho = true
+    cookies[:anrcho] = true
     @proposal = Proposal.new
 #    if current_user
 #      # if user had visited social_maya via anrcho

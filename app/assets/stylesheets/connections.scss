@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.invite_only_img {
+  position: relative;
+  max-width: 557.5px;
+  margin: 0 auto;
+  margin-bottom: 7.5px;
+  width: 97.5%;
+}
+
 .folder_card_link {
   padding: 5px 0px;
 }

@@ -228,7 +228,9 @@ class User < ActiveRecord::Base
   private
   
   def gen_unique_token
-    self.unique_token = SecureRandom.urlsafe_base64
+    begin
+      self.unique_token = SecureRandom.urlsafe_base64
+    end while User.exists? unique_token: self.unique_token
   end
 
   def encrypt_password
