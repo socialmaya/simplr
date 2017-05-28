@@ -51,6 +51,7 @@ class Treasure < ActiveRecord::Base
       # Discover is never returned as random
       discover: 'Discover secrets',
       hype_others: 'Hype up other users',
+      anarchy: 'Make motions or proposals',
       see_views: "See who's viewing posts",
       invade_groups: 'Invade private groups',
       create_bots: 'Create bots to perform tasks',

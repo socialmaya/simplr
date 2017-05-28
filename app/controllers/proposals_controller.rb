@@ -37,6 +37,12 @@ class ProposalsController < ApplicationController
     # for use in development
     # cookies.permanent[:at_anrcho] ||= true.to_s
     build_feed :main
+    # grants Power of Anarchy
+    if current_user and not current_user.has_power? 'anarchy'
+      treasure = current_user.treasures.new power: 'anarchy'
+      # can now make motions and proposals from homepage
+      treasure.save
+    end
   end
   
   def new
