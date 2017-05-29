@@ -41,10 +41,14 @@ class GroupsController < ApplicationController
   def show
     if @group
       @group_shown = true
-      @post = Post.new
-      @proposal = Proposal.new
-      build_proposal_feed :all, @group
-      @all_items.each { |item| seent item }
+      if @group.proposals.size > @group.posts.size
+        @proposal = Proposal.new
+        build_proposal_feed :all, @group
+        @all_items.each { |item| seent item }
+      else
+        @post = Post.new
+        @items = @group.posts.last(10).reverse
+      end
       # records group being seen
       seent @group
     else
