@@ -8,6 +8,7 @@ class Proposal < ActiveRecord::Base
   has_many :tags, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   before_create :gen_unique_token
   validates_presence_of :body

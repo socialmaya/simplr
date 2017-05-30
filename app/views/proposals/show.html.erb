@@ -5,6 +5,9 @@
 <% end %>
 
 <%= render "proposals/card", proposal: @proposal %>
+
+<%= render "posts/liked_and_viewed_by" %>
+
 <%= render "proposals/sub_section_links", proposal: @proposal %>
 
 <% if @show_votes %>

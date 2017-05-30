@@ -13,7 +13,11 @@
   <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
   <%= render "proposals/ratification_glimmer", proposal: proposal %>
   <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
-  <%= render "app/seent", item: proposal %>
+  
+  
+  <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
+  <%= render "likes/link", item: proposal %>
+  
   <%= render "proposals/history_icon_link", proposal: proposal %>
   <div id="proposal_card_spacer"></div>
   <div align="center">
@@ -25,5 +29,20 @@
 	  <!-- anchor for inserting new comment form -->
 	  <div id="new_form_anchor_<%= proposal.id %>"></div>
   </div>
+  
+  <table class="bottom_left_link">
+      <tr>
+        <td>
+          <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
+          <%= render "likes/link", item: proposal %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <%= render "app/seent", item: proposal %>
+        </td>
+      </tr>
+    </table>
 </div>
 

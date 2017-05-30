@@ -1,10 +1,13 @@
 <% if @likes.present? %>
-  <div class="card">
-    <div align="center">
+  <div class="dark_card">
+    <script>
+      <%= render "app/fader.js", target: "liked_by_text", target_id: "0" %>
+    </script>
+    <div align="center" id="liked_by_text_0">
       Liked by:
         <% user_likes = @likes.where.not(user_id: nil); anon_likes = @likes.where.not(anon_token: nil) %>
         <% for like in user_likes %>
-          <%= link_to like.user.name, like.user if like.user %><%= ", " \
+          <%= link_to like.user.name, like.user, class: :white_link if like.user %><%= ", " \
             unless like.eql? user_likes.last %>
         <% end %>
         <%= "and" if user_likes.present? and anon_likes.present? %>
@@ -13,7 +16,7 @@
   </div>
 <% end %>
 
-<% if @views.present? and (current_user and current_user.has_power? 'see_views' or dev?) %>
+<% if @views.present? and (current_user and current_user.has_power? 'see_views' or dev? or @proposal) %>
   <div class="dark_card">
     <script>
       <%= render "app/fader.js", target: "seen_by_text", target_id: "0" %>

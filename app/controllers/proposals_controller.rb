@@ -92,6 +92,8 @@ class ProposalsController < ApplicationController
       @revisions = @proposal.proposals
       @revision = Proposal.new
       
+      @views = @proposal.views
+      
       @old_versions = @proposal.old_versions
       
       if params[:revisions] and @proposal.requires_revision

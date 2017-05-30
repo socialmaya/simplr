@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528191027) do
+ActiveRecord::Schema.define(version: 20170530193930) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170528191027) do
     t.string   "unique_token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "proposal_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -300,6 +301,7 @@ ActiveRecord::Schema.define(version: 20170528191027) do
     t.string   "ip_address"
     t.integer  "proposal_id"
     t.integer  "message_id"
+    t.string   "locale"
   end
 
   create_table "votes", force: :cascade do |t|
