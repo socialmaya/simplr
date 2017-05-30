@@ -110,7 +110,7 @@ class ProposalsController < ApplicationController
   
   # Proposal sections: :voting, :revision, :ratified
   def switch_section
-    @group = Group.anrcho.find_by_unique_token params[:group_token]
+    @group = Group.find_by_unique_token params[:group_token]
     build_feed params[:section], @group
   end
   
