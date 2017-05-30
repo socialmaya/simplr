@@ -14,10 +14,6 @@
   <%= render "proposals/ratification_glimmer", proposal: proposal %>
   <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
   
-  
-  <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
-  <%= render "likes/link", item: proposal %>
-  
   <%= render "proposals/history_icon_link", proposal: proposal %>
   <div id="proposal_card_spacer"></div>
   <div align="center">
@@ -36,12 +32,14 @@
           <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
           <%= render "likes/link", item: proposal %>
         </td>
-        <td>
-          ·
-        </td>
-        <td>
-          <%= render "app/seent", item: proposal %>
-        </td>
+        <% if proposal.views.present? %>
+          <td>
+            ·
+          </td>
+          <td>
+            <%= render "app/seent", item: proposal %>
+          </td>
+        <% end %>
       </tr>
     </table>
 </div>

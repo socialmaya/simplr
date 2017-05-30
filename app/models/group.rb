@@ -81,8 +81,7 @@ class Group < ActiveRecord::Base
   
   def gen_unique_name
     unless self.name.present?
-      name = $name_generator.next_name
-      self.name = "#{name}_" + self.unique_token
+      self.name = $name_generator.next_name
     end
   end
   

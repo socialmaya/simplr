@@ -31,6 +31,8 @@ class LikesController < ApplicationController
         Post.find_by_id params[:post_id]
       elsif params[:comment_id]
         Comment.find_by_id params[:comment_id]
+      elsif params[:proposal_id]
+        Proposal.find_by_id params[:proposal_id]
       end
     end
 end
