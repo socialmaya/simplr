@@ -3,28 +3,28 @@
 </script>
 
 <h2 id="invite_only_header">
-  Social Maya - A secret place for cool art
+  Social Maya
 </h2>
 
-<div class="dark_card">
-  <p id="invite_only_text" class="justified_body_text" align="center">
-    Feel free to use the form below to log in if you've already been invited and are a registered user. Try finding another way if you haven't been invited yet.
+<div class="dark_card" align="center">
+  <p id="invite_only_text" class="justified_body_text">
+    Use the form below to log in if you've already been invited and are a registered user. Try finding another way if you haven't been invited yet.
   </p>
+  <div align="center">
+    <%= image_tag "parthenon1.png", class: :invite_only_img %>
+  </div>
 </div>
 
 <%= render "sessions/form" %>
 
-<div align="center">
-  <%= image_tag "parthenon1.png", class: :invite_only_img %>
-</div>
-
 <div class="dark_card">
   <p class="justified_body_text" align="center">
-    Haven't been invited yet? Try <%= link_to "Anrcho", proposals_path, id: :anrcho_link_text, title: "Anrcho - Change the World Securely" %> instead and change the world securely with local comrades. Anrcho is designed to help people organize through consensus, on a peer to peer basis, and with minimal hierarchy.
+    Haven't been invited yet? Try <%= link_to "Anrcho.com", proposals_path, id: :anrcho_link_text, title: "Anrcho - Model of Consensus/Voting Platform" %> instead and help get your community more organized, with software specifically designed to gauge and build consensus in groups. Use <%= link_to "Anrcho.com", proposals_path, id: :anrcho_link_text_1, title: "Anrcho - Model of Consensus/Voting Platform" %> to help people organize through consensus, on a peer to peer basis, and with minimal hierarchy.
   </p>
   <%= image_tag "banner.gif", class: :standard_post_image %>
 </div>
 
 <script>
   <%= render "app/fader.js", target: "anrcho_link_text", target_id: "" %>
+  <%= render "app/fader.js", target: "anrcho_link_text_1", target_id: "" %>
 </script>

@@ -93,6 +93,7 @@ class ProposalsController < ApplicationController
       @revision = Proposal.new
       
       @views = @proposal.views
+      @likes = @proposal.likes
       
       @old_versions = @proposal.old_versions
       
