@@ -16,7 +16,7 @@ module UsersHelper
       # featured unless logged in and already joined
       featured << user unless current_user and (current_user.eql? user or current_user.following.include? user)
     end
-    return featured.last(4).reverse
+    return featured.sample(4)
   end
   
   def user_mentioned word
