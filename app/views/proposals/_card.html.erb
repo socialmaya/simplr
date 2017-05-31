@@ -26,21 +26,7 @@
 	  <div id="new_form_anchor_<%= proposal.id %>"></div>
   </div>
   
-  <table class="bottom_left_link">
-      <tr>
-        <td>
-          <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
-          <%= render "likes/link", item: proposal %>
-        </td>
-        <% if proposal.views.present? %>
-          <td>
-            ·
-          </td>
-          <td>
-            <%= render "app/seent", item: proposal %>
-          </td>
-        <% end %>
-      </tr>
-    </table>
+  <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
+  <%= render "likes/link", item: proposal, bottom_left: true %>
 </div>
 
