@@ -1,6 +1,6 @@
 module NotesHelper
   def namify_note_message note
-    if note.message.include? "Someone"
+    if note.message and note.message.include? "Someone"
       if User.find_by_id note.sender_id
         return note.message.gsub("Someone", User.find(note.sender_id).name)
       elsif note.sender_token.present?
