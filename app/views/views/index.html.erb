@@ -1,0 +1,19 @@
+<h2 class="standard_page_header">Views <i class="fa fa-eye"></i></h2>
+
+<% for view in @views %>
+  <% if view.locale %>
+  <div class="dark_card" align="center">
+    <p color="white">
+      <%= if view.locale.present? then view.locale else "No locale available." end %>
+    </p>
+  </div>
+  <% end %>
+<% end %>
+
+<% if View.where.not(locale: nil).size < 1 %>
+  <div class="dark_card" align="center">
+    <p>
+      There isn't any data coming from views right now.
+    </p>
+  </div>
+<% end %>
