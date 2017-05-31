@@ -17,7 +17,7 @@ module GroupsHelper
       # featured unless logged in and already joined
       featured << group unless my_groups.include? group or group.hidden
     end
-    return featured.last(4).reverse
+    return featured.sample(4)
   end
   
   def my_group_options
