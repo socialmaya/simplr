@@ -32,7 +32,7 @@ class View < ActiveRecord::Base
   
   def set_locale
     if self.ip_address
-      self.locale = View.get_locale self.ip_address
+      self.locale = View.get_locale(self.ip_address)[:address]
     end
   end
 end
