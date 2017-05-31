@@ -6,7 +6,7 @@ class View < ActiveRecord::Base
   belongs_to :comment
   belongs_to :proposal
   
-  before_create :get_locale
+  before_create :set_locale
   
   def self.get_locale ip=nil
     ip = if ip then ip else self.ip_address end
