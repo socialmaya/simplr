@@ -9,6 +9,7 @@
         <%= Post.all.size %> posts,
         <%= link_to "#{Proposal.all.size} motions", proposals_path %>,
         <%= Vote.all.size %> votes,
+        <%= link_to "#{Views.all.size} views", views_path %>,
         <%= Comment.all.size %> comments,
         <%= Message.all.size %> messages,
         <%= Connection.folders.size %> conversations,

@@ -154,6 +154,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :notes
+  resources :views
   resources :bots
 
   # The priority is based upon order of creation: first created -> highest priority.
