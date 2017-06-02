@@ -33,6 +33,7 @@ class Note < ActiveRecord::Base
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted.",
       hype_received: "Someone sent you some H Y P E",
+      like_like: "Someone liked your like.",
       # proposal notification actions
       ratified: "Your proposal has been ratified.",
       proposal_up_voted: "Someone supported your proposal.",
@@ -40,7 +41,10 @@ class Note < ActiveRecord::Base
       revision_submitted: "Someone proposed a revision to your proposal.",
       proposal_revised: "Your proposal has been revised.",
       proposal_comment: "Someone commented on your proposal.",
-      vote_comment: "Someone commented on your vote." }
+      proposal_like: "Someone liked your proposal.",
+      vote_verified: "Someone verified on your vote.",
+      vote_comment: "Someone commented on your vote.",
+      vote_like: "Someone liked your vote." }
     return _actions[action.to_sym]
   end
   

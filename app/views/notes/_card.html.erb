@@ -28,6 +28,8 @@
       <%= link_to note.message, show_proposal_path(note.item_token) if note.item_token %>
     <% when :proposal_blocked, :revision_submitted %>
       <%= link_to note.message, show_proposal_path(token: note.item_token, revisions: true) %>
+    <% when :vote_verified, :vote_like, :vote_comment %>
+      <%= link_to note.message, show_vote_path(token: note.item_token) %>
     <% end %>
   </p>
 </div>

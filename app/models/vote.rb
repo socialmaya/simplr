@@ -4,9 +4,10 @@ class Vote < ActiveRecord::Base
   belongs_to :vote
   belongs_to :user
   
-  has_many :comments
-  has_many :votes
-  has_many :tags
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   before_create :gen_unique_token
   

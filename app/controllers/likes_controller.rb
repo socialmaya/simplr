@@ -10,7 +10,8 @@ class LikesController < ApplicationController
     end
     if like.save
       if (current_user and not @item.user.eql? current_user) or (anon_token and not @item.anon_token.eql? anon_token)
-        Note.notify "#{@item.class.to_s.downcase}_like".to_sym, (@item.is_a?(Proposal) ? @item.unique_token : @item),
+        Note.notify "#{@item.class.to_s.downcase}_like".to_sym,
+          (@item.is_a?(Proposal) || @item.is_a?(Vote) ? @item.unique_token : @item),
           (@item.user ? @item.user : @item.anon_token), (current_user ? current_user : anon_token)
       end
     end
@@ -33,6 +34,10 @@ class LikesController < ApplicationController
         Comment.find_by_id params[:comment_id]
       elsif params[:proposal_id]
         Proposal.find_by_id params[:proposal_id]
+      elsif params[:vote_id]
+        Vote.find_by_id params[:vote_id]
+      elsif params[:like_id]
+        Like.find_by_id params[:like_id]
       end
     end
 end
