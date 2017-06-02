@@ -1,7 +1,7 @@
 <% if item.user and item.user.image %>
   <div class="<%= defined?(position) ? position.to_s : 'left_mini_avatar' %>">
     <%= link_to item.user,
-      title: "#{item.user.name}" + (god? && user.views.present? ? ", #{item.user.views.last.locale}" : "") do %>
+      title: "#{item.user.name}" + (god? && item.user.views.present? ? ", #{item.user.views.last.locale}" : "") do %>
       <%= image_tag item.user.image, class: :user_avatar_image %>
     <% end %>
   </div>
