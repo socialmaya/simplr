@@ -1,4 +1,10 @@
 module UsersHelper
+  def last_locale user
+    if god? and user.views.present? and user.views.last.locale.present?
+      return user.views.last.locale
+    end
+  end
+  
   def following_options
     options = [["Choose a user", nil]]
     for user in current_user.following
