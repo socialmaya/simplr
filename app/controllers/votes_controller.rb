@@ -18,7 +18,8 @@ class VotesController < ApplicationController
     @up_vote = Vote.up_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @up_vote
     if @up_vote.body.to_s.size > 5
-      Note.notify :proposal_up_voted, @proposal.unique_token, @up_vote.anon_token
+      Note.notify :proposal_up_voted, @proposal.unique_token, (@proposal.user ? @proposal.user : @proposal.anon_token),
+        (@up_vote.user ? @up_vote.user : @up_vote.anon_token)
     end
   end
   

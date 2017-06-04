@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   
   def hijack
     @user = User.find_by_unique_token params[:token]
+    @user ||= User.find_by_id params[:token]
     if @user
       # logs them out
       @user.update_token
