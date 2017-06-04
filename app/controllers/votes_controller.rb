@@ -47,7 +47,7 @@ class VotesController < ApplicationController
         @vote.update verified: false
         @vote.votes.destroy_all
         Note.notify :vote_reversed, @vote.unique_token,
-          (@vote.user ? : user : @vote.anon_token),
+          (@vote.user ? user : @vote.anon_token),
           (current_user ? current_user : anon_token)
       end
     end
