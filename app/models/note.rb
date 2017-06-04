@@ -44,6 +44,7 @@ class Note < ActiveRecord::Base
       proposal_comment: "Someone commented on your proposal.",
       proposal_like: "Someone liked your proposal.",
       vote_verified: "Someone verified your vote.",
+      vote_reversed: "Someone reversed your vote.",
       vote_comment: "Someone commented on your vote.",
       vote_like: "Someone liked your vote." }
     return _actions[action.to_sym]
