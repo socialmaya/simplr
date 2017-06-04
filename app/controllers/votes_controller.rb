@@ -27,7 +27,7 @@ class VotesController < ApplicationController
     @proposal = Proposal.find_by_unique_token(params[:token])
     @down_vote = Vote.down_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @down_vote
-    if @up_vote
+    if @down_vote
       Note.notify :proposal_down_voted, @proposal.unique_token, (@proposal.user ? @proposal.user : @proposal.anon_token),
         (@down_vote.user ? @down_vote.user : @down_vote.anon_token)
     end
