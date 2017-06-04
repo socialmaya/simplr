@@ -37,6 +37,7 @@ class Note < ActiveRecord::Base
       # proposal notification actions
       ratified: "Your proposal has been ratified.",
       proposal_up_voted: "Someone supported your proposal.",
+      proposal_down_voted: "Someone voted against your proposal.",
       proposal_blocked: "Someone blocked your proposal.",
       revision_submitted: "Someone proposed a revision to your proposal.",
       proposal_revised: "Your proposal has been revised.",

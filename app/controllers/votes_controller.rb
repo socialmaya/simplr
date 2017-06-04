@@ -17,7 +17,7 @@ class VotesController < ApplicationController
     @proposal = Proposal.find_by_unique_token(params[:token])
     @up_vote = Vote.up_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @up_vote
-    if @up_vote.body.to_s.size > 5
+    if @up_vote
       Note.notify :proposal_up_voted, @proposal.unique_token, (@proposal.user ? @proposal.user : @proposal.anon_token),
         (@up_vote.user ? @up_vote.user : @up_vote.anon_token)
     end
@@ -27,6 +27,10 @@ class VotesController < ApplicationController
     @proposal = Proposal.find_by_unique_token(params[:token])
     @down_vote = Vote.down_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @down_vote
+    if @up_vote
+      Note.notify :proposal_down_voted, @proposal.unique_token, (@proposal.user ? @proposal.user : @proposal.anon_token),
+        (@down_vote.user ? @down_vote.user : @down_vote.anon_token)
+    end
   end
   
   def reverse
