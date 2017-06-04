@@ -5,12 +5,21 @@
     <% when :post_comment, :also_commented, :post_like, :post_share %>
       <% post = Post.find_by_id note.item_id %>
       <% if post %>
-        <%= link_to message, show_post_path(Post.find_by_id(note.item_id).unique_token) %>
+        <%= link_to message, show_post_path(post.unique_token) %>
+        <% if note.action.to_sym.eql? :post_like %>
+          <% like = if note.sender_id then post.likes.find_by_user_id(note.sender_id) \
+            else post.likes.find_by_anon_token(note.sender_token) end %>
+          <span id="like_like_link_anchor_<%= like.id %>"></span>
+          <%= render "likes/link", item: like, bottom_left: true %>
+        <% end %>
       <% else %>
         <%= message %> Content no longer available.
       <% end %>
     <% when :comment_like, :comment_reply %>
       <%= link_to message, comment_path(note.item_id) %>
+    <% when :like_like %>
+      <% post = Like.find(note.item_id).post if Like.find_by_id note.item_id %>
+      <%= link_to message, show_post_path(post.unique_token) if post %>
     <% when :group_invite %>
       <%= link_to message, invites_path(note.user) %>
     <% when :group_request %>
