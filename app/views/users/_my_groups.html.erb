@@ -1,8 +1,7 @@
 <%= link_to (user.eql?(current_user) ? my_groups_path : their_groups_path(user)) do %>
   <table align="center">
     <tr>
-      <% _groups = []; user.my_groups.each { |group| _groups << group if group.image.url } %>
-      <% for group in _groups.last(4).reverse %>
+      <% for group in featured_groups %>
         <td>
           <%= image_tag group.image, class: :my_groups_group_icon %>
         </td>

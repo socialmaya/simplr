@@ -1,14 +1,14 @@
 class VotesController < ApplicationController
   def new_up_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
-    if @proposal and not @proposal.anon_token.eql? anon_token
+    if @proposal and not (@proposal.anon_token.eql? anon_token and anon_token)
       @up_vote = Vote.up_vote(@proposal, current_user, anon_token)
     end
   end
   
   def new_down_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
-    if @proposal and not @proposal.anon_token.eql? anon_token
+    if @proposal and not (@proposal.anon_token.eql? anon_token and anon_token)
       @down_vote = Vote.down_vote(@proposal, current_user, anon_token)
     end
   end

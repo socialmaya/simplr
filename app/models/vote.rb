@@ -39,8 +39,12 @@ class Vote < ActiveRecord::Base
   end
   
   def self.up_vote obj, user, token, body=""
-    unless token.eql? obj.anon_token or (user and user.id.eql? obj.user_id)
-      vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
+    unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
+      vote = if token
+        obj.votes.find_by_anon_token token
+      elsif user
+        obj.votes.find_by_user_id user.id
+      end
       if not vote
         vote = obj.votes.new flip_state: 'up', anon_token: token, body: body
         vote.user_id = user.id if user
@@ -56,8 +60,12 @@ class Vote < ActiveRecord::Base
   end
   
   def self.down_vote obj, user, token, body=""
-    unless token.eql? obj.anon_token or (user and user.id.eql? obj.user_id)
-      vote = obj.votes.find_by_anon_token(token) if obj.votes.find_by_anon_token(token)
+    unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
+      vote = if token
+        obj.votes.find_by_anon_token token
+      elsif user
+        obj.votes.find_by_user_id user.id
+      end
       if not vote
         vote = obj.votes.new flip_state: 'down', anon_token: token, body: body
         vote.user_id = user.id if user

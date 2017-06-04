@@ -17,11 +17,11 @@
     <%= link_to verified_label, path_to_proposal, class: :top_right_link %>
     
     <div class="voter_tokens_container">
-      <% for vote in votes.last 6 %>
+      <% for vote in votes.sample 6 %>
         <div class="voter_token_container">
-          <% if vote.anon_token %>
-            <%= render "users/anon_avatar", token: vote.anon_token %>
-          <% elsif vote.user %>
+          <% if vote.anon_token or (vote.user and vote.user.image.url.nil?) %>
+            <%= render "users/anon_avatar", token: vote.anon_token, user: vote.user %>
+          <% elsif vote.user and vote.user.image %>
             <%= link_to user_path(vote.user), title: "#{vote.user.name}" do %>
               <%= image_tag vote.user.image, class: :user_avatar_image %>
             <% end %>

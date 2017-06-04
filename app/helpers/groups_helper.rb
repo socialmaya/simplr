@@ -15,7 +15,7 @@ module GroupsHelper
     featured = []
     Group.where.not(image: nil).each do |group|
       # featured unless logged in and already joined
-      featured << group unless my_groups.include? group or group.hidden
+      featured << group unless my_groups.include? group or group.hidden or group.image.url.nil?
     end
     return featured.sample(4)
   end
