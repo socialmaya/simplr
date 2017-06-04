@@ -1,4 +1,4 @@
-<% @groups = my_groups.reverse %>
+<% @groups = my_groups.sort_by {|g| (g.posts.present? ? g.posts.last.created_at : g.created_at) }.reverse %>
 
 <%= render "groups/form" %>
 
