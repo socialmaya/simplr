@@ -92,6 +92,12 @@ class User < ActiveRecord::Base
     self.posts.each do |post|
       _feed << post unless _feed.include? post
     end
+    # all anonymous posts if dev or has power
+    if dev?
+      for post in Post.where.not(anon_token: nil)
+        _feed << post unless _feed.include? post
+      end
+    end
     # gets all active or ratified global proposals for feed
     Proposal.globals.main.each do |proposal|
       _feed << proposal unless _feed.include? proposal
