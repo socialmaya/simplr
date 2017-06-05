@@ -22,7 +22,7 @@ module GroupsHelper
   
   def my_group_options
     options = [["Choose a group", nil]]
-    for group in my_groups
+    for group in my_groups.sort_by {|g| (g.posts.present? ? g.posts.last.created_at : g.created_at) }.reverse
       # inserts group as an invite option unless invitee is already a member or already invited
       unless @user and (@user.my_groups.include? group or @user.invites.find_by_group_id group.id) and not @user_shown
         options << [group.name, group.id]
