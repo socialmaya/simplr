@@ -6,11 +6,12 @@ class User < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :bots, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :proposals, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :views, dependent: :destroy
   has_many :treasures
-  has_many :proposals
   has_many :groups
-  has_many :views
-  has_many :votes
 
   validates_uniqueness_of :name
   validates_presence_of :name, length: { minimum: 3 }

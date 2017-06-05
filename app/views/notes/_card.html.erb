@@ -17,6 +17,8 @@
       <% end %>
     <% when :comment_like, :comment_reply %>
       <%= link_to message, comment_path(note.item_id) %>
+    <% when :user_like %>
+      <%= link_to message, user_path(item.item_id) %>
     <% when :like_like %>
       <% post = Like.find(note.item_id).post if Like.find_by_id note.item_id %>
       <%= link_to message, show_post_path(post.unique_token) if post %>

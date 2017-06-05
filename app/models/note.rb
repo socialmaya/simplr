@@ -33,6 +33,7 @@ class Note < ActiveRecord::Base
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted.",
       hype_received: "Someone sent you some H Y P E",
+      user_like: "Someone liked your profile.",
       like_like: "Someone liked your like.",
       # proposal notification actions
       ratified: "Your proposal has been ratified.",
