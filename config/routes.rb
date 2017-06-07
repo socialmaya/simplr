@@ -154,6 +154,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :notes
+  resources :likes
   resources :views
   resources :bots
 

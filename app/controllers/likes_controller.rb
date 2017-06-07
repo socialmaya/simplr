@@ -1,6 +1,10 @@
 class LikesController < ApplicationController
   before_action :set_item
   
+  def show
+    @like = Like.find_by_id params[:id]
+  end
+  
   def create
     like = @item.likes.new
     if current_user

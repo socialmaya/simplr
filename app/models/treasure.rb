@@ -53,6 +53,7 @@ class Treasure < ActiveRecord::Base
       hype_others: 'Hype up other users',
       anarchy: 'Make motions or proposals',
       see_views: "See who's viewing posts",
+      like_likes: "Like that someone liked something",
       invade_groups: 'Invade private groups',
       create_bots: 'Create bots to perform tasks',
       invite_someone: 'Invite someone to the site',
