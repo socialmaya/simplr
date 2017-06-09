@@ -1,5 +1,6 @@
 <script>
   <%= render "app/fader.js", target: "invite_only_header", target_id: "" %>
+  <%= render "app/fader.js", target: "invite_only_txt", target_id: "" %>
 </script>
 
 <h2 id="invite_only_header">
@@ -7,12 +8,9 @@
 </h2>
 
 <div class="dark_card" align="center">
-  <p>
-    You've stumbled upon a small village in cyberspace and the gates are closed! Unless of course you know the password.
+  <p id="invite_only_txt">
+    You've stumbled across a small village in cyberspace and the gates are closed! Unless of course you know the password.
   </p>
-  <div align="center">
-    <%= image_tag "parthenon1.png", class: :invite_only_img %>
-  </div>
 </div>
 
 <%= render "sessions/form" %>
