@@ -11,7 +11,7 @@
   
   <!-- to be triggered when user casts the ending vote -->
   <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
-  <%= render "proposals/ratification_glimmer", proposal: proposal %>
+  <%= render "proposals/ratification_glimmer", proposal: proposal if proposal.ratified %>
   <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
   
   <%= render "proposals/history_icon_link", proposal: proposal %>
@@ -30,3 +30,6 @@
   <%= render "likes/link", item: proposal, bottom_left: true %>
 </div>
 
+<script>
+  <%= render "app/fader.js", target: "proposal_card", target_id: proposal.id, background: true, slow: true %>
+</script>
