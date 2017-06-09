@@ -37,7 +37,13 @@
   text-align: center;
   font-size: 50px;
   margin: 12.5px 0px;
-  letter-spacing: 20px;
+  letter-spacing: 15px;
+}
+
+#invited_message_header {
+  font-size: 50px;
+  letter-spacing: 15px;
+  margin: 12.5px 0px;
 }
 
 #generate_invite_button {
@@ -51,5 +57,8 @@
 @media screen and (max-width: 975px) {
   #invite_only_header {
     font-size: 20px;
+  }
+  #invited_message_header {
+    font-size: 17.5px;
   }
 }

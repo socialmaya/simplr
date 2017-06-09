@@ -69,7 +69,9 @@ class Treasure < ActiveRecord::Base
       game: 'Game - Play and win to receive a prize',
       prize: 'Prize - rewarded with power or high XP',
       kanye: 'Kanye - nothing but text (dead end)',
-      hype: 'Hype - A nugget of pure positivity' }
+      hype: 'Hype - A nugget of pure positivity',
+      love: 'Love - Love other users posts',
+      whoa: 'Whoa man - Say who to other users posts' }
   end
   
   private
