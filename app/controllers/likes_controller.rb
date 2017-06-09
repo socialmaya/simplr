@@ -13,9 +13,14 @@ class LikesController < ApplicationController
     else
       like.anon_token = anon_token
     end
+    if params[:love]
+      like.love = true
+    elsif params[:whoa]
+      like.whoa = true
+    end
     if like.save
       if (current_user and not @item.user.eql? current_user) or (anon_token and not @item.anon_token.eql? anon_token)
-        Note.notify "#{@item.class.to_s.downcase}_like".to_sym,
+        Note.notify "#{@item.class.to_s.downcase}_#{like.love ? 'love' : (like.whoa ? 'whoa' : 'like')}".to_sym,
           (@item.is_a?(Proposal) || @item.is_a?(Vote) ? @item.unique_token : @item),
           (@item.user ? @item.user : @item.anon_token), (current_user ? current_user : anon_token)
       end
