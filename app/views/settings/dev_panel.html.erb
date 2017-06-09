@@ -2,22 +2,24 @@
 
 <div class="card">
   <div align="center">
-    <p>
-      Totals:
-        <%= link_to "#{User.all.size} users", users_path %>,
-        <%= link_to "#{Group.all.size} groups", groups_path %>,
-        <%= Post.all.size %> posts,
-        <%= link_to "#{Proposal.all.size} motions", proposals_path %>,
-        <%= Vote.all.size %> votes,
-        <%= link_to "#{View.all.size} views", views_path %>,
-        <%= Comment.all.size %> comments,
-        <%= Message.all.size %> messages,
-        <%= Connection.folders.size %> conversations,
-        <%= Connection.invites.size %> invites,
-        <%= Connection.invites.where(redeemed: true).size %> redeemed invites,
-        <%= link_to "#{Portal.all.size} portals open", portals_path %>,
-        <%= Treasure.all.size %> treasures,
-        <%= link_to "#{Bot.all.size} bots", bots_path %>
+    <p><b>Dev totals:</b> 
+      <%= Connection.invites.size %> invites,
+      <%= Connection.invites.where(redeemed: true).size %> redeemed invites,
+      <%= link_to "#{Portal.all.size} portals open", portals_path %>,
+      <%= Treasure.all.size %> treasures,
+      <%= link_to "#{Bot.all.size} bots", bots_path %>
+    </p>
+    <p><b>User totals:</b> 
+      <%= link_to "#{User.all.size} users", users_path %>,
+      <%= Post.all.size %> posts,
+      <%= Comment.all.size %> comments,
+      <%= Message.all.size %> messages,
+      <%= Connection.folders.size %> conversations,
+      <%= link_to "#{Group.all.size} groups", groups_path %>
+    </p>
+    <p><b>Anrcho totals:</b> 
+      <%= link_to "#{Proposal.all.size} motions", proposals_path %>,
+      <%= Vote.all.size %> votes
     </p>
     <%= link_to 'Reinitialize all user settings <i class="fa fa-cog"></i>'.html_safe,
       update_all_user_settings_path, method: :put %>

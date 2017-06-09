@@ -37,6 +37,7 @@
   text-align: center;
   font-size: 50px;
   margin: 12.5px 0px;
+  letter-spacing: 20px;
 }
 
 #generate_invite_button {
@@ -49,6 +50,6 @@
 // for mobile
 @media screen and (max-width: 975px) {
   #invite_only_header {
-    font-size: 45px;
+    font-size: 20px;
   }
 }
