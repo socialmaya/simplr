@@ -3,6 +3,7 @@ class LikesController < ApplicationController
   
   def show
     @like = Like.find_by_id params[:id]
+    @comments = @like.comments
   end
   
   def create

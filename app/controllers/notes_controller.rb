@@ -9,11 +9,6 @@ class NotesController < ApplicationController
     @notes = @notes.last(10).reverse
   end
   
-  def destroy
-    @notes.destroy_all
-    redirect_to :back
-  end
-  
   private
   
   def current_notes
