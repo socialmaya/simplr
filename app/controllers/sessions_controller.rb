@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
   before_action :dev_only, only: [:hijack]
+  before_action :dev_env_only, only: [:dev_login]
+  
+  def dev_login
+    cookies.permanent[:auth_token] = User.first.auth_token
+    redirect_to root_url
+  end
   
   def hijack
     @user = User.find_by_unique_token params[:token]
@@ -52,6 +58,10 @@ class SessionsController < ApplicationController
   end
   
   private
+  
+  def dev_env_only
+    Rails.env.development?
+  end
   
   def dev_only
     dev?
