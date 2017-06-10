@@ -87,6 +87,9 @@ class User < ActiveRecord::Base
       group.posts.each do |post|
         _feed << post unless _feed.include? post
       end
+      group.proposals.each do |proposal|
+        _feed << proposal unless _feed.include? proposal
+      end
     end
     # all of users own posts
     self.posts.each do |post|

@@ -1,6 +1,15 @@
 <div class="card" id="proposal_card_<%= proposal.id %>">
 	<div class="card_corner_cut_out"></div>
   <%= render "proposals/time_ago", item: proposal %>
+  
+  <% if proposal.group %>
+    <% group_name = if proposal.group.name.size > 15 then proposal.group.name[0..9] + "..." else proposal.group.name end %>
+    <span class="posted_label">
+      made a motion in <%= link_to group_name, proposal.group, class: :posted_link,
+        title: "Group (#{proposal.group.name})" %>
+    </span>
+  <% end %>
+  
   <!-- shows type of proposal to be motioned -->
   <%= render "proposals/action_type", proposal: proposal %>
   
