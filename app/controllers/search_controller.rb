@@ -45,6 +45,8 @@ class SearchController < ApplicationController
           case @query
           when "posts", "Posts"
             match = true if _class.eql? Post and not item.group
+          when "proposals", "Proposals", "motions", "Motions", "motion", "proposal", "Proposal", "Motion"
+            match = true if _class.eql? Proposal and not item.group
           when "groups", "Groups"
             match = true if _class.eql? Group
           when "users", "Users"
