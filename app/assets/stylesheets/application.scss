@@ -75,11 +75,11 @@ textarea {
 }
 
 .right_pane {
-  position: fixed;
-  right: 10%;
-  top: 200px;
-  width: 15%;
-  height: 300px;
+  position: absolute;
+  right: -265px;
+  top: 0px;
+  width: 250px;
+  height: 500px;
   background: rgb(10, 10, 10);
 }
 
