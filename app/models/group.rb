@@ -17,6 +17,13 @@ class Group < ActiveRecord::Base
   scope :global, -> { where.not(name: nil).where anon_token: nil }
   scope :anrcho, -> { where.not(anon_token: nil).where name: nil }
   
+  def total_items_unseen user
+    member = self.members.find_by_user_id user.id
+    member = self if member.nil? and self.user_id.eql? user.id
+    items_total = self.posts.size + self.proposals.size
+    return items_total - member.total_items_seen.to_i
+  end
+  
   def self.delete_all_old
     # ephemerality for all anrcho groups
     anrcho.delete_all "created_at < '#{1.week.ago}'"

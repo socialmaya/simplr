@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609172456) do
+ActiveRecord::Schema.define(version: 20170611172507) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170609172456) do
     t.string   "invite_password"
     t.boolean  "grant_gk_access"
     t.boolean  "portal"
+    t.integer  "total_items_seen"
   end
 
   create_table "game_pieces", force: :cascade do |t|
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 20170609172456) do
     t.datetime "expires_at"
     t.boolean  "hidden"
     t.string   "social_structure"
+    t.integer  "total_items_seen"
   end
 
   create_table "likes", force: :cascade do |t|
