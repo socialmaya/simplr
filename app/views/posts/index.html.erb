@@ -1,8 +1,6 @@
 <div class="dark_card">
   <%= render "posts/form" %>
-  <% if Rails.env.development? %>
-    <%= render "app/right_pane" %>
-  <% end %>
+  <%= render "app/right_pane" %>
 </div>
 
 <%= render "posts/main_feed_container" %>

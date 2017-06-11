@@ -51,6 +51,16 @@ class ApplicationController < ActionController::Base
   end
     
   def seent item
+    # initial update for group activity
+    if item.is_a? Group and current_user
+      if item.user_id.eql? current_user.id
+        item.update total_items_seen: item.items_total
+      else
+        member = item.members.find_by_user_id current_user.id
+        member.update total_items_seen: item.items_total
+      end
+    end
+    # continues to normal seent
     views = if item.is_a? User
       View.where profile_id: item.id
     else

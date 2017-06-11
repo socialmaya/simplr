@@ -20,8 +20,11 @@ class Group < ActiveRecord::Base
   def total_items_unseen user
     member = self.members.find_by_user_id user.id
     member = self if member.nil? and self.user_id.eql? user.id
-    items_total = self.posts.size + self.proposals.size
     return items_total - member.total_items_seen.to_i
+  end
+  
+  def items_total
+    self.posts.size + self.proposals.size
   end
   
   def self.delete_all_old
