@@ -18,6 +18,10 @@
   </head>
   <body>
     <%= render "app/header" if invited? or anrcho? %>
+    <% if invited? and Rails.env.development? %>
+      <%= render "app/left_pane" %>
+      <%= render "app/right_pane" %>
+    <% end %>
     <%= yield %>
     <%= render "app/footer" %>
   </body>

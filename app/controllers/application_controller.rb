@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
       when 'forrestwilkins.com'
         'Forrest Wilkins'
       else
-        's o c i a l m a y a'
+        'Social Maya'
       end
     end
   end
