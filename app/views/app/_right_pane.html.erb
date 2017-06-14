@@ -2,13 +2,19 @@
   <div class="right_pane">
     <div align="center">Group activity</div>
     <% for group in current_user.my_groups.select{ |g| !g.total_items_unseen(current_user).zero? } %>
-      <%= link_to group, class: "white_link group_activity" do %>
-        <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
       <div>
-        <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
-        <%= group_name + " +#{group.total_items_unseen(current_user)}"%>
+        <%= link_to group, class: "dark_link group_activity" do %>
+          <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
+          <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
+          <%= group_name + " +#{group.total_items_unseen(current_user)}"%>
+        <% end %>
       </div>
-      <% end %>
+    <% end %>
+    <div class="trending_tags_title" align="center">Trending tags</div>
+    <% for tag in Tag.trending %>
+      <div>
+        <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
+      </div>
     <% end %>
   </div>
 <% end %>
