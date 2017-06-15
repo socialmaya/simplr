@@ -2,6 +2,7 @@
 
 function loading_glimmer() {
   var chars = <%=j @char_codes.to_json %>
+  var bits = <%=j @char_bits.to_json %>
   var num = 0;
 
   setInterval(function() {

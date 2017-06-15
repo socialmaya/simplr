@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
-    :page_size, :paginate, :reset_page, :char_codes, :settings, :dev?, :anrcho?, :invited?,
+    :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?
   
   include SimpleCaptcha::ControllerHelpers
@@ -131,10 +131,13 @@ class ApplicationController < ActionController::Base
   def char_bits items
     bits = []; for item in items
       for char in (item.body.present? ? item.body : item.image.to_s).split("")
-        _bits = char.codepoints.first.to_s(2)
-        bits << _bits
+        for bit in ("%04b" % char.codepoints.first).split("")
+          bits << bit.to_i
+        end
       end
     end
+    puts "\n" + bits.to_s + "\n"
+    return bits
   end
   
   def char_codes items
