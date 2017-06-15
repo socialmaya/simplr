@@ -128,6 +128,15 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def char_bits items
+    bits = []; for item in items
+      for char in (item.body.present? ? item.body : item.image.to_s).split("")
+        _bits = char.codepoints.first.to_s(2)
+        bits << _bits
+      end
+    end
+  end
+  
   def char_codes items
     codes = []; for item in items
       for char in (item.body.present? ? item.body : item.image.to_s).split("")
