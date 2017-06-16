@@ -68,8 +68,9 @@ class PostsController < ApplicationController
       @all_items
     else
       paginate @all_items
-    end    
+    end
     @char_codes = char_codes @items
+    @char_bits = char_bits @items
     @post = Post.new
     # records user viewing posts
     @items.each {|item| seent item}

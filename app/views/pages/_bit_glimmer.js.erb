@@ -1,12 +1,8 @@
 // pages
 
-function loading_glimmer() {
-  var chars = <%=j @char_codes.to_json %>;
-  var bits = <%=j @char_bits.to_json %>;
-  // counter for char codes
+function loading_bit_glimmer() {
+  var bits = <%=j @char_bits.to_json; puts @char_bits.to_json %>;
   var num = 0;
-  // counter for bits
-  var b_num = 0;
 
   setInterval(function() {
 	  var id = Math.round(Math.random() * 16);
@@ -15,16 +11,12 @@ function loading_glimmer() {
 	  var b = Math.round(Math.random() * 255 * chars[num + 2]);
 	  var pixel = $("#loading_grid_pixel_" + id);
 	  pixel.css("background", "rgb(" + r + ", " + g + ", " + b + ")");
-	  pixel.text(bits[b_num].toString()); // errors
-	  num += 3;
-	  b_num += 1;
+	  pixel.text(bits[b_num]);
+	  num += 1;
 	  if (num >= chars.length) {
 		  num = 0;
-	  }
-	  if (b_num >= bits.length) {
-		  b_num = 0;
 	  }
   }, 1);
 }
 
-loading_glimmer();
+loading_bit_glimmer();
