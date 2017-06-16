@@ -5,7 +5,7 @@
   <% if message.body.present? %>
     <div class="<%= own_item?(message) ? 'right' : 'left' %>_message_body_text"
       title="Sent <%= time_ago(time_ago_in_words(message.created_at)) %>">
-      <div id="bub_txt" style="<%= 'float:right;' if own_item?(message) %>">
+      <div id="bub_txt_<%= message.unique_token %>" style="<%= 'float:right;' if own_item?(message) %>">
         <%= render "app/body", item: message %>
       </div>
     </div>
