@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     @all_items = proposals.send(section.to_sym) + (group ? group.posts : [])
     @all_items.sort_by! { |item| item.created_at }
     @char_codes = char_codes @all_items
+    @char_bits = char_bits @all_items
     @items = paginate @all_items
     for item in @items
       seent item
