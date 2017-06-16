@@ -4,11 +4,11 @@
 		  <%= render "pages/glimmer.js" %>
 	  </script>
     
-    <div class="avatar_container">
+    <div class="buffer_wheel_grid_containor">
       <%= link_to show_treasure_path(Treasure.random(current_user).unique_token) do %>
         <% 16.times do |num| %>
           <% rgb = random_color %>
-          <div class="avatar_pixel buffer_pixel_bit" id="loading_grid_pixel_<%= num %>"
+          <div class="buffer_pixel" id="loading_grid_pixel_<%= num %>"
 	          style="background:rgb(<%= "#{rgb[0]}, #{rgb[1]}, #{rgb[2]}" %>);"></div>
         <% end %>
       <% end %>

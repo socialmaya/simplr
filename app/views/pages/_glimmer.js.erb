@@ -16,6 +16,7 @@ function loading_glimmer() {
 	  var pixel = $("#loading_grid_pixel_" + id);
 	  pixel.css("background", "rgb(" + r + ", " + g + ", " + b + ")");
 	  pixel.text(bits[b_num].toString());
+	  pixel.css("color", "rgb(" + b + ", " + r + ", " + g + ")");
 	  num += 3;
 	  b_num += 1;
 	  if (num >= chars.length) {
