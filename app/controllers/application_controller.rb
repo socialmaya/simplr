@@ -217,15 +217,16 @@ class ApplicationController < ActionController::Base
   private
     def get_correct_char_str item
       # gets correct string to push to glimmer
-      item_string = "just in case of error" # incase there's no match for some reason idk yet
       item_string = if item.body.present?
         item.body
       # for motions only
       elsif item.image.url
-        item.image.url
+        item.image.to_s
       # for posts only
       elsif item.pictures.present?
-        item.pictures.first.image.url
+        item.pictures.first.image.to_s
+      else
+        "just in case of error" # incase there's no match for some reason idk yet
       end
       return item_string
     end
