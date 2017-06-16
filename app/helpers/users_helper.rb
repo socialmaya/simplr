@@ -3,7 +3,7 @@ module UsersHelper
     locale_and_time_ago = ""
     if god?
       locale_and_time_ago << user.views.last.locale if user.views.present? and user.views.last.locale.present?
-      locale_and_time_ago << "last active " + time_ago(time_ago_in_words(user.last_active_at)) if user.last_active_at
+      locale_and_time_ago << ", last active " + time_ago(time_ago_in_words(user.last_active_at)) if user.last_active_at
     end
     return locale_and_time_ago
   end
