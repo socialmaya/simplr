@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
     @new_message = Message.new
     if @folder
       @folder_shown = true
-      @messages = @folder.messages.last 5
+      @messages = @folder.messages.last 10
       set_last_message_seen
       set_last_im
       for message in @messages
