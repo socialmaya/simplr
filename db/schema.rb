@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616005233) do
+ActiveRecord::Schema.define(version: 20170616102741) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20170616005233) do
     t.integer  "connection_id"
     t.string   "sender_token"
     t.string   "salt"
+    t.string   "unique_token"
   end
 
   create_table "notes", force: :cascade do |t|
