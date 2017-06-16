@@ -130,8 +130,10 @@ class ApplicationController < ActionController::Base
   end
   
   def char_bits items
-    bits = []; for item in items
-      for char in (item.body.present? ? item.body : item.image.to_s).split("")
+    bits = [];
+    for item in items
+      item_string = get_correct_char_str item
+      for char in item_string.split("")
         for bit in ("%04b" % char.codepoints.first).split("")
           bits << bit.to_i
         end
@@ -141,8 +143,10 @@ class ApplicationController < ActionController::Base
   end
   
   def char_codes items
-    codes = []; for item in items
-      for char in (item.body.present? ? item.body : item.image.to_s).split("")
+    codes = [];
+    for item in items
+      item_string = get_correct_char_str item
+      for char in item_string.split("")
         codes << char.codepoints.first * 0.01
       end
     end
@@ -211,6 +215,20 @@ class ApplicationController < ActionController::Base
   end
   
   private
+    def get_correct_char_str item
+      # gets correct string to push to glimmer
+      item_string = if item.body.present?
+        item.body
+      # for motions only
+      elsif item.image.present?
+        item.image.url
+      # for posts only
+      elsif item.pictures.present?
+        item.pictures.first.image.url
+      end
+      return item_string
+    end
+    
     def anrcho_to_proposals
       if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
         cookies.permanent[:at_anrcho] = true.to_s
