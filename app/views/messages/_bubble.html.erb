@@ -3,9 +3,9 @@
     position: (own_item?(message) ? :right_mini_avatar : :left_mini_avatar) %>
   
   <% if message.body.present? %>
-    <div id="bub_txt" class="<%= own_item?(message) ? 'right' : 'left' %>_message_body_text"
+    <div class="<%= own_item?(message) ? 'right' : 'left' %>_message_body_text"
       title="Sent <%= time_ago(time_ago_in_words(message.created_at)) %>">
-      <div style="<%= 'float:right;' if own_item?(message) %>">
+      <div id="bub_txt" style="<%= 'float:right;' if own_item?(message) %>">
         <%= render "app/body", item: message %>
       </div>
     </div>
