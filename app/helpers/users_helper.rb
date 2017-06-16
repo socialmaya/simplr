@@ -1,8 +1,11 @@
 module UsersHelper
   def last_locale user
-    if god? and user.views.present? and user.views.last.locale.present?
-      return user.views.last.locale
+    locale_and_time_ago = ""
+    if god?
+      locale_and_time_ago << user.views.last.locale if user.views.present? and user.views.last.locale.present?
+      locale_and_time_ago << "last active " + time_ago(time_ago_in_words(user.last_active_at)) if user.last_active_at
     end
+    return locale_and_time_ago
   end
   
   def following_options
