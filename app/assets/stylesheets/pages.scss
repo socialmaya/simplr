@@ -3,15 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .buffer_pixel {
-	width: 11px;
-	height: 11px;
+	width: 25%;
+	height: 22px;
 	float: right;
-  font-size: 10px;
+  font-size: 15px;
+  text-align: center;
 }
 
 .buffer_wheel_grid_containor {
-	width: 50px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 }
 
 .load_fib_bar {
