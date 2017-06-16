@@ -136,7 +136,6 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    puts "\n" + bits.to_s + "\n"
     return bits
   end
   
