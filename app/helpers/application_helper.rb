@@ -1,6 +1,6 @@
 module ApplicationHelper
   def justified_body item
-    'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 150
+    'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 125
   end
 
   def fa_icon icon, label='', size=''
