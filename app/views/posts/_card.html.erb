@@ -108,9 +108,6 @@
             <span id="love_post_link_anchor_<%= post.id %>"></span>
             <%= render "likes/love_link", item: post %>
           </td>
-          <script>
-            <%= render "app/fader.js", target: "love_post_link", target_id: post.id, love: true, slow: true %>
-          </script>
           <td>
             ·
           </td>
@@ -121,9 +118,6 @@
             <span id="whoa_post_link_anchor_<%= post.id %>"></span>
             <%= render "likes/whoa_link", item: post %>
           </td>
-          <script>
-            <%= render "app/fader.js", target: "whoa_post_link", target_id: post.id %>
-          </script>
           <td>
             ·
           </td>
