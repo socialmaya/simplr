@@ -86,7 +86,7 @@ class PostsController < ApplicationController
       # manifests table flipping/resetting bot
       Bot.manifest_bots [:reset_table, :grow],
         { comments: @comments, page: request.original_url }
-      @likes = @post.likes
+      @likes = @post._likes
       # records views
       seent @post
       # gets views

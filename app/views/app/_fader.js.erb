@@ -1,7 +1,7 @@
 // app
 
 function fader_<%= target + "_" + target_id.to_s %>() {
-  var rgb = [0, 0, 0]; // the targets color values
+  var rgb = <%= defined?(red) ? [0] : [0, 0, 0] %>; // the targets color values
   var fat_rgb = [false, false, false]; // ensures pos/neg
   var color_min = 1; // when it should go back up
   var color_max = 255; // when color should go back down
