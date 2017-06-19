@@ -80,7 +80,7 @@ class SearchController < ApplicationController
           end
         end
         # to prevent duplicate treasures from being created
-        break if @discover
+        break if @discover or @found_love
       end
       # removes any types not found at all, for display to view with/without commas
       @result_types.each { |key, val| @result_types.delete(key) if val.zero?  }
