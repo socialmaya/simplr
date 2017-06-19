@@ -10,7 +10,8 @@
   </script>
   <div class="dark_card">
     <p align="center" id="power_<%= power.id %>">
-      <%= power.power.gsub("_", " ").capitalize + " - " + Treasure.powers[power.power.to_sym] %>
+      <%= power.power.gsub("_", " ").capitalize + (power.power.eql?('whoa') ? ' man' : '') \
+        + " - " + Treasure.powers[power.power.to_sym] %>
     </p>
   </div>
 <% end %>
