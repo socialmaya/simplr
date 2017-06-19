@@ -191,6 +191,10 @@ class User < ActiveRecord::Base
     return folders
   end
   
+  def _likes
+    self.likes.where love: nil, whoa: nil
+  end
+  
   def initialize_settings
     _settings = Setting.names
     # puts names from both categories into one array

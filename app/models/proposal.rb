@@ -193,7 +193,7 @@ class Proposal < ActiveRecord::Base
   end
   
   def _likes
-    self.likes.where.not(love: true, whoa: true)
+    self.likes.where love: nil, whoa: nil
   end
   
   private

@@ -64,7 +64,7 @@ class SearchController < ApplicationController
               end
             end
           when "what is love", "What is love", "what is love ", "What is love "
-            if current_user
+            if current_user and not current_user.has_power? 'love'
               treasure = current_user.treasures.new power: 'love'
               # can now love posts
               if treasure.save
