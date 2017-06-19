@@ -4,6 +4,7 @@ class Like < ActiveRecord::Base
   belongs_to :comment
   belongs_to :proposal
   belongs_to :like
+  belongs_to :vote
   
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy

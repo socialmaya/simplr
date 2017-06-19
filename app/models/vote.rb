@@ -11,6 +11,10 @@ class Vote < ActiveRecord::Base
   
   before_create :gen_unique_token
   
+  def _likes
+    self.likes.where love: nil, whoa: nil
+  end
+  
   def votes_to_reverse
     self.proposal.ratification_threshold - self.votes.where(flip_state: 'down').size
   end
