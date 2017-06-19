@@ -1,4 +1,22 @@
 module LikesHelper
+  def get_like_type_str link=nil
+    like_type = if @like.love
+      'love'
+    elsif @like.whoa
+      'whoa'
+    else
+      'like'
+    end
+    if link
+      if not like_type.eql? 'like'
+        like_type = like_type + '_link'
+      else
+        like_type = 'link'
+      end
+    end
+    like_type
+  end
+  
   def get_like_liked_post like
     begin
       like = like.like
@@ -51,11 +69,11 @@ module LikesHelper
   
   def already_liked? item
     if current_user
-      if item.likes.where(user_id: current_user.id).present?
+      if item._likes.where(user_id: current_user.id).present?
         return true
       end
     else
-      if item.likes.where(anon_token: anon_token).present?
+      if item._likes.where(anon_token: anon_token).present?
         return true
       end
     end

@@ -6,6 +6,6 @@
   <%= link_to "Whoa#{(' ' + item.whoas.size.to_s) unless item.whoas.size.zero?}", like_path(param_id => item.id, whoa: true),
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>
-  <%= link_to "Unwhoa #{item.whoas.size.to_s}", like_path(param_id => item.id, whoa: true),
+  <%= link_to "Unwhoa #{item.whoas.size.to_s}", unlike_path(param_id => item.id, whoa: true),
     method: :delete, remote: true, class: link_class, id: link_id %>
 <% end %>

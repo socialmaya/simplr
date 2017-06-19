@@ -192,6 +192,10 @@ class Proposal < ActiveRecord::Base
     return versions
   end
   
+  def _likes
+    self.likes.where.not(love: true, whoa: true)
+  end
+  
   private
   
   def gen_unique_token

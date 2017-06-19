@@ -18,6 +18,10 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   
+  def _likes
+    self.likes.where love: nil, whoa: nil
+  end
+  
   def loves
     self.likes.where love: true
   end

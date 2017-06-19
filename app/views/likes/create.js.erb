@@ -1,5 +1,5 @@
-var link = $("#<%= "like_#{@item.class.to_s.downcase}_link_#{@item.id}" %>");
-var anchor = $("#<%= "like_#{@item.class.to_s.downcase}_link_anchor_#{@item.id}" %>");
+var link = $("#<%= "#{get_like_type_str}_#{@item.class.to_s.downcase}_link_#{@item.id}" %>");
+var anchor = $("#<%= "#{get_like_type_str}_#{@item.class.to_s.downcase}_link_anchor_#{@item.id}" %>");
 
 link.remove();
-anchor.after("<%=j render "likes/link", item: @item, bottom_left: !@item.is_a?(Post) %>");
+anchor.after("<%=j render "likes/#{get_like_type_str true}", item: @item, bottom_left: !@item.is_a?(Post) %>");
