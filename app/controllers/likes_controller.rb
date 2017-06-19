@@ -36,12 +36,12 @@ class LikesController < ApplicationController
   end
   
   def destroy
-    like = if current_user
+    @like = if current_user
       @item.likes.where(user_id: current_user.id).last
     else
       @item.likes.where(anon_token: anon_token).last
     end
-    like.destroy
+    @like.destroy
   end
   
   private
