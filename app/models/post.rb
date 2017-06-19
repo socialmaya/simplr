@@ -18,6 +18,14 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   
+  def loves
+    self.likes.where love: true
+  end
+  
+  def whoas
+    self.likes.where whoa: true
+  end
+  
   def self.preview_posts
     posts = []
     # gets all posts by first user from open groups

@@ -1,0 +1,11 @@
+<% param_id = (item.class.to_s.downcase + "_id").to_sym %>
+<% link_id = "love_#{item.class.to_s.downcase}_link_#{item.id}" %>
+<% link_class = ((defined?(bottom_left) and bottom_left) ? :bottom_left_link : :standard_post_link) %>
+
+<% unless already_loved? item %>
+  <%= link_to "Love#{(' ' + item.loves.size.to_s) unless item.loves.size.zero?}", like_path(param_id: item.id, love: true),
+    method: :post, remote: true, class: link_class, id: link_id %>
+<% else %>
+  <%= link_to "Unlove #{item.loves.size.to_s}", like_path(param_id => item.id, love: true),
+    method: :delete, remote: true, class: link_class, id: link_id %>
+<% end %>

@@ -103,6 +103,20 @@
           ·
         </td>
         <td>
+          <span id="love_post_link_anchor_<%= post.id %>"></span>
+          <%= render "likes/love_link", item: post %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <span id="whoa_post_link_anchor_<%= post.id %>"></span>
+          <%= render "likes/whoa_link", item: post %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
           <% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
           <% if current_user and not current_user.eql? post.user %>
             <%= link_to share_text, share_post_path(post), method: :post, class: :standard_post_link,

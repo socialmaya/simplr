@@ -9,6 +9,9 @@ class Like < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   
   before_create :gen_unique_token
+  
+  scope :loves, -> { where love: true }
+  scope :whoas, -> { where whoa: true }
 
   private
   
