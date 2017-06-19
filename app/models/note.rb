@@ -23,6 +23,8 @@ class Note < ActiveRecord::Base
   def action_text action
     _actions = { post_comment: "Someone commented on your post.",
       post_like: "Someone liked your post.",
+      post_whoa: "Someone was like whoa to your post.",
+      post_love: "Someone loved your post.",
       post_share: "Someone shared your post.",
       comment_like: "Someone liked your comment.",
       comment_reply: "Someone replied to your comment.",

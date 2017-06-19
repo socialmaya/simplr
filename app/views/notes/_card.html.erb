@@ -1,14 +1,14 @@
 <div class="card" id="note_card_<%= note.id %>">
   <%= render "app/time_ago", item: note %>
   <p align="center">
-    <% message = namify_note_message(note); case note.action.to_sym %>
-    <% when :post_comment, :also_commented, :post_like, :post_share %>
+    <% message = namify_note_message(note); action = note.action.to_sym; case action %>
+    <% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_share %>
       <% post = Post.find_by_id note.item_id %>
       <% if post %>
         <%= link_to message, show_post_path(post.unique_token) %>
-        <% if note.action.to_sym.eql? :post_like %>
-          <% like = if note.sender_id then post.likes.find_by_user_id(note.sender_id) \
-            else post.likes.find_by_anon_token(note.sender_token) end %>
+        <% if action.eql? :post_like %>
+          <% like = if note.sender_id then post._likes.find_by_user_id(note.sender_id) \
+            else post._likes.find_by_anon_token(note.sender_token) end %>
           <span id="like_like_link_anchor_<%= like.id %>"></span>
           <%= render "likes/link", item: like, bottom_left: true %>
         <% end %>
