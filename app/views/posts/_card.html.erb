@@ -102,30 +102,33 @@
         <td>
           ·
         </td>
-        <td>
-          <span id="love_post_link_anchor_<%= post.id %>"></span>
-          <%= render "likes/love_link", item: post %>
-        </td>
         
-        <script>
-          <%= render "app/fader.js", target: "love_post_link", target_id: post.id, red: true %>
-        </script>
+        <% if current_user and current_user.has_power? 'love' %>
+          <td>
+            <span id="love_post_link_anchor_<%= post.id %>"></span>
+            <%= render "likes/love_link", item: post %>
+          </td>
+          <script>
+            <%= render "app/fader.js", target: "love_post_link", target_id: post.id, love: true %>
+          </script>
+          <td>
+            ·
+          </td>
+        <% end %>
         
-        <td>
-          ·
-        </td>
-        <td>
-          <span id="whoa_post_link_anchor_<%= post.id %>"></span>
-          <%= render "likes/whoa_link", item: post %>
-        </td>
+        <% if current_user and current_user.has_power? 'whoa' %>
+          <td>
+            <span id="whoa_post_link_anchor_<%= post.id %>"></span>
+            <%= render "likes/whoa_link", item: post %>
+          </td>
+          <script>
+            <%= render "app/fader.js", target: "whoa_post_link", target_id: post.id %>
+          </script>
+          <td>
+            ·
+          </td>
+        <% end %>
         
-        <script>
-          <%= render "app/fader.js", target: "whoa_post_link", target_id: post.id %>
-        </script>
-        
-        <td>
-          ·
-        </td>
         <td>
           <% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
           <% if current_user and not current_user.eql? post.user %>

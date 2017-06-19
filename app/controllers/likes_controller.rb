@@ -31,6 +31,9 @@ class LikesController < ApplicationController
         Note.notify "#{@item.class.to_s.downcase}_#{@like.love ? 'love' : (@like.whoa ? 'whoa' : 'like')}".to_sym,
           (@item.is_a?(Proposal) || @item.is_a?(Vote) ? @item.unique_token : @item),
           (@item.user ? @item.user : @item.anon_token), (current_user ? current_user : anon_token)
+        if current_user and not current_user.has_power? 'whoa'
+          current_user.treasures.create power: 'whoa'
+        end
       end
     end
   end

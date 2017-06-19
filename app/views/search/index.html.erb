@@ -22,7 +22,7 @@
 	<% end %>
 <% end %>
 
-<% if @results.empty? and @query.present? and not @discover %>
+<% if @results.empty? and @query.present? and not (@discover or @found_love) %>
 	<div class="card">
 		<p align="center">
 			There aren't any items associated with this search.
@@ -38,6 +38,16 @@
       You can now find hidden treasure all over the site.
     </p>
     <%= image_tag "discover_card.jpg", class: :standard_image %>
+  </div>
+<% elsif @found_love %>
+  <script>
+    <%= render "app/fader.js", target: 'power_of_love_text', target_id: '' %>
+  </script>
+  <div class="dark_card" align="center">
+    <p class="justified_body" id="power_of_love_text">
+      You've unlocked the Power of Love.
+    </p>
+    <%= image_tag "what_is_love.gif", class: :standard_image %>
   </div>
 <% end %>
 

@@ -63,6 +63,15 @@ class SearchController < ApplicationController
                 break
               end
             end
+          when "what is love", "What is love", "what is love ", "What is love "
+            if current_user
+              treasure = current_user.treasures.new power: 'love'
+              # can now love posts
+              if treasure.save
+                @found_love = true
+                break
+              end
+            end
           end
           if match
             @results << item
