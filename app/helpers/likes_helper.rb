@@ -4,6 +4,8 @@ module LikesHelper
       'love'
     elsif @like.whoa
       'whoa'
+    elsif @like.zen
+      'zen'
     else
       'like'
     end

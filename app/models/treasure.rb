@@ -56,6 +56,7 @@ class Treasure < ActiveRecord::Base
       like_likes: "Like that someone liked something",
       love: 'Love other users posts',
       whoa: 'Say whoa to other users posts',
+      zen: 'Say when other users posts are zenful',
       invade_groups: 'Invade private groups',
       create_bots: 'Create bots to perform tasks',
       invite_someone: 'Invite someone to the site',

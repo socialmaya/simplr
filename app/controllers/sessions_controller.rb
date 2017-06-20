@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :dev_only, only: [:hijack]
+  before_action :god_only, only: [:hijack]
   before_action :dev_env_only, only: [:dev_login]
   
   def dev_login
@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
     Rails.env.development?
   end
   
-  def dev_only
-    dev?
+  def god_only
+    god?
   end
 end

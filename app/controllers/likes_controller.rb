@@ -35,6 +35,10 @@ class LikesController < ApplicationController
           current_user.treasures.create power: 'whoa'
         end
       end
+      # some real crazy narcissistic shit right here
+      if god? and @like.love and not @item.user.eql? current_user and not current_user.has_power? 'zen'
+        current_user.treasures.create power: 'zen'
+      end
     end
   end
   
