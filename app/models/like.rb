@@ -13,9 +13,10 @@ class Like < ActiveRecord::Base
   
   scope :loves, -> { where love: true }
   scope :whoas, -> { where whoa: true }
+  scope :zens, -> { where zen: true }
   
   def _likes
-    self.likes.where love: nil, whoa: nil
+    self.likes.where love: nil, whoa: nil, zen: nil
   end
 
   private

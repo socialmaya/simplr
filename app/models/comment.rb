@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   def _likes
-    self.likes.where love: nil, whoa: nil
+    self.likes.where love: nil, whoa: nil, zen: nil
   end
   
   def replies

@@ -55,6 +55,18 @@ module LikesHelper
     end
   end
   
+  def already_zend? item
+    if current_user
+      if item.zens.where(user_id: current_user.id).present?
+        return true
+      end
+    else
+      if item.zens.where(anon_token: anon_token).present?
+        return true
+      end
+    end
+  end
+  
   def already_whoad? item
     if current_user
       if item.whoas.where(user_id: current_user.id).present?

@@ -113,6 +113,16 @@
           </td>
         <% end %>
         
+        <% if current_user and (current_user.has_power? 'zen' or post.zens.present?) %>
+          <td>
+            <span id="zen_post_link_anchor_<%= post.id %>"></span>
+            <%= render "likes/zen_link", item: post %>
+          </td>
+          <td>
+            ·
+          </td>
+        <% end %>
+        
         <% if current_user and (current_user.has_power? 'whoa' or post.whoas.present?) %>
           <td>
             <span id="whoa_post_link_anchor_<%= post.id %>"></span>

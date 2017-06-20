@@ -12,7 +12,7 @@ class Vote < ActiveRecord::Base
   before_create :gen_unique_token
   
   def _likes
-    self.likes.where love: nil, whoa: nil
+    self.likes.where love: nil, whoa: nil, zen: nil
   end
   
   def votes_to_reverse
