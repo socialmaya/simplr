@@ -25,6 +25,7 @@ class Note < ActiveRecord::Base
       post_like: "Someone liked your post.",
       post_whoa: "Someone was like whoa to your post.",
       post_love: "Someone loved your post.",
+      post_zen: "Someone said your post was very zen.",
       post_share: "Someone shared your post.",
       comment_like: "Someone liked your comment.",
       comment_reply: "Someone replied to your comment.",
