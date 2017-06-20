@@ -12,6 +12,8 @@ class LikesController < ApplicationController
       @item.loves.new
     elsif params[:whoa]
       @item.whoas.new
+    elsif params[:zen]
+      @item.zens.new
     else
       @item.likes.new
     end
@@ -20,6 +22,8 @@ class LikesController < ApplicationController
       @like.love = true
     elsif params[:whoa]
       @like.whoa = true
+    elsif params[:zen]
+      @like.zen = true
     end
     if current_user
       @like.user_id = current_user.id
@@ -28,7 +32,8 @@ class LikesController < ApplicationController
     end
     if @like.save
       if (current_user and not @item.user.eql? current_user) or (anon_token and not @item.anon_token.eql? anon_token)
-        Note.notify "#{@item.class.to_s.downcase}_#{@like.love ? 'love' : (@like.whoa ? 'whoa' : 'like')}".to_sym,
+        Note.notify \
+          "#{@item.class.to_s.downcase}_#{@like.love ? 'love' : (@like.whoa ? 'whoa' : (@like.zen ? 'zen' : 'like'))}".to_sym,
           (@item.is_a?(Proposal) || @item.is_a?(Vote) ? @item.unique_token : @item),
           (@item.user ? @item.user : @item.anon_token), (current_user ? current_user : anon_token)
         if current_user and not current_user.has_power? 'whoa'
