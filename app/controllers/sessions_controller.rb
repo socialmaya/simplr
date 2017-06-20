@@ -60,10 +60,14 @@ class SessionsController < ApplicationController
   private
   
   def dev_env_only
-    Rails.env.development?
+    unless Rails.env.development?
+      redirect_to '/404'
+    end
   end
   
   def god_only
-    god?
+    unless god?
+      redirect_to '/404'
+    end
   end
 end
