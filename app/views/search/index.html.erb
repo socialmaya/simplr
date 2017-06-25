@@ -21,7 +21,9 @@
     <p class="justified_body" id="power_of_love_text">
       You've unlocked the Power of Love.
     </p>
-    <%= image_tag "what_is_love.gif", class: :standard_image %>
+    <%= link_to "https://www.youtube.com/watch?v=ILt5HZnPz5o" do %>
+      <%= image_tag "what_is_love.gif", class: :standard_image %>
+    <% end %>
   </div>
 <% elsif @results.empty? and @query.present? and not (@discover or @found_love) %>
   <div class="card">

@@ -1,0 +1,17 @@
+<script>
+  <%= render "treasures/kanye.js" %>
+  <%= render "app/fader.js", target: "kanye_header", target_id: "" %>
+  <%= render "app/fader.js", target: "kanye_quote", target_id: "" %>
+</script>
+
+<div class="dark_card">
+  <%= image_tag "kanye.jpg", class: :standard_post_image %>
+</div>
+
+<div class="dark_card">
+  <div align="center">
+    <p class="kanye justified_body_text" id="kanye_quote"></p>
+  </div>
+</div>
+
+<h1 align="center" id="kanye_header">— k a n y e</h1>

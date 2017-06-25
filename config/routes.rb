@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
+  get 'kanye', to: 'treasures#kanye', as: 'kanye'
 
   # portals
   get 'portals', to: 'portals#index', as: 'portals'

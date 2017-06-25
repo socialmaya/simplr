@@ -1,5 +1,8 @@
 class TreasuresController < ApplicationController
-  before_action :hidden_treasure
+  before_action :hidden_treasure, except: [:kanye]
+  
+  def kanye
+  end
   
   def hype
     @user = User.find_by_id params[:user_id]
