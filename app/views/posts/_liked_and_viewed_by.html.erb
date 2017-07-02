@@ -12,6 +12,41 @@
         <% end %>
         <%= "and" if user_likes.present? and anon_likes.present? %>
         <%= "#{anon_likes.size} anon(s)" if anon_likes.present? %>
+        <i class="fa fa-thumbs-o-up"></i>
+    </div>
+  </div>
+<% end %>
+
+<% if @loves.present? %>
+  <div class="dark_card">
+    <script>
+      <%= render "app/fader.js", target: "loved_by_text", target_id: "0" %>
+    </script>
+    <div align="center" id="loved_by_text_0">
+      Loved by:
+        <% user_loves = @loves.where.not(user_id: nil) %>
+        <% for love in user_loves %>
+          <%= link_to love.user.name, love.user, class: :white_link if love.user %><%= ", " \
+            unless love.eql? user_loves.last %>
+        <% end %>
+        <i class="fa fa-heart-o"></i>
+    </div>
+  </div>
+<% end %>
+
+<% if @whoas.present? %>
+  <div class="dark_card">
+    <script>
+      <%= render "app/fader.js", target: "whoad_by_text", target_id: "0" %>
+    </script>
+    <div align="center" id="whoad_by_text_0">
+      Whoa'd by:
+        <% user_whoas = @whoas.where.not(user_id: nil) %>
+        <% for whoa in user_whoas %>
+          <%= link_to whoa.user.name, whoa.user, class: :white_link if whoa.user %><%= ", " \
+            unless whoa.eql? user_whoas.last %>
+        <% end %>
+        <i class="fa fa-grav"></i>
     </div>
   </div>
 <% end %>

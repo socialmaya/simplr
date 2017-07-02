@@ -87,6 +87,9 @@ class PostsController < ApplicationController
       Bot.manifest_bots [:reset_table, :grow],
         { comments: @comments, page: request.original_url }
       @likes = @post._likes
+      @loves = @post.loves
+      @whoas = @post.whoas
+      @zens = @post.zens
       # records views
       seent @post
       # gets views
