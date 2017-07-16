@@ -1,6 +1,22 @@
 class WikisController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :history]
+  before_action :secure_wiki, only: [:new, :edit, :create, :update, :destroy]
+  
+  def add_image
+  end
+  
   def index
+    @wiki = Wiki.first
+    unless @wiki
+      @wiki = Wiki.new
+    end
+    if @wiki.versions.present?
+      @wiki = @wiki.versions.last
+    end
+  end
+  
+  def new
+    @wiki = Wiki.new
   end
   
   def show
@@ -10,6 +26,23 @@ class WikisController < ApplicationController
   end
   
   def create
+    @wiki = Wiki.new(wiki_params)
+    @wiki.user_id = current_user.id
+    # sets as photoset for validation
+    if params[:pictures]
+      @wiki.photoset = true
+    end
+    if @wiki.save
+      if params[:pictures]
+        # builds photoset for wiki
+        params[:pictures][:image].each do |image|
+          @wiki.pictures.create image: image
+        end
+      end
+      redirect_to @wiki
+    else
+      redirect_to :back
+    end
   end
   
   def update
@@ -22,6 +55,12 @@ class WikisController < ApplicationController
   end
   
   private
+  
+  def secure_wiki
+    unless current_user
+      redirect_to '/404'
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_wiki

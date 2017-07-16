@@ -5,4 +5,8 @@ class Wiki < ApplicationRecord
   has_many :pictures, dependent: :destroy
   
   accepts_nested_attributes_for :pictures
+  
+  def versions
+    self.wiki_versions
+  end
 end

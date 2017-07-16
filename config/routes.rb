@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
+  get 'wikis/add_image', as: 'add_wiki_image'
 
   # groups
   get 'my_anon_groups', to: 'groups#my_anon_groups', as: 'my_anon_groups'

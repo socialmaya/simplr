@@ -1,0 +1,19 @@
+<div class="dark_card">
+  <%= form_for(@wiki) do |f| %>
+    <div align="center">
+      <%= f.text_field :title, placeholder: "Wiki title...", class: :dark_text_field %>
+      <%= f.text_area :body, placeholder: "Body of text...", class: :dark_text_area %>
+
+		  <%= link_to add_wiki_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
+			  <i class="fa fa-picture-o fa-2x dark_link"></i>
+		  <% end %>
+		  <p id="hidden_file_field" hidden><%= f.file_field :image, multiple: true, name: "pictures[image][]" %></p>
+      
+      <p>
+        <button type="submit" name="commit" class="dark_form_button">
+          <b>Save Wiki <i class="fa fa-pencil"></i></b>
+        </button>
+      </p>
+    </div>
+  <% end %>
+</div>
