@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :history]
+  before_action :set_wiki, only: [:show, :edit, :update, :destroy, :history]
   before_action :secure_wiki, only: [:new, :edit, :create, :update, :destroy]
   
   def add_image
@@ -13,6 +13,8 @@ class WikisController < ApplicationController
     if @wiki.versions.present?
       @wiki = @wiki.versions.last
     end
+
+    @outline = $markdown.render Wiki::OUTLINE
   end
   
   def new
@@ -52,12 +54,13 @@ class WikisController < ApplicationController
   end
   
   def history
+    @versions = @wiki.versions
   end
   
   private
   
   def secure_wiki
-    unless current_user
+    unless god?
       redirect_to '/404'
     end
   end

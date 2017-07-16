@@ -37,9 +37,8 @@ gem 'name-generator'
 gem 'phonetic_alphabet'
 gem 'passphrase'
 
-# wiki
-gem 'gollum'
-gem 'irwi', :git => 'git://github.com/alno/irwi.git'
+# markdown parsing
+gem 'redcarpet'
 
 # chat bot
 # gem 'lita'
