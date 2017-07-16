@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # wikis
+  get 'book', to: 'wikis#index', as: 'book'
+
   # groups
   get 'my_anon_groups', to: 'groups#my_anon_groups', as: 'my_anon_groups'
   get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
