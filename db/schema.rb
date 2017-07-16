@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716164111) do
+ActiveRecord::Schema.define(version: 20170716172858) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170716164111) do
     t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "wiki_id"
   end
 
   create_table "portals", force: :cascade do |t|
