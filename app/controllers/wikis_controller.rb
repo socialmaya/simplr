@@ -48,6 +48,16 @@ class WikisController < ApplicationController
   end
   
   def update
+    if @wiki.update(wiki_params)
+      if params[:pictures]
+        params[:pictures][:image].each do |image|
+          @wiki.pictures.create image: image
+        end
+      end
+      redirect_to wiki_path @wiki
+    else
+      render :edit
+    end
   end
   
   def destroy

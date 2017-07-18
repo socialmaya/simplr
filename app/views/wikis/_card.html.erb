@@ -1,8 +1,6 @@
-<div class="dark_card" align="center">
+<div class="dark_card" align="left">
   <p>
-    <%= wiki.title %>
+    <%= $markdown.render(wiki.body).html_safe %>
   </p>
-  <p>
-    <%= wiki.body %>
-  </p>
+  <%= link_to "Edit", edit_wiki_path(wiki), class: "white_link bottom_right_link" %>
 </div>

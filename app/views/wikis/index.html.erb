@@ -1,10 +1,4 @@
-<div class="dark_card" align="center">
-  <div align="left">
-    <%= @outline.html_safe %>
-  </div>
-</div>
-
-<% if @wiki.body.present? and false %>
+<% if @wiki.body.present? %>
   <%= render "card", wiki: @wiki %>
 <% end %>
 

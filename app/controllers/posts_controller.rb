@@ -139,17 +139,17 @@ class PostsController < ApplicationController
   end
 
   def update
-      if @post.update(post_params)
-        if params[:pictures]
-          params[:pictures][:image].each do |image|
-            @post.pictures.create image: image
-          end
+    if @post.update(post_params)
+      if params[:pictures]
+        params[:pictures][:image].each do |image|
+          @post.pictures.create image: image
         end
-        Tag.extract @post
-        redirect_to show_post_path @post.unique_token
-      else
-        render :edit
       end
+      Tag.extract @post
+      redirect_to show_post_path @post.unique_token
+    else
+      render :edit
+    end
   end
 
   def destroy
