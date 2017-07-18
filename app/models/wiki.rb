@@ -10,13 +10,15 @@ class Wiki < ApplicationRecord
     self.wiki_versions
   end
   
-  OUTLINE = %Q[## Book of Social Maya - ideas and concepts
+  OUTLINE = %Q[## Book of Social Maya - outline
 
 Historical materialist analysis, outlining revolutions in technology with their corresponding revolutions in society
 
 The rise of neo-fascism and how to resist it, explain it's emergence as a result of late capitalism's failure to prevent further crises and maintain civility/order
 
 The necessity of addressing newer aspects of an evolved fascism, such as embracing rampant individualism and unbridled capitalism over nationalism, or even simple racism
+
+Ending systemic racism, patriarchy and all major divisions preventing the working class from fully unifying
 
 The inevitable, global revolution, cyber-warfare, psychological warfare, control of information, out right violence becoming unnecessary to subvert the corporate elite, how exactly to subvert capitalism through non-violent means
 
