@@ -13,8 +13,6 @@ class WikisController < ApplicationController
     if @wiki.versions.present?
       @wiki = @wiki.versions.last
     end
-
-    @outline = $markdown.render Wiki::OUTLINE
   end
   
   def new

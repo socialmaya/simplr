@@ -11,9 +11,6 @@
 	<%= link_to fa_icon("bell", "Notes#{': ' + currently_unseen_notes.size.to_s \
 	  unless currently_unseen_notes.size.zero?}"), notes_path, class: :standard_nav_menu_link,
     title: "See what's happening..." %>
-	
-	<%= link_to fa_icon("search", "Search"), search_path, class: :standard_nav_menu_link,
-	  title: "Search for groups, users, posts, comments, etc." %>
 	  
   <%= link_to fa_icon("cubes", "Groups"), (anrcho? ? my_anon_groups_path : my_groups_path),
     class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
@@ -60,4 +57,7 @@
     
   <%= link_to fa_icon("question-circle", "How Anrcho Works"), tutorial_path, class: :standard_nav_menu_link,
     title: "Click here to see how the site works." %>
+	
+	<%= link_to fa_icon("book", "Book of Social Maya"), book_path, class: :standard_nav_menu_link,
+	  title: "Long term plans for the site..." %>
 </div>

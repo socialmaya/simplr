@@ -8,9 +8,10 @@
   id: :toggle_menu_link, remote: true, title: "Main menu" %>
   
 <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
-  id: :return_home_link, title: "Return home" unless @you_are_home %>
+  class: :return_home_link, title: "Return home" unless @you_are_home %>
 
-<%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, search_path, id: :search_nav_link %>
+<%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, search_path, class: :search_nav_link,
+	  title: "Search for groups, users, posts, comments, etc." %>
 
 <%= render "notes/nav_link" %>
 
