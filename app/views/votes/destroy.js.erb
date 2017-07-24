@@ -5,9 +5,6 @@ function destroy_vote() {
   var for_anchor = $("#<%= "for_proposal_link_anchor_#{@proposal.id}" %>");
   var against_anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
   
-  var new_vote_form = $("#new_up_down_form_" + proposal_id);
-  
-  new_vote_form.remove();
   for_link.remove();
   against_link.remove();
   for_anchor.after("<%=j render "votes/for_link", item: @proposal %>");
