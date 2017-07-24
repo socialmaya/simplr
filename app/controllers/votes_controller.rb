@@ -1,4 +1,19 @@
 class VotesController < ApplicationController
+  def destroy
+    @proposal = Proposal.find_by_unique_token(params[:token])
+    @votes = if params[:unfor]
+      @proposal.up_votes
+    else
+      @proposal.down_votes
+    end
+    @vote = if current_user
+      @votes.where(user_id: current_user.id).last
+    else
+      @votes.where(anon_token: anon_token).last
+    end
+    @vote.destroy
+  end
+  
   def new_up_vote
     @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal

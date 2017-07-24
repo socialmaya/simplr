@@ -35,8 +35,28 @@
 	  <div id="new_form_anchor_<%= proposal.id %>"></div>
   </div>
   
-  <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
-  <%= render "likes/link", item: proposal, bottom_left: true %>
+  <table class="bottom_left_link">
+      <tr>
+        <td>
+          <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
+          <%= render "votes/for_link", item: proposal %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
+          <%= render "votes/against_link", item: proposal %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
+          <%= render "likes/link", item: proposal %>
+        </td>
+    </table>
+  
 </div>
 
 <script>

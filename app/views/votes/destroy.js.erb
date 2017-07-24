@@ -1,0 +1,5 @@
+var link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
+var anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
+
+link.remove();
+anchor.after("<%=j render "votes/against_link", item: @proposal %>");
