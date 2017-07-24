@@ -10,15 +10,10 @@ module VotesHelper
   
   def up_voted? proposal
     up_votes = proposal.up_votes
-    vote = if current_user
+    if current_user
       up_votes.find_by_user_id(current_user.id)
     else
       up_votes.find_by_anon_token(anon_token)
-    end
-    if vote and vote.body.present?
-      return vote
-    else
-      return nil
     end
   end
   

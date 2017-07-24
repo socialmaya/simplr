@@ -1,5 +1,17 @@
-var link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
-var anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
+function destroy_vote() {
+  var for_link = $("#<%= "for_proposal_link_#{@proposal.id}" %>");
+  var against_link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
+  
+  var for_anchor = $("#<%= "for_proposal_link_anchor_#{@proposal.id}" %>");
+  var against_anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
+  
+  var new_vote_form = $("#new_up_down_form_" + proposal_id);
+  
+  new_vote_form.remove(); for_link.remove(); against_link.remove();
+  for_anchor.after("<%=j render "votes/for_link", item: @proposal %>");
+  against_anchor.after("<%=j render "votes/against_link", item: @proposal %>");
+}
 
-link.remove();
-anchor.after("<%=j render "votes/against_link", item: @proposal %>");
+destroy_vote();
+
+
