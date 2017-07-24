@@ -11,7 +11,7 @@ class VotesController < ApplicationController
     else
       @votes.where(anon_token: anon_token).last
     end
-    @vote.destroy
+    @vote.destroy if @vote
   end
   
   def new_up_vote

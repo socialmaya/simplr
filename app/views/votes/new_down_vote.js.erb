@@ -6,13 +6,21 @@
   function new_down_vote_form() {
     var up_vote_link = $("#up_vote_proposal_" + proposal_id);
     var down_vote_link = $("#down_vote_proposal_" + proposal_id);
-    var table_anchor = $("#link_table_anchor_" + proposal_id);
     var form_anchor = $("#new_form_anchor_" + proposal_id);
-    var form = $("#new_up_vote_form_" + proposal_id);
-    var table = $("#link_table_" + proposal_id);
+    var up_form = $("#new_up_vote_form_" + proposal_id);
+    var down_form = $("#new_down_vote_form_" + proposal_id);
+    var comment_form = $("#new_comment_form_" + proposal_id);
     
-    if (!form.length) {
+    if (!down_form.length) {
       form_anchor.after("<%=j render 'votes/new_down_vote' %>");
+    }
+    
+    if (up_form.length) {
+      up_form.remove();
+    }
+    
+    if (comment_form.length) {
+      comment_form.remove();
     }
   }
   
