@@ -12,8 +12,6 @@
     var table = $("#link_table_" + proposal_id);
     
     if (!form.length) {
-      up_vote_link.css("font-size", "15px");
-      down_vote_link.css("font-size", "17.5px");
       form_anchor.after("<%=j render 'votes/new_down_vote' %>");
     }
   }

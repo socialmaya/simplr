@@ -27,10 +27,6 @@
   <div id="proposal_card_spacer"></div>
   <div align="center">
     <%= render "proposals/content", proposal: proposal %>
-	  <!-- anchor for reinserting the link table -->
-	  <div id="link_table_anchor_<%= proposal.id %>"></div>
-	  <!-- link table encapsulated as partial -->
-	  <%= render "proposals/link_table", proposal: proposal %>
 	  <!-- anchor for inserting new comment form -->
 	  <div id="new_form_anchor_<%= proposal.id %>"></div>
   </div>
@@ -54,6 +50,13 @@
         <td>
           <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
           <%= render "likes/link", item: proposal %>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+    		  <div id="proposal_comments_link_anchor_<%= proposal.id %>"></div>
+    		  <%= render "comments/link", proposal: proposal %>
         </td>
     </table>
   
