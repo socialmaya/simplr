@@ -7,7 +7,9 @@ function destroy_vote() {
   
   var new_vote_form = $("#new_up_down_form_" + proposal_id);
   
-  new_vote_form.remove(); for_link.remove(); against_link.remove();
+  new_vote_form.remove();
+  for_link.remove();
+  against_link.remove();
   for_anchor.after("<%=j render "votes/for_link", item: @proposal %>");
   against_anchor.after("<%=j render "votes/against_link", item: @proposal %>");
 }
