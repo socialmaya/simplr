@@ -22,7 +22,7 @@ class Note < ActiveRecord::Base
   
   def action_text action
     _actions = { post_comment: "Someone commented on your post.",
-      post_like: "Someone liked your post.",
+      post_like: "Someone nooiced your post.",
       post_whoa: "Someone was like whoa to your post.",
       post_love: "Someone loved your post.",
       post_zen: "Someone said your post was very zen.",
@@ -36,8 +36,8 @@ class Note < ActiveRecord::Base
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted.",
       hype_received: "Someone sent you some H Y P E",
-      user_like: "Someone liked your profile.",
-      like_like: "Someone liked your like.",
+      user_like: "Someone nooiced your profile.",
+      like_like: "Someone nooiced your nooice.",
       # proposal notification actions
       ratified: "Your proposal has been ratified.",
       proposal_up_voted: "Someone supported your proposal.",

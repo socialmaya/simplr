@@ -1,6 +1,6 @@
-<div class="card" id="note_card_<%= note.id %>">
+<div class="card" id="note_card_<%= note.id %>" align="center">
   <%= render "app/time_ago", item: note %>
-  <p align="center">
+  <p>
     <% message = namify_note_message(note); action = note.action.to_sym; case action %>
     <% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share %>
       <% post = Post.find_by_id note.item_id %>
@@ -9,8 +9,10 @@
         <% if action.eql? :post_like %>
           <% like = if note.sender_id then post._likes.find_by_user_id(note.sender_id) \
             else post._likes.find_by_anon_token(note.sender_token) end %>
-          <span id="like_like_link_anchor_<%= like.id %>"></span>
-          <%= render "likes/link", item: like, bottom_left: true %>
+          <% if like %>
+            <span id="like_like_link_anchor_<%= like.id %>"></span>
+            <%= render "likes/link", item: like, bottom_left: true %>
+          <% end %>
         <% end %>
       <% else %>
         <%= message %> Content no longer available.
@@ -53,4 +55,7 @@
       <%= link_to note.message, show_vote_path(token: note.item_token) %>
     <% end %>
   </p>
+  <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like %>
+    <%= image_tag "nooice.gif", class: :nooice_img %>
+  <% end %>
 </div>
