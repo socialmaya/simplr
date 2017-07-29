@@ -56,6 +56,8 @@
     <% end %>
   </p>
   <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like %>
-    <%= image_tag "nooice.gif", class: :nooice_img %>
+    <%= link_to "https://www.youtube.com/watch?v=rQnYi3z56RE" do %>
+      <%= image_tag "nooice.gif", class: :nooice_img %>
+    <% end %>
   <% end %>
 </div>
