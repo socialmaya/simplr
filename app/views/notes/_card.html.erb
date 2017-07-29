@@ -55,7 +55,8 @@
       <%= link_to note.message, show_vote_path(token: note.item_token) %>
     <% end %>
   </p>
-  <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like %>
+  <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like or action.eql? :comment_like \
+    or action.eql? :proposal_like or action.eql? :vote_like %>
     <%= link_to "https://www.youtube.com/watch?v=rQnYi3z56RE" do %>
       <%= image_tag "nooice.gif", class: :nooice_img %>
     <% end %>

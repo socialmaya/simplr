@@ -27,7 +27,7 @@ class Note < ActiveRecord::Base
       post_love: "Someone loved your post.",
       post_zen: "Someone said your post was very zen.",
       post_share: "Someone shared your post.",
-      comment_like: "Someone liked your comment.",
+      comment_like: "Someone nooiced your comment.",
       comment_reply: "Someone replied to your comment.",
       also_commented: "Someone also commented on this post.",
       user_follow: "Someone started following you.",
@@ -46,11 +46,11 @@ class Note < ActiveRecord::Base
       revision_submitted: "Someone proposed a revision to your proposal.",
       proposal_revised: "Your proposal has been revised.",
       proposal_comment: "Someone commented on your proposal.",
-      proposal_like: "Someone liked your proposal.",
+      proposal_like: "Someone nooiced your proposal.",
       vote_verified: "Someone verified your vote.",
       vote_reversed: "Someone reversed your vote.",
       vote_comment: "Someone commented on your vote.",
-      vote_like: "Someone liked your vote." }
+      vote_like: "Someone nooiced your vote." }
     return _actions[action.to_sym]
   end
   
