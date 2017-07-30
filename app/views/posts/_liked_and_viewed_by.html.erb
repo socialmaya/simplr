@@ -12,7 +12,7 @@
         <% end %>
         <%= "and" if user_likes.present? and anon_likes.present? %>
         <%= "#{anon_likes.size} anon(s)" if anon_likes.present? %>
-        <i class="fa fa-thumbs-o-up"></i>
+        <%= image_tag "nooice.gif", class: :nooice_img %>
     </div>
   </div>
 <% end %>
