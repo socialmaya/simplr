@@ -105,6 +105,16 @@ class User < ActiveRecord::Base
     Proposal.globals.main.each do |proposal|
       _feed << proposal unless _feed.include? proposal
     end
+    # removes hidden posts or hidden users posts
+    _feed.delete_if do
+      if item.is_a? Post and not item.user.eql? self
+        if item.hidden
+          true
+        elsif item.user and item.user.hidden
+          true
+        end
+      end
+    end
     # sorts posts/proposals chronologically
     _feed.sort_by! { |item| item.created_at }
     return _feed.reverse
