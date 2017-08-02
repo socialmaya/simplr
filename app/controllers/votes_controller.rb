@@ -75,7 +75,7 @@ class VotesController < ApplicationController
       if @vote.verifiable? anon_token, current_user and not @vote.proposal.requires_revision
         @vote.update verified: true
         @vote.proposal.evaluate
-        Note.notify :verify_vote, @vote.unique_token,
+        Note.notify :vote_verified, @vote.unique_token,
           (@vote.user.nil? ? @vote.anon_token : @vote.user),
           (current_user ? current_user : anon_token)
       end

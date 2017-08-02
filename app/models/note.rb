@@ -47,7 +47,7 @@ class Note < ActiveRecord::Base
       proposal_revised: "Your proposal has been revised.",
       proposal_comment: "Someone commented on your proposal.",
       proposal_like: "Someone noiced your proposal.",
-      verify_vote: "Someone verified your vote.",
+      vote_verified: "Someone verified your vote.",
       vote_reversed: "Someone reversed your vote.",
       vote_comment: "Someone commented on your vote.",
       vote_like: "Someone noiced your vote." }
