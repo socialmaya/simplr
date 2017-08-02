@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
       _feed << proposal unless _feed.include? proposal
     end
     # removes hidden posts or hidden users posts
-    _feed.delete_if do
+    _feed.delete_if do |item|
       if item.is_a? Post and not item.user.eql? self
         if item.hidden
           true
