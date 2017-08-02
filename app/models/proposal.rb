@@ -142,7 +142,7 @@ class Proposal < ActiveRecord::Base
     end
     # uses views as threshold if higher
   	if _views.size > _threshold
-  		return _views.size / 2
+  		return _views.size / 5
   	else
   		return _threshold / 2
   	end
