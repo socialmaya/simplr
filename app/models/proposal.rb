@@ -116,7 +116,7 @@ class Proposal < ActiveRecord::Base
   
   def votes_to_ratify
     # also accounts for non verified votes as well, as half votes, since no peer review
-    (self.ratification_threshold - (self.verified_up_votes.size + (self.up_votes / 2))).to_i + 1
+    (self.ratification_threshold - (self.verified_up_votes.size + (self.up_votes.size / 2))).to_i + 1
   end
   
   def requires_revision?
@@ -126,7 +126,7 @@ class Proposal < ActiveRecord::Base
   def ratifiable?
     # also accounts for non verified votes as well, as half votes, since no peer review
     !self.ratified and !(self.proposal.present? and self.proposal.revised) and self.verified_down_votes.size.zero? \
-      and (self.verified_up_votes.size + (self.up_votes / 2)) > self.ratification_threshold
+      and (self.verified_up_votes.size + (self.up_votes.size / 2)) > self.ratification_threshold
   end
   
   def ratification_threshold
