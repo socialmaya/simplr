@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @admin_user_index = true
     # creates array of active users and sorts by date last active
     active_users = []; User.where.not(last_active_at: nil).each { |user| active_users << user }
     active_users.sort_by! { |user| user.last_active_at }.reverse!

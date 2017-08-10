@@ -249,18 +249,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def encrypt_password
+    if self.password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
+    end
+  end
+
   private
   
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64
     end while User.exists? unique_token: self.unique_token
-  end
-
-  def encrypt_password
-    if self.password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
-    end
   end
 end
