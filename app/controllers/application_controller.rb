@@ -245,6 +245,6 @@ class ApplicationController < ActionController::Base
     end
     
     def bots_to_404
-      redirect_to '/404' if request.bot?
+      redirect_to '/404' if request.bot? and not request.host.include? "facebook"
     end
 end
