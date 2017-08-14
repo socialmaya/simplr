@@ -79,6 +79,7 @@ class Proposal < ActiveRecord::Base
     self.update ratified: true
     Note.notify :ratified, self.unique_token, (self.user ? self.user : self.anon_token)
     puts "\nProposal #{self.id} has been ratified.\n"
+    self.tweet if ENV['RAILS_ENV'].eql? 'production'
   end
   
   def rank
@@ -196,6 +197,36 @@ class Proposal < ActiveRecord::Base
   
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
+  end
+  
+  def tweet
+    message = ""
+    insert = lambda { |char| message << char if message.size < 140 }
+    # inserts title into message
+    self.title.split("").each do |char|
+      insert.call char
+    end
+    insert.call " "
+    # inserts body, breaks at hashtags
+    self.body.split("").each do |char|
+      break if char.eql? '#'
+      insert.call char
+    end
+    insert.call " "
+    # inserts tags if room
+    self.tags.each do |tag|
+      break unless tag.tag.size + message.size < 140
+      tag.tag.split("").each do |char|
+        insert.call char
+      end
+      insert.call " "
+    end
+    # checks in case api keys aren't present
+    if ENV['TWITTER_CONSUMER_KEY'].present?
+      $twitter.update message
+    else
+      puts "Twitter API keys are not present."
+    end
   end
   
   private
