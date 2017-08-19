@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
 
   # likes
-  post 'noice', to: 'likes#create', as: 'like'
-  delete 'unnoice', to: 'likes#destroy', as: 'unlike'
+  post 'like', to: 'likes#create', as: 'like'
+  delete 'unlike', to: 'likes#destroy', as: 'unlike'
   post 'love', to: 'likes#love', as: 'love'
   post 'unlove', to: 'likes#unlove', as: 'unlove'
   post 'whoa', to: 'likes#whoa', as: 'whoa'
