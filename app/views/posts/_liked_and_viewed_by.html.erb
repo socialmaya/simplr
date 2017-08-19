@@ -4,7 +4,7 @@
       <%= render "app/fader.js", target: "liked_by_text", target_id: "0" %>
     </script>
     <div align="center" id="liked_by_text_0">
-      Noices:
+      Likes:
         <% user_likes = @likes.where.not(user_id: nil); anon_likes = @likes.where.not(anon_token: nil) %>
         <% for like in user_likes %>
           <%= link_to like.user.name, like.user, class: :white_link if like.user %><%= ", " \
