@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
-  get 'kopimi', to: 'treasures#kopimi', as: 'kanye'
+  get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
 
   # portals
   get 'portals', to: 'portals#index', as: 'portals'
