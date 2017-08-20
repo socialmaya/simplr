@@ -10,7 +10,7 @@
 		<% end %>
 		<p id="hidden_file_field" hidden><%= f.file_field :image %></p>
 		
-		<p><%= f.select :action, options_for_select(action_types(@group)),
+		<p>Motion type: <%= f.select :action, options_for_select(action_types(@group)),
 			id: :proposal_action_select %></p>
 		
 		<div id="action_fields_anchor"></div>
