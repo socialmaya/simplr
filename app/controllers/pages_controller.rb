@@ -38,6 +38,11 @@ class PagesController < ApplicationController
   
   def build_feed_data
     @all_items = relevant_items
+    # for anrcho
+    if params[:proposals]
+      @all_items.sort_by { |proposal| proposal.rank }
+    end
+    # applies to all item types
     @items = paginate @all_items
     @char_codes = char_codes @items
     @char_bits = char_bits @items
@@ -48,7 +53,7 @@ class PagesController < ApplicationController
   def relevant_items
     if params[:proposals]
       @proposals = true
-      return Proposal.all.reverse
+      return Proposal.globals
     elsif params[:posts]
       @home_shown = true
       if current_user

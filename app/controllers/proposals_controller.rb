@@ -123,29 +123,30 @@ class ProposalsController < ApplicationController
   end
   
   private
-    def set_proposal
-      @proposal = Proposal.find_by_unique_token(params[:token])
+  
+  def set_proposal
+    @proposal = Proposal.find_by_unique_token(params[:token])
+  end
+  
+  def build_feed section, group=nil
+    build_proposal_feed section, group
+  end
+  
+  def build_action
+    action = params[:proposal][:action]
+    action = params[:proposal_action] unless action.present?
+    case (action.present? ? action : "").to_sym
+    when :add_locale, :meetup
+      @proposal.misc_data = request.remote_ip.to_s
+    when :revision
+      @proposal.action = "revision"
+      @proposal.proposal_id = params[:proposal_id]
+      @proposal.revised_action = params[:revised_action]
+      @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
     end
-    
-    def build_feed section, group=nil
-      build_proposal_feed section, group
-    end
-    
-    def build_action
-      action = params[:proposal][:action]
-      action = params[:proposal_action] unless action.present?
-      case (action.present? ? action : "").to_sym
-      when :add_locale, :meetup
-        @proposal.misc_data = request.remote_ip.to_s
-      when :revision
-        @proposal.action = "revision"
-        @proposal.proposal_id = params[:proposal_id]
-        @proposal.revised_action = params[:revised_action]
-        @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
-      end
-    end
-    
-    def proposal_params
-      params[:proposal].permit(:title, :body, :action, :image, :misc_data)
-    end
+  end
+  
+  def proposal_params
+    params[:proposal].permit(:title, :body, :action, :image, :misc_data)
+  end
 end
