@@ -45,7 +45,9 @@ class PagesController < ApplicationController
     end
     
     def relevant_items
-      if params[:posts]
+      if params[:proposals]
+        return Proposal.all.reverse
+      elsif params[:posts]
         @home_shown = true
         if current_user
           return current_user.feed
