@@ -31,32 +31,34 @@ class PagesController < ApplicationController
   end
   
   private
-    def set_human
-      cookies.permanent[:probably_human] = true unless current_user
-    end
-    
-    def build_feed_data
-      @all_items = relevant_items
-      @items = paginate @all_items
-      @char_codes = char_codes @items
-      @char_bits = char_bits @items
-      # records being seen
-      @items.each {|item| seent item}
-    end
-    
-    def relevant_items
-      if params[:proposals]
-        return Proposal.all.reverse
-      elsif params[:posts]
-        @home_shown = true
-        if current_user
-          return current_user.feed
-        else
-          return Post.all.reverse
-        end
-      elsif params[:group_id]
-        @group_shown = true
-        return Group.find_by_id(params[:group_id]).posts.reverse
+
+  def set_human
+    cookies.permanent[:probably_human] = true unless current_user
+  end
+  
+  def build_feed_data
+    @all_items = relevant_items
+    @items = paginate @all_items
+    @char_codes = char_codes @items
+    @char_bits = char_bits @items
+    # records being seen
+    @items.each {|item| seent item}
+  end
+  
+  def relevant_items
+    if params[:proposals]
+      @proposals = true
+      return Proposal.all.reverse
+    elsif params[:posts]
+      @home_shown = true
+      if current_user
+        return current_user.feed
+      else
+        return Post.all.reverse
       end
+    elsif params[:group_id]
+      @group_shown = true
+      return Group.find_by_id(params[:group_id]).posts.reverse
     end
+  end
 end
