@@ -12,7 +12,6 @@ class GroupsController < ApplicationController
   
   def their_groups
     @user = User.find_by_id params[:user_id]
-    @group = Group.new
     @groups = @user.my_groups.reverse
     redirect_to my_groups_path if @user.eql? current_user
   end
@@ -24,6 +23,7 @@ class GroupsController < ApplicationController
   def my_anon_groups
     unless current_user
       Group.delete_all_old
+      @group = Group.new
       # a list of all groups viewed so far
       views = View.where(anon_token: anon_token).where.not(group_id: nil)
       @groups = []; for view in views
