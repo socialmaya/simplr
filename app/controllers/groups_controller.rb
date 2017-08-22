@@ -31,6 +31,9 @@ class GroupsController < ApplicationController
           @groups << view.group unless @groups.include? view.group
         end
       end
+      Group.where(anon_token: anon_token).each do |group|
+        @groups << group unless @groups.include? group
+      end
       @groups.reverse!
     end
   end
