@@ -1,6 +1,14 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  # sacred kopimist ritual
+  def kopimi
+    @kopi = ""
+    for i in 1..3
+      @kopi << $name_generator.next_name.downcase + " "
+    end
+  end
+  
   # sacred copying
   def kopi
   end
@@ -19,10 +27,6 @@ class TreasuresController < ApplicationController
   
   # new form for kopi_share
   def new_kopi_share
-  end
-  
-  # sacred kopimist ritual
-  def kopimi
   end
   
   # kanye quotes

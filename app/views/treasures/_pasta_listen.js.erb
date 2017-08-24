@@ -1,0 +1,12 @@
+var fired = false;
+var pasta_field = $('#pasta_field');
+var remix_field = $('#remix_field');
+pasta_field.on('paste', function() {
+  if (!fired) {
+    setTimeout(function () {
+      pasta_text = pasta_field.val()
+      remix_field.val(pasta_text);
+    }, 100);
+  fired = true;
+  }
+});

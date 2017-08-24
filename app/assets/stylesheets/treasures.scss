@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.kopimi_field {
+  max-width: 275px;
+  background: rgb(25, 25, 25);
+  color: white;
+  border-width: 1px;
+}
+
 .hype_nugget {
   font-size: 25px;
 }
