@@ -1,12 +1,35 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  # sacred copying
+  def kopi
+  end
+  
+  # sacred pasting
+  def pasta
+  end
+  
+  # sacred remixing of information
+  def remix
+  end
+  
+  # sacred sharing of info
+  def kopi_share
+  end
+  
+  # new form for kopi_share
+  def new_kopi_share
+  end
+  
+  # sacred kopimist ritual
   def kopimi
   end
   
+  # kanye quotes
   def kanye
   end
   
+  # hype other users
   def hype
     @user = User.find_by_id params[:user_id]
     hype_nugget = Treasure.new treasure_type: :hype, power: :hype_others,

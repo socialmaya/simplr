@@ -28,7 +28,14 @@ Rails.application.routes.draw do
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
+  
+  # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
+  get 'kopi', to: 'treasures#kopi', as: 'kopi'
+  get 'pasta', to: 'treasures#pasta', as: 'pasta'
+  get 'remix', to: 'treasures#remix', as: 'remix'
+  get 'kopi_share', to: 'treasures#kopi_share', as: 'kopi_share'
+  get 'new_kopi_share', to: 'treasures#new_kopi_share', as: 'new_kopi_share'
 
   # portals
   get 'portals', to: 'portals#index', as: 'portals'
