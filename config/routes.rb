@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'kopi', to: 'treasures#kopi', as: 'kopi'
   get 'pasta', to: 'treasures#pasta', as: 'pasta'
   get 'remix', to: 'treasures#remix', as: 'remix'
+  get 'treasures/send_back_remix', to: 'treasures#send_back_remix', as: 'send_back_remix'
   get 'kopi_share', to: 'treasures#kopi_share', as: 'kopi_share'
   get 'new_kopi_share', to: 'treasures#new_kopi_share', as: 'new_kopi_share'
 
