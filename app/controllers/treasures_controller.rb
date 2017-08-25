@@ -41,9 +41,6 @@ class TreasuresController < ApplicationController
     end
   end
   
-  def send_back_remix
-  end
-  
   # sacred sharing of info
   def kopi_share
   end
