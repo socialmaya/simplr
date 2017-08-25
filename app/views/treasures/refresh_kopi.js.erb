@@ -1,6 +1,10 @@
 function refresh_kopi() {
   var kopi_field = $("#kopi_field");
+  var pasta_field = $("#pasta_field");
+  var remix_field = $("#remix_field");
   kopi_field.val("<%= @kopi %>");
+  pasta_field.val("");
+  remix_field.val("");
 }
 
 refresh_kopi();
