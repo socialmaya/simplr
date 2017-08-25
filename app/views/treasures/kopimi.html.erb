@@ -11,7 +11,17 @@
     </tr>
   </table>
   
-  <%= text_field_tag :pasta, @pasta, placeholder: "Paste sacred text here...", id: :pasta_field, class: :dark_text_field %>
+    <table>
+    <tr>
+      <td>
+        <%= text_field_tag :pasta, @pasta, placeholder: "Paste sacred text here...",
+          id: :pasta_field, class: :kopimi_field %>
+      </td>
+      <td>
+        <%= link_to "pasta", "/#", remote: true, class: :white_link %>
+      </td>
+    </tr>
+  </table>
   
   <%= form_tag remix_path, method: :get, remote: true do |f| %>
 	  <table id="remix_form_table">
@@ -23,22 +33,6 @@
 			  <td>
 			    <button type="submit" name="commit">
 			      <i class="fa fa-recycle"></i>
-			    </button>
-			  </td>
-		  </tr>
-	  </table>
-  <% end %>
-  
-  <%= form_tag new_kopi_share_path, method: :get do |f| %>
-	  <table id="new_kopi_share_form_table">
-		  <tr>
-			  <td>
-				  <%= text_field_tag :kopi_share, @kopi_share,
-				    placeholder: "Share your sacred kopi pasta remix text here...", class: :kopimi_field %>
-			  </td>
-			  <td>
-			    <button type="submit" name="commit">
-			      <i class="fa fa-share"></i>
 			    </button>
 			  </td>
 		  </tr>
