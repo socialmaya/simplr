@@ -1,42 +1,30 @@
 <div class="dark_card" align="center">
-  <table>
-    <tr>
-      <td>
-        <%= text_field_tag :kopi, @kopi, placeholder: "Kopi sacred text from here...",
-          id: :kopi_field, class: :kopimi_field %>
-      </td>
-      <td>
-        <%= link_to "kopi", kopi_path, remote: true, id: :kopi_textarea_link, class: :white_link %>
-      </td>
-    </tr>
-  </table>
+  <%= text_area_tag :kopi, @kopi, placeholder: "Kopi sacred text from here...",
+    id: :kopi_field, class: :dark_text_area %>
+  <%= link_to kopi_path, remote: true, id: :kopi_textarea_link do %>
+    <button class="dark_form_button">
+      <b>Kopi <i class="fa fa-copyright"></i></b>
+    </button>
+  <% end %>
+</div>
   
-    <table>
-    <tr>
-      <td>
-        <%= text_field_tag :pasta, @pasta, placeholder: "Paste sacred text here...",
-          id: :pasta_field, class: :kopimi_field %>
-      </td>
-      <td>
-        <%= link_to "pasta", "/#", remote: true, class: :white_link %>
-      </td>
-    </tr>
-  </table>
-  
+<div class="dark_card" align="center">
+  <%= text_area_tag :pasta, @pasta, placeholder: "Paste sacred text here...",
+    id: :pasta_field, class: :dark_text_area %>
+  <%= link_to pasta_path, remote: true do %>
+    <button class="dark_form_button">
+      <b>Pasta <i class="fa fa-clipboard"></i></b>
+    </button>
+  <% end %>
+</div>
+
+<div class="dark_card" align="center">
   <%= form_tag remix_path, method: :get, remote: true do |f| %>
-	  <table id="remix_form_table">
-		  <tr>
-			  <td>
-				  <%= text_field_tag :unremixed_text, @remix, placeholder: "Remix sacred text here...",
-				    id: :remix_field, class: :kopimi_field %>
-			  </td>
-			  <td>
-			    <button type="submit" name="commit">
-			      <i class="fa fa-recycle"></i>
-			    </button>
-			  </td>
-		  </tr>
-	  </table>
+	  <%= text_area_tag :unremixed_text, @remix, placeholder: "Remix sacred text here...",
+	    id: :remix_field, class: :dark_text_area %>
+    <button class="dark_form_button">
+      <b>Remix <i class="fa fa-recycle"></i></b>
+    </button>
   <% end %>
 </div>
 
