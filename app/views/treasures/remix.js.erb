@@ -1,6 +1,17 @@
 function remix() {
   var remix_field = $("#remix_field");
-  remix_field.val("<%= @remixed_text %>");
+  var kopi_field = $("#kopi_field");
+  var pasta_field = $("#pasta_field");
+  
+  if (remix_field.val() == '') {
+    if (pasta_field.val() == '') {
+      remix_field.val(kopi_field.val());
+    } else {
+      remix_field.val(pasta_field.val());
+    }
+  } else {
+    remix_field.val("<%= @remixed_text %>");
+  }
 }
 
 remix();

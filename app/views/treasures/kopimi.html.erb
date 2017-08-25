@@ -1,16 +1,20 @@
 <div class="dark_card" align="center">
   <%= text_area_tag :kopi, @kopi, placeholder: "Kopi sacred text from here...",
-    id: :kopi_field, class: :dark_text_area %>
+    id: :kopi_field, class: "dark_text_area kopimi_field_large" %>
   <%= link_to kopi_path, remote: true, id: :kopi_textarea_link do %>
     <button class="dark_form_button">
       <b>Kopi <i class="fa fa-copyright"></i></b>
     </button>
   <% end %>
+  
+  <%= link_to refresh_kopi_path, remote: true, class: :bottom_right_icon, title: "Refresh sacred kopi text..." do %>
+    <i class="fa fa-refresh fa-2x dark_link"></i>
+  <% end %>
 </div>
   
 <div class="dark_card" align="center">
   <%= text_area_tag :pasta, @pasta, placeholder: "Paste sacred text here...",
-    id: :pasta_field, class: :dark_text_area %>
+    id: :pasta_field, class: "dark_text_area kopimi_field_large" %>
   <%= link_to pasta_path, remote: true do %>
     <button class="dark_form_button">
       <b>Pasta <i class="fa fa-clipboard"></i></b>
@@ -21,7 +25,7 @@
 <div class="dark_card" align="center">
   <%= form_tag remix_path, method: :get, remote: true do |f| %>
 	  <%= text_area_tag :unremixed_text, @remix, placeholder: "Remix sacred text here...",
-	    id: :remix_field, class: :dark_text_area %>
+	    id: :remix_field, class: "dark_text_area kopimi_field_large" %>
     <button class="dark_form_button">
       <b>Remix <i class="fa fa-recycle"></i></b>
     </button>
@@ -31,4 +35,7 @@
 <script>
   <%= render "treasures/kopi_listen.js" %>
   <%= render "treasures/pasta_listen.js" %>
+  <%= render "app/fader.js", target: "kopi_field", target_id: "" %>
+  <%= render "app/fader.js", target: "pasta_field", target_id: "" %>
+  <%= render "app/fader.js", target: "remix_field", target_id: "" %>
 </script>

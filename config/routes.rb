@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get 'remix', to: 'treasures#remix', as: 'remix'
   get 'kopi_share', to: 'treasures#kopi_share', as: 'kopi_share'
   get 'new_kopi_share', to: 'treasures#new_kopi_share', as: 'new_kopi_share'
+  get 'refresh_kopi', to: 'treasures#refresh_kopi', as: 'refresh_kopi'
 
   # portals
   get 'portals', to: 'portals#index', as: 'portals'

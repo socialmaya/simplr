@@ -3,12 +3,7 @@ class TreasuresController < ApplicationController
   
   # sacred kopimist ritual
   def kopimi
-    @kopi = ""
-    for i in 1..3
-      word = $name_generator.next_name.downcase
-      word << " " unless i.eql? 3
-      @kopi << word
-    end
+    @kopi = sacred_text
   end
   
   # sacred copying
@@ -45,6 +40,10 @@ class TreasuresController < ApplicationController
   
   # new form for kopi_share
   def new_kopi_share
+  end
+  
+  def refresh_kopi
+    @kopi = sacred_text
   end
   
   # kanye quotes
@@ -129,23 +128,34 @@ class TreasuresController < ApplicationController
   end
   
   private
-    def hidden_treasure
-      unless current_user and current_user.has_power? 'discover'
-        redirect_to '/404' unless dev?
-      end
+  
+  def sacred_text
+    kopi = ""
+    for i in 1..3
+      word = $name_generator.next_name.downcase
+      word << " " unless i.eql? 3
+      kopi << word
     end
-    
-    # shuffles answer options so correct one isn't always first
-    def shuffle options
-      vals = options.values.shuffle
-      i=0; options.each do |key, val|
-        options[key] = vals[i]; i+=1
-      end
-      return options
+    return kopi
+  end
+  
+  def hidden_treasure
+    unless current_user and current_user.has_power? 'discover'
+      redirect_to '/404' unless dev?
     end
-    
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def treasure_params
-      params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer)
+  end
+  
+  # shuffles answer options so correct one isn't always first
+  def shuffle options
+    vals = options.values.shuffle
+    i=0; options.each do |key, val|
+      options[key] = vals[i]; i+=1
     end
+    return options
+  end
+  
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def treasure_params
+    params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer)
+  end
 end
