@@ -1,19 +1,23 @@
 <div class="dark_card" align="center">
+  <%= image_tag "kopimi", class: :kopimism_sybol_lg %>
+</div>
+
+<div class="dark_card" align="center">
   <p>
-    Perform the sacred Kopimist ritual of Kopyacting
+    Perform the Kopimist ritual of Kopyacting
   </p>
 </div>
 
 <div class="dark_card" align="center">
-  <%= text_area_tag :kopi, @kopi, placeholder: "Kopi sacred text from here...",
+  <%= text_area_tag :kopi, @kopi, placeholder: "Kopy sacred text from here...",
     id: :kopi_field, class: "dark_text_area kopimi_field_large" %>
   <%= link_to kopi_path, remote: true, id: :kopi_textarea_link do %>
     <button class="dark_form_button">
-      <b>Kopi <i class="fa fa-copyright"></i></b>
+      <b>Kopy <i class="fa fa-copyright"></i></b>
     </button>
   <% end %>
   
-  <%= link_to refresh_kopi_path, remote: true, class: :bottom_right_icon, title: "Refresh sacred kopi text..." do %>
+  <%= link_to refresh_kopi_path, remote: true, class: :bottom_right_icon, title: "Refresh sacred kopy text..." do %>
     <i class="fa fa-refresh fa-2x dark_link"></i>
   <% end %>
 </div>
@@ -26,6 +30,10 @@
       <b>Pasta <i class="fa fa-clipboard"></i></b>
     </button>
   <% end %>
+  
+  <%= link_to "/#", remote: true, class: :bottom_right_icon, title: "The sharing of information is sacred..." do %>
+    <%= image_tag "kopimi", class: :kopimi_symbol %>
+  <% end %>
 </div>
 
 <div class="dark_card" align="center">
@@ -36,6 +44,14 @@
       <b>Remix <i class="fa fa-recycle"></i></b>
     </button>
   <% end %>
+  
+  <%= link_to "/#", remote: true, class: :bottom_right_icon, title: "Copy, paste..." do %>
+    <%= image_tag "kopimism", class: :kopimi_symbol %>
+  <% end %>
+</div>
+
+<div class="dark_card" align="center">
+  <%= image_tag "kopimism", class: :kopimism_sybol_lg %>
 </div>
 
 <script>
