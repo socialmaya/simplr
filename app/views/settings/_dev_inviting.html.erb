@@ -1,7 +1,7 @@
 <% if @invite %>
   <div class="card">
     <b id="invite_link_label"><%= link_to "Invitation link - Copy and share:",
-      copy_invite_link_path, remote: true %></b>
+      copy_invite_link_path, remote: true, id: :copy_invite_link %></b>
     <div align="center">
       <%= text_field_tag :invite_link, @invite_link, id: :invite_link_field %>
     </div>
@@ -37,3 +37,7 @@
     <%= render "connections/portal_link_form" %>
   </div>
 </div>
+
+<script>
+  <%= render "connections/listen_for_invite_copy.js" %>
+</script>

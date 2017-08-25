@@ -16,7 +16,7 @@
     </p>
     
     <b id="invite_link_label"><%= link_to "Portal link - Copy and share:",
-      copy_invite_link_path, remote: true %></b>
+      copy_invite_link_path, remote: true, id: :copy_invite_link %></b>
     <div align="center">
       <%= text_field_tag :invite_link, portal_link, id: :invite_link_field, class: :standard_text_field %>
     </div>
