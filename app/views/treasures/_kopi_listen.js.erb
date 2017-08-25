@@ -1,0 +1,18 @@
+function kopi_listen() {
+  var copyTextareaBtn = $('#kopi_textarea_link');
+
+  copyTextareaBtn.on('click', function () {
+    var copyTextarea = $('#kopi_field');
+    copyTextarea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Copying text command was ' + msg);
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+  });
+}
+
+kopi_listen();

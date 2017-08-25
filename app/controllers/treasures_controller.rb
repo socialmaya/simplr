@@ -32,12 +32,10 @@ class TreasuresController < ApplicationController
     words = words.sample words.size
     (0..words.size-1).step(2) do |i|
       if words[i].nil? or words[i+1].nil?
-        puts "\n #{i}: #{words[i].to_s}, #{i+1}: #{words[i+1].to_s} \n"
         break
       end
       @remixed_text << "#{words[i]+words[i+1]}"
       @remixed_text << " " unless i.eql? words.size-1
-      puts "\n #{@remixed_text} \n"
     end
   end
   

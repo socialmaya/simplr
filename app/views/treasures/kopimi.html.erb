@@ -6,7 +6,7 @@
           id: :kopi_field, class: :kopimi_field %>
       </td>
       <td>
-        <%= link_to "kopi", kopi_path, remote: true, class: :white_link %>
+        <%= link_to "kopi", kopi_path, remote: true, id: :kopi_textarea_link, class: :white_link %>
       </td>
     </tr>
   </table>
@@ -41,5 +41,6 @@
 </div>
 
 <script>
+  <%= render "treasures/kopi_listen.js" %>
   <%= render "treasures/pasta_listen.js" %>
 </script>
