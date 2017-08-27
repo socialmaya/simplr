@@ -17,6 +17,8 @@
   <% end %>
 </div>
 
+<%= render "users/edit_password" %>
+
 <div class="card">
   <div align="center">
     <%= link_to "Log out of all other sessions", destroy_all_other_sessions_path, method: :delete,

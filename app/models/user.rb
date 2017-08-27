@@ -249,14 +249,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
-
   def encrypt_password
     if self.password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password = BCrypt::Engine.hash_secret(self.password, self.password_salt)
     end
   end
+
+  private
   
   def gen_unique_token
     begin

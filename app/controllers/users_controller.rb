@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :update_password, :destroy]
   before_action :secure_user, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
@@ -75,6 +75,16 @@ class UsersController < ApplicationController
         format.html { render :edit }
       end
     end
+  end
+  
+  def update_password
+    @auth_user = User.authenticate(current_user.name, params[:old_password])
+    if @auth_user or dev?
+      @user.password = user_params[:password]
+      @user.encrypt_password
+      @user.save
+    end
+    redirect_to :back
   end
 
   def destroy
