@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :proposals, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
+  has_many :carts, dependent: :destroy
+  has_many :wish_lists, dependent: :destroy
   has_many :treasures
   has_many :groups
 

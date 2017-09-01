@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814100555) do
+ActiveRecord::Schema.define(version: 20170901013358) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 20170814100555) do
     t.integer  "bot_id"
     t.string   "page"
     t.string   "parent_tokens"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -186,6 +192,15 @@ ActiveRecord::Schema.define(version: 20170814100555) do
     t.string   "unique_token"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.integer  "card_id"
+    t.integer  "wish_list_id"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "proposals", force: :cascade do |t|
     t.string   "unique_token"
     t.string   "anon_token"
@@ -207,6 +222,15 @@ ActiveRecord::Schema.define(version: 20170814100555) do
     t.string   "misc_data"
     t.integer  "user_id"
     t.string   "voting_type"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "body"
+    t.integer  "stars"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "secrets", force: :cascade do |t|
@@ -355,6 +379,12 @@ ActiveRecord::Schema.define(version: 20170814100555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "photoset"
+  end
+
+  create_table "wish_lists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

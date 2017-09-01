@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
   get 'wikis/add_image', as: 'add_wiki_image'
@@ -175,6 +176,8 @@ Rails.application.routes.draw do
   resources :comments
   resources :settings
   resources :groups
+  resources :wish_lists
+  resources :carts
   resources :users
   resources :posts
   resources :notes
