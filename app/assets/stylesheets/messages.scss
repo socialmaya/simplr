@@ -2,13 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.instant_message_form_container {
-  position: relative;
-  width: 85%;
+.message_form_container {
+  width: 95%;
 }
 
-.instant_message_text_area {
+.message_form_left_sub_container {
+  float: left;
   width: 75%;
+}
+
+.message_form_right_sub_container {
+  float: left;
+  width: 25%;
+}
+
+.message_img_link_container {
+  
+}
+
+.message_text_area {
+  width: 85%;
 }
 
 .message_button_container {

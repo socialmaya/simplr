@@ -5,22 +5,22 @@
 			<%= hidden_field_tag :group_id, @group.id if @group %>
 			
 			<!-- level 1 start -->
-			<div class="instant_message_form_container">
+			<div class="message_form_container">
 		    <!-- level 2 left start -->
-			  <div class="instant_message_form_left_sub_container">
-					<%= f.text_area :body, placeholder: "Send a message...", class: "dark_text_area instant_message_text_area" %>
+			  <div class="message_form_left_sub_container">
+					<%= f.text_area :body, placeholder: "Send a message...", class: "dark_text_area message_text_area" %>
 			  </div>
 		    <!-- level 2 left end -->
 			  
 		    <!-- level 2 right start -->
-			  <div class="instant_message_form_right_sub_container">
+			  <div class="message_form_right_sub_container">
 			    <div class="message_button_container">
 			      <button type="submit" name="commit">
 			        <i class="fa fa-send"></i>
 			      </button>
 			    </div>
 			    
-			    <div class="instant_message_img_link_container">
+			    <div class="message_img_link_container">
 					  <%= link_to add_message_image_path, remote: true do %>
 						  <i class="fa fa-picture-o dark_link"></i>
 					  <% end %>
