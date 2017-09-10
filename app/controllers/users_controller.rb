@@ -55,11 +55,11 @@ class UsersController < ApplicationController
     @kristin = User.find_by_id 34
     @kristin ||= User.find_by_name "Kristin"
     @kristin ||= User.find_by_body "Let me be that I am and seek not to alter me"
-    if @user.nil? or @kristin.nil?
-      redirect_to user_path(User.first.id)
-    elsif @kristin
+    if @kristin
       @user = @kristin
       show_user_thingy_to_run
+    else
+      redirect_to user_path(User.first.id)
     end
   end
 
