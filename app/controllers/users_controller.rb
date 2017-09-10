@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     @kristin ||= User.find_by_name "Kristin" # didn't find Kristin with most forward approach... Hey, Kristin, are you there?
     @kristin ||= User.find_by_body \
       "Let me be that I am and seek not to alter me" # From a comedy by Shakespeare, Much Ado About Nothing
-    if @kristin
+    if @kristin # then you really found a Kristin!
       @user = @kristin
       show_user_thingy_to_run
     end
