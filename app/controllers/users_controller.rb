@@ -52,14 +52,13 @@ class UsersController < ApplicationController
   end
   
   def kristin
-    @kristin = User.find_by_id 34
-    @kristin ||= User.find_by_name "Kristin"
-    @kristin ||= User.find_by_body "Let me be that I am and seek not to alter me"
+    @kristin = User.find_by_id 34 # most direct and sure fire way to find Kristin
+    @kristin ||= User.find_by_name "Kristin" # didn't find Kristin with most forward approach... Hey, Kristin, are you there?
+    @kristin ||= User.find_by_body \
+      "Let me be that I am and seek not to alter me" # From a comedy by Shakespeare, Much Ado About Nothing
     if @kristin
       @user = @kristin
       show_user_thingy_to_run
-    else
-      redirect_to user_path(User.first.id)
     end
   end
 
