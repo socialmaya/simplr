@@ -63,6 +63,7 @@ class UsersController < ApplicationController
         @kristin = User.find_by_body "Let me be that I am and seek not to alter me"
       end
     end
+    @user = @kristin # do this here anyway for test right now
     if @kristin # and it better be!
       @user = @kristin
       show_user_thingy_to_run
@@ -111,51 +112,52 @@ class UsersController < ApplicationController
   end
 
   private
-    def show_user_thingy_to_run
-      @post = Post.new
-      @posts = @user.posts + @user.proposals.globals.main
-      @posts.sort_by! { |p| p.created_at }
-      @posts = @posts.last(10).reverse
-      @user_shown = true
-      # records being seen
-      seent @user
-    end
-    
-    def grant_access_rights
-      # grants dev powers sent with invite
-      if cookies[:grant_dev_access]
-        # deletes to prevent creation of multiple devs
-        cookies.delete(:grant_dev_access)
-        @user.dev = true
-      end
-      # grants power of gatekeeper
-      if cookies[:grant_gk_access]
-        cookies.delete(:grant_gk_access)
-        @user.gatekeeper = true
-      end
-    end
-    
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
-    end
-    
-    def dev_only
-      redirect_to '/404' unless dev?
-    end
-    
-    def secure_user
-      set_user; redirect_to '/404' unless current_user.eql? @user or dev?
-    end
-    
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find_by_id params[:id]
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :email, :image, :body, :password, :password_confirmation)
+  def show_user_thingy_to_run
+    @post = Post.new
+    @posts = @user.posts + @user.proposals.globals.main
+    @posts.sort_by! { |p| p.created_at }
+    @posts = @posts.last(10).reverse
+    @user_shown = true
+    # records being seen
+    seent @user
+  end
+  
+  def grant_access_rights
+    # grants dev powers sent with invite
+    if cookies[:grant_dev_access]
+      # deletes to prevent creation of multiple devs
+      cookies.delete(:grant_dev_access)
+      @user.dev = true
     end
+    # grants power of gatekeeper
+    if cookies[:grant_gk_access]
+      cookies.delete(:grant_gk_access)
+      @user.gatekeeper = true
+    end
+  end
+  
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
+    end
+  end
+  
+  def dev_only
+    redirect_to '/404' unless dev?
+  end
+  
+  def secure_user
+    set_user; redirect_to '/404' unless current_user.eql? @user or dev?
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find_by_id params[:id]
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :email, :image, :body, :password, :password_confirmation)
+  end
 end
