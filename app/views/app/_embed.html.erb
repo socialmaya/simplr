@@ -13,13 +13,16 @@
 		<div align="center"><%= image_tag word, class: :standard_image %></div>
 	<% else %>
 		<% unless word.size > 25 %>
-			<%= link_to word + " ", word, target: :_blank %>
+			<%= link_to word + " ", word, target: :_blank,
+			  style: (@folder ? "color:white;" : nil) %>
 		<% else %>
-			<%= link_to word[0..25] + "... ", word, target: :_blank %>
+			<%= link_to word[0..25] + "... ", word, target: :_blank,
+			  style: (@folder ? "color:white;" : nil) %>
 		<% end %>
 	<% end %>
 <% elsif user_mentioned word %>
-  <%= link_to user_mentioned(word).name, user_mentioned(word) %>
+  <%= link_to user_mentioned(word).name, user_mentioned(word),
+			  style: (@folder ? "color:white;" : nil) %>
 <% else %>
 	<% if word.size < 30 %>
 		<%= (word + " ").html_safe %>
