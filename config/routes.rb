@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
   get 'poem', to: 'treasures#poem', as: 'poem'
-  get 'kristin', to: 'users#show', as: 'kristin'
+  get 'kristin', to: 'users#kristin', as: 'kristin'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
