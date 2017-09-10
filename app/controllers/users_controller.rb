@@ -147,7 +147,14 @@ class UsersController < ApplicationController
   
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find_by_id params[:id]
+    if params[:token]
+      @user = User.find_by_unique_token params[:token]
+      @user ||= User.find_by_id params[:token]
+    else
+      @user = User.find_by_unique_token params[:id]
+      @user ||= User.find_by_id params[:id]
+    end
+    redirect_to '/404' unless @user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
