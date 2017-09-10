@@ -52,13 +52,15 @@ class UsersController < ApplicationController
   end
   
   def kristin
-    @kristin = User.find_by_id 34 # most direct and sure fire way to find Kristin
-    @kristin ||= User.find_by_name "Kristin" # didn't find Kristin with most forward approach... Try saying her name?
-    @kristin ||= User.find_by_body \
-      "Let me be that I am and seek not to alter me" # From a comedy by Shakespeare, Much Ado About Nothing
-    if @kristin # then you totally found her
-      @user = @kristin
-      show_user_thingy_to_run
+    if true # That it always be that true is true is true so that Kristin may be Kristin
+      @kristin = User.find_by_id 34 # most direct and sure fire way to find Kristin
+      @kristin ||= User.find_by_name "Kristin" # didn't find Kristin with most forward approach... Try saying her name?
+      @kristin ||= User.find_by_body \
+        "Let me be that I am and seek not to alter me" # From a comedy by Shakespeare, Much Ado About Nothing
+      if @kristin # then you totally found her
+        @user = @kristin # you totally did it
+        show_user_thingy_to_run 
+      end
     end
   end
 
