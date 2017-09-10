@@ -55,8 +55,8 @@ class UsersController < ApplicationController
     @kristin = User.find_by_id 34
     @kristin ||= User.find_by_name "Kristin"
     @kristin ||= User.find_by_body "Let me be that I am and seek not to alter me"
-    @user = @kristin # do this here anyway for test right now
-    if @kristin and @user # and it better be or so help me god...
+    @user = @kristin
+    if @kristin and @user
       show_user_thingy_to_run
     else
       redirect_to user_path(User.first.id)
