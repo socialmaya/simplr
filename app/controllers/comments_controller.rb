@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all.last.(20).reverse
+    @comments = Comment.all.last(20).reverse
   end
 
   # GET /comments/1
