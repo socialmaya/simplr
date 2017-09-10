@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901013358) do
+ActiveRecord::Schema.define(version: 20170909025021) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 20170901013358) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer  "card_id"
+    t.integer  "cart_id"
     t.integer  "wish_list_id"
     t.string   "name"
     t.string   "description"

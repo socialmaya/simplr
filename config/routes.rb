@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
+  get 'poem', to: 'treasures#poem', as: 'poem'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
@@ -166,6 +167,9 @@ Rails.application.routes.draw do
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
+  
+  # online store/ecommerce
+  get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
 
   resources :proposals do
     resources :comments

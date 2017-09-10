@@ -1,5 +1,9 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  
+  def my_cart
+    @products = current_user.my_cart.products
+  end
 
   # GET /carts
   # GET /carts.json

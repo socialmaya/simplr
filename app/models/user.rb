@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def my_cart
+    carts.last
+  end
+  
   # optional arg to check if power present AND not expired
   def has_power? power, not_expired=nil
     treasure = self.treasures.find_by_power power

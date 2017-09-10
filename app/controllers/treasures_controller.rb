@@ -1,6 +1,10 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  def poem
+  
+  end
+  
   # sacred kopimist ritual
   def kopimi
     @kopi = sacred_text
