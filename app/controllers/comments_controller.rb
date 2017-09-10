@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :invite_only, except: [:new, :show, :create, :add_image]
   before_action :invite_only_or_anrcho, only: [:new, :show, :create, :add_image]
+  before_action :dev_only, only: [:index]
   
   def add_image
   end
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.all.last(20).reverse
   end
 
   # GET /comments/1
@@ -116,25 +117,30 @@ class CommentsController < ApplicationController
   end
 
   private
-    def invite_only_or_anrcho
-      unless invited? or anrcho?
-        redirect_to '/404'
-      end
-    end
   
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+  def dev_only
+    redirect_to '/404' unless dev?
+  end
+  
+  def invite_only_or_anrcho
+    unless invited? or anrcho?
+      redirect_to '/404'
     end
-    
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:user_id, :post_id, :comment_id, :proposal_id, :vote_id, :body, :image)
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:user_id, :post_id, :comment_id, :proposal_id, :vote_id, :body, :image)
+  end
 end
