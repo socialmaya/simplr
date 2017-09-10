@@ -111,9 +111,7 @@ class CommentsController < ApplicationController
   def destroy
     @post = @comment.post
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @post }
-    end
+    redirect_to root_url
   end
 
   private
