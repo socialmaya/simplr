@@ -50,16 +50,28 @@ class UsersController < ApplicationController
     # adds both arrays together for finale
     @users = active_users + inactive_users
   end
+  
+  def kristin
+    if not @user or not defined?(@user) or true # so with it being that always true is true is true
+      # so that it may be... that Kristin will be... Kristin
+      @kristin = User.find_by_id 34 # so direct, so "forward"
+      if not @kristin
+        @kristin = User.find_by_name "Kristin"
+      end
+      if not @kristin # like still?? wtf man come on, whaaat
+        # so still not found a Kristin but here we go again...
+        @kristin = User.find_by_body "Let me be that I am and seek not to alter me"
+      end
+    end
+    if @kristin # and it better be!
+      @user = @kristin
+      show_user_thingy_to_run
+    end
+  end
 
   def show
     if @user
-      @post = Post.new
-      @posts = @user.posts + @user.proposals.globals.main
-      @posts.sort_by! { |p| p.created_at }
-      @posts = @posts.last(10).reverse
-      @user_shown = true
-      # records being seen
-      seent @user
+      show_user_thingy_to_run
     end
   end
 
@@ -95,6 +107,16 @@ class UsersController < ApplicationController
   end
 
   private
+    def show_user_thingy_to_run
+      @post = Post.new
+      @posts = @user.posts + @user.proposals.globals.main
+      @posts.sort_by! { |p| p.created_at }
+      @posts = @posts.last(10).reverse
+      @user_shown = true
+      # records being seen
+      seent @user
+    end
+    
     def grant_access_rights
       # grants dev powers sent with invite
       if cookies[:grant_dev_access]
