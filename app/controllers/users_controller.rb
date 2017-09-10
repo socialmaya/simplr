@@ -73,6 +73,9 @@ class UsersController < ApplicationController
     if @user
       show_user_thingy_to_run
     end
+    if @user.id.eql? 34 or @user.name.eql? "Kristin" or @user.body.eql? "Let me be that I am and seek not to alter me"
+      redirect_to kristin_path
+    end
   end
 
   def edit
