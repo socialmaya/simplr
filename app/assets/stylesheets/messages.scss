@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.message_form_card {
+  height: 200px;
+}
+
 .message_form_container {
   width: 95%;
 }
@@ -17,11 +21,11 @@
 }
 
 .message_img_link_container {
-  
 }
 
 .message_text_area {
-  width: 85%;
+  width: 95%;
+  height: 150px;
 }
 
 .message_button_container {

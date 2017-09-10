@@ -1,4 +1,4 @@
-<div class="dark_card" id="new_message_form">
+<div class="dark_card message_form_card" id="new_message_form">
 	<div align="center">
 		<%= form_for @new_message, url: messages_path, method: :post, remote: true do |f| %>
 			<%= hidden_field_tag :folder_id, @folder.id if @folder %>
