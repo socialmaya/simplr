@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :update_password, :destroy]
+  before_action :set_user, only: [:show, :kristin, :edit, :update, :update_password, :destroy]
   before_action :secure_user, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
@@ -54,11 +54,11 @@ class UsersController < ApplicationController
   def kristin
     if not @user or not defined?(@user) or true # so with it being that always true is true is true
       # so that it may be... that Kristin will be... Kristin
-      @kristin = User.find_by_id 34 # so direct, so "forward"
+      @kristin = User.find_by_id 34 # so direct, the most direct
       if not @kristin
         @kristin = User.find_by_name "Kristin"
       end
-      if not @kristin # like still?? wtf man come on, whaaat
+      if not @kristin # like still?? whaaat
         # so still not found a Kristin but here we go again...
         @kristin = User.find_by_body "Let me be that I am and seek not to alter me"
       end
@@ -73,7 +73,8 @@ class UsersController < ApplicationController
     if @user
       show_user_thingy_to_run
     end
-    if @user.id.eql? 34 or @user.name.eql? "Kristin" or @user.body.eql? "Let me be that I am and seek not to alter me"
+    if @user and (@user.id.eql? 34 or @user.name.eql? "Kristin" \
+      or @user.body.eql? "Let me be that I am and seek not to alter me")
       redirect_to kristin_path
     end
   end
