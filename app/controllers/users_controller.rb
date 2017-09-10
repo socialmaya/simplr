@@ -154,7 +154,7 @@ class UsersController < ApplicationController
       @user = User.find_by_unique_token params[:id]
       @user ||= User.find_by_id params[:id]
     end
-    redirect_to '/404' unless @user or (params[:id] and params[:id].nil?)
+    redirect_to '/404' unless @user or params[:id].nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
