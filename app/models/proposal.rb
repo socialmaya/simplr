@@ -97,6 +97,7 @@ class Proposal < ActiveRecord::Base
       direct_action: "Plan some direct action",
       cooperative: "Form a cooperative",
       meetup: "Local meetup",
+      debate: "Debate",
       update_manifesto: "New manifesto",
       request_feature: "New feature",
       bug_fix: "Fix to a bug",
