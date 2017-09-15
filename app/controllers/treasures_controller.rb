@@ -1,6 +1,9 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  def zodiac
+  end
+  
   def poem
   
   end
