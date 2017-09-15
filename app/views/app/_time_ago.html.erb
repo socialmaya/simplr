@@ -10,7 +10,7 @@
 
 <% link_path = if anrcho? and item.is_a?(Group) %>
   <% show_group_path(item.unique_token) %>
-<% if item.is_a?(Portal) %>
+<% elsif item.is_a?(Portal) %>
   <% "/#" %>
 <% else %>
   <% item.is_a?(Post) ? show_post_path(item.unique_token.nil? ? item.id : item.unique_token) : item %>
