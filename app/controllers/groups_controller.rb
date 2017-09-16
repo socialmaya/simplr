@@ -96,8 +96,10 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    respond_to do |format|
-      format.html { redirect_to my_groups_path }
+    if anrcho? or not current_user
+      redirect_to my_anon_groups_path
+    else
+      redirect_to my_groups_path
     end
   end
 
