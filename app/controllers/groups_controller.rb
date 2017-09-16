@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only, except: [:new, :create, :show, :my_anon_groups]
-  before_action :invited_or_anrcho, only: [:new, :create, :show]
+  before_action :invited_or_anrcho, only: [:new, :create, :update, :show, :edit]
   before_action :anrcho_only, only: [:my_anon_groups]
   
   def hide_featured_groups

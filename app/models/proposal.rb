@@ -113,7 +113,9 @@ class Proposal < ActiveRecord::Base
       postpone_expiration: "Postpone expiration of the group",
       set_ratification_threshold: "Set ratification threshold to 25",
       update_manifesto: "Update group manifesto",
-      limit_views: "Expire at view limit of 3" }
+      limit_views: "Expire at view limit of 3",
+      grant_title: "Grant title",
+      debate: "Debate" }
   end
   
   def votes_to_ratify
