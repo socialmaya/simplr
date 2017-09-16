@@ -1,9 +1,9 @@
 <%= render 'form' %>
 
-<div class="card">
+<div class="dark_card">
   <div align="center">
-    <%= link_to 'Delete', @group, method: :delete, data: { :confirm => 'Are you sure?' } %>
+    <%= link_to 'Delete', @group, method: :delete, data: { :confirm => 'Are you sure?' }, class: :white_link %>
     <%= " | " %>
-    <%= link_to 'Back', @group %>
+    <%= link_to 'Back', @group, class: :white_link %>
   </div>
 </div>
