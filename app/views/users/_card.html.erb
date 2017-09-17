@@ -1,4 +1,13 @@
-<div class="card" id="user_profile_card_<%= user.id %>">
+<% unless user.is_a? User %>
+  <% user = nil %>
+<% end %>
+
+<div class="card"
+  <% if user %>
+    id="user_profile_card_<%= user.id %>"
+  <% end %>
+>
+
   <%= render "users/avatar_card_link", user: user, token: (defined?(token) ? token : nil) %>
   <div align="center">
     <% if defined?(group_creator) %>
@@ -7,33 +16,37 @@
       </p>
     <% end %>
     
-    <% if dev? and user.last_active_at.present? %>
+    <% if dev? and user and user.last_active_at.present? %>
       <%= render "app/time_ago", item: user, time: user.last_active_at, time_label: "Last active " %>
     <% end %>
     
-    <% if defined? @followers and not current_user.eql? @user and not current_user.eql? user \
+    <% if user and defined? @followers and not current_user.eql? @user and not current_user.eql? user \
       and current_user.has_power? 'steal_followers', :not_expired %>
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :bottom_right_link %>
     <% end %>
     
-    <p class="user_card_name_and_bio">
-      <%= link_to user.name, user, class: :user_name_link %>
-      <% if user.body.present? %>
-        <%= render "app/body", item: user %>
-      <% end %>
-    </p>
+    <% if user %>
+      <p class="user_card_name_and_bio">
+        <%= link_to user.name, user, class: :user_name_link %>
+        <% if user.body.present? %>
+          <%= render "app/body", item: user %>
+        <% end %>
+      </p>
     
-    <div id="user_<%= user.id %>_card_links_anchor"></div>
-    <%= render "users/card_links", user: user %>
+      <div id="user_<%= user.id %>_card_links_anchor"></div>
+      <%= render "users/card_links", user: user %>
+    <% end %>
   </div>
 </div>
 
-<% if settings(user)[:profile_card_bg_fader_on] %>
-  <script>
-    <%= render "app/fader.js", target: "user_profile_card", target_id: user.id.to_s, background: true, slow: true %>
-  </script>
-<% elsif settings(user)[:profile_card_bg_color] %>
-  <script>
-    <%= render "users/profile_card_bg_color.js", user: user %>
-  </script>
+<% user %>
+  <% if settings(user)[:profile_card_bg_fader_on] %>
+    <script>
+      <%= render "app/fader.js", target: "user_profile_card", target_id: user.id.to_s, background: true, slow: true %>
+    </script>
+  <% elsif settings(user)[:profile_card_bg_color] %>
+    <script>
+      <%= render "users/profile_card_bg_color.js", user: user %>
+    </script>
+  <% end %>
 <% end %>
