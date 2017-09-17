@@ -7,7 +7,6 @@
     id="user_profile_card_<%= user.id %>"
   <% end %>
 >
-
   <%= render "users/avatar_card_link", user: user, token: (defined?(token) ? token : nil) %>
   <div align="center">
     <% if defined?(group_creator) %>
@@ -32,9 +31,13 @@
           <%= render "app/body", item: user %>
         <% end %>
       </p>
-    
       <div id="user_<%= user.id %>_card_links_anchor"></div>
       <%= render "users/card_links", user: user %>
+      
+    <% elsif token and token.present? and token.is_a(String) and token.size > 5 %>
+      <p>
+        <%= link_to fa_icon("user-secret", token.split("_").first), search_path(query: token) %>
+      </p>
     <% end %>
   </div>
 </div>
