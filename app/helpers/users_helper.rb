@@ -9,7 +9,7 @@ module UsersHelper
   end
   
   def following_options
-    options = [["Choose a user", nil]]
+    @options = [["Choose a user", nil]]
     if current_user
       for user in current_user.following
         # inserts user as an invite option unless they're already a member of this group or already invited
@@ -21,7 +21,7 @@ module UsersHelper
         inserts_available_following_options user
       end
     end
-    return options
+    return @options
   end
   
   def featured_users
@@ -97,7 +97,7 @@ module UsersHelper
   def inserts_available_following_options user
     # inserts user as an invite option unless they're already a member of this group or already invited
     unless @group and (@group.members.find_by_user_id user.id or @group.invites.find_by_user_id user.id)
-      options << [user.name, user.id]
+      @options << [user.name, user.id]
     end
   end
   
