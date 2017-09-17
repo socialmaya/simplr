@@ -1,5 +1,5 @@
-<div class="card">
-  <%= render "users/avatar_card_link", user: message.user %>
+<div class="dark_card">
+  <%= render "users/avatar_card_link", user: message.user if message.user %>
   <%= render "app/time_ago", item: message %>
   <div align="center">
     <% if message.image.url %>
