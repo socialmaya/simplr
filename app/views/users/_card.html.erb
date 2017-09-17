@@ -34,7 +34,7 @@
       <div id="user_<%= user.id %>_card_links_anchor"></div>
       <%= render "users/card_links", user: user %>
       
-    <% elsif token and token.present? and token.is_a(String) and token.size > 5 %>
+    <% elsif token and token.present? and token.is_a?(String) and token.size > 5 %>
       <p>
         <%= link_to fa_icon("user-secret", token.split("_").first), search_path(query: token) %>
       </p>
