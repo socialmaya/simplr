@@ -1,7 +1,8 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
-  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :zen]
+  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :zen, :new, :create]
+  before_action :invited_or_anrcho, only: [:new, :create]
   before_action :user_access, only: [:invites, :followers]
   
   def invite_someone
@@ -110,6 +111,7 @@ class ConnectionsController < ApplicationController
     @connection = Connection.new
   end
 
+  # for inviting users to join a group
   def create
     if @group and @user
       invite = @group.invite_to_join @user
@@ -207,6 +209,12 @@ class ConnectionsController < ApplicationController
         end
       else
         redirect_to '/404'
+      end
+    end
+    
+    def invited_or_anrcho
+      unless invited? or anrcho?
+        redirect_to invite_only_path
       end
     end
     
