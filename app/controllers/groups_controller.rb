@@ -104,47 +104,48 @@ class GroupsController < ApplicationController
   end
 
   private
-    def anrcho_only
-      unless anrcho?
-        redirect_to '/404'
-      end
+  
+  def anrcho_only
+    unless anrcho?
+      redirect_to '/404'
     end
-    
-    def invited_or_anrcho
-      unless invited? or anrcho?
-        redirect_to invite_only_path
-      end
+  end
+  
+  def invited_or_anrcho
+    unless invited? or anrcho?
+      redirect_to invite_only_path
     end
-    
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+  end
+  
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
-    
-    def dev_only
-      redirect_to '/404' unless dev?
+  end
+  
+  def dev_only
+    redirect_to '/404' unless dev?
+  end
+  
+  def secure_group
+    set_group
+    secure = if current_user
+      current_user.id.eql? @group.user_id
+    else
+      anon_token.eql? @group.anon_token
     end
-    
-    def secure_group
-      set_group
-      secure = if current_user
-        current_user.id.eql? @group.user_id
-      else
-        anon_token.eql? @group.anon_token
-      end
-      redirect_to '/404' unless secure or dev?
-    end
-    
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find_by_id(params[:id])
-      # sets group with token for anrcho groups
-      @group ||= Group.find_by_unique_token(params[:token])
-    end
+    redirect_to '/404' unless secure or dev?
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = Group.find_by_id(params[:id])
+    # sets group with token for anrcho groups
+    @group ||= Group.find_by_unique_token(params[:token])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_params
-      params.require(:group).permit(:name, :body, :image, :open, :hidden, :social_structure)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_params
+    params.require(:group).permit(:name, :body, :image, :open, :hidden, :social_structure)
+  end
 end

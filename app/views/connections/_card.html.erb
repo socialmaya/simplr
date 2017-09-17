@@ -1,9 +1,14 @@
 <div class="card" id="user_profile_card_<%= connection.user_id %>">
-  <%= render "groups/avatar_card_link", group: connection.group \
-    if connection.group and connection.invite %>
-    
-  <%= render "users/avatar_card_link", user: connection.user, token: connection.anon_token \
-    if connection.user and (connection.request or !connection.request) %>
+
+  <% if @invites %>
+    <%= render "groups/avatar_card_link", group: connection.group \
+      if connection.group and connection.invite %>
+  <% end %>
+  
+  <% if @members or @requests %>
+    <%= render "users/avatar_card_link", user: connection.user, token: connection.anon_token \
+      if connection.user and (connection.request or !connection.request) %>
+  <% end %>
     
   <% if connection.user and connection.group and group_auth connection.group %>
     <%= link_to "Remove", remove_user_path(connection.user.id, connection.group.id),
