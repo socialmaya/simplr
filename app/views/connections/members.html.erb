@@ -2,7 +2,7 @@
 
 <%= render "groups/card", group: @group %>
 
-<%= render "users/card", user: @group.creator, group_creator: true if @group.creator and @group.creator.is_a? User %>
+<%= render "users/card", user: @group.creator, token: @group.creator, group_creator: true if @group.creator %>
 
 <% for member in @members %>
   <%= render "connections/card", connection: member %>
