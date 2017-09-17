@@ -16,9 +16,7 @@
   
   <% if message.image.url %>
     <div align="center">
-      <% link_to message_path(message.id) do %>
-        <%= image_tag message.image, class: :message_image %>
-      <% end %>
+      <%= image_tag message.image, class: :message_image %>
     </div>
   <% end %>
 </div>
