@@ -10,10 +10,15 @@ module UsersHelper
   
   def following_options
     options = [["Choose a user", nil]]
-    for user in current_user.following
-      # inserts user as an invite option unless they're already a member of this group or already invited
-      unless @group and (@group.members.find_by_user_id user.id or @group.invites.find_by_user_id user.id)
-        options << [user.name, user.id]
+    if current_user
+      for user in current_user.following
+        # inserts user as an invite option unless they're already a member of this group or already invited
+        inserts_available_following_options user
+      end
+    else
+      for user in User.all
+        # inserts user as an invite option unless they're already a member of this group or already invited
+        inserts_available_following_options user
       end
     end
     return options
@@ -87,6 +92,13 @@ module UsersHelper
   end
   
   private
+  
+  # for inviting users to a group
+  def inserts_available_following_options user
+    # inserts user as an invite option unless they're already a member of this group or already invited
+    unless @group and (@group.members.find_by_user_id user.id or @group.invites.find_by_user_id user.id)
+      options << [user.name, user.id]
+  end
   
   def next_chars char, chars
 		next_char = chars[chars.index(char) + 1]
