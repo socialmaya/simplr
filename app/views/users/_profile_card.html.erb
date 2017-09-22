@@ -1,9 +1,10 @@
 <% if (user.dev or user.god or kristin?) and user.title.present? %>
   <script>
     <%= render "app/fader.js", target: "user_title", target_id: "" %>
+    <%= render "app/fader.js", target: "user_title_card", background: true, target_id: "" %>
   </script>
   
-  <div class="dark_card" align="center">
+  <div class="dark_card" align="center" id="user_title_card">
     <h2 id="user_title" class="user_title">
       <%= user.title.html_safe %>
     </h2>
