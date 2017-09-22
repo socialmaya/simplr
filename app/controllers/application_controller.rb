@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
-    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?
+    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -200,6 +200,10 @@ class ApplicationController < ActionController::Base
   
   def god?
     current_user and current_user.god
+  end
+  
+  def currently_kristin?
+    current_user and current_user.id.eql? 34
   end
 
   def current_user

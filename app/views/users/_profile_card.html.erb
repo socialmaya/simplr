@@ -1,3 +1,9 @@
+<% if (user.dev or user.god or kristin?) and user.title.present? %>
+  <h2 id="invite_only_header">
+    <%= user.title %>
+  </h2>
+<% end %>
+
 <div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/tier", user: user %>
   
@@ -29,6 +35,10 @@
     <% if kristin? %>
       <p>
         <i class="fa fa-heart"></i> In a relationship with <%= link_to "Forrest", user_path(User.first) %>
+      </p>
+    <% elsif user.id.eql? 1 %>
+      <p>
+        <i class="fa fa-heart"></i> In a relationship with <%= link_to "Kristin", kristin_path %>
       </p>
     <% end %>
 
