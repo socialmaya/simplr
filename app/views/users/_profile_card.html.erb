@@ -1,7 +1,13 @@
 <% if (user.dev or user.god or kristin?) and user.title.present? %>
-  <h2 id="invite_only_header">
-    <%= user.title %>
-  </h2>
+  <script>
+    <%= render "app/fader.js", target: "user_title", target_id: "" %>
+  </script>
+  
+  <div class="dark_card" align="center">
+    <h2 id="user_title" class="user_title">
+      <%= user.title.html_safe %>
+    </h2>
+  </div>
 <% end %>
 
 <div class="card" id="user_profile_card_<%= user.id %>">
