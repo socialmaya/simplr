@@ -1,15 +1,23 @@
+<script>
+  <%= render "app/fader.js", target: "signup_field_1", target_id: "" %>
+  <%= render "app/fader.js", target: "signup_field_2", target_id: "" %>
+  <%= render "app/fader.js", target: "signup_field_3", target_id: "" %>
+  <%= render "app/fader.js", target: "signup_field_4", target_id: "" %>
+</script>
+
 <div class="dark_card">
   <%= form_for(@user) do |f| %>
   	<%= link_to "Already signed up?", sessions_new_path, class: "top_right_link white_link" %>
 
     <div align="center">
       <p>
-        <%= f.text_field :name, placeholder: "Nickname", class: :dark_text_field %>
-        <%= f.password_field :password, placeholder: "Password", class: :dark_text_field %>
-        <%= f.password_field :password_confirmation, placeholder: "Confirm password", class: :dark_text_field %>
+        <%= f.text_field :name, placeholder: "Nickname", class: :dark_text_field, id: :signup_field_1 %>
+        <%= f.password_field :password, placeholder: "Password", class: :dark_text_field, id: :signup_field_2 %>
+        <%= f.password_field :password_confirmation, placeholder: "Confirm password",
+          class: :dark_text_field, id: :signup_field_3 %>
       </p>
 	    <p>
-        <button type="submit" name="commit" class="dark_form_button">
+        <button type="submit" name="commit" class="dark_form_button" id="signup_field_4">
 	        <b>Sign up <i class="fa fa-pencil"></i></b>
         </button>
       </p>

@@ -1,12 +1,17 @@
 <% unless current_user %>
+  <script>
+    <%= render "app/fader.js", target: "login_field_1", target_id: "" %>
+    <%= render "app/fader.js", target: "login_field_2", target_id: "" %>
+  </script>
+  
   <div class="dark_card">
 	  <%= link_to "Haven't signed up yet?", new_user_path, class: "top_right_link white_link" if invited? %>
 	  
 	  <%= form_tag sessions_path do %>
 	    <div align="center">
 	      <p>
-		      <%= text_field_tag :login, nil, placeholder: "Username", class: :dark_text_field %>
-		      <%= password_field_tag :password, nil, placeholder: "Passphrase", class: :dark_text_field %>
+		      <%= text_field_tag :login, nil, placeholder: "Username", class: :dark_text_field, id: :login_field_1 %>
+		      <%= password_field_tag :password, nil, placeholder: "Passphrase", class: :dark_text_field, id: :login_field_2 %>
 		    </p>
 		    <p>
           <button type="submit" name="commit" class="dark_form_button">

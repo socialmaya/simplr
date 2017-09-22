@@ -1,21 +1,29 @@
+<script>
+  <%= render "app/fader.js", target: "user_field_1", target_id: "" %>
+  <%= render "app/fader.js", target: "user_field_2", target_id: "" %>
+  <%= render "app/fader.js", target: "user_field_3", target_id: "" %>
+  <%= render "app/fader.js", target: "user_field_4", target_id: "" %>
+  <%= render "app/fader.js", target: "user_field_5", target_id: "" %>
+</script>
+
 <div class="dark_card">
   <%= form_for @user, url: user_path(@user), method: :patch,
 	  :html => { :multipart => true, "data-ajax" => false } do |f| %>
 	  <div align="center">
 	    <% if (@user.god or @user.dev) or kristin? %>
-        <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field" %>
+        <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
       <% end %>
       
-      <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field" %>
+      <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
       
-		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area" %>
+		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
 		  
 		  <p>
-		    Avatar: <%= f.file_field :image %>
+		    Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
 	    
 	    <p>
-		    <%= f.submit "Update Profile", class: "dark_form_button" %>
+		    <%= f.submit "Update Profile", class: "dark_form_button", id: :user_field_5 %>
 	    </p>
 	  </div>
   <% end %>
