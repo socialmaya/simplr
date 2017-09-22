@@ -1,7 +1,13 @@
 module UsersHelper
   def kristin? user=nil
     @user = user if user
-    return @user.id.eql?(34) or @user.name.eql?("Kristin") or @user.body.eql?("Let me be that I am and seek not to alter me")
+    if @user.id.eql? 34
+      true
+    elsif @user.name.eql? "Kristin"
+      true
+    elsif @user.body.eql? "Let me be that I am and seek not to alter me"
+      true
+    end
   end
   
   def last_locale user
