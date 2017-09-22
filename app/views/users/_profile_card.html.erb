@@ -25,6 +25,12 @@
       <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? \
         or (dev? and not user.dev) or god? %>
     </p>
+    
+    <% if kristin? %>
+      <p>
+        <i class="fa fa-heart"></i> In a relationship with <%= link_to "Forrest", user_path(User.first) %>
+      </p>
+    <% end %>
 
     <div id="user_<%= user.id %>_card_links_anchor"></div>
     <%= render "users/card_links", user: user %>

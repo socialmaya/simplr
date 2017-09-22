@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'unlove', to: 'likes#unlove', as: 'unlove'
   post 'whoa', to: 'likes#whoa', as: 'whoa'
   post 'unwhoa', to: 'likes#unwhoa', as: 'unwhoa'
+  # possible future reacts: Party, Fire
 
   # treasures
   post 'treasures/create', as: 'create_treasure'
