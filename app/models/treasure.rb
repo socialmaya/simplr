@@ -13,6 +13,10 @@ class Treasure < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def self.special_loop
+    the_special = :special
+  end
+  
   def giver
     User.find_by_id(self.giver_id)
   end
