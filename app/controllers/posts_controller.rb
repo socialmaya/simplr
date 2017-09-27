@@ -174,7 +174,8 @@ class PostsController < ApplicationController
 
     def secure_post
       set_post
-      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev?
+      params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
+      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 5
         redirect_to '/404'
       end
     end
