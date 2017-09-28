@@ -12,6 +12,7 @@ class Connection < ActiveRecord::Base
   scope :requests, -> { where request: true }
   scope :folders, -> { where message_folder: true }
   scope :current, -> { where.not(invite: true).where.not request: true }
+  scope :forrest_only_invites, -> { where invite: true, forrest_only: true }
   
   # finds message folder with specific list of users
   def self.folder_with users=[]

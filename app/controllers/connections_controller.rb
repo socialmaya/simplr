@@ -66,6 +66,7 @@ class ConnectionsController < ApplicationController
         @invite.update redeemed: true
         if @invite.redeemed
           cookies.permanent[:invite_token] = @invite.unique_token
+          cookies[:forrest_only_invite_token] = @invite.forrest_only
           cookies[:grant_dev_access] = @invite.grant_dev_access
           cookies[:grant_gk_access] = @invite.grant_gk_access
           cookies.permanent[:human] = true
@@ -82,6 +83,7 @@ class ConnectionsController < ApplicationController
     
   def generate_invite
     @invite = Connection.new invite: true,
+      forrest_only: params[:forrest_only],
       grant_dev_access: params[:grant_dev_access],
       grant_mod_access: params[:grant_mod_access],
       grant_gk_access: params[:grant_gk_access]

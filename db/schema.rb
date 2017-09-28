@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922153552) do
+ActiveRecord::Schema.define(version: 20170928173633) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20170922153552) do
     t.integer  "post_id"
     t.integer  "comment_id"
     t.text     "body"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "anon_token"
     t.string   "image"
     t.integer  "bot_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170922153552) do
     t.integer  "vote_id"
     t.integer  "like_id"
     t.integer  "note_id"
+    t.boolean  "forrest_only"
   end
 
   create_table "connections", force: :cascade do |t|
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170922153552) do
     t.boolean  "grant_gk_access"
     t.boolean  "portal"
     t.integer  "total_items_seen"
+    t.boolean  "forrest_only"
   end
 
   create_table "game_pieces", force: :cascade do |t|
@@ -190,6 +192,7 @@ ActiveRecord::Schema.define(version: 20170922153552) do
     t.boolean  "hidden"
     t.boolean  "photoset"
     t.string   "unique_token"
+    t.boolean  "forrest_only"
   end
 
   create_table "products", force: :cascade do |t|
@@ -330,6 +333,7 @@ ActiveRecord::Schema.define(version: 20170922153552) do
     t.boolean  "god"
     t.boolean  "hidden"
     t.string   "title"
+    t.boolean  "forrest_only"
   end
 
   create_table "views", force: :cascade do |t|
