@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
-    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?
+    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
+    :forrest_only_club?, :invited_to_forrest_only_club?
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -189,6 +190,15 @@ class ApplicationController < ActionController::Base
     request.host.eql? "anrcho.com" or cookies[:at_anrcho].present?
   end
   
+  def forrest_only_club?
+    request.host.eql? "forrestonlyclub.com" or cookies[:at_forrest_only_club].present?
+  end
+    
+  def invited_to_forrest_only_club?
+    (cookies[:forrest_only_invite_token].present? and Connection.find_by_unique_token(cookies[:forrest_only_invite_token])) \
+      or current_user
+  end
+  
   def invited?
     (cookies[:invite_token].present? and Connection.find_by_unique_token(cookies[:invite_token])) \
       or current_user or User.all.size.zero? or cookies[:zen].present?
@@ -239,6 +249,12 @@ class ApplicationController < ActionController::Base
       if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
         cookies.permanent[:at_anrcho] = true.to_s
         redirect_to proposals_path
+      end
+    end
+    
+    def forrest_club_to_forrest_club
+      if request.host.eql? 'forrestsonlyclub.com'
+        redirect_to resume_path
       end
     end
     
