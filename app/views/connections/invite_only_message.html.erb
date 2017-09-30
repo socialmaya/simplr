@@ -4,10 +4,14 @@
 </script>
 
 <% if forrest_only_club? %>
-  <div class="dark_card" align="center">
+  <div class="dark_card top_spacer" align="center">
     <h2 class="user_title" id="invite_only_header">
       Forrest Only Club
     </h2>
+  </div>
+  
+  <div class="dark_card">
+    <%= image_tag "favicons/foc.ico", class: :standard_image %>
   </div>
 <% else %>
   <h2 id="invite_only_header" class="invite_only_header">
