@@ -3,13 +3,17 @@
   <%= render "app/fader.js", target: "invite_only_txt", target_id: "" %>
 </script>
 
-<h2 id="invite_only_header">
-  <% if forrest_only_club? %>
-    Forrest Only Club
-  <% else %>
+<% if forrest_only_club? %>
+  <div class="dark_card" align="center">
+    <h2 class="user_title" id="invite_only_header">
+      Forrest Only Club
+    </h2>
+  </div>
+<% else %>
+  <h2 id="invite_only_header">
     Social Maya
-  <% end %>
-</h2>
+  </h2>
+<% end %>
 
 <div class="dark_card" align="center">
   <p id="invite_only_txt">
