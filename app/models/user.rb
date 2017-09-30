@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  scope :forrest_only, -> { where forrest_only: true }
+  
   def my_cart
     carts.last
   end

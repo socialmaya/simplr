@@ -202,7 +202,8 @@ class ApplicationController < ActionController::Base
   end
   
   def invited?
-    (cookies[:invite_token].present? and Connection.find_by_unique_token(cookies[:invite_token])) \
+    (cookies[:invite_token].present? and Connection.find_by_unique_token(cookies[:invite_token]) \
+      and not invited_to_forrest_only_club?) \
       or current_user or User.all.size.zero? or cookies[:zen].present?
   end
   

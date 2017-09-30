@@ -65,11 +65,14 @@ class ConnectionsController < ApplicationController
       if !@invite.redeemed
         @invite.update redeemed: true
         if @invite.redeemed
-          cookies.permanent[:invite_token] = @invite.unique_token
-          cookies[:forrest_only_invite_token] = @invite.forrest_only
           cookies[:grant_dev_access] = @invite.grant_dev_access
           cookies[:grant_gk_access] = @invite.grant_gk_access
           cookies.permanent[:human] = true
+        end
+        if @invite.forrest_only
+          cookies.permanent[:forrest_only_invite_token] = @invite.unique_token
+        else
+          cookies.permanent[:invite_token] = @invite.unique_token
         end
       # if invite already redeemed in current browser
       elsif @invite.redeemed and invited?

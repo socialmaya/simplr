@@ -17,6 +17,7 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   scope :global, -> { where group_id: nil }
+  scope :forrest_only, -> { where forrest_only: true }
   
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
