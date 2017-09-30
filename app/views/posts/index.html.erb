@@ -1,3 +1,11 @@
+<% if forrest_only_club? %>
+  <div class="dark_card">
+    <h2 class="user_title">
+      Forrest Only Club
+    </h2>
+  </div>
+<% end %>
+
 <div class="dark_card">
   <%= render "posts/form" %>
   <%= render "app/right_pane" %>
