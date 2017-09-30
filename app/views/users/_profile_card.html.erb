@@ -22,7 +22,9 @@
   <div align="center">
     <% if user.image.url %>
       <% if @user_shown %>
-        <%= image_tag user.image, class: :profile_picture %>
+        <%= link_to geolocation_path, remote: true do %>
+          <%= image_tag user.image, class: :profile_picture %>
+        <% end %>
       <% else %>
         <%= link_to user do %>
           <%= image_tag user.image, class: :profile_picture %>
