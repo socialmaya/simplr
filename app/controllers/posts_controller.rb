@@ -58,7 +58,8 @@ class PostsController < ApplicationController
   def index
     @you_are_home = true
     @all_items = if current_user
-      current_user.feed
+      # gets the current users posts, accounts for foc
+      current_user.feed forrest_only_club?
     else
       @preview_items = true
       # gets preview items for invitee, accounting for when foc invitee

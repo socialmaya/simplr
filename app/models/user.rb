@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
     return { xp_left: xp_to_nxt_lvl, progress: progress, lvl: lvl }
   end
   
-  def feed
+  def feed forrest_only=nil
     _feed = []
     # all posts from users followed
     for user in following
@@ -113,6 +113,8 @@ class User < ActiveRecord::Base
     Proposal.globals.main.each do |proposal|
       _feed << proposal unless _feed.include? proposal
     end
+    # only gets foc posts when forrest_only
+    _feed.delete_if { |item| !item.forrest_only } if forrest_only
     # removes hidden posts or hidden users posts
     _feed.delete_if do |item|
       if item.is_a? Post and not item.user.eql? self

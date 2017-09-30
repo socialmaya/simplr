@@ -7,6 +7,10 @@
 
 <div class="dark_card">
   <%= form_for(@user) do |f| %>
+    <% if forrest_only_club? %>
+      <%= hidden_field_tag :forrest_only, true %>
+    <% end %>
+    
   	<%= link_to "Already signed up?", sessions_new_path, class: "top_right_link white_link" %>
 
     <div align="center">

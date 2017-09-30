@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # users
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
   put 'users/:id/update_password', to: 'users#update_password', as: 'update_password'
+  get 'geo', to: 'users#geolocation', as: 'geolocation'
 
   # likes
   post 'like', to: 'likes#create', as: 'like'

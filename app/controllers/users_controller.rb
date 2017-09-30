@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   before_action :dev_only, only: [:index]
   before_action :invite_only
   
+  def geolocation
+  end
+  
   def hide_featured_users
     cookies.permanent[:hide_featured_users] = true
   end
