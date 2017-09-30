@@ -8,6 +8,8 @@
     
     <% if anrcho? %>
       <%= favicon_link_tag "favicons/anrcho.ico" %>
+    <% elsif request.host.eql? "forrestonlyclub.com" %>
+      <%= favicon_link_tag "favicons/foc.ico" %>
     <% elsif request.host.eql? "forrestwilkins.com" %>
       <%= favicon_link_tag "favicons/glitch_om.ico" %>
     <% else %>
