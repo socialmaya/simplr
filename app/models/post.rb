@@ -35,7 +35,7 @@ class Post < ActiveRecord::Base
     self.likes.where whoa: true
   end
   
-  def self.preview_posts
+  def self.preview_posts forrest_only=nil
     posts = []
     # gets all posts by first user from open groups
     for group in Group.where(open: true)
@@ -51,6 +51,9 @@ class Post < ActiveRecord::Base
     for proposal in Proposal.globals.main
       posts << proposal
     end
+    # only get foc posts when forrest_only
+    posts.delete_if { |item| !item.forrest_only } if forrest_only
+    # sorts posts chronologically
     posts.sort_by! { |item| item.created_at }
     return posts
   end

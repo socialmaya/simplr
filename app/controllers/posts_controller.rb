@@ -61,8 +61,8 @@ class PostsController < ApplicationController
       current_user.feed
     else
       @preview_items = true
-      # gets preview items for invitee
-      Post.preview_posts.last(10).reverse
+      # gets preview items for invitee, accounting for when foc invitee
+      Post.preview_posts(invited_to_forrest_only_club?).last(10).reverse
     end
     @items = if @preview_items
       @all_items

@@ -122,7 +122,7 @@ class ApplicationController < ActionController::Base
   end
 
   def page_size
-    @page_size = 5
+    @page_size = 10
   end
   
   def reset_page

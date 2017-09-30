@@ -8,6 +8,9 @@
 	  <%= link_to "Haven't signed up yet?", new_user_path, class: "top_right_link white_link" if invited? %>
 	  
 	  <%= form_tag sessions_path do %>
+	    <% if forrest_only_club? %>
+	      <%= hidden_field_tag :forrest_only, true %>
+	    <% end %>
 	    <div align="center">
 	      <p>
 		      <%= text_field_tag :login, nil, placeholder: "Username", class: :dark_text_field, id: :login_field_1 %>
