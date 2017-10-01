@@ -13,7 +13,11 @@
     <% elsif request.host.eql? "forrestwilkins.com" %>
       <%= favicon_link_tag "favicons/glitch_om.ico" %>
     <% else %>
-      <%= favicon_link_tag "favicons/bust.ico" %>
+      <% if invited? or current_user %>
+        <%= favicon_link_tag "favicons/bust.ico" %>
+      <% else %>
+        <%= favicon_link_tag "favicons/social_maya.ico" %>
+      <% end %>
     <% end %>
     
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
