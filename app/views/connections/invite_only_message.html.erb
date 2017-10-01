@@ -1,6 +1,7 @@
 <script>
   <%= render "app/fader.js", target: "invite_only_header", target_id: "" %>
   <%= render "app/fader.js", target: "invite_only_txt", target_id: "" %>
+  <%= render "app/fader.js", target: "foc_message", target_id: "" %>
 </script>
 
 <% if forrest_only_club? %>
@@ -15,7 +16,7 @@
   </div>
   
   <div class="dark_card" align="center">
-    <p>
+    <p id="foc_message">
       Forrest Only Club is a social networking site for people with the name Forrest, whether it's your first, middle, or last name. This website is for Forrests only.
     </p>
   </div>
