@@ -69,7 +69,7 @@
     <% end %>
     <!-- showing preview content -->
     <% if item %>
-      <% if !item.is_a?(Proposal) and item.pictures.present? and item.pictures.first.image.url %>
+      <% if !item.is_a?(Proposal) and !item.is_a?(Comment) and item.pictures.present? and item.pictures.first.image.url %>
         <%= image_tag item.pictures.first.image, class: :note_img_preview %>
       <% elsif item.body.present? %>
         <div class="note_txt_preview">
