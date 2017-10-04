@@ -59,5 +59,23 @@
       or action.eql? :proposal_like or action.eql? :vote_like %>
         <%= image_tag "nooice.gif", class: :nooice_img %>
     <% end %>
+    
+    <% item = if action.eql? :post_like %>
+      <% Post.find_by_id note.item_id %>
+    <% elsif action.eql? :proposal_like or action.eql? :proposal_up_voted %>
+      <% Proposal.find_by_unique_token note.item_token %>
+    <% elsif action.eql? :comment_like %>
+      <% Comment.find_by_id note.item_id %>
+    <% end %>
+    <!-- showing preview content -->
+    <% if item %>
+      <% if !item.is_a?(Proposal) and item.pictures.present? and item.pictures.first.image.url %>
+        <%= image_tag item.pictures.first.image, class: :note_img_preview %>
+      <% elsif item.body.present? %>
+        <div class="note_txt_preview">
+          <%= item.body[0..20] + "..." %>
+        </div>
+      <% end %>
+    <% end %>
   </p>
 </div>

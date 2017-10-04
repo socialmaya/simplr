@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928173633) do
+ActiveRecord::Schema.define(version: 20170930210226) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -316,8 +316,8 @@ ActiveRecord::Schema.define(version: 20170928173633) do
     t.string   "name"
     t.string   "passphrase"
     t.binary   "salt"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "auth_token"
     t.string   "image"
     t.text     "body"
@@ -334,6 +334,7 @@ ActiveRecord::Schema.define(version: 20170928173633) do
     t.boolean  "hidden"
     t.string   "title"
     t.boolean  "forrest_only"
+    t.string   "foc_unique_token"
   end
 
   create_table "views", force: :cascade do |t|
