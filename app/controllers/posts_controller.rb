@@ -140,7 +140,10 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if @post.update(post_params.except(:group_id))
+      if params[:group_id].present?
+        @post.update group_id: params[:group_id]
+      end
       if params[:pictures]
         params[:pictures][:image].each do |image|
           @post.pictures.create image: image

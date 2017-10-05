@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
         item.update total_items_seen: item.items_total
       else
         member = item.members.find_by_user_id current_user.id
-        member.update total_items_seen: item.items_total
+        member.update total_items_seen: item.items_total if member
       end
     end
     # continues to normal seent

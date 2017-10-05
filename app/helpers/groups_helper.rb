@@ -20,8 +20,13 @@ module GroupsHelper
     return featured.sample(4)
   end
   
-  def my_group_options
-    options = [["Choose a group", nil]]
+  def my_group_options editing=nil
+    label = if editing
+      "Put in a different group"
+    else
+      "Choose a group"
+    end
+    options = [[label, nil]]
     for group in my_groups.sort_by {|g| (g.posts.present? ? g.posts.last.created_at : g.created_at) }.reverse
       # inserts group as an invite option unless invitee is already a member or already invited
       unless @user and (@user.my_groups.include? group or @user.invites.find_by_group_id group.id) and not @user_shown
