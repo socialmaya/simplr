@@ -41,6 +41,16 @@
     </p>
     <%= image_tag "banner.gif", class: :standard_post_image %>
   </div>
+  
+  <div class="dark_card" align="center">
+    <p>
+      Feel free to post something anonymous below...
+    </p>
+  </div>
+  
+  <div class="dark_card">
+    <%= render "posts/form" %>
+  </div>
 
   <script>
     <%= render "app/fader.js", target: "anrcho_link_text", target_id: "" %>

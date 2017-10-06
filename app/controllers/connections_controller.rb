@@ -57,6 +57,8 @@ class ConnectionsController < ApplicationController
     if anrcho?
       redirect_to proposals_path
     end
+    @post = Post.new un_invited: true
+    @posts = Post.un_invited.last(10).reverse
   end
   
   def redeem_invite

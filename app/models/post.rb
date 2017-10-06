@@ -18,6 +18,7 @@ class Post < ActiveRecord::Base
   
   scope :global, -> { where group_id: nil }
   scope :forrest_only, -> { where forrest_only: true }
+  scope :un_invited, -> { where un_invited: true }
   
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
