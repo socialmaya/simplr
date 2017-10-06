@@ -1,4 +1,4 @@
-<% if @post.group.present? %>
+<% if @post.group.present? and invited? or current_user %>
   <%= render "app/lineage", line: { group: @post.group, post: @post } %>
 <% end %>
 
@@ -10,4 +10,4 @@
   <%= render "comments/card", comment: comment %>
 <% end %>
 
-<%= render "comments/form" %>
+<%= render "comments/form" if invited? or current_user %>
