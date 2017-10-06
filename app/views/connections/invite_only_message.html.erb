@@ -51,6 +51,10 @@
   <div class="dark_card">
     <%= render "posts/form" %>
   </div>
+  
+  <% for post in @posts %>
+    <%= render "posts/card", post: post %>
+  <% end %>
 
   <script>
     <%= render "app/fader.js", target: "anrcho_link_text", target_id: "" %>
