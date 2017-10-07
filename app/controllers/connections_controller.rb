@@ -59,6 +59,7 @@ class ConnectionsController < ApplicationController
     end
     @post = Post.new un_invited: true
     @posts = Post.un_invited.last(10).reverse
+    @invite_only_page = true
   end
   
   def redeem_invite

@@ -2,6 +2,7 @@
   <%= form_for(@post) do |f| %>
     <div align="center">
       <%= hidden_field_tag :group_id, @group.id if @group %>
+      <%= hidden_field_tag :un_invited, true if @invite_only_page %>
       
       <% if @editing and @post.pictures.present? %>
         <% for picture in @post.pictures %>
