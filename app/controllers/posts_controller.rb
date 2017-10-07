@@ -123,6 +123,11 @@ class PostsController < ApplicationController
     if params[:pictures]
       @post.photoset = true
     end
+    # for users not yet invited, from the invite only page
+    if params[:un_invited] and not (invited? or current_user or anrcho?)
+      @post.un_invited = true
+      @post.anon_token = $name_generator.next_name + "_" + SecureRandom.urlsafe_base64
+    end
     respond_to do |format|
       if @post.save
         if params[:pictures]
