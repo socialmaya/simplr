@@ -109,7 +109,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    if !(invited? or anrcho? or current) and not params[:un_invited]
+    sorta_secure = invited? or anrcho? or current
+    if !sorta_secure and not params[:un_invited]
       redirect_to '/404'
     end
     @post = Post.new(post_params)
@@ -127,7 +128,7 @@ class PostsController < ApplicationController
       @post.photoset = true
     end
     # for users not yet invited, from the invite only page
-    if params[:un_invited] and not (invited? or current_user or anrcho?)
+    if params[:un_invited] and not sorta_secure
       @post.un_invited = true
       @post.anon_token = $name_generator.next_name + "_" + SecureRandom.urlsafe_base64
     end
