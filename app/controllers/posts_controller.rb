@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     :hide, :open_menu, :close_menu, :add_photoset]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
-  before_action :invite_only, except: [:show]
+  before_action :invite_only, except: [:show, :create, :add_image]
   before_action :invited_or_token_used, only: [:show]
   
   def read_more
@@ -109,6 +109,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    if !(invited? or anrcho? or current) and not params[:un_invited]
+      redirect_to '/404'
+    end
     @post = Post.new(post_params)
     @group = Group.find_by_id params[:group_id]
     # check to see if user is a member of group if ones selected
