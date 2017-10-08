@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930210226) do
+ActiveRecord::Schema.define(version: 20171006210001) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20170930210226) do
     t.boolean  "photoset"
     t.string   "unique_token"
     t.boolean  "forrest_only"
+    t.boolean  "un_invited"
   end
 
   create_table "products", force: :cascade do |t|

@@ -109,7 +109,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    sorta_secure = invited? or anrcho? or current
+    sorta_secure = invited? or anrcho? or current_user
     if !sorta_secure and not params[:un_invited]
       redirect_to '/404'
     end
