@@ -7,6 +7,7 @@ module NotesHelper
     title << get_site_title
     # applies kristin if kristins profile
     title << " — Kristin <3" if @kristin
+    return title
   end
   
   def namify_note_message note
