@@ -81,7 +81,7 @@ class Post < ActiveRecord::Base
   
   def gen_unique_token
     begin
-      self.unique_token = SecureRandom.urlsafe_base64
+      self.unique_token = SecureRandom.urlsafe_base64.split('').sample(5).join
     end while Post.exists? unique_token: self.unique_token
   end
     
