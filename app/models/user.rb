@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
     end
     # all anonymous posts if dev or has power
     if dev?
-      for post in Post.where.not(anon_token: nil)
+      for post in Post.where(un_invited: nil).where.not(anon_token: nil)
         _feed << post unless _feed.include? post
       end
     end
