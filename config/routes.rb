@@ -129,7 +129,7 @@ Rails.application.routes.draw do
   get 'notes/index', as: 'notes'
   delete 'notes/destroy', as: 'clear_notes'
   get 'dev_notes', to: 'notes#dev_index', as: 'dev_notes'
-  get 'instant_notes', to: 'notes#instant_notes', as: 'instant_notes'
+  get 'notes/instant_notes', to: 'notes#instant_notes', as: 'instant_notes'
 
   # search
   get 'search', to: 'search#index', as: 'search'
