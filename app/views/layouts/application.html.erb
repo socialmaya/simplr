@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= "(" + currently_unseen_notes.size.to_s + ") " if currently_unseen_notes.present? %>
-      <%= get_site_title %><%= " — Kristin <3" if @kristin %></title>
+    <title><%= current_title %></title>
       
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

@@ -2,6 +2,10 @@ class NotesController < ApplicationController
   before_action :current_notes, only: [:index, :destroy]
   before_action :dev_only, only: [:dev_index]
   
+  def instant_notes
+  
+  end
+  
   def dev_index
     @notes = Note.all.last(20).reverse
   end

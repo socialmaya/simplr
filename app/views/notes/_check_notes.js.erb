@@ -1,0 +1,16 @@
+function check_notes() {
+  setInterval(function() {
+	  if ($("#instant_messages_anchor").length) {
+		  $.ajax({
+			  type: "GET",
+			  url: "/messages/instant_messages",
+			  data: $.param({folder_id: "<%= @folder.id %>"})
+		  });
+	  }
+  }, 1000);
+}
+
+if (!check_notes_started) {
+  check_notes();
+  var check_notes_started = true;
+}
