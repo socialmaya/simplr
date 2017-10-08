@@ -1,11 +1,9 @@
 function check_notes() {
   setInterval(function() {
-	  if ($("#instant_messages_anchor").length) {
-		  $.ajax({
-			  type: "GET",
-			  url: "/notes/instant_notes"
-		  });
-	  }
+	  $.ajax({
+		  type: "GET",
+		  url: "/notes/instant_notes"
+	  });
   }, 2500);
 }
 
