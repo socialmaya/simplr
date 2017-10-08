@@ -3,7 +3,6 @@ class NotesController < ApplicationController
   before_action :dev_only, only: [:dev_index]
   
   def instant_notes
-  
   end
   
   def dev_index

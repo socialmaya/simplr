@@ -3,11 +3,10 @@ function check_notes() {
 	  if ($("#instant_messages_anchor").length) {
 		  $.ajax({
 			  type: "GET",
-			  url: "/messages/instant_messages",
-			  data: $.param({folder_id: "<%= @folder.id %>"})
+			  url: "/notes/instant_notes"
 		  });
 	  }
-  }, 1000);
+  }, 2500);
 }
 
 if (!check_notes_started) {
