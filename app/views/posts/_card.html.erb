@@ -146,7 +146,7 @@
     </table>
   </div>
 
-  <% if settings(post.user)[:post_bg_fader_on] %>
+  <% if settings(post.user)[:post_bg_fader_on] or @invite_only_page %>
     <script>
       <%= render "app/fader.js", target: "post_card", target_id: post.id, background: true, slow: true %>
     </script>
