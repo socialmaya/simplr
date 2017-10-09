@@ -65,7 +65,7 @@ class PortalsController < ApplicationController
     end
     # creates portal cluster
     if params[:cluster_size] and not params[:cluster_size].to_i.zero?
-      @cluster = Portal.create cluster: true
+      @cluster = Portal.create cluster: true, expires_at: @portal.expires_at
       if @cluster
         params[:cluster_size].to_i.times do
           Portal.create(
