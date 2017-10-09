@@ -15,7 +15,7 @@ class Portal < ActiveRecord::Base
     end
 
     def gen_unique_token
-      self.unique_token = SecureRandom.urlsafe_base64.split('').sample(4).join
-      self.unique_token << "_" + $name_generator.next_name
+      self.unique_token = $name_generator.next_name.downcase
+      self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(3).join.downcase
     end
 end
