@@ -95,10 +95,15 @@ class PortalsController < ApplicationController
   
   def destroy
     @portal = Portal.find_by_unique_token params[:token]
+    @was_a_cluster = @portal.cluster
     if @portal
       @portal.destroy
     end
-    redirect_to :back
+    if @was_a_cluster
+      redirect_to dev_panel_path
+    else
+      redirect_to :back
+    end
   end
   
   private

@@ -4,7 +4,7 @@ class Portal < ActiveRecord::Base
   
   DEFAULT_REMAINING_USES = 5
   
-  scope :loners, -> { where cluster_id: nil }
+  scope :loners, -> { where cluster: nil, cluster_id: nil }
   scope :clusters, -> { where cluster: true }
   
   def _cluster
