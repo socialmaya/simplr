@@ -106,6 +106,13 @@ class PortalsController < ApplicationController
     end
   end
   
+  def destroy_all
+    Portal.loners.each do |portal|
+      portal.destroy
+    end
+    redirect_to :back
+  end
+  
   private
     def dev_only
       unless dev?
