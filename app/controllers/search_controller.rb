@@ -95,6 +95,10 @@ class SearchController < ApplicationController
           match = true if scan item.send(sym), query
         end
       end
+      # show all content of a group when searched by group name
+      if item.respond_to? :group and item.group
+        match = true if scan item.group.name, query
+      end
       return match
     end
     
