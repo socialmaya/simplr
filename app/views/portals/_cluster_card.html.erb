@@ -6,9 +6,11 @@
     <p>
       Cluster <%= cluster.unique_token %>
     </p>
-    <p>
-      <b>There are <%= cluster.portals.size %> portals in this cluster.</b>
-    </p>
+    <%= link_to show_cluster_path(cluster.unique_token) do %>
+      <p>
+        <b>There are <%= cluster.portals.size %> portals in this cluster.</b>
+      </p>
+    <% end %>
     <p>
       Expires in <%= time_ago_in_words cluster.expires_at %>
     </p>
