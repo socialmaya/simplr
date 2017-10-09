@@ -174,7 +174,7 @@ class PostsController < ApplicationController
 
   private
     def invited_or_token_used
-      unless invited? or (params[:token] and params[:token].size > 20)
+      unless invited? or (params[:token] and params[:token].size > 4)
         redirect_to '/404'
       end
     end
