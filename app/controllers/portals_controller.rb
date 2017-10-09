@@ -3,6 +3,7 @@ class PortalsController < ApplicationController
   before_action :dev_only, only: [:index]
   
   def index
+    @portals_index = true
     @portals = Portal.all.reverse
     for portal in @portals
       if DateTime.current > portal.expires_at
@@ -47,10 +48,10 @@ class PortalsController < ApplicationController
       @portal.expires_at = params[:remaining_days].to_i.days.from_now.to_datetime
     end
     if @portal.save
-      if dev?
-        redirect_to dev_panel_path(portal_token: @portal.unique_token)
-      else
+      if not dev? or params[:from_portal_index]
         redirect_to :back
+      else
+        redirect_to dev_panel_path(portal_token: @portal.unique_token)
       end
     end
   end
