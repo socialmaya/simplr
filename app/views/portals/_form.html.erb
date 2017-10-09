@@ -1,0 +1,10 @@
+<div align="center">
+  <p>
+    Create portals for mass exodus
+  </p>
+  <p>
+    Defaults to <%= Portal::DEFAULT_REMAINING_USES %> uses and expires in
+      <%= time_ago_in_words(Portal.expiration_date) %>
+  </p>
+  <%= render "connections/portal_link_form" %>
+</div>
