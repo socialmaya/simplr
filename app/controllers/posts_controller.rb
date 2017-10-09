@@ -80,7 +80,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if @post and params[:token].to_s.size >= 20
+    if @post and params[:token].to_s.size >= 4
       @post_shown = true
       @comment = Comment.new
       @comments = @post.comments
@@ -188,7 +188,7 @@ class PostsController < ApplicationController
     def secure_post
       set_post
       params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
-      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 5
+      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 4
         redirect_to '/404'
       end
     end
