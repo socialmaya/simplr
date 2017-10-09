@@ -5,7 +5,7 @@ class PortalsController < ApplicationController
   def clusters
     @clusters = Portal.clusters.reverse
     for cluster in @clusters
-      if DateTime.current > cluster.expires_at
+      if DateTime.current > cluster.expires_at or not cluster.portals.present?
         cluster.destroy
       end
     end
@@ -22,6 +22,7 @@ class PortalsController < ApplicationController
   end
   
   def show_cluster
+    @showing_cluster = true
     @cluster = Portal.find_by_unique_token params[:token]
     @portals = @cluster.portals
   end
@@ -70,7 +71,7 @@ class PortalsController < ApplicationController
           Portal.create(
             cluster_id: @cluster.id,
             remaining_uses: @portal.remaining_uses,
-            remaining_days: @portal.remaining_days
+            expires_at: @portal.expires_at
           )
         end
       end

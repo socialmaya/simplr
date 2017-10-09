@@ -5,7 +5,8 @@
     <p><b>Dev totals:</b> 
       <%= Connection.invites.size %> invites,
       <%= Connection.invites.where(redeemed: true).size %> redeemed invites,
-      <%= link_to "#{Portal.all.size} portals open", portals_path %>,
+      <%= link_to "#{Portal.loners.size} portals open", portals_path %>,
+      <%= link_to "#{Portal.clusters.size} clusters", clusters_path %>,
       <%= Treasure.all.size %> treasures,
       <%= link_to "#{Bot.all.size} bots", bots_path %>
     </p>

@@ -9,6 +9,11 @@
     <p>
       Portal <%= portal.unique_token %>
     </p>
+    <% if portal._cluster %>
+      <p>
+        <b><%= "Belongs to Cluster #{portal._cluster.unique_token}" %></b>
+      </p>
+    <% end %>
     <p>
       <%= portal.remaining_uses %> remaining uses
     </p>
