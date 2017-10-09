@@ -7,6 +7,9 @@
     <%= select_tag :remaining_days, options_for_select(portal_life_durations) %>
   </p>
   <p>
+    <%= select_tag :cluster_size, options_for_select(portal_cluster_size) %>
+  </p>
+  <p>
     <button type="submit" name="commit" id="generate_invite_button">
       <b>Generate portal to site <i class="fa fa-opera"></i></b>
     </button>

@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get 'portal/:token', to: 'portals#enter', as: 'enter_portal'
   post 'generate_portal', to: 'portals#create', as: 'generate_portal'
   delete 'close_portal/:token', to: 'portals#destroy', as: 'close_portal'
+  get 'clusters/:token', to: 'portals#show_cluster', as: 'show_cluster'
+  get 'clusters', to: 'portals#clusters', as: 'clusters'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'

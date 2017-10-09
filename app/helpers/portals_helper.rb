@@ -1,4 +1,13 @@
 module PortalsHelper
+  def portal_cluster_size
+    options = [["Generate as a cluster? (multiple)", nil],
+      ["5", 5],
+      ["10", 10],
+      ["25", 25],
+      ["50", 50]]
+    return options
+  end
+  
   def portal_life_durations
     options = [["How long should it stay open for?", nil],
       ["1 week (default)", 7],
