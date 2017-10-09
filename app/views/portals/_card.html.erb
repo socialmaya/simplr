@@ -6,14 +6,20 @@
   <%= link_to "Close", close_portal_path(portal.unique_token), method: :delete,
     data: { confirm: "Are you sure you want to close this portal?" }, class: :top_left_link %>
   <div align="center">
-    <p>
-      Portal <%= portal.unique_token %>
-    </p>
-    <% if portal._cluster %>
+    <%= link_to show_portal_path(portal.unique_token) do %>
       <p>
-        <b><%= "Belongs to Cluster #{portal._cluster.unique_token}" %></b>
+        Portal <%= portal.unique_token %>
       </p>
     <% end %>
+    
+    <% if portal._cluster %>
+      <%= link_to show_cluster_path(portal._cluster.unique_token) do %>
+        <p>
+          <b><%= "Belongs to Cluster #{portal._cluster.unique_token}" %></b>
+        </p>
+      <% end %>
+    <% end %>
+    
     <p>
       <%= portal.remaining_uses %> remaining uses
     </p>
