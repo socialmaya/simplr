@@ -12,9 +12,13 @@
   <% end %>
   <%= render "comments/form" %>
 <% else %>
-  <div class="dark_card" align="center">
+  <div id="guest_prompt" class="dark_card" align="center">
     <p>
       You've stumbled across a small village in cyberspace... To enter Social Maya, <b>you need to find a Portal...</b>
     </p>
   </div>
+
+  <script>
+    <%= render "app/fader.js", target: "guest_prompt", target_id: "" %>
+  </script>
 <% end %>
