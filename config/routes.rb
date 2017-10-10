@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'clusters/:token', to: 'portals#show_cluster', as: 'show_cluster'
   get 'clusters', to: 'portals#clusters', as: 'clusters'
   delete 'close_all_portals', to: 'portals#destroy_all', as: 'destroy_all_portals'
+  get 'cluster_flier/:token', to: 'portals#cluster_flier', as: 'cluster_flier'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'

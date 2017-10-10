@@ -2,6 +2,12 @@ class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
   before_action :dev_only, only: [:index]
   
+  def cluster_flier
+    @cluster_flier_page = true
+    @cluster = Portal.find_by_unique_token params[:token]
+    @portals = @cluster.portals
+  end
+  
   def clusters
     @clusters = Portal.clusters.reverse
     for cluster in @clusters
