@@ -32,8 +32,8 @@
     
   </head>
   <body>
-    <%= render "app/header" if invited? or anrcho? %>
+    <%= render "app/header" if (invited? or anrcho?) and not @cluster_flier_page %>
     <%= yield %>
-    <%= render "app/footer" %>
+    <%= render "app/footer" unless @cluster_flier_page %>
   </body>
 </html>
