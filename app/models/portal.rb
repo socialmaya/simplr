@@ -28,26 +28,27 @@ class Portal < ActiveRecord::Base
   end
     
   private
-    def destroy_dependent_portals
-      if self.cluster
-        for portal in self.portals
-          portal.destroy
-        end
+  
+  def destroy_dependent_portals
+    if self.cluster
+      for portal in self.portals
+        portal.destroy
       end
     end
-    
-    # defaults to 5 uses and expires a week from now
-    def initialize_portal
-      self.expires_at ||= Portal.expiration_date
-      self.remaining_uses ||= DEFAULT_REMAINING_USES
-    end
+  end
+  
+  # defaults to 5 uses and expires a week from now
+  def initialize_portal
+    self.expires_at ||= Portal.expiration_date
+    self.remaining_uses ||= DEFAULT_REMAINING_USES
+  end
 
-    def gen_unique_token
-      self.unique_token = $name_generator.next_name.downcase
-      if self.cluster
-        self.unique_token << "_" + SecureRandom.urlsafe_base64
-      else
-        self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(3).join.downcase.gsub("_", "").gsub("-", "")
-      end
+  def gen_unique_token
+    self.unique_token = $name_generator.next_name.downcase
+    if self.cluster
+      self.unique_token << "_" + SecureRandom.urlsafe_base64
+    else
+      self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(3).join.downcase.gsub("_", "").gsub("-", "")
     end
+  end
 end
