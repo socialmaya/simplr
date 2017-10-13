@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     else
       item.views
     end
-    unless seen? item
+    if not seen? item
       if current_user
         # unless item is the current user or item is not a user at all and belongs to user
         unless current_user.eql? item or (!item.is_a? User and current_user.eql? item.user)
@@ -82,6 +82,10 @@ class ApplicationController < ActionController::Base
           views.create anon_token: anon_token, ip_address: request.remote_ip if probably_human or invited?
         end
       end
+    # updates score count of view for posts/proposals already seen by current user
+    elsif current_user and (item.is_a? Post or item.is_a? Proposal)
+      view = item.views.where(user_id: current_user.id).last
+      view.update score_count: view.score_count.to_i + 1
     end
   end
   

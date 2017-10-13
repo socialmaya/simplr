@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009005546) do
+ActiveRecord::Schema.define(version: 20171013171959) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -355,6 +355,7 @@ ActiveRecord::Schema.define(version: 20171009005546) do
     t.integer  "message_id"
     t.string   "locale"
     t.integer  "vote_id"
+    t.integer  "score_count"
   end
 
   create_table "votes", force: :cascade do |t|
