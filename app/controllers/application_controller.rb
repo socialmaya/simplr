@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     reset_page; session[:current_proposal_section] = section.to_s
     proposals = if group then group.proposals else Proposal.globals end
     @all_items = proposals.send(section.to_sym) + (group ? group.posts : [])
-    @all_items.sort_by! { |item| item.created_at }
+    @all_items.sort_by! { |item| item.score }
     @char_codes = char_codes @all_items
     @char_bits = char_bits @all_items
     @items = paginate @all_items
