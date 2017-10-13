@@ -87,7 +87,7 @@
 		    <% end %>
 		  <% end %>
 		  
-		  <% if ENV['RAILS_ENV'].eql? 'development' and current_user %>
+		  <% if current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) %>
 		    <p>Score = <%= post.score current_user %><p>
 		    <p>
 		      <% weights = post.score(current_user, :get_weights) %>
