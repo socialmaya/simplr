@@ -93,8 +93,8 @@ class PostsController < ApplicationController
       @zens = @post.zens
       # records views
       seent @post
-      # gets views
-      @views = @post.views
+      # gets views, viewed by users other than OP
+      @views = @post.views.where.not non_visible: true
     else
       redirect_to '/404'
     end
