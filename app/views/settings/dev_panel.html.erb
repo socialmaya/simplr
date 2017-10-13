@@ -5,7 +5,7 @@
     <% if ENV['RAILS_ENV'].eql? "production" %>
       You are in production.
     <% else %>
-      You are in development mode.
+      You are in <%= ENV['RAILS_ENV'] %> mode.
     <% end %>
   </p>
 </div>
