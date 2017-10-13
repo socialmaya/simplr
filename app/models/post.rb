@@ -105,7 +105,8 @@ class Post < ActiveRecord::Base
     weights[:days_plus] += 5 if days_old.to_i < 7
     
     # views by current user
-    weights[:views] -= self.views.where(user_id: user.id).last.score_count.to_i
+    view = self.views.where(user_id: user.id).last
+    weights[:views] -= view.score_count.to_i if view
     
     # add all weights together
     weights_keys = weights.keys; weights.size.times do |i|
