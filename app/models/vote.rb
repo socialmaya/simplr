@@ -86,12 +86,13 @@ class Vote < ActiveRecord::Base
   
   def self.score obj, get_weights=nil
     weight = 0
-    weights = {up_votes: 0, days_old: 0, views: 0, hotness: 0}
+    weights = {up_votes: 0, comments: 0, days_old: 0, views: 0, hotness: 0}
     up_votes_weight = 0; for vote in obj.votes.up_votes
       # recent votes on older proposals have more weight
       up_votes_weight += ((vote.created_at.to_date - obj.created_at.to_date).to_i / 2) + 1
     end # plus one for votes on recent proposals to still get valued
-    weights[:up_votes] += up_votes_weight + obj.comments.size / 2 # accounts for comments
+    weights[:up_votes] += up_votes_weight / 5
+    weights[:comments] += obj.comments.size / 2 # accounts for comments
     # number of days since posted
     weights[:days_old] -= (Date.today - obj.created_at.to_date).to_i / 2
     weights[:views] -= obj.views.size / 10 # raise the obscure to top
