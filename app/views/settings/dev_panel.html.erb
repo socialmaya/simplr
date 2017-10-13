@@ -1,5 +1,15 @@
 <h2 class="standard_page_header">Dev Panel <i class="fa fa-code"></i></h2>
 
+<div class="dark_card" align="center">
+  <p>
+    <% if ENV['RAILS_ENV'].eql? "production" %>
+      You are in production.
+    <% else %>
+      You are in development mode.
+    <% end %>
+  </p>
+</div>
+
 <div class="card">
   <div align="center">
     <p><b>Dev totals:</b> 
