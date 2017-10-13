@@ -82,13 +82,13 @@ class Proposal < ActiveRecord::Base
     self.tweet if ENV['RAILS_ENV'].eql? 'production'
   end
   
-  def rank
+  def rank user=nil, feed=nil
     proposals = self.group.present? ? self.group.proposals : Proposal.globals
     ranked = proposals.sort_by { |proposal| proposal.score }
     return ranked.reverse.index(self) + 1 if ranked.include? self
   end
   
-  def score
+  def score user=nil
     Vote.score(self)
   end
   

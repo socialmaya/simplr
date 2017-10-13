@@ -77,6 +77,47 @@ class Post < ActiveRecord::Base
     Post.find_by_id self.original_id
   end
   
+  def rank user=nil, feed=nil
+    ranked = feed.sort_by { |post| post.score(user) }
+    return ranked.index(self) + 1 if ranked.include? self
+  end
+  
+  def score user=nil, get_weights=nil
+    weight = 0
+    weights = {
+      likes: 0, likes_plus: 0,
+      days: 0, days_plus: 0,
+      views: 0
+    }
+    
+    # likes
+    for like in self.likes
+      # recent likes on older posts have more weight
+      weights[:likes] += ((like.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
+      weights[:likes_plus] += 5 if like.whoa or like.love or like.zen
+    end # plus one for likes on recent posts to still get valued
+    
+    # days since posted
+    days_old = (Date.today - self.created_at.to_date).to_i
+    # older the post, less the weight
+    weights[:days] -= days_old.to_i / 2
+    # recent posts get more weight
+    weights[:days_plus] += 5 if days_old.to_i < 7
+    
+    # views by current user
+    weights[:views] -= self.views.where(user_id: user.id).size
+    
+    # add all weights together
+    weights_keys = weights.keys; weights.size.times do |i|
+      weight += weights[weights_keys[i]]
+    end
+    if get_weights
+      return weights
+    else
+      return weight
+    end
+  end
+  
   private
   
   def gen_unique_token
