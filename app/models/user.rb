@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
       end
     end
     # sorts posts/proposals chronologically
-    _feed.sort_by! { |item| item.rank self, _feed }
+    _feed.sort_by! { |item| item.created_at }
     return _feed.reverse
   end
 
