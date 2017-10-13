@@ -88,7 +88,7 @@ class Proposal < ActiveRecord::Base
     return ranked.reverse.index(self) + 1 if ranked.include? self
   end
   
-  def score user=nil
+  def score user=nil, feed=nil
     Vote.score(self)
   end
   
