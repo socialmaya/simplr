@@ -91,7 +91,7 @@ class Vote < ActiveRecord::Base
       # recent votes on older proposals have more weight
       up_votes_weight += ((vote.created_at.to_date - obj.created_at.to_date).to_i / 2) + 1
     end # plus one for votes on recent proposals to still get valued
-    weights[:up_votes] += up_votes_weight / 5
+    weights[:up_votes] += up_votes_weight
     weights[:comments] += obj.comments.size / 2 # accounts for comments
     # number of days since posted
     weights[:days_old] -= (Date.today - obj.created_at.to_date).to_i / 2
