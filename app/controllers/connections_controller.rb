@@ -212,7 +212,7 @@ class ConnectionsController < ApplicationController
   private
   
   def dev_only
-    if ENV['RAILS_ENV'].eql? 'production'
+    unless ENV['RAILS_ENV'].eql? 'production'
       redirect_to '/404'
     end
   end
