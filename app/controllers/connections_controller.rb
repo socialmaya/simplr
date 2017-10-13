@@ -4,6 +4,7 @@ class ConnectionsController < ApplicationController
   before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :zen, :new, :create, :members]
   before_action :invited_or_anrcho, only: [:new, :create, :members]
   before_action :user_access, only: [:invites, :followers]
+  before_action :dev_only, only: [:zen]
   
   def invite_someone
     unless current_user and (current_user.has_power? 'invite_someone' or current_user.gatekeeper)
@@ -209,32 +210,39 @@ class ConnectionsController < ApplicationController
   end
 
   private
-    def user_access
-      if current_user
-        unless @user.eql? current_user or dev? or \
-          (action_name.eql? 'followers' and current_user.has_power? 'steal_followers', :not_expired)
-          redirect_to '/404'
-        end
-      else
+  
+  def dev_only
+    if ENV['RAILS_ENV'].eql? 'production'
+      redirect_to '/404'
+    end
+  end
+  
+  def user_access
+    if current_user
+      unless @user.eql? current_user or dev? or \
+        (action_name.eql? 'followers' and current_user.has_power? 'steal_followers', :not_expired)
         redirect_to '/404'
       end
+    else
+      redirect_to '/404'
     end
-    
-    def invited_or_anrcho
-      unless invited? or anrcho?
-        redirect_to invite_only_path
-      end
+  end
+  
+  def invited_or_anrcho
+    unless invited? or anrcho?
+      redirect_to invite_only_path
     end
-    
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+  end
+  
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
-    
-    def set_item
-      @user = User.find_by_id params[:user_id]
-      @group = Group.find_by_id params[:group_id]
-      @connection = Connection.find_by_id params[:id] unless @user or @group
-    end
+  end
+  
+  def set_item
+    @user = User.find_by_id params[:user_id]
+    @group = Group.find_by_id params[:group_id]
+    @connection = Connection.find_by_id params[:id] unless @user or @group
+  end
 end
