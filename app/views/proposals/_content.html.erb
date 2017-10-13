@@ -26,4 +26,8 @@
 		  
 <% if current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) %>
   <p>Score = <%= proposal.score %><p>
+  <p>
+    <% weights = proposal.score(nil, nil, :get_weights) %>
+    Score weights: <%= weights %>
+  </p>
 <% end %>
