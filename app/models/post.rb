@@ -87,6 +87,8 @@ class Post < ActiveRecord::Base
     weights = {
       likes: 0, likes_plus: 0,
       days: 0, days_plus: 0,
+      comments: 0,
+      shares: 0,
       views: 0
     }
     

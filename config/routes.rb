@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
   get 'poem', to: 'treasures#poem', as: 'poem'
   get 'kristin', to: 'users#kristin', as: 'kristin'
+  get 'play_audio', to: 'treasures#play_audio', as: 'play_audio'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'

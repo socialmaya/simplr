@@ -10,6 +10,15 @@
   </p>
 </div>
 
+<div class="dark_card" align="center">
+  <p>
+    <%= audio_tag "alien_breathe.wav", id: "audio_play" %>
+  </p>
+  <p>
+    <%= link_to "Play", play_audio_path, remote: true %>
+  </p>
+</div>
+
 <div class="card">
   <div align="center">
     <p><b>Dev totals:</b> 
