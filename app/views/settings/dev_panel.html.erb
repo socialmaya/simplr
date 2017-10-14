@@ -16,6 +16,7 @@
   <%= audio_tag "effects/coin_3.wav", id: "coin_3" %>
   <%= audio_tag "effects/umbrella_1.wav", id: "umbrella_1" %>
   <%= audio_tag "effects/zipper_bag_3.wav", id: "zipper_bag_3" %>
+  <%= audio_tag "effects/magic.wav", id: "magic" %>
   
   <p>
     <%= link_to "Bumerang", play_audio_path("bumerang"), remote: true, class: :white_link %>
@@ -31,6 +32,9 @@
   </p>
   <p>
     <%= link_to "Zipper bag", play_audio_path("zipper_bag_3"), remote: true, class: :white_link %>
+  </p>
+  <p>
+    <%= link_to "Magic wand", play_audio_path("magic"), remote: true, class: :white_link %>
   </p>
   
   <% 7.times do |i| %>

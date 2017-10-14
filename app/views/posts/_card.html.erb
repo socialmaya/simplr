@@ -153,6 +153,8 @@
       </tr>
     </table>
   </div>
+  
+  <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
 
   <% if settings(post.user)[:post_bg_fader_on] or @invite_only_page %>
     <script>
