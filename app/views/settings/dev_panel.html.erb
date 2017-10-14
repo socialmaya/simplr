@@ -2,10 +2,10 @@
 
 <div class="dark_card" align="center">
   <p>
-    <% if ENV['RAILS_ENV'].eql? "production" %>
-      You are in production.
+    <% if ENV['RAILS_ENV'].eql? "development" %>
+      You are in development.
     <% else %>
-      You are in <%= ENV['RAILS_ENV'] %> mode.
+      You are in production mode.
     <% end %>
   </p>
 </div>
