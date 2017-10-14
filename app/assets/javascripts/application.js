@@ -20,4 +20,5 @@
 //= require bonsai
 //= require jquery.kanye-ipsum.min.js
 
-webview.getSettings().setMediaPlaybackRequiresUserGesture(fa‌​lse);
+// chrome mobile autoplay of audio
+//webview.getSettings().setMediaPlaybackRequiresUserGesture(fa‌​lse);
