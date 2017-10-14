@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
         # unless item is the current user or item is not a user at all and belongs to user
         unless current_user.eql? item
           view = views.new user_id: current_user.id, ip_address: request.remote_ip
-          if current_user.eql? item.user
+          if item.respond_to?(:user) and current_user.eql? item.user
             view.non_visible = true
           end
           view.save
