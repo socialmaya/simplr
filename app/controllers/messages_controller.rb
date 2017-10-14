@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
     @new_message = Message.new
     if @folder
       @folder_shown = true
-      @messages = @folder.messages.last 10
+      @messages = @folder.messages.last 5
       set_last_message_seen
       set_last_im
       for message in @messages
@@ -102,6 +102,9 @@ class MessagesController < ApplicationController
       end
     end
     set_last_im
+    unless @instant_messages.empty?
+      @instant_messages = @messages.last(5)
+    end
   end
 
   def index

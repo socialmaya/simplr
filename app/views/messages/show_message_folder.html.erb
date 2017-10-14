@@ -4,9 +4,11 @@
 
 <%= render "messages/folder_card", folder: @folder %>
 
-<% for message in @messages %>
-	<%= render "messages/bubble", message: message %>
-<% end %>
+<div id="messages_container">
+  <% for message in @messages %>
+	  <%= render "messages/bubble", message: message %>
+  <% end %>
+</div>
 
 <div id="instant_messages_anchor"></div>
 

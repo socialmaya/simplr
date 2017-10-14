@@ -1,5 +1,7 @@
-<% @instant_messages.each do |message| %>
-	<%= render "messages/bubble", message: message %>
-<% end %>
+<div id="messages_container">
+  <% @instant_messages.each do |message| %>
+	  <%= render "messages/bubble", message: message %>
+  <% end %>
+</div>
 
 <div id="instant_messages_anchor"></div>

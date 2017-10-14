@@ -8,8 +8,11 @@
     || last_message_id !== <%= @instant_messages.last.id %> )
   {
     var last_message_id = <%= @instant_messages.last.id %>;
+    var container = $("#messages_container");
+    
     anchor.after("<%=j render 'messages/instant_messages' %>");
-    anchor.remove(); $("#instant_messages_anchor").scrollView();
+    container.remove(); anchor.remove();
+    $("#instant_messages_anchor").scrollView();
     
     // play audio for IM received
     $("#audio_play")[0].currentTime = 0;
