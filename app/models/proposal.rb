@@ -10,7 +10,7 @@ class Proposal < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :likes, dependent: :destroy
   
-  before_create :gen_unique_token
+  before_create :gen_unique_token, :spam_filter
   validates_presence_of :body
   
   scope :main, -> { where requires_revision: [nil, false] }
@@ -233,6 +233,12 @@ class Proposal < ActiveRecord::Base
   end
   
   private
+  
+  def spam_filter
+    if self.body.include? "businessLoansfunded"
+      errors.add(:post, "cannot be spam.")
+    end
+  end
   
   def gen_unique_token
     begin
