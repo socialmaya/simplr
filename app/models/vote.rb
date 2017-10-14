@@ -89,7 +89,9 @@ class Vote < ActiveRecord::Base
     weights = {up_votes: 0, comments: 0, days_old: 0, views: 0, hotness: 0}
     up_votes_weight = 0; for vote in obj.votes.up_votes
       # recent votes on older proposals have more weight
-      up_votes_weight += ((vote.created_at.to_date - obj.created_at.to_date).to_i / 2) + 1
+      if vote.created_at.to_date < 2.week.ago
+        up_votes_weight += ((vote.created_at.to_date - obj.created_at.to_date).to_i / 2) + 1
+      end
     end # plus one for votes on recent proposals to still get valued
     weights[:up_votes] += up_votes_weight / 4
     weights[:comments] += obj.comments.size / 2 # accounts for comments
