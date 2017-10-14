@@ -276,6 +276,6 @@ class ApplicationController < ActionController::Base
     end
     
     def bots_to_404
-      redirect_to '/404' if request.bot? and false # turned off for now
+      redirect_to '/404' if request.bot? and anrcho? # turned on only for anrcho
     end
 end
