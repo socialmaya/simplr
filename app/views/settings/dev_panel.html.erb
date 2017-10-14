@@ -33,8 +33,8 @@
     <%= link_to "Zipper bag", play_audio_path("zipper_bag_3"), remote: true, class: :white_link %>
   </p>
   
-  <% 8.times do |i| %>
-    <%= audio_tag "interface/interface_#{(i+1).to_s}.wav", id: "interface_#{(i+1).to_s}" %>
+  <% 7.times do |i| %>
+    <%= audio_tag "interface/interface_#{(i+1).to_s}.mp3", id: "interface_#{(i+1).to_s}" %>
     <p>
       <%= link_to "Interface #{(i+1).to_s}", play_audio_path("interface_#{(i+1).to_s}"), remote: true, class: :white_link %>
     </p>
