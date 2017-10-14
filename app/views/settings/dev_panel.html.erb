@@ -11,9 +11,25 @@
 </div>
 
 <div class="dark_card" align="center">
-  <%= audio_tag "effects/bumerang.wav", id: "audio_play" %>
+  <%= audio_tag "effects/bumerang.wav", id: "bumerang" %>
+  <%= audio_tag "effects/coin_1.wav", id: "coin_1" %>
+  <%= audio_tag "effects/coin_3.wav", id: "coin_3" %>
+  <%= audio_tag "effects/umbrella_1.wav", id: "umbrella_1" %>
+  <%= audio_tag "effects/zipper_bag_3.wav", id: "zipper_bag_3" %>
   <p>
-    <%= link_to "Play", play_audio_path, remote: true, class: :white_link %>
+    <%= link_to "Bumerang", play_audio_path("bumerang"), remote: true, class: :white_link %>
+  </p>
+  <p>
+    <%= link_to "Coin 1", play_audio_path("coin_1"), remote: true, class: :white_link %>
+  </p>
+  <p>
+    <%= link_to "Coin 2", play_audio_path("coin_3"), remote: true, class: :white_link %>
+  </p>
+  <p>
+    <%= link_to "Umbrella", play_audio_path("umbrella_1"), remote: true, class: :white_link %>
+  </p>
+  <p>
+    <%= link_to "Zipper bag", play_audio_path("zipper_bag_3"), remote: true, class: :white_link %>
   </p>
 </div>
 
