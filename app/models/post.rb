@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   validate :text_or_image?, on: :create
   
   mount_uploader :image, ImageUploader
+  mount_uploader :video, VideoUploader
   
   scope :global, -> { where group_id: nil }
   scope :forrest_only, -> { where forrest_only: true }
@@ -138,7 +139,7 @@ class Post < ActiveRecord::Base
     if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
       unless original_id and (body.present? or (Post.find_by_id(original_id) \
         and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
-        errors.add(:post, "cannot be empty.")
+        errors.add(:post, "cannot be empty.") unless video_url
       end
     end
   end

@@ -1,7 +1,5 @@
-function fader_<%= target + "_" + target_id.to_s %>() {
-  var rgb = [0, 0, 0]; // the targets color values
-  var fat_rgb = [false, false, false]; // ensures pos/neg
-  var color_min = [<%= defined?(love) ? 200 : 1 %>, 1, 1]; // when it should go back up
+function padding_fader_<%= target + "_" + target_id.to_s %>() {
+  var color_min = [200, 1, 1]; // when it should go back up
   var color_max = [255, 255, <%= defined?(love) ? 20 : 255 %>]; // when color should go back down
   var change_rate = <%= defined?(slow) ? 0.25 : (defined?(fast) ? 1 : 0.5) %>; // added/subbed each round
   var change_speed = <%= defined?(slow) ? 15 : (defined?(fast) ? 5 : 2.5) %>; // interval speed, higher == slower
@@ -33,8 +31,8 @@ function fader_<%= target + "_" + target_id.to_s %>() {
   }, change_speed);
 }
 
-if (!fader_<%= target + "_" + target_id.to_s %>_started) {
-  fader_<%= target + "_" + target_id.to_s %>();
-  var fader_<%= target + "_" + target_id.to_s %>_started = true;
+if (!padding_fader_<%= target + "_" + target_id.to_s %>_started) {
+  padding_fader_<%= target + "_" + target_id.to_s %>();
+  var padding_fader_<%= target + "_" + target_id.to_s %>_started = true;
 }
 

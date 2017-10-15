@@ -72,6 +72,12 @@
           <% end %>
         </p>
       <% end %>
+      
+      <% if post.video_url %>
+        <p>
+          <%= video_tag post.video_url.to_s, controls: true, class: :standard_post_video %>
+        </p>
+      <% end %>
 
       <% if post.body.present? %>
         <% body_size = 500 %>
