@@ -108,7 +108,12 @@ class Post < ActiveRecord::Base
     
     # views by current user
     view = self.views.where(user_id: user.id).last
-    weights[:views] -= view.score_count.to_i if view
+    if view
+      score_count = view.score_count.to_i
+      # more weight taken for views on older posts
+      score_count *= 5 if self.created_at > 2.week.ago
+      weights[:views] -= view.score_count.to_i
+    end
     
     # add all weights together
     weights_keys = weights.keys; weights.size.times do |i|
