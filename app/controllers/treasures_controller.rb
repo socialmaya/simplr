@@ -1,6 +1,9 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  def console
+  end
+  
   def play_audio
     @audio = params[:audio]
   end

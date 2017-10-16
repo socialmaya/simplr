@@ -75,7 +75,7 @@
       
       <% if post.video_url %>
         <p>
-          <%= video_tag post.video_url.to_s, controls: true, class: :standard_post_video %>
+          <%= video_tag post.video_url.to_s, autoplay: true, loop: true, class: :standard_post_video %>
         </p>
       <% end %>
 

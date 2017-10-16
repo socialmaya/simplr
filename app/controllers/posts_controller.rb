@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     :hide, :open_menu, :close_menu, :add_photoset]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
-  before_action :invite_only, except: [:show, :create, :add_image]
+  before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
   
   def read_more
@@ -17,6 +17,9 @@ class PostsController < ApplicationController
   end
 
   def add_group_id
+  end
+
+  def add_video
   end
 
   def add_image

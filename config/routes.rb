@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'poem', to: 'treasures#poem', as: 'poem'
   get 'kristin', to: 'users#kristin', as: 'kristin'
   get 'play_audio/:audio', to: 'treasures#play_audio', as: 'play_audio'
+  get 'console', to: 'treasures#console', as: 'console'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
@@ -114,6 +115,7 @@ Rails.application.routes.draw do
 
   # posts
   get 'posts/add_image', as: 'add_post_image'
+  get 'posts/add_video', as: 'add_post_video'
   get 'posts/add_group_id', as: 'add_post_group_id'
   get 'posts/:id/add_photoset', to: 'posts#add_photoset', as: 'add_post_photoset'
   post 'posts/:id/share', to: 'posts#share', as: 'share_post'
