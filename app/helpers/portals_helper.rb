@@ -1,4 +1,15 @@
 module PortalsHelper
+  def portal_qr_code link
+    return RQRCode::QRCode.new link, :size => 5, :level => :h
+  end
+
+  def portal_url portal
+    link = root_url
+    link.slice!(-1)
+    link += enter_portal_path(portal.unique_token)
+    return link
+  end
+  
   def portal_cluster_size
     options = [["Generate as a cluster? (multiple)", nil],
       ["5", 5],

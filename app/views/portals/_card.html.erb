@@ -12,6 +12,8 @@
       </p>
     <% end %>
     
+    <%= render "portals/qr_code", portal: portal %>
+    
     <% if portal._cluster %>
       <%= link_to show_cluster_path(portal._cluster.unique_token) do %>
         <p>

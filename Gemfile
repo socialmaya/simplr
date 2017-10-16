@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'bcrypt'
 gem 'gpgme'
 
+# QR code generation
+gem 'rqrcode'
+
 # editing and updating site from anywhere
 gem 'net-ssh'
 gem 'github_api'

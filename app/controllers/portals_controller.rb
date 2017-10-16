@@ -25,6 +25,8 @@ class PortalsController < ApplicationController
         portal.destroy
       end
     end
+    
+    @qr = RQRCode::QRCode.new( 'http://localhost:3000/portal/moesnove_lek', :size => 5, :level => :h )
   end
   
   def show_cluster

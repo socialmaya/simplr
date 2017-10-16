@@ -2,12 +2,14 @@
 
 <div class="dark_card" align="center">
   <p>
+    <%= link_to '<i class="fa fa-terminal fa-lg" aria-hidden="true"></i>'.html_safe,
+      console_path, class: :white_link %> 
+    You are in 
     <% if ENV['RAILS_ENV'].eql? "development" %>
-      You are in development mode.
+      development mode.
     <% else %>
-      You are in production.
+      production.
     <% end %>
-    <%= link_to '<i class="fa fa-terminal fa-lg" aria-hidden="true"></i>'.html_safe, console_path, class: :white_link %>
   </p>
 </div>
 
