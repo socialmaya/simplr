@@ -15,6 +15,9 @@
   td.black { border-color: #000; }
   td.white { border-color: #fff; }
 </style>
-<p>
-  <%= raw portal_qr_code(portal_url(portal)).as_html %>
-</p>
+
+<%= link_to show_portal_path portal.unique_token do %>
+  <p>
+    <%= raw portal_qr_code(portal_url(portal)).as_html %>
+  </p>
+<% end %>
