@@ -129,7 +129,7 @@ class Post < ActiveRecord::Base
       weights[:views] -= view.score_count.to_i
     # bring back old classics
     elsif self.created_at > 3.month.ago    
-      weights[:classics] += 25 if rand(Post.size).eql? 1
+      weights[:classics] += 25 if rand(Post.all.size).eql? 1
     end
     
     # add all weights together
