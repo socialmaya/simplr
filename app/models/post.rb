@@ -90,7 +90,8 @@ class Post < ActiveRecord::Base
       comments: 0, comments_plus: 0,
       days: 0, days_plus: 0,
       shares: 0,
-      views: 0
+      views: 0,
+      classic: 0
     }
     
     # likes
@@ -104,8 +105,13 @@ class Post < ActiveRecord::Base
     for comment in self.comments
       # recent likes on older posts have more weight
       weights[:comments] += ((comment.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
-      weights[:comments_plus] += 5 if comment.likes.present?
+      weights[:comments_plus] += 5 if comment.likes.where.not(user_id: user.id).present?
     end # plus one for likes on recent posts to still get valued
+    
+    # shares, post shared
+    for post in shares
+      weights[:shares] += 5
+    end
     
     # days since posted
     days_old = (Date.today - self.created_at.to_date).to_i
@@ -119,8 +125,11 @@ class Post < ActiveRecord::Base
     if view
       score_count = view.score_count.to_i
       # more weight taken for views on older posts
-      score_count *= 5 if self.created_at > 2.week.ago
+      score_count *= 10 if self.created_at > 2.week.ago
       weights[:views] -= view.score_count.to_i
+    # bring back old classics
+    elsif self.created_at > 3.month.ago    
+      weights[:classics] += 25 if rand(Post.size).eql? 1
     end
     
     # add all weights together
