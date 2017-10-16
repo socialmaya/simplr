@@ -2,6 +2,7 @@ class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
   def console
+    config.web_console.whitelisted_ips = request.remote_ip
   end
   
   def play_audio
