@@ -87,8 +87,8 @@ class Post < ActiveRecord::Base
     weight = 0
     weights = {
       likes: 0, likes_plus: 0,
+      comments: 0, comments_plus: 0,
       days: 0, days_plus: 0,
-      comments: 0,
       shares: 0,
       views: 0
     }
@@ -98,6 +98,13 @@ class Post < ActiveRecord::Base
       # recent likes on older posts have more weight
       weights[:likes] += ((like.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
       weights[:likes_plus] += 5 if like.whoa or like.love or like.zen
+    end # plus one for likes on recent posts to still get valued
+    
+    # comments
+    for comment in self.comments
+      # recent likes on older posts have more weight
+      weights[:comments] += ((comment.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
+      weights[:comments_plus] += 5 if comment.likes.present?
     end # plus one for likes on recent posts to still get valued
     
     # days since posted
