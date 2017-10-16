@@ -152,9 +152,11 @@ class UsersController < ApplicationController
   def set_user
     if params[:token]
       @user = User.find_by_unique_token params[:token]
+      @user ||= User.find_by_name params[:token]
       @user ||= User.find_by_id params[:token]
     else
       @user = User.find_by_unique_token params[:id]
+      @user ||= User.find_by_name params[:id]
       @user ||= User.find_by_id params[:id]
     end
     redirect_to '/404' unless @user or params[:id].nil?
