@@ -36,6 +36,12 @@ class UsersController < ApplicationController
         cookies[:auth_token] = @user.auth_token
       end
       cookies.permanent[:logged_in_before] = true
+      
+      # automatically follows website creator at sign up so feed is full
+      connection = current_user.follow User.first
+      Note.notify(:user_follow, nil, @user, current_user) if connection
+      
+      # returns to home page, main feed
       redirect_to root_url
     else
       redirect_to :back
