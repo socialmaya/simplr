@@ -1,7 +1,7 @@
 <% portal_link = root_url; portal_link.slice!(-1);
   portal_link +=enter_portal_path(portal.unique_token) %>
 
-<div class="card">
+<div class="card" id="portal_card_<%= portal.id %>">
   <%= render "app/time_ago", item: portal %>
   <%= link_to "Close", close_portal_path(portal.unique_token), method: :delete,
     data: { confirm: "Are you sure you want to close this portal?" }, class: :top_left_link %>
