@@ -95,14 +95,14 @@ class Post < ActiveRecord::Base
     }
     
     # likes
-    for like in self.likes
+    for like in self.likes.where.not(user_id: user.id)
       # recent likes on older posts have more weight
       weights[:likes] += ((like.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
-      weights[:likes_plus] += 5 if like.whoa or like.love or like.zen
+      weights[:likes_plus] += 1 if like.whoa or like.love or like.zen
     end # plus one for likes on recent posts to still get valued
     
     # comments
-    for comment in self.comments
+    for comment in self.comments.where.not(user_id: user.id)
       # recent likes on older posts have more weight
       weights[:comments] += ((comment.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
       weights[:comments_plus] += 5 if comment.likes.where.not(user_id: user.id).present?
