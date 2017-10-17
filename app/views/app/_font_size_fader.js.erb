@@ -4,7 +4,7 @@ function font_size_fader_<%= target + "_" + target_id.to_s %>() {
   var font_size = 0;
   var fat_font_size = false;
   var font_size_min = 1; // when it should go back up
-  var  font_size_max = 20; // when  font_size should go back down
+  var  font_size_max = 30; // when  font_size should go back down
   var change_rate = <%= defined?(slow) ? 0.2 : (defined?(fast) ? 1 : 0.5) %>; // added/subbed each round
   var change_speed = <%= defined?(slow) ? 0.1 : (defined?(fast) ? 5 : 2.5) %>; // interval speed, higher == slower
   
