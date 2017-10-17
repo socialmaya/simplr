@@ -119,6 +119,8 @@ class Post < ActiveRecord::Base
     weights[:days] -= days_old.to_i / 2
     # recent posts get more weight
     weights[:days_plus] += 5 if days_old.to_i < 7
+    # still fresh posts get even more weight
+    weights[:days_plus] += 15 if days_old.to_i < 5
     
     # views by current user
     view = self.views.where(user_id: user.id).last
@@ -127,8 +129,10 @@ class Post < ActiveRecord::Base
       # more weight taken for views on older posts
       score_count *= 10 if self.created_at > 2.week.ago
       weights[:views] -= view.score_count.to_i
+    end
+    
     # bring back old classics
-    elsif self.created_at > 3.month.ago    
+    if self.created_at > 3.month.ago    
       weights[:classics] += 25 if rand(Post.all.size).eql? 1
     end
     
