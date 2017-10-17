@@ -133,7 +133,7 @@ class Post < ActiveRecord::Base
     
     # bring back old classics
     if self.created_at > 3.month.ago    
-      weights[:classics] += 25 if rand(Post.all.size).eql? 1
+      weights[:classics] += 25 if rand(Post.all.size/5).eql? 1
     end
     
     # add all weights together
