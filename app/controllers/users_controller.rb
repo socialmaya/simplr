@@ -108,7 +108,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    @user.destroy unless @user.dev or @user.god
     respond_to do |format|
       format.html { redirect_to users_url }
     end

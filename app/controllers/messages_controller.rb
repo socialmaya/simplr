@@ -79,10 +79,11 @@ class MessagesController < ApplicationController
     @message.sender_token = current_user.unique_token
     if @message.save and @folder
       Tag.extract @message
-      for member in @folder.members
-        next if member.user.eql? current_user
-        Note.notify :message_received, @folder, member.user, current_user
-      end
+        # notifications turned off for now
+#      for member in @folder.members
+#        next if member.user.eql? current_user
+#        Note.notify :message_received, @folder, member.user, current_user
+#      end
     end
   end
 

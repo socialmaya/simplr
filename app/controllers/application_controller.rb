@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
           if item.respond_to?(:user) and current_user.eql? item.user
             view.non_visible = true
           end
-          view.save
+          view.save unless item.is_a?(Message) and view.non_visible
         end
       else
         # unless the non-user, non-group item was posted by current anon
