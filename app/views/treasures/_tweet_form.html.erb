@@ -1,0 +1,14 @@
+<div class="dark_card" align="center">
+  <%= form_tag dev_tweet_path, method: :post do %>
+    <p>
+      <%= text_area_tag :tweet, nil, placeholder: "Type your tweet here...",
+        class: :dark_text_area, id: :tweet_message_field %>
+    </p>
+    
+    <p>
+      <button type="submit" name="commit" id="tweet_message_button" class="dark_form_button">
+        <b>Tweet <i class="fa fa-twitter"></i></b>
+      </button>
+    </p>
+  <% end %>
+</div>

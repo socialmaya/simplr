@@ -1,6 +1,22 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi]
   
+  def tweet
+    @message = params[:tweet]
+    # checks in case api keys aren't present
+    if ENV['TWITTER_CONSUMER_KEY'].present?
+      if dev? and god? and @message.size >= 4 and @message.size <= 139
+        $twitter.update @message
+        redirect_to :back, notice: "Your tweet has satisfied the gods of Social Maya."
+      else
+        redirect_to :back, notice: "The gods frowned on your tweet and deemed it unsatisfactory."
+      end
+    else
+      puts "Twitter API keys are not present."
+      redirect_to :back, notice: "Fail."
+    end
+  end
+  
   def consoles
   end
   
@@ -173,6 +189,6 @@ class TreasuresController < ApplicationController
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def treasure_params
-    params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer)
+    params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer, :tweet)
   end
 end

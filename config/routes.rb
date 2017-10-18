@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get 'kristin', to: 'users#kristin', as: 'kristin'
   get 'play_audio/:audio', to: 'treasures#play_audio', as: 'play_audio'
   get 'console', to: 'treasures#console', as: 'console'
+  post 'tweet', to: 'treasures#tweet', as: 'dev_tweet'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
