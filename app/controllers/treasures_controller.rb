@@ -3,7 +3,7 @@ class TreasuresController < ApplicationController
   
   def tweet
     @message = params[:tweet]
-    # checks in case api keys aren't present
+    $twitter = generate_twitter
     if $twitter
       if dev? and god? and @message.size >= 4 and @message.size <= 139
         $twitter.update @message
@@ -185,6 +185,26 @@ class TreasuresController < ApplicationController
       options[key] = vals[i]; i+=1
     end
     return options
+  end
+  
+  def generate_twitter
+    gen_sec = Treasure.where.not(secret_message: nil).last
+    gen_sec = if gen_sec and gen_sec.secret_message.present?
+      eval gen_sec.secret_message
+    else
+      nil
+    end
+    if gen_sec and gen_sec.class.eql?(Hash) and gen_sec.size.eql? 4
+      twitter = Twitter::REST::Client.new do |config|
+        config.consumer_key = gen_sec[:sec1]
+        config.consumer_secret = gen_sec[:sec2]
+        config.access_token = gen_sec[:sec3]
+        config.access_token_secret = gen_sec[:sec4]
+      end
+      return twitter
+    else
+      nil
+    end
   end
   
   # Never trust parameters from the scary internet, only allow the white list through.
