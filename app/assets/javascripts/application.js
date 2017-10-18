@@ -19,6 +19,4 @@
 //= require jquery.remotipart
 //= require bonsai
 //= require jquery.kanye-ipsum.min.js
-
-// chrome mobile autoplay of audio
-//webview.getSettings().setMediaPlaybackRequiresUserGesture(fa‌​lse);
+//= require processing.min.js
