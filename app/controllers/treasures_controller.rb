@@ -4,7 +4,7 @@ class TreasuresController < ApplicationController
   def tweet
     @message = params[:tweet]
     # checks in case api keys aren't present
-    if ENV['TWITTER_CONSUMER_KEY'].present?
+    if $twitter
       if dev? and god? and @message.size >= 4 and @message.size <= 139
         $twitter.update @message
         redirect_to :back, notice: "Your tweet has satisfied the gods of Social Maya."
