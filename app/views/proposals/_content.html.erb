@@ -22,7 +22,7 @@
   <%= render "app/body", item: proposal %>
 </p>
 		  
-<% if current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) %>
+<% if current_user and (ENV['RAILS_ENV'].eql? 'development' and dev?) %>
   <p>Score = <%= proposal.score %><p>
   <p>
     <% weights = proposal.score(nil, nil, :get_weights) %>
