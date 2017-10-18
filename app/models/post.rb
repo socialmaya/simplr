@@ -99,7 +99,8 @@ class Post < ActiveRecord::Base
       # recent likes on older posts have more weight
       weights[:likes] += ((like.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
       weights[:likes_plus] += 1 if like.whoa or like.love or like.zen
-      weights[:likes_plus] += 15 if like.love and like.user_id.eql? 34 # kristin power love
+      weights[:likes_plus] += 15 if like.love and like.user_id.eql?(34) \
+        and not self.user_id.eql?(34) # kristin power love
     end # plus one for likes on recent posts to still get valued
     
     # comments
