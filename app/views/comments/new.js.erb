@@ -18,6 +18,10 @@ function new_comment_form() {
   if (down_form.length) {
     down_form.remove();
   }
+  
+  // interface sound plays
+  $("#post_interface_sound")[0].currentTime = 0;
+  $("#post_interface_sound")[0].play();
 }
 
 new_comment_form();

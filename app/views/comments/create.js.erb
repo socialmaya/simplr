@@ -1,6 +1,9 @@
 <% if @post %>
   $("#mini_comments_container_<%= @post.id %>").remove();
   $("#post_comments_anchor_<%= @post.id %>").after("<%=j render 'comments/mini_index' %>");
+  
+  $("#post_interface_sound")[0].currentTime = 0;
+  $("#post_interface_sound")[0].play();
 <% elsif @proposal %>
   var item_id = <%= @proposal.id %>;
   var comment_form = $("#new_comment_form_" + item_id);

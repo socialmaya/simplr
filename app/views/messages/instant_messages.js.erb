@@ -2,16 +2,17 @@
   var anchor = $("#instant_messages_anchor");
   var seen_anchor = $("#last_message_views_anchor");
   var seen_views = $("#last_message_views_<%= @folder.id %>");
+  var container = $("#messages_container");
   
   if ( typeof last_message_id === 'undefined'
     || last_message_id < <%= @instant_messages.first.id %>
     || last_message_id !== <%= @instant_messages.last.id %> )
   {
     var last_message_id = <%= @instant_messages.last.id %>;
-    var container = $("#messages_container");
     
+    // refreshes messages
+    container.remove();
     anchor.after("<%=j render 'messages/instant_messages' %>");
-    container.remove(); anchor.remove();
     $("#instant_messages_anchor").scrollView();
     
     // play audio for IM received

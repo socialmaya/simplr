@@ -3,3 +3,6 @@ link.after("<%=j render "posts/mini_menu", post: @post %>");
 
 link.after("<%=j render "posts/close_menu_link", post: @post %>");
 link.remove();
+
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
