@@ -97,7 +97,11 @@ class PostsController < ApplicationController
       # records views
       seent @post
       # gets views, viewed by users other than OP
-      @views = @post.views.where.not non_visible: true
+      @views = if current_user
+        @post.views.where.not user_id: current_user.id
+      else
+        @post.views
+      end
     else
       redirect_to '/404'
     end
