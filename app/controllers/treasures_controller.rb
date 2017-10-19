@@ -3,10 +3,10 @@ class TreasuresController < ApplicationController
   
   def tweet
     @message = params[:tweet]
-    $twitter = generate_twitter
-    if $twitter
+    twitter = generate_twitter
+    if twitter
       if dev? and god? and @message.size >= 4 and @message.size <= 139
-        $twitter.update @message
+        twitter.update @message
         redirect_to :back, notice: "Your tweet has satisfied the gods of Social Maya."
       else
         redirect_to :back, notice: "The gods frowned on your tweet and deemed it unsatisfactory."
