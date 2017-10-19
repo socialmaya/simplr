@@ -96,7 +96,7 @@ class PostsController < ApplicationController
       @zens = @post.zens
       # records views
       seent @post
-      # gets views, viewed by users other than OP
+      # gets views, viewed by users other than current users
       @views = if current_user
         @post.views.where.not user_id: current_user.id
       else

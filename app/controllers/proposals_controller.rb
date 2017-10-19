@@ -92,8 +92,12 @@ class ProposalsController < ApplicationController
       @revisions = @proposal.proposals
       @revision = Proposal.new
       
-      # gets views, viewed by users other than OP
-      @views = @proposal.views.where.not non_visible: true
+      # gets views, viewed by users other than current users
+      @views = if current_user
+        @proposal.views.where.not user_id: current_user.id
+      else
+        @proposal.views
+      end
       @likes = @proposal.likes
       
       @old_versions = @proposal.old_versions
