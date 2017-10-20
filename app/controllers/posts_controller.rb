@@ -101,10 +101,11 @@ class PostsController < ApplicationController
       # gets views, viewed by users other than current users
       @views = if current_user
         @post.views.where.not(user_id: current_user.id)
-        @post.where.not(user_id: @post.user_id) if @post.user_id
       else
         @post.views
       end
+      # filters any views by the OP, of course they saw, they posted it
+      @views = @views.where.not(user_id: @post.user_id) if @post.user_id
     else
       redirect_to '/404'
     end

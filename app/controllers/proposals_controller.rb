@@ -98,6 +98,9 @@ class ProposalsController < ApplicationController
       else
         @proposal.views
       end
+      # filters any views by the OP, of course they saw, they posted it
+      @views = @views.where.not(user_id: @proposal.user_id) if @proposal.user_id
+      # gets any likes for the motion
       @likes = @proposal.likes
       
       @old_versions = @proposal.old_versions
