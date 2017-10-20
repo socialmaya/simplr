@@ -5,13 +5,7 @@ class PagesController < ApplicationController
   end
   
   def more
-    if session[:page].nil? or session[:page] * page_size <= relevant_items.size
-      if session[:page]
-        session[:page] += 1
-      else
-        session[:page] = 1
-      end
-    end
+    page_turning relevant_items
     build_feed_data
   end
 

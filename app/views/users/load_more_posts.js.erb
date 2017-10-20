@@ -1,0 +1,4 @@
+var anchor = $("#load_more_posts_anchor");
+
+anchor.after("<%=j render "users/more_posts", posts: @posts %>");
+anchor.remove();

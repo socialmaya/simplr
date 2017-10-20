@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?
+    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -131,6 +131,16 @@ class ApplicationController < ActionController::Base
 
   def page_size
     @page_size = 10
+  end
+  
+  def page_turning relevant_items=nil
+    if session[:page].nil? or session[:page] * page_size <= relevant_items.size
+      if session[:page]
+        session[:page] += 1
+      else
+        session[:page] = 1
+      end
+    end
   end
   
   def reset_page

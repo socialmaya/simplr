@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :kristin, :edit, :update, :update_password, :destroy]
+  before_action :set_user, only: [:show, :kristin, :edit, :update, :update_password, :destroy, :load_more_posts]
   before_action :secure_user, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
+  
+  def load_more_posts
+    build_feed
+    page_turning @posts
+  end
   
   def geolocation
   end
@@ -115,15 +120,28 @@ class UsersController < ApplicationController
   end
 
   private
+  
+  def build_feed
+    all_user_posts
+    @posts = paginate @posts
+  end
 
   def show_user_thingy_to_run
+    reset_page
+    # solves loading error
+    session[:page] = 1
     @post = Post.new
-    @posts = @user.posts + @user.proposals.globals.main
-    @posts.sort_by! { |p| p.created_at }
-    @posts = @posts.last(10).reverse
+    all_user_posts # gets posts by users, sorts them
+    @posts = @posts.first(10)
     @user_shown = true
     # records being seen
     seent @user
+  end
+  
+  def all_user_posts
+    @posts = @user.posts + @user.proposals.globals.main
+    @posts.sort_by! { |p| p.created_at }.reverse!
+    @posts_size = @posts.size
   end
   
   def grant_access_rights
