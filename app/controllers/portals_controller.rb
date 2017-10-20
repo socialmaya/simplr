@@ -1,6 +1,6 @@
 class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
-  before_action :dev_only, only: [:index]
+  before_action :dev_only, only: [:index, :destroy, :destroy_all]
   
   def cluster_flier
     @cluster_flier_page = true
@@ -64,13 +64,14 @@ class PortalsController < ApplicationController
   
   def create
     @portal = Portal.new
+    @portal.user_id = current_user.id
     # sets up for regular portal to begin with
     @portal.remaining_uses = params[:remaining_uses]
     if params[:remaining_days].present?
       @portal.expires_at = params[:remaining_days].to_i.days.from_now.to_datetime
     end
     # creates portal cluster
-    if params[:cluster_size] and not params[:cluster_size].to_i.zero?
+    if params[:cluster_size] and not params[:cluster_size].to_i.zero? and dev?
       @cluster = Portal.create cluster: true, expires_at: @portal.expires_at
       if @cluster
         params[:cluster_size].to_i.times do

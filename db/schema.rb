@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018043331) do
+ActiveRecord::Schema.define(version: 20171020194315) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -180,6 +180,8 @@ ActiveRecord::Schema.define(version: 20171018043331) do
     t.datetime "updated_at",     null: false
     t.boolean  "cluster"
     t.integer  "cluster_id"
+    t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
   create_table "posts", force: :cascade do |t|

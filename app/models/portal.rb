@@ -1,4 +1,6 @@
 class Portal < ActiveRecord::Base
+  belongs_to :user
+  
   before_create :gen_unique_token, :initialize_portal
   before_destroy :destroy_dependent_portals
   

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :carts, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
   has_many :treasures
+  has_many :portals
   has_many :groups
 
   validates_uniqueness_of :name
