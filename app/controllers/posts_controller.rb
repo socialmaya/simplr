@@ -73,7 +73,7 @@ class PostsController < ApplicationController
     else
       paginate @all_items
     end
-    # accessible in other controllers
+    # accessible for other controllers
     $all_items = @all_items # stays constant, only sorted once
     @char_codes = char_codes @items
     @char_bits = char_bits @items
