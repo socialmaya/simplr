@@ -8,6 +8,8 @@ class View < ActiveRecord::Base
   
   before_create :set_locale
   
+  validate :unique_to_item?, on: :create
+  
   def self.get_locale ip=nil
     ip = if ip then ip else self.ip_address end
     address = nil; locale = nil
@@ -29,6 +31,30 @@ class View < ActiveRecord::Base
   end
   
   private
+  
+  def unique_to_item?
+    if self.post_id
+      if self.user_id
+        if Post.find(self.post_id).views.where(user_id: self.user_id).present?
+          errors.add :view, "Not unique view by user"
+        end
+      elsif self.anon_token
+        if Post.find(self.post_id).views.where(anon_token: self.anon_token).present?
+          errors.add :view, "Not unique view by anon"
+        end
+      end
+    elsif self.proposal_id
+      if self.user_id
+        if Proposal.find(self.proposal_id).views.where(user_id: self.user_id).present?
+          errors.add :view, "Not unique view of motion by user"
+        end
+      elsif self.anon_token
+        if Proposal.find(self.proposal_id).views.where(anon_token: self.anon_token).present?
+          errors.add :view, "Not unique view of motion by anon"
+        end
+      end
+    end
+  end
   
   def set_locale
     if self.ip_address
