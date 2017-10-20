@@ -1,4 +1,10 @@
 module PortalsHelper
+  # returns current official gatekeeper
+  # most recent gatekeeper is the most official one
+  def gatekeeper? user
+    User.where(gatekeeper: true).last.eql? user
+  end
+  
   def portal_qr_code link
     return RQRCode::QRCode.new link, size: 5, level: :h
   end
