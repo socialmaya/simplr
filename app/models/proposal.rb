@@ -235,7 +235,7 @@ class Proposal < ActiveRecord::Base
   private
   
   def spam_filter
-    if self.body.include? "businessLoansfunded"
+    if self.body.include? "businessloansfunded"
       errors.add(:post, "cannot be spam.")
     end
   end
