@@ -100,7 +100,7 @@ class PostsController < ApplicationController
       seent @post
       # gets views, viewed by users other than current users
       @views = if current_user
-        @post.views.where.not user_id: current_user.id
+        @post.views.where.not(user_id: current_user.id).where.not(user_id @post.user_id)
       else
         @post.views
       end
