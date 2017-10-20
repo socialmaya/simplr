@@ -207,7 +207,7 @@ class ApplicationController < ActionController::Base
   end
   
   def testing_score?
-    current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) and current_user.id.eql? 1
+    current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) and current_user.id.eql?(1) and false
   end
   
   def anrcho?
