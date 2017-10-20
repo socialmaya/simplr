@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning
+    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning, :testing_score?
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -204,6 +204,10 @@ class ApplicationController < ActionController::Base
     # set by 'pages/more' since only humans 'want more'
     # a way to see if the user is probably a human
     cookies[:human]
+  end
+  
+  def testing_score?
+    current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) and current_user.id.eql? 1
   end
   
   def anrcho?
