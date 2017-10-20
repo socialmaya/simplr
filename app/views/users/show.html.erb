@@ -15,14 +15,7 @@
   <% end %>
 <% end %>
 
-<% if @posts_size > @posts.size %>
-  <div id="load_more_posts_anchor"></div>
-  <div class="dark_card" align="center">
-    <p>
-      <%= link_to "Load more posts...", load_more_posts_path(token: @user.unique_token), remote: true, class: :white_link %>
-    </p>
-  </div>
-<% end %>
+<%= render "load_more_link", user: @user %>
 
 <% if @posts.empty? %>
   <div class="card">
