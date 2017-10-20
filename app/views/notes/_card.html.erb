@@ -60,7 +60,7 @@
         <%= image_tag "nooice.gif", class: :nooice_img %>
     <% end %>
     
-    <% item = if action.eql? :post_like %>
+    <% item = if action.eql? :post_like or action.eql? :post_love or action.eql? :post_whoa %>
       <% Post.find_by_id note.item_id %>
     <% elsif action.eql? :proposal_like or action.eql? :proposal_up_voted %>
       <% Proposal.find_by_unique_token note.item_token %>
