@@ -34,8 +34,11 @@
 
 <% if @user.eql? User.first %>
   <%= audio_tag "music/high_tech_city.mp3", id: "creator_music" %>
-  <script>
-    $("#creator_music")[0].currentTime = 0;
-    $("#creator_music")[0].play();
-  </script>
+<% elsif gatekeeper? @user %>
+  <%= audio_tag "music/progress.mp3", id: "creator_music" %>
 <% end %>
+
+<script>
+  $("#creator_music")[0].currentTime = 0;
+  $("#creator_music")[0].play();
+</script>
