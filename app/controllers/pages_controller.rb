@@ -49,7 +49,13 @@ class PagesController < ApplicationController
     elsif params[:posts]
       @home_shown = true
       if current_user
-        return current_user.feed
+        if $all_items
+          # already sorted, only needs sorting once
+          return $all_items
+        else
+          # should only run if hasn't been sorted yet
+          return current_user.feed
+        end
       else
         return Post.all.reverse
       end
