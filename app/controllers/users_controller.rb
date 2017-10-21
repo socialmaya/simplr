@@ -46,6 +46,10 @@ class UsersController < ApplicationController
       connection = current_user.follow User.first if current_user
       Note.notify(:user_follow, nil, User.first, current_user) if connection
       
+      # website creator automatically follows new user back
+      connection = User.first.follow current_user if current_user
+      Note.notify(:user_follow, nil, current_user, User.first) if connection
+      
       # returns to home page, main feed
       redirect_to root_url
     else
