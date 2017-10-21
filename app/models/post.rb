@@ -125,7 +125,7 @@ class Post < ActiveRecord::Base
     weights[:days_plus] += 25 if days_old.to_i < 5
     
     # very fresh posts get even more weight yet
-    weights[:days_plus] += 50 if days_old.to_i < 3
+    weights[:fresh] += 50 if days_old.to_i < 3
     
     # views by current user
     view = self.views.where(user_id: user.id).last
