@@ -20,39 +20,6 @@ class Like < ActiveRecord::Base
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
-  def clean
-    like_type = if self.love
-      :loves
-    elsif self.whoa
-      :whoas
-    elsif self.zen
-      :zens
-    else
-      :_likes
-    end
-    if self.post_id
-      if self.user_id
-        if Post.find(self.post_id).send(like_type).where(user_id: self.user_id).where.not(id: self.id).present?
-          self.destroy
-        end
-      elsif self.anon_token
-        if Post.find(self.post_id).send(like_type).where(anon_token: self.anon_token).where.not(id: self.id).present?
-          self.destroy
-        end
-      end
-    elsif self.proposal_id
-      if self.user_id
-        if Proposal.find(self.proposal_id).send(like_type).where(user_id: self.user_id).where.not(id: self.id).present?
-          self.destroy
-        end
-      elsif self.anon_token
-        if Proposal.find(self.proposal_id).send(like_type).where(anon_token: self.anon_token).where.not(id: self.id).present?
-          self.destroy
-        end
-      end
-    end
-  end
 
   private
   
