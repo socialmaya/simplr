@@ -8,3 +8,6 @@ if (post_form.length) {
   proposal_form.after("<%=j render 'posts/form' %>");
   proposal_form.remove();
 }
+
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
