@@ -5,4 +5,6 @@
       <%= link_to "Load more posts...", load_more_posts_path(token: user.unique_token), remote: true, class: :white_link %>
     </p>
   </div>
+
+  <%= audio_tag "effects/bumerang.wav", id: "more_content_sound" %>
 <% end %>
