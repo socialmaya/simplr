@@ -8,6 +8,6 @@
   <%= link_to "Whoa#{(' ' + item.whoas.size.to_s) unless item.whoas.size.zero?}", whoa_path,
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>
-  <%= link_to "Unwhoa #{item.whoas.size.to_s}", unwhoa_path,
-    method: :delete, remote: true, class: link_class, id: link_id %>
+  <%= link_to "Whoa #{item.whoas.size.to_s}", unwhoa_path,
+    method: :delete, remote: true, class: link_class, id: link_id, style: "color:green;" %>
 <% end %>

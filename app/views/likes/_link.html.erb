@@ -6,6 +6,6 @@
   <%= link_to "Like#{(' ' + item._likes.size.to_s) unless item._likes.size.zero?}", like_path(param_id => item.id),
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>
-  <%= link_to "Unlike #{item._likes.size.to_s}", unlike_path(param_id => item.id),
-    method: :delete, remote: true, class: link_class, id: link_id %>
+  <%= link_to "Like #{item._likes.size.to_s}", unlike_path(param_id => item.id),
+    method: :delete, remote: true, class: link_class, id: link_id, style: "color:blue;" %>
 <% end %>
