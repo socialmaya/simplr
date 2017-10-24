@@ -17,7 +17,7 @@
 
 <%= render "load_more_link", user: @user %>
 
-<%= render "pages/load_bar" %>
+<%= render "pages/load_bar", items: [], all_items: [] %>
 
 <% if @posts.empty? %>
   <div class="card">
