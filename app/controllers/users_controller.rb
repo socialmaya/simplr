@@ -163,8 +163,9 @@ class UsersController < ApplicationController
   end
   
   def invite_only
+    token_good = User.find_by_unique_token @user.unique_token
     unless invited?
-      redirect_to invite_only_path
+      redirect_to invite_only_path unless token_good
     end
   end
   
