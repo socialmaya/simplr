@@ -1,0 +1,21 @@
+<% if all_items.present? and all_items.size > page_size %>
+  <div align="center" id="load_bar">
+    <div class="load_bar_containor">
+      <%= link_to show_treasure_path(Treasure.random(current_user).unique_token) do %>
+        <% 16.times do |num| %>
+          <% rgb = random_color %>
+          <div class="load_bar_section" id="load_bar_section_<%= num %>"
+	          style="background:black;"></div>
+        <% end %>
+      <% end %>
+    </div>
+    
+	  <script>
+		  <%= render "pages/load_bar_fader.js" %>
+	  </script>
+  </div>
+<% end %>
+
+<%= audio_tag "effects/bumerang.wav", id: "more_content_sound" %>
+
+<div id="footer_spacing"></div>

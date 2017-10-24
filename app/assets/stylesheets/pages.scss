@@ -15,6 +15,17 @@
 	height: 50px;
 }
 
+.load_bar_containor {
+  width: 100px;
+  height: 50px;
+}
+
+.load_bar_section {
+  width: 6%;
+  height: 100%;
+  float: left;
+}
+
 .load_fib_bar {
   width: 100%;
 }
