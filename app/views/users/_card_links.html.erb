@@ -17,7 +17,8 @@
       <%= link_to 'Message <i class="fa fa-envelope"></i>'.html_safe,
         create_message_folder_path(user_id: user), method: :post %>
     <% end %>
-    <% if current_user.has_power? 'hype_others' and hypeable? user %>
+    <% if current_user.has_power?('discover') and \
+      (current_user.has_power?('hype_others') or current_user.id.eql? 1) and hypeable? user %>
       <%= " | " %>
       <script>
         <%= render "app/fader.js", target: "hype_link", target_id: user.id %>

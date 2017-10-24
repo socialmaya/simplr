@@ -1,5 +1,5 @@
 class TreasuresController < ApplicationController
-  before_action :hidden_treasure, except: [:kanye, :kopimi]
+  before_action :hidden_treasure, except: [:kanye, :kopimi, :show]
   
   def tweet
     @message = params[:tweet]
