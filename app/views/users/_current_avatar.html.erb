@@ -1,5 +1,5 @@
 <% if current_user and current_user.image.url %>
-  <%= link_to user_path(current_user), class: :current_token_link, title: "#{current_user.name}" do %>
+  <%= link_to user_path(current_user.unique_token), class: :current_token_link, title: "#{current_user.name}" do %>
     <%= image_tag current_user.image, class: :avatar_container %>
   <% end %>
 <% elsif current_user %>
