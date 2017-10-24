@@ -1,4 +1,4 @@
-<% if all_items.present? and all_items.size > page_size %>
+<% if all_items.present? and all_items.size > page_size or @user %>
   <div align="center" id="load_bar">
     <%= link_to show_treasure_path(Treasure.random(current_user).unique_token) do %>
       <div class="load_bar_containor">
