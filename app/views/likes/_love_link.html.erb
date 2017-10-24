@@ -9,5 +9,5 @@
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>
   <%= link_to "Love #{item.loves.size.to_s}", unlove_path,
-    method: :delete, remote: true, class: link_class, id: link_id, style: "color:red;" %>
+    method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(100,41,38);" %>
 <% end %>
