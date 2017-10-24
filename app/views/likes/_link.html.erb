@@ -7,5 +7,5 @@
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>
   <%= link_to "Like #{item._likes.size.to_s}", unlike_path(param_id => item.id),
-    method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(68,78,81);" %>
+    method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(174,198,207);" %>
 <% end %>
