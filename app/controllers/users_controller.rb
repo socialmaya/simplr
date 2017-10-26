@@ -137,6 +137,7 @@ class UsersController < ApplicationController
     @post = Post.new
     all_user_posts # gets posts by users, sorts them
     @posts = @posts.first(10)
+    @char_bits = char_bits @posts
     @user_shown = true
     # records being seen
     seent @user
