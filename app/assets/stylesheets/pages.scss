@@ -163,3 +163,14 @@
 #vertical_load_screen {
   position: relative;
 }
+
+// for mobile
+@media screen and (max-width: 975px) {
+  .right_pane {
+    visibility: hidden;
+  }
+}
+
+
+
+
