@@ -10,6 +10,8 @@
 
 <% link_path = if anrcho? and item.is_a?(Group) %>
   <% show_group_path item.unique_token %>
+<% elsif item.is_a?(Portal) and item.cluster %>
+  <% show_cluster_path item.unique_token %>
 <% elsif item.is_a?(Portal) %>
   <% show_portal_path item.unique_token %>
 <% else %>
