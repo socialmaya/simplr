@@ -111,8 +111,8 @@ class Post < ActiveRecord::Base
     end # plus one for likes on recent posts to still get valued
     
     # shares, post shared
-    for post in shares
-      weights[:shares] += 5
+    for post in shares # only gives weight for shares of others posts
+      weights[:shares] += 5 unless post.user_id and post.user_id.eql? post.original.user_id
     end
     
     # days since posted
