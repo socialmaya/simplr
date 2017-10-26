@@ -6,8 +6,12 @@
     <% if post.original and post.original.user %>
       <!-- reuses group classes because they fit -->
       <span class="posted_label">
-        shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
-          title: "Originally posted by #{post.original.user.name}" %>
+        <% if post.original.user_id.eql? post.user_id %>
+          shared a <%= link_to "memory", show_post_path(post.original.unique_token), class: :posted_link %>.
+        <% else %>
+          shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
+            title: "Originally posted by #{post.original.user.name}" %>
+        <% end %>
       </span>
     <% elsif post.original and post.original.anon_token %>
       <span class="posted_label">
@@ -149,9 +153,9 @@
         
         <td>
           <% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
-          <% if current_user and not current_user.eql? post.user %>
+          <% if current_user %>
             <%= link_to share_text, share_post_path(post), method: :post, class: :standard_post_link,
-              data: { confirm: "Share this post?" } %>
+              data: { confirm: "Share #{own_item?(post) ? 'your own' : 'this'} post?" } %>
           <% else %>
               <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link %>
           <% end %>
