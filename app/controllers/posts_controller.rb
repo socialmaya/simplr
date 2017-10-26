@@ -51,12 +51,12 @@ class PostsController < ApplicationController
     @dup_post.group_id = nil
     if @dup_post.save
       Tag.extract @dup_post
-      unless current_user and current_user.eql? @post.user # only notify for sharing others posts
+      if current_user and not current_user.eql? @post.user # only notify for sharing others posts
         Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
+        @note = "You shared another users post."
+      else
+        @note = "You shared a memory."
       end
-      redirect_to root_url
-    else
-      redirect_to :back
     end
   end
 

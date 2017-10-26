@@ -152,13 +152,8 @@
         <% end %>
         
         <td>
-          <% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
-          <% if current_user %>
-            <%= link_to share_text, share_post_path(post), method: :post, class: :standard_post_link,
-              data: { confirm: "Share #{own_item?(post) ? 'your own' : 'this'} post?" } %>
-          <% else %>
-              <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link %>
-          <% end %>
+          <span id="share_post_link_anchor_<%= post.id %>"></span>
+          <%= render "posts/share_link", post: post %>
         </td>
       </tr>
     </table>

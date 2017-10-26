@@ -1,0 +1,9 @@
+<% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
+<% link_id = "share_post_link_#{post.id}" %>
+
+<% if current_user %>
+  <%= link_to share_text, share_post_path(post), method: :post, remote: true, class: :standard_post_link, id: link_id.to_sym,
+    data: { confirm: "Share #{own_item?(post) ? 'your own' : 'this'} post?" } %>
+<% else %>
+    <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link, id: link_id.to_sym %>
+<% end %>
