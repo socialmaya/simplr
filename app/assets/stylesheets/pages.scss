@@ -168,6 +168,8 @@
 @media screen and (max-width: 975px) {
   .right_pane {
     visibility: hidden;
+    width: 0px;
+    left: 0px;
   }
 }
 
