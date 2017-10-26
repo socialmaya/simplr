@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   before_create :gen_unique_token
   
   validate :text_or_image?, on: :create
+  validate :unique_share?, on: :create
   
   mount_uploader :image, ImageUploader
   mount_uploader :video, VideoUploader
@@ -153,6 +154,13 @@ class Post < ActiveRecord::Base
   end
   
   private
+  
+  def unique_share?
+    # if a share of this post is already present by current user
+    if self.original.shares.where(user_id: self.user_id).present?
+      errors.add :post, "Share must be unique."
+    end
+  end
   
   def gen_unique_token
     begin
