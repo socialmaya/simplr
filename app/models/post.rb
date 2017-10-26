@@ -157,7 +157,7 @@ class Post < ActiveRecord::Base
   
   def unique_share?
     # if a share of this post is already present by current user
-    if self.original.shares.where(user_id: self.user_id).present?
+    if self.original_id and self.original.shares.where(user_id: self.user_id).present?
       errors.add :post, "Share must be unique."
     end
   end
