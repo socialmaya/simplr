@@ -51,7 +51,9 @@ class PostsController < ApplicationController
     @dup_post.group_id = nil
     if @dup_post.save
       Tag.extract @dup_post
-      Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
+      unless current_user and current_user.eql? @post.user # only notify for sharing others posts
+        Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
+      end
       redirect_to root_url
     else
       redirect_to :back
