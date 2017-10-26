@@ -1,7 +1,7 @@
-<% if Rails.env.development? and current_user %>
+<% if Rails.env.development? and current_user or god? %>
   <div class="right_pane">
     <% unless current_user.my_groups.empty? %>
-      <div align="center">Group activity</div>
+      <div class="side_pane_label right_pane_label">Group activity</div>
       <% for group in current_user.my_groups.select { |g| !g.total_items_unseen(current_user).zero? } %>
         <div>
           <%= link_to group, class: "dark_link group_activity" do %>
@@ -12,11 +12,12 @@
         </div>
       <% end %>
     <% end %>
-    <div class="trending_tags_title" align="center">Trending tags</div>
+    <div class="side_pane_label right_pane_label side_pane_label_successive">Trending tags</div>
     <% for tag in Tag.trending %>
       <div>
         <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
       </div>
     <% end %>
+    </br>
   </div>
 <% end %>

@@ -66,25 +66,6 @@ textarea {
 	font-size: 12.5px;
 }
 
-.right_pane {
-  position: absolute;
-  right: -262.5px;
-  top: 0px;
-  width: 250px;
-  min-height: 200px;
-  background: rgb(10, 10, 10);
-  padding-top: 20px;
-}
-
-.left_pane {
-  position: fixed;
-  left: 10%;
-  top: 45px;
-  width: 15%;
-  height: 300px;
-  background: rgb(10, 10, 10);
-}
-
 .card {
 	@include card;
 }

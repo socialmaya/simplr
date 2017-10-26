@@ -2,6 +2,47 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.right_pane {
+  position: absolute;
+  right: -262.5px;
+  top: 0px;
+  width: 250px;
+  min-height: 200px;
+  background: rgb(10, 10, 10);
+  padding-top: 20px;
+}
+
+.left_pane {
+  position: fixed;
+  left: 10%;
+  top: 45px;
+  width: 15%;
+  height: 300px;
+  background: rgb(10, 10, 10);
+}
+
+.side_pane_label {
+  color: rgb(175, 175, 175);
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.right_pane_label {
+  margin-left: 5px;
+}
+
+.side_pane_label_successive {
+  padding-top: 10px;
+}
+
+.side_pane_item {
+  text-align: left;
+  padding-left: 10px;
+  margin-top: -7.5px;
+  width: 100%;
+}
+
 .buffer_pixel {
 	width: 25%;
 	height: 25%;
