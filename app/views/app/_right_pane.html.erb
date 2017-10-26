@@ -2,7 +2,7 @@
   <div class="right_pane">
     <% unless current_user.my_groups.empty? %>
       <div class="side_pane_label right_pane_label">Group activity</div>
-      <% for group in current_user.my_groups.select { |g| !g.total_items_unseen(current_user).zero? } %>
+      <% for group in current_user.my_groups.select { |g| g.total_items_unseen(current_user).to_i > 0 } %>
         <div>
           <%= link_to group, class: "dark_link group_activity" do %>
             <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>

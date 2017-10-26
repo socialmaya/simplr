@@ -19,6 +19,7 @@ class Group < ActiveRecord::Base
   
   def total_items_unseen user
     member = self.members.find_by_user_id user.id
+    # group object itself acts member object if user is creator
     member = self if member.nil? and self.user_id.eql? user.id
     return items_total - member.total_items_seen.to_i
   end

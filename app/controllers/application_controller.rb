@@ -57,9 +57,10 @@ class ApplicationController < ActionController::Base
   def seent item
     # initial update for group activity
     if item.is_a? Group and current_user
+      # if current_user is creator of group being seen
       if item.user_id.eql? current_user.id
         item.update total_items_seen: item.items_total
-      else
+      else # if current_user is just a member of this group
         member = item.members.find_by_user_id current_user.id
         member.update total_items_seen: item.items_total if member
       end
