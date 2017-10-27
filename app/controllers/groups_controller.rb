@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
   
   def load_more_posts
     build_feed
+    @items = paginate @items
     page_turning @items
   end
   
@@ -50,6 +51,8 @@ class GroupsController < ApplicationController
   def show
     if @group
       reset_page
+      # solves loading error
+      session[:page] = 1
       @group_shown = true
       @post = Post.new
       @proposal = Proposal.new
@@ -114,7 +117,8 @@ class GroupsController < ApplicationController
   private
   
   def build_feed
-    @items = (@group.posts + @group.proposals).sort_by { |i| i.created_at }.reverse
+    @items = @group.posts + @group.proposals
+    @items.sort_by! { |i| i.created_at }.reverse!
     @items_size = @items.size
   end
   
@@ -159,6 +163,6 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
-    params.require(:group).permit(:name, :body, :image, :open, :hidden, :social_structure)
+    params.require(:group).permit(:name, :body, :image, :open, :hidden, :social_structure, :token)
   end
 end
