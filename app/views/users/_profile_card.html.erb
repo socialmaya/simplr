@@ -47,7 +47,7 @@
         or (dev? and not user.dev) or god? %>
     </p>
     
-    <% unless current_user and current_user.id >= 45 %>
+    <% unless current_user and current_user.id >= 40 %>
       <% if kristin? %>
         <p>
           <i class="fa fa-heart"></i> In a relationship with <%= link_to "Forrest", user_path(User.first) %>
