@@ -47,14 +47,16 @@
         or (dev? and not user.dev) or god? %>
     </p>
     
-    <% if kristin? %>
-      <p>
-        <i class="fa fa-heart"></i> In a relationship with <%= link_to "Forrest", user_path(User.first) %>
-      </p>
-    <% elsif user.id.eql? 1 %>
-      <p>
-        <i class="fa fa-heart"></i> In a relationship with <%= link_to "Kristin", kristin_path %>
-      </p>
+    <% unless current_user and current_user.id >= 45 %>
+      <% if kristin? %>
+        <p>
+          <i class="fa fa-heart"></i> In a relationship with <%= link_to "Forrest", user_path(User.first) %>
+        </p>
+      <% elsif user.id.eql? 1 %>
+        <p>
+          <i class="fa fa-heart"></i> In a relationship with <%= link_to "Kristin", kristin_path %>
+        </p>
+      <% end %>
     <% end %>
 
     <div id="user_<%= user.id %>_card_links_anchor"></div>

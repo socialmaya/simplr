@@ -1,5 +1,6 @@
 <% shares = post.original ? post.original.shares : post.shares %>
-<% shared = true if current_user and shares.find_by_user_id current_user.id and not post.user.eql? current_user%>
+<% shared = true if current_user and shares.find_by_user_id current_user.id \
+  and not (post.original and post.original.user.eql? current_user) %>
 <% share_text = "Share#{(' ' + shares.size.to_s) unless shares.size.zero?}" %>
 <% link_id = "share_post_link_#{post.id}" %>
 
