@@ -1,10 +1,15 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :load_more_posts]
   before_action :secure_group, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only, except: [:new, :create, :update, :destroy, :show, :edit, :my_anon_groups]
   before_action :invited_or_anrcho, only: [:new, :create, :show]
   before_action :anrcho_only, only: [:my_anon_groups]
+  
+  def load_more_posts
+    build_feed
+    page_turning @items
+  end
   
   def hide_featured_groups
     cookies.permanent[:hide_featured_groups] = true
@@ -44,10 +49,13 @@ class GroupsController < ApplicationController
 
   def show
     if @group
+      reset_page
       @group_shown = true
       @post = Post.new
       @proposal = Proposal.new
-      @items = (@group.posts + @group.proposals).sort_by { |i| i.created_at }.last(10).reverse
+      build_feed
+      @items = @items.first(10)
+      @char_bits = char_bits @items
       # records all groups posts/motion views
       @items.each { |item| seent item }
       # records group being seen
@@ -104,6 +112,11 @@ class GroupsController < ApplicationController
   end
 
   private
+  
+  def build_feed
+    @items = (@group.posts + @group.proposals).sort_by { |i| i.created_at }.reverse
+    @items_size = @items.size
+  end
   
   def anrcho_only
     unless anrcho?

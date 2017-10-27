@@ -15,6 +15,10 @@
   <% for item in @items %>
     <%= render "#{item.class.to_s.downcase}s/card", (item.class.to_s.downcase.to_sym) => item %>
   <% end %>
+  
+  <%= render "load_more_link", group: @group %>
+
+  <%= render "pages/load_bar", items: [], all_items: [] %>
 <% end %>
 
 <% if @items.empty? %>
