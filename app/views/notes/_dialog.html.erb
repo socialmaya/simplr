@@ -1,5 +1,5 @@
 <div class="note_dialog" id="note_dialog" align="center" hidden>
-  <p class="note_dialog_text">
+  <p class="note_dialog_text" id="note_dialog_text">
     <% if note.is_a? Note %>
       <%= note.message %>
     <% else %>
@@ -7,3 +7,7 @@
     <% end %>
   </p>
 </div>
+
+<script>
+  <%= render "app/fader.js", target: "note_dialog_text", target_id: "", slow: true %>
+</script>
