@@ -5,7 +5,7 @@
 
 <% if current_user %>
   <%= link_to share_text, share_post_path(post), method: :post, remote: true, class: :standard_post_link,
-    style: "#{shared ? 'color:rgb(119,158,203);' : ''}", id: link_id.to_sym %>
+    style: "#{shared ? 'color:rgb(136,227,182);' : ''}", id: link_id.to_sym %>
 <% else %>
     <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link, id: link_id.to_sym %>
 <% end %>
