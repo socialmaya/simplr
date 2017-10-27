@@ -1,4 +1,5 @@
-<% share_text = "Share#{(' ' + post.shares.size.to_s) unless post.shares.size.zero?}" %>
+<% shares = post.original ? post.original.shares : post.shares %>
+<% share_text = "Share#{(' ' + shares.size.to_s) unless shares.size.zero?}" %>
 <% link_id = "share_post_link_#{post.id}" %>
 
 <% if current_user %>

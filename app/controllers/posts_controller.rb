@@ -51,9 +51,15 @@ class PostsController < ApplicationController
     @dup_post.group_id = nil
     if @dup_post.save
       Tag.extract @dup_post
+      # gets the true original post
+      original_post = @post.original ? @post.original : @post
       if current_user and not current_user.eql? @post.user # only notify for sharing others posts
-        Note.notify :post_share, @dup_post, (@post.user ? @post.user : @post.anon_token), current_user
-        @note = "You shared another users post."
+        Note.notify :post_share, @dup_post, (original_post.user ? original_post.user : original_post.anon_token), current_user
+        @note = if original_post.user
+          "You shared #{original_post.user.name}'s post."
+        else
+          "You shared an anonymous post."
+        end
       else
         @note = "You shared a memory."
       end
