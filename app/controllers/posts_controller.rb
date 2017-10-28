@@ -104,6 +104,11 @@ class PostsController < ApplicationController
       @loves = @post.loves
       @whoas = @post.whoas
       @zens = @post.zens
+      @shares = if @post.original
+        @post.original.shares
+      else
+        @post.shares
+      end
       # records views
       seent @post
       # gets views, viewed by users other than current users

@@ -51,6 +51,25 @@
   </div>
 <% end %>
 
+<% if @shares.present? %>
+  <div class="dark_card">
+    <script>
+      <%= render "app/fader.js", target: "shared_by_text", target_id: "0" %>
+    </script>
+    <div align="center" id="shared_by_text_0">
+      Shared by:
+        <% user_shares = @shares.where.not(user_id: nil); anon_shares = @shares.where.not(anon_token: nil) %>
+        <% for share in user_shares %>
+          <%= link_to share.user.name, share.user, class: :white_link if share.user %><%= ", " \
+            unless share.eql? user_shares.last %>
+        <% end %>
+        <%= "and" if user_shares.present? and anon_shares.present? %>
+        <%= "#{anon_shares.size} anon(s)" if anon_shares.present? %>
+        <i class="fa fa-retweet"></i>
+    </div>
+  </div>
+<% end %>
+
 <% if @views.present? and (current_user and current_user.has_power? 'see_views' or dev? or @proposal) %>
   <div class="dark_card">
     <script>
