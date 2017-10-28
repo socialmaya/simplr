@@ -257,7 +257,9 @@ class ApplicationController < ActionController::Base
   private
     def get_correct_char_str item
       # gets correct string to push to glimmer
-      item_string = if item.body.present?
+      item_string = if item.is_a? Note
+        item.message
+      elsif item.body.present?
         item.body
       # for motions only
       elsif item.image.url

@@ -9,6 +9,10 @@
   <%= render "notes/card", note: note %>
 <% end %>
 
+<%= render "load_more_link" %>
+
+<%= render "pages/load_bar", items: [], all_items: [] %>
+
 <% if @notes.empty? %>
   <div class="card">
     <p align="center">

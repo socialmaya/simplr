@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :current_notes, only: [:index, :destroy]
+  before_action :current_notes, only: [:index, :destroy, :load_more_notes]
   before_action :dev_only, only: [:dev_index]
   
   def instant_notes
@@ -13,11 +13,27 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
   
+  def load_more_notes
+    build_feed
+    @notes = paginate @notes
+    page_turning @notes
+  end
+  
   def index
-    @notes = @notes.last(10).reverse
+    reset_page
+    # solves loading error
+    session[:page] = 1
+    build_feed
+    @notes = @notes.first(10)
+    @char_bits = char_bits @notes
   end
   
   private
+  
+  def build_feed
+    @notes = @notes.sort_by { |i| i.created_at }.reverse
+    @notes_size = @notes.size
+  end
   
   def dev_only
     redirect_to '/404' unless dev?
