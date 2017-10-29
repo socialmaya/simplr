@@ -13,6 +13,9 @@
     link.click(function(){
       link.toggle();
       $("#load_bar").toggle();
+      // sound for the click
+      $("#post_interface_sound")[0].currentTime = 0;
+      $("#post_interface_sound")[0].play();
     })
   </script>
 <% end %>
