@@ -5,3 +5,6 @@
   $("#group_<%= @group.id %>_card_links").remove();
   $("#group_<%= @group.id %>_card_links_anchor").after("<%=j render "groups/card_links", group: @group %>");
 <% end %>
+
+$("#user_interface_sound")[0].currentTime = 0;
+$("#user_interface_sound")[0].play();
