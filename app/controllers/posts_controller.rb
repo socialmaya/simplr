@@ -156,19 +156,19 @@ class PostsController < ApplicationController
       @post.un_invited = true
       @post.anon_token = $name_generator.next_name + "_" + SecureRandom.urlsafe_base64
     end
-    respond_to do |format|
-      if @post.save
-        if params[:pictures]
-          # builds photoset for post
-          params[:pictures][:image].each do |image|
-            @post.pictures.create image: image
-          end
+    if @post.save
+      if params[:pictures]
+        # builds photoset for post
+        params[:pictures][:image].each do |image|
+          @post.pictures.create image: image
         end
-        Tag.extract @post #extracts any hashtags along with their position in the text
-        format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
-      else
-        format.html { redirect_to root_url }
       end
+      # extracts any hashtags along with their position in the text
+      Tag.extract @post
+      # prepares vars for ajax create.js
+      @successfully_created = true
+      @post_just_created = @post
+      @post = Post.new
     end
   end
 
