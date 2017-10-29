@@ -15,10 +15,27 @@ class Like < ActiveRecord::Base
   
   scope :loves, -> { where love: true }
   scope :whoas, -> { where whoa: true }
+  scope :hypes, -> { where hype: true }
   scope :zens, -> { where zen: true }
   
+  def like_type plural=nil
+    _type = if self.love
+      "love"
+    elsif self.whoa
+      "whoa"
+    elsif self.zen
+      "zen"
+    elsif self.hype
+      "hype"
+    else
+      "#{plural ? '_' : ''}like"
+    end
+    _type << "s" if plural
+    return _type
+  end
+  
   def _likes
-    self.likes.where love: nil, whoa: nil, zen: nil
+    self.likes.where love: nil, whoa: nil, zen: nil, hype: nil
   end
 
   private
@@ -30,6 +47,8 @@ class Like < ActiveRecord::Base
       :whoas
     elsif self.zen
       :zens
+    elsif self.hype
+      :hypes
     else
       :_likes
     end

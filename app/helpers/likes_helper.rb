@@ -45,49 +45,18 @@ module LikesHelper
     return like
   end
   
-  def already_loved? item
-    if current_user
-      if item.loves.where(user_id: current_user.id).present?
-        return true
-      end
+  def already_liked? item, like_type=nil
+    like_type = if like_type
+      (like_type.to_s + "s").to_sym
     else
-      if item.loves.where(anon_token: anon_token).present?
-        return true
-      end
+      :_likes
     end
-  end
-  
-  def already_zend? item
     if current_user
-      if item.zens.where(user_id: current_user.id).present?
+      if item.send(like_type).where(user_id: current_user.id).present?
         return true
       end
     else
-      if item.zens.where(anon_token: anon_token).present?
-        return true
-      end
-    end
-  end
-  
-  def already_whoad? item
-    if current_user
-      if item.whoas.where(user_id: current_user.id).present?
-        return true
-      end
-    else
-      if item.whoas.where(anon_token: anon_token).present?
-        return true
-      end
-    end
-  end
-  
-  def already_liked? item
-    if current_user
-      if item._likes.where(user_id: current_user.id).present?
-        return true
-      end
-    else
-      if item._likes.where(anon_token: anon_token).present?
+      if item.send(like_type).where(anon_token: anon_token).present?
         return true
       end
     end

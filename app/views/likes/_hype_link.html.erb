@@ -1,0 +1,13 @@
+<% param_id = (item.class.to_s.downcase + "_id").to_sym %>
+<% link_id = "hype_#{item.class.to_s.downcase}_link_#{item.id}" %>
+<% link_class = ((defined?(bottom_left) and bottom_left) ? :bottom_left_link : :standard_post_link) %>
+<% hype_path = current_user.has_power?("hype") ? like_path(param_id => item.id, hype: true) : "/#" %>
+<% unhype_path = current_user.has_power?("hype") ? unlike_path(param_id => item.id, hype: true) : "/#" %>
+
+<% unless already_liked? item, :hype %>
+  <%= link_to "Hype#{(' ' + item.hypes.size.to_s) unless item.hypes.size.zero?}", hype_path,
+    method: :post, remote: true, class: link_class, id: link_id %>
+<% else %>
+  <%= link_to "Hype #{item.hypes.size.to_s}", unhype_path,
+    method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(119,221,119);" %>
+<% end %>

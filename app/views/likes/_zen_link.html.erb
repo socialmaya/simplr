@@ -4,7 +4,7 @@
 <% zen_path = current_user.has_power?("zen") ? like_path(param_id => item.id, zen: true) : "/#" %>
 <% unzen_path = current_user.has_power?("zen") ? unlike_path(param_id => item.id, zen: true) : "/#" %>
 
-<% unless already_zend? item %>
+<% unless already_liked? item, :zen %>
   <%= link_to "Zen#{(' ' + item.zens.size.to_s) unless item.zens.size.zero?}", zen_path,
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>

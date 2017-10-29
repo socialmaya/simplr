@@ -4,7 +4,7 @@
 <% whoa_path = current_user.has_power?("whoa") ? like_path(param_id => item.id, whoa: true) : "/#" %>
 <% unwhoa_path = current_user.has_power?("whoa") ? unlike_path(param_id => item.id, whoa: true) : "/#" %>
 
-<% unless already_whoad? item %>
+<% unless already_liked? item, :whoa %>
   <%= link_to "Whoa#{(' ' + item.whoas.size.to_s) unless item.whoas.size.zero?}", whoa_path,
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>

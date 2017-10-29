@@ -4,7 +4,7 @@
 <% love_path = current_user.has_power?("love") ? like_path(param_id => item.id, love: true) : "/#" %>
 <% unlove_path = current_user.has_power?("love") ? unlike_path(param_id => item.id, love: true) : "/#" %>
 
-<% unless already_loved? item %>
+<% unless already_liked? item, :love %>
   <%= link_to "Love#{(' ' + item.loves.size.to_s) unless item.loves.size.zero?}", love_path,
     method: :post, remote: true, class: link_class, id: link_id %>
 <% else %>

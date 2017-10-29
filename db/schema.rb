@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020194315) do
+ActiveRecord::Schema.define(version: 20171029033750) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20171020194315) do
     t.boolean  "love"
     t.boolean  "whoa"
     t.boolean  "zen"
+    t.boolean  "hype"
   end
 
   create_table "messages", force: :cascade do |t|
