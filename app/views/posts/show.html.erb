@@ -7,10 +7,7 @@
 <%= render "posts/liked_and_viewed_by" %>
 
 <% if invited? or current_user %>
-  <% for comment in @comments %>
-    <%= render "comments/card", comment: comment %>
-  <% end %>
-  <%= render "comments/form" %>
+  <%= render "comments/index", comments: @comments %>
 <% else %>
   <div id="guest_prompt" class="dark_card" align="center">
     <p>

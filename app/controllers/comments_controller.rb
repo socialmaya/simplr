@@ -56,7 +56,10 @@ class CommentsController < ApplicationController
     else
       @comment.anon_token = anon_token
     end
+    # renders javascript differently for mini and regular forms
+    @from_mini_form = true if params[:mini_form] and params[:mini_form].present?
     if @comment.save
+      @successfully_created = true
       Tag.extract @comment
       if @comment.comment
         Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_identity \
@@ -73,11 +76,12 @@ class CommentsController < ApplicationController
           Note.notify :also_commented, @post, user, current_identity unless current_user and current_user.eql? user
         end
         # only redirects if not ajax
-        unless params[:ajax_req]
-          redirect_to show_post_path(@comment.post.unique_token)
-        else
+        if @from_mini_form
           @comment = Comment.new
           @comments = @post.comments.last 5
+        else
+          @comment_just_created = @comment
+          @comment = Comment.new
         end
       elsif @comment.proposal
         @proposal = @comment.proposal
