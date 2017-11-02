@@ -132,7 +132,7 @@ class Post < ActiveRecord::Base
     # views by current user
     view = self.views.where(user_id: user.id).last
     if view
-      score_count = view.score_count.to_i
+      score_count = view.score_count.to_i * 2
       # more weight taken for views on older posts
       score_count *= 10 if self.created_at > 2.week.ago
       weights[:views] -= view.score_count.to_i
