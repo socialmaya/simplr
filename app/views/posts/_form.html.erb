@@ -69,6 +69,7 @@
       <script>
         var button = $("#post_form_button_<%= form_button_id %>");
         button.click(function(){
+          button.text("Loading...");
           <%= render "app/fader.js", target: "post_form_button", target_id: form_button_id, fast: true %>
         });
       </script>
