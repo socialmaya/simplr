@@ -60,16 +60,16 @@
       <% end %>
 
       <p>
-        <% form_button_id = rand(100) %>
+        <% form_button_id = rand 1000 %>
         <button type="submit" name="commit" class="dark_form_button" id="post_form_button_<%= form_button_id %>">
           <b><%= @post.id.nil? ? "Post" : "Save" %> <i class="fa fa-pencil"></i></b>
         </button>
       </p></br>
       
       <script>
-        var button = $("#post_form_button_<%= form_button_id %>");
-        button.click(function(){
-          button.text("Loading...");
+        var button_<%= form_button_id %> = $("#post_form_button_<%= form_button_id %>");
+        button_<%= form_button_id %>.click(function(){
+          button_<%= form_button_id %>.text("Loading...");
           <%= render "app/fader.js", target: "post_form_button", target_id: form_button_id, fast: true %>
         });
       </script>
