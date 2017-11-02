@@ -3,7 +3,7 @@
 <div class="dark_card" id="comment_form_card">
   <%= render "app/random_pixels" %>
   <%= form_for((@replying ? @reply : @comment), remote: @post.present?) do |f| %>
-    <%= hidden_field_tag :post_id, @post.id if @post %>
+    <%= hidden_field_tag :post_id, @post.id if @post %> 
     <%= hidden_field_tag(:comment_id, @comment.id) if @replying %>
     
     <%= hidden_field_tag :proposal_id, @proposal.id if @proposal %>
@@ -18,10 +18,19 @@
 		  <p id="hidden_file_field" hidden><%= f.file_field :image %></p>
       
       <p>
-        <button type="submit" name="commit" class="dark_form_button">
+        <% form_button_id = rand 1000 %>
+        <button type="submit" name="commit" class="dark_form_button" id="comment_form_button_<%= form_button_id %>">
           <b><%= @replying ? "Reply" : (@editing ? "Save" : "Comment") %> <i class="fa fa-pencil"></i></b>
         </button>
       </p>
+      
+      <script>
+        var button_<%= form_button_id %> = $("#comment_form_button_<%= form_button_id %>");
+        button_<%= form_button_id %>.click(function(){
+          button_<%= form_button_id %>.text("Loading...");
+          <%= render "app/fader.js", target: "comment_form_button", target_id: form_button_id, fast: true %>
+        });
+      </script>
     </div>
   <% end %>
 </div>
