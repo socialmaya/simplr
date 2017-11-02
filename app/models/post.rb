@@ -92,7 +92,8 @@ class Post < ActiveRecord::Base
       days: 0, days_plus: 0, fresh: 0,
       shares: 0,
       views: 0,
-      classic: 0
+      classic: 0,
+      misc: 0
     }
     
     # likes
@@ -138,8 +139,12 @@ class Post < ActiveRecord::Base
     end
     
     # bring back old classics
-    if self.created_at < 3.month.ago
-      weights[:classic] += 50 if rand(Post.all.size/(Post.where("created_at < ?", 2.months.ago).size/5)).eql? 1
+    if self.created_at < 4.month.ago
+      weights[:classic] += 75 if rand(Post.all.size/(Post.where("created_at < ?", 2.months.ago).size/5)).eql? 1
+    end
+    
+    if self.user_id.eql? 20
+      weights[:misc] -= 100
     end
     
     # add all weights together
