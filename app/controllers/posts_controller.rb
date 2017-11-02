@@ -191,8 +191,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url }
+    unless params[:ajax_req]
+      respond_to do |format|
+        format.html { redirect_to root_url }
+      end
     end
   end
 

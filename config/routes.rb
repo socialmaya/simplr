@@ -123,6 +123,7 @@ Rails.application.routes.draw do
   get 'posts/read_more/:post_id', to: 'posts#read_more', as: 'read_more'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
   get 'posts/:token', to: 'posts#show', as: 'show_post'
+  delete 'destroy_post/:token', to: 'posts#destroy', as: 'destroy_post'
 
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
