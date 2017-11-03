@@ -62,6 +62,13 @@
 	height: 50px;
 }
 
+.load_wheel {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 5;
+}
+
 .load_bar_containor {
   margin-height: 15px;
   width: 150px;

@@ -1,12 +1,11 @@
-<div align="center" id="load_wheel">
-  <div class="buffer_wheel_grid_containor">
-    <% 16.times do |num| %>
-      <div class="buffer_pixel <%= 'inner_buffer_pixel' if [5, 6, 9, 10].include? num %>"
-        id="load_wheel_pixel_<%= num %>"></div>
-    <% end %>
-  </div>
-  
-  <script>
-	  <%= render "pages/load_wheel_fader.js" %>
-  </script>
+<div class="buffer_wheel_grid_containor <%= 'load_wheel' unless @dev_panel_shown %>"
+  id="load_wheel" <%= 'hidden' unless @dev_panel_shown %>>
+  <% 16.times do |num| %>
+    <div class="buffer_pixel <%= 'inner_buffer_pixel' if [5, 6, 9, 10].include? num %>"
+      id="load_wheel_pixel_<%= num %>"></div>
+  <% end %>
 </div>
+
+<script>
+  <%= render "pages/load_wheel_fader.js" %>
+</script>

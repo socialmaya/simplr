@@ -13,6 +13,8 @@
   </p>
 </div>
 
+<%= render "pages/load_bar", items: [], all_items: [] %>
+
 <div class="card">
   <div align="center">
     <p><b>Dev totals:</b> 
@@ -81,6 +83,6 @@
   </p>
 </div>
 
-<%= render "pages/load_bar", items: [], all_items: [] %>
-
-<%= render "pages/load_wheel" %>
+<div align="center">
+  <%= render "pages/load_wheel" %>
+</div>
