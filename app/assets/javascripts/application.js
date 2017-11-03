@@ -21,3 +21,5 @@
 //= require jquery.kanye-ipsum.min.js
 //= require processing.min.js
 //= require groll.min.js
+//= require parallax.min.js
+//= require jquery.paroller.min.js
