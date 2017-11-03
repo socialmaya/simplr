@@ -7,6 +7,7 @@ class SettingsController < ApplicationController
   end
   
   def dev_panel
+    @dev_panel_shown = true
     @char_bits = char_bits Post.last 10
     # creates the invite link to be copied and shared
     if params[:invite_token]
