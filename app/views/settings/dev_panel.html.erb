@@ -13,10 +13,6 @@
   </p>
 </div>
 
-<div class="dark_card" align="center">
-  <%= render "pages/load_wheel" %>
-</div>
-
 <div class="card">
   <div align="center">
     <p><b>Dev totals:</b> 
@@ -83,11 +79,6 @@
   <p>
     <%= link_to "Magic wand", play_audio_path("magic"), remote: true, class: :white_link %>
   </p>
-  
-  <% 7.times do |i| %>
-    <%= audio_tag "interface/interface_#{(i+1).to_s}.mp3", id: "interface_#{(i+1).to_s}" %>
-    <p>
-      <%= link_to "Interface #{(i+1).to_s}", play_audio_path("interface_#{(i+1).to_s}"), remote: true, class: :white_link %>
-    </p>
-  <% end %>
 </div>
+
+<%= render "pages/load_wheel" %>

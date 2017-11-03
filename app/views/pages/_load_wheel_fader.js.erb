@@ -11,11 +11,15 @@ function load_wheel_fader() {
 	  rgb[i] = Math.round(Math.random() * 255);
   }
   
+  // bits to be visualized
+  var bits = <%=j @char_bits.to_json %>;
+  // counter for bits
+  var b_num = 0;
+  
   var outer_id = 0;
-  var inner_id = 0;
   
   var outer_circle = [0, 1, 2, 3, 7, 11, 15, 14, 13, 12, 8, 4];
-  var inner_circle = [-1, 5, -1, -1, 6, -1, -1,  9, -1, -1, 10, -1];
+  var inner_circle = [5, 6, 9, 10];
 
   setInterval(function() {
 	  var outer_pixel = $("#load_wheel_pixel_" + outer_circle[outer_id]);
@@ -46,6 +50,12 @@ function load_wheel_fader() {
 	  
 	  if (outer_id >= outer_circle.length) {
 	    outer_id = 0;
+	  }
+	  
+	  // cycles through bits
+	  b_num += 1;
+	  if (b_num >= bits.length) {
+		  b_num = 0;
 	  }
     
   }, change_speed);
