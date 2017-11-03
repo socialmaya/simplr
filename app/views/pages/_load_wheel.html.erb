@@ -1,5 +1,4 @@
-<div class="buffer_wheel_grid_containor <%= 'load_wheel' unless @dev_panel_shown %>"
-  id="load_wheel" <%= 'hidden' unless @dev_panel_shown %>>
+<div class="buffer_wheel_grid_containor load_wheel" id="load_wheel" hidden>
   <% 16.times do |num| %>
     <div class="buffer_pixel <%= 'inner_buffer_pixel' if [5, 6, 9, 10].include? num %>"
       id="load_wheel_pixel_<%= num %>"></div>
