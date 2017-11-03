@@ -1,8 +1,5 @@
 <% unless current_user %>
   <script>
-    <%= render "app/fader.js", target: "login_field_1", target_id: "" %>
-    <%= render "app/fader.js", target: "login_field_2", target_id: "" %>
-    
     <%= render "app/fader.js", target: "remember_me_check_box", target_id: "" %>
   </script>
   
@@ -27,7 +24,7 @@
 		  
 		  <%= image_tag "fire.gif", class: :fire_gif %>
 		  
-		  <div id="remember_me_check_box">
+		  <div id="remember_me_check_box" class="dark_link">
 			  Remember me <%= check_box_tag :remember_me, 1, params[:remember_me] %>
 		  </div>
 	  <% end %>
