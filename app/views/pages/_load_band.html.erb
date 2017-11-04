@@ -1,9 +1,12 @@
-<div class="load_band_container">
-  <% 16.times do |num| %>
-    <div class="load_band_section" id="load_band_section_<%= num %>"></div>
-  <% end %>
-</div>
+<div id="load_band" align="center">
+  <div class="load_band_container">
+    <% 16.times do |num| %>
+      <div class="load_band_section" id="load_band_section_<%= num %>"
+        style="background:black;"></div>
+    <% end %>
+  </div>
 
-<script>
-  <%= render "pages/load_band_fader.js" %>
-</script>
+  <script>
+    <%= render "pages/load_band_fader.js" %>
+  </script>
+</div>
