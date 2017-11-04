@@ -17,9 +17,9 @@ function load_wheel_fader<%= "_" + token if defined?(token) and token.present? %
   var inner_circle = [5, 6, 9, 10];
 
   setInterval(function() {
-	  var outer_pixel = $("#load_wheel_pixel_" + outer_circle[outer_id]<%= ' + "_#{token}"' \
-	    if defined?(token) and token.present? %>);
-	  var inner_pixels = $(".inner_buffer_pixel");
+	  var outer_pixel = $("#load_wheel_pixel_" + outer_circle[outer_id] + "<%= "_" + token \
+	    if defined?(token) and token.present? %>");
+	  var inner_pixels = $(".inner_buffer_pixel<%= '_' + token if defined?(token) and token.present? %>");
 	  // morphs all of rgb back and forth
 	  for (var i=0; i < 3; i++) {
 		  // flips colors direction of change
