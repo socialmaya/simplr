@@ -84,15 +84,16 @@
 }
 
 .load_band_containor {
-  width: 200px;
-  height: 500px;
+  width: 100px;
+  height: 20px;
 }
 
 .load_band_section {
-  width: 5%;
+  width: 4%;
   height: 100%;
   float: left;
-  background: red;
+  font-size: 10px;
+  text-align: center;
 }
 
 .load_fib_bar {
