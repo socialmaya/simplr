@@ -45,11 +45,12 @@ function loading_glimmer() {
 		  }
 	  }
 	  
+	  pixel.css("background", "black");
 	  pixel.text(bits[b_num].toString());
 	  pixel.css("color", "rgb(" + b + ", " + r + ", " + g + ")");
 	  
 	  pixels.each(function() {
-	    $(this).css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
+	    //$(this).css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
 	  });
 	  
 	  num += 3;
