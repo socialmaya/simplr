@@ -186,10 +186,10 @@ class ApplicationController < ActionController::Base
   
   
   def unique_element_token
-    token = if cookies[:unique_element_token].nil?
-      cookies.permanent[:unique_element_token] = SecureRandom.urlsafe_base64
+    token = if cookies[:element_token].nil?
+      cookies.permanent[:element_token] = SecureRandom.urlsafe_base64.gsub(/[^0-9a-z]/i, '')
     else
-      cookies[:unique_element_token]
+      cookies[:element_token]
     end
     return token
   end
