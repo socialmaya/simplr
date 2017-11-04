@@ -51,15 +51,20 @@
   text-align: center;
 }
 
-.mini_buffer_pixel {
-	width: 50%;
-	height: 50%;
-	float: right;
-}
-
 .buffer_wheel_grid_containor {
 	width: 50px;
 	height: 50px;
+}
+
+.load_wheel_pixel {
+	width: 25%;
+	height: 25%;
+	float: right;
+}
+
+.load_wheel_container {
+	width: 25px;
+	height: 25px;
 }
 
 .load_wheel {
