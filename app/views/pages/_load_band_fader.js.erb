@@ -15,7 +15,7 @@ function load_band_fader() {
   var direction = true;
 
   setInterval(function() {
-	  var section = $("#load_band_section_" + id);
+	  var band = $("#load_band_section_" + id);
 	  // morphs all of rgb back and forth
 	  for (var i=0; i < 3; i++) {
 		  // flips colors direction of change
@@ -32,7 +32,7 @@ function load_band_fader() {
 		  }
 	  }
 	  
-	  section.css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
+	  band.css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
 	  
 	  // cycles through sections
 	  if (direction) {
@@ -41,7 +41,7 @@ function load_band_fader() {
 	    id -= 1;
 	  }
     // cycles back and forth, changing direction
-	  if (id >= 24 || id <= 0) {
+	  if (id >= 19 || id <= 0) {
 		  direction = !direction;
 	  }
   }, change_speed);

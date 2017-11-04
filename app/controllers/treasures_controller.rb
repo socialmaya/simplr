@@ -4,6 +4,7 @@ class TreasuresController < ApplicationController
   def sandbox
     @sandbox = true
     @char_bits = char_bits Post.last 10
+    @char_codes = char_codes Post.last 10
   end
   
   def tweet
