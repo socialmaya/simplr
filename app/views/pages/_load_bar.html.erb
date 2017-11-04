@@ -1,11 +1,12 @@
-<% if all_items.present? and all_items.size > page_size or @user or @group or @dev_panel_shown or @invite_only_page %>
+<% if all_items.present? and all_items.size > page_size or @user or @group \
+  or @dev_panel_shown or @invite_only_page or @sandbox %>
   <div align="center" id="load_bar" <%= (@user or @group) ? "hidden" : nil %>>
     <%= link_to show_treasure_path(Treasure.random(current_user).unique_token) do %>
       <div class="load_bar_containor">
         <% 16.times do |num| %>
           <% rgb = random_color %>
           <div class="load_bar_section" id="load_bar_section_<%= num %>"
-            style="background:black;"></div>
+            style="background:rgb(10, 10, 10);"></div>
         <% end %>
       </div>
     <% end %>

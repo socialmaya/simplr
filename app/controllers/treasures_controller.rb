@@ -1,5 +1,10 @@
 class TreasuresController < ApplicationController
-  before_action :hidden_treasure, except: [:kanye, :kopimi, :show]
+  before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox]
+  
+  def sandbox
+    @sandbox = true
+    @char_bits = char_bits Post.last 10
+  end
   
   def tweet
     @message = params[:tweet]

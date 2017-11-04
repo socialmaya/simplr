@@ -1,10 +1,12 @@
-<div class="buffer_wheel_grid_containor load_wheel" id="load_wheel" hidden>
+<div class="buffer_wheel_grid_containor <%= 'load_wheel' if defined?(token) %>"
+  id="load_wheel" <%= 'hidden' if defined?(token) %>>
   <% 16.times do |num| %>
+    <% id_append = num.to_s; id_append << ("_" + token) if defined?(token) %>
     <div class="buffer_pixel <%= 'inner_buffer_pixel' if [5, 6, 9, 10].include? num %>"
-      id="load_wheel_pixel_<%= num %>"></div>
+      id="load_wheel_pixel_<%= id_append %>" style="background:black;"></div>
   <% end %>
 </div>
 
 <script>
-  <%= render "pages/load_wheel_fader.js" %>
+  <%= render "pages/load_wheel_fader.js", token: (token if defined?(token)) %>
 </script>

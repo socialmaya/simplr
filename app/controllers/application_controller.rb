@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning, :testing_score?
+    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning, :testing_score?, :unique_element_token
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -184,6 +184,16 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  
+  def unique_element_token
+    token = if cookies[:unique_element_token].nil?
+      cookies.permanent[:unique_element_token] = SecureRandom.urlsafe_base64
+    else
+      cookies[:unique_element_token]
+    end
+    return token
+  end
+  
   def anon_token
     unless current_user # signed up and and logged in
       if cookies[:token_timestamp].nil? or \
@@ -255,44 +265,45 @@ class ApplicationController < ActionController::Base
   end
   
   private
-    def get_correct_char_str item
-      # gets correct string to push to glimmer
-      item_string = if item.is_a? Note
-        item.message
-      elsif item.body.present?
-        item.body
-      # for motions only
-      elsif item.image.url
-        item.image.to_s
-      # for posts only
-      elsif item.pictures.present?
-        item.pictures.first.image.to_s
-      else
-        "just in case of error" # incase there's no match for some reason idk yet
-      end
-      return item_string
+  
+  def get_correct_char_str item
+    # gets correct string to push to glimmer
+    item_string = if item.is_a? Note
+      item.message
+    elsif item.body.present?
+      item.body
+    # for motions only
+    elsif item.image.url
+      item.image.to_s
+    # for posts only
+    elsif item.pictures.present?
+      item.pictures.first.image.to_s
+    else
+      "just in case of error" # incase there's no match for some reason idk yet
     end
-    
-    def anrcho_to_proposals
-      if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
-        cookies.permanent[:at_anrcho] = true.to_s
-        redirect_to proposals_path
-      end
+    return item_string
+  end
+  
+  def anrcho_to_proposals
+    if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
+      cookies.permanent[:at_anrcho] = true.to_s
+      redirect_to proposals_path
     end
-    
-    def forrest_club_to_forrest_club
-      if request.host.eql? 'forrestsonlyclub.com'
-        redirect_to resume_path
-      end
+  end
+  
+  def forrest_club_to_forrest_club
+    if request.host.eql? 'forrestsonlyclub.com'
+      redirect_to resume_path
     end
-    
-    def forrest_to_resume
-      if request.host.eql? 'forrestwilkins.com'
-        redirect_to resume_path
-      end
+  end
+  
+  def forrest_to_resume
+    if request.host.eql? 'forrestwilkins.com'
+      redirect_to resume_path
     end
-    
-    def bots_to_404
-      redirect_to '/404' if request.bot? and anrcho? # turned on only for anrcho
-    end
+  end
+  
+  def bots_to_404
+    redirect_to '/404' if request.bot? and anrcho? # turned on only for anrcho
+  end
 end
