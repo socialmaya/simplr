@@ -37,5 +37,10 @@
 
   <%= render "sessions/form" %>
   
-  <%= render "pages/load_bar", items: [], all_items: [] %>
+  <div class="dark_card" align="center" style="background:black;">
+    <%= render "pages/load_band", items: [], all_items: [] %>
+    <p>
+      <%= render "pages/load_wheel" %>
+    </p>
+  </div>
 <% end %>

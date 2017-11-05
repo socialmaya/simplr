@@ -1,4 +1,4 @@
-<% if all_items.present? and all_items.size > page_size or @sandbox %>
+<% if all_items.present? and all_items.size > page_size or @sandbox or @invite_only_page %>
   <div align="center" id="buffer_wheel">
 	  <script>
 		  <%= render "pages/glimmer.js" %>

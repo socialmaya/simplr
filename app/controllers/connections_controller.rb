@@ -62,6 +62,7 @@ class ConnectionsController < ApplicationController
     @posts = Post.un_invited.last(10).reverse
     @invite_only_page = true
     @char_bits = char_bits Post.last 10
+    @char_codes = char_codes Post.last 10
   end
   
   def redeem_invite

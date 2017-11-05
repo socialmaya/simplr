@@ -19,6 +19,6 @@
 
 <%= audio_tag "effects/bumerang.wav", id: "more_content_sound" %>
 
-<% unless @sandbox %>
+<% unless @sandbox or @invite_only_page%>
   <div id="footer_spacing"></div>
 <% end %>
