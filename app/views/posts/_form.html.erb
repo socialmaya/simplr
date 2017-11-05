@@ -72,7 +72,7 @@
           button_<%= form_button_id %>.text("Loading...");
           <%= render "app/fader.js", target: "post_form_button", target_id: form_button_id, fast: true %>
           
-          $("#load_wheel").fadeIn(2000);
+          $(".load_element").removeAttr('hidden');
         });
       </script>
     </div>
