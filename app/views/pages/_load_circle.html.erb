@@ -1,0 +1,11 @@
+<div class="load_circle_containor" id="load_circle_containor">
+  <% z = 25; z.times do |num| %>
+    <div class="load_circle_section" id="load_circle_section_<%= num %>"
+      style="background:black; z-index:<%= z %>; width:<%= (num + 1) * 5 %>%; height:<%= (num + 1) * 5 %>%;"></div>
+    <% z -= 1 %>
+  <% end %>
+</div>
+
+<script>
+  <%= render "pages/load_circle_fader.js" %>
+</script>

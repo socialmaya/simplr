@@ -100,6 +100,19 @@
   text-align: center;
 }
 
+.load_circle_containor {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.load_circle_section {
+	border-radius: 50%;
+  width: 5%;
+  height: 5%;
+  position: absolute;
+}
+
 .load_fib_bar {
   width: 100%;
 }
