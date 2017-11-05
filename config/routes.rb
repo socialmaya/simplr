@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'play_audio/:audio', to: 'treasures#play_audio', as: 'play_audio'
   get 'console', to: 'treasures#console', as: 'console'
   post 'tweet', to: 'treasures#tweet', as: 'dev_tweet'
-  get 'sandbox', to: 'treasures#sandbox', as: 'sandbox'
+  get 'forrests_fabulous_sandbox', to: 'treasures#sandbox', as: 'sandbox'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
