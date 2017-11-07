@@ -28,6 +28,9 @@
 <% if @actively_typing_member %>
   if (!$("#actively_typing").length) {
     $("#new_message_form").before("<%=j render 'messages/actively_typing', member: @actively_typing_member %>");
+    // plays sound of a typewriter being typed on when other user is typing
+    $("#typewriter_audio")[0].currentTime = 0;
+    $("#typewriter_audio")[0].play();
   }
 <% else %>
   if ($("#actively_typing").length) {
