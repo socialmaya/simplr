@@ -8,7 +8,12 @@
 			<div class="message_form_container">
 		    <!-- level 2 left start -->
 			  <div class="message_form_left_sub_container">
-					<%= f.text_area :body, placeholder: "Send a message...", class: "dark_text_area message_text_area" %>
+					<%= f.text_area :body, placeholder: "Send a message...",
+					  class: "dark_text_area message_text_area", id: :instant_message_text_area %>
+					  
+					  <script>
+					    <%= render "messages/typing_listen.js" %>
+					  </script>
 			  </div>
 		    <!-- level 2 left end -->
 			  

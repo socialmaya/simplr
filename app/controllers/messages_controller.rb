@@ -1,6 +1,13 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show]
   before_action :invite_only
+  
+  def currently_typing
+    @folder = Message.folders.find_by_id params[:folder_id]
+    @user = User.find_by_id params[:user_id]
+    member = @folder.members.find_by_user_id @user.id
+    member.update last_typing_at: DateTime.now
+  end
 
   # create folder between users if none exists
   def create_message_folder
@@ -106,6 +113,16 @@ class MessagesController < ApplicationController
     unless @instant_messages.empty?
       @instant_messages = @messages.last(10)
     end
+    
+    actively_typing_members = @folder.members.where.not last_typing_at: nil, user_id: current_user.id
+    
+    if actively_typing_members.present?
+      member = actively_typing_members.sort_by { |m| m.last_typing_at }.last
+      if member.last_typing_at >= 30.second.ago
+        @actively_typing_member = member
+      end
+    end
+    
   end
 
   def index

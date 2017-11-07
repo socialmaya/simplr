@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :god_only, only: [:hijack]
+  before_action :god_only, only: [:hijack] # also set for development
   before_action :dev_env_only, only: [:dev_login]
   
   def dev_login
@@ -66,7 +66,7 @@ class SessionsController < ApplicationController
   end
   
   def god_only
-    unless god?
+    unless god? or Rails.env.development?
       redirect_to '/404'
     end
   end

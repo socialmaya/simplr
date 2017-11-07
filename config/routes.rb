@@ -105,6 +105,7 @@ Rails.application.routes.draw do
   get 'folders/:folder_id/show', to: 'messages#show_message_folder', as: 'show_message_folder'
   get 'messages/instant_folder_messages', to: 'messages#instant_folder_messages'
   get 'inbox', to: 'messages#message_folders', as: 'inbox'
+  put 'messages/currently_typing'
 
   # sessions
   get 'sessions/new'

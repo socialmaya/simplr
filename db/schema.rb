@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029033750) do
+ActiveRecord::Schema.define(version: 20171107200806) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20171029033750) do
     t.boolean  "portal"
     t.integer  "total_items_seen"
     t.boolean  "forrest_only"
+    t.datetime "last_typing_at"
   end
 
   create_table "game_pieces", force: :cascade do |t|

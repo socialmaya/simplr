@@ -24,3 +24,13 @@
   seen_views.remove();
   seen_anchor.after("<%=j render 'messages/seen', message: @instant_messages.last %>");
 <% end %>
+
+<% if @actively_typing_member %>
+  if (!$("#actively_typing").length) {
+    $("#new_message_form").before("<%=j render 'messages/actively_typing', member: @actively_typing_member %>");
+  }
+<% else %>
+  if ($("#actively_typing").length) {
+    $("#actively_typing").remove();
+  }
+<% end %>

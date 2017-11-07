@@ -15,6 +15,10 @@ class Message < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   
+  def self.folders
+    return Connection.folders
+  end
+  
   private
   
   def gen_unique_token
