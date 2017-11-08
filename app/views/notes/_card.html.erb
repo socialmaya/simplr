@@ -31,9 +31,10 @@
         <% post = get_like_liked_post like %>
         <%= link_to message, show_post_path(post.unique_token) if post %>
       <% end %>
-          
-      <span id="like_like_link_anchor_<%= like.id %>"></span>
-      <%= render "likes/link", item: like, bottom_left: true %>
+      <% if like %>    
+        <span id="like_like_link_anchor_<%= like.id %>"></span>
+        <%= render "likes/link", item: like, bottom_left: true %>
+      <% end %>
     <% when :group_invite %>
       <%= link_to message, invites_path(note.user) %>
     <% when :group_request %>
