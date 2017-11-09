@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get 'console', to: 'treasures#console', as: 'console'
   post 'tweet', to: 'treasures#tweet', as: 'dev_tweet'
   get 'sandbox', to: 'treasures#sandbox', as: 'sandbox'
+  get 'templates', to: 'treasures#templates', as: 'templates'
+  get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'

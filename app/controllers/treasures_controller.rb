@@ -1,5 +1,11 @@
 class TreasuresController < ApplicationController
-  before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox]
+  before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates, :philosophy]
+  
+  def templates
+  end
+  
+  def philosophy
+  end
   
   def sandbox
     @sandbox = true
