@@ -2,7 +2,3 @@
   <span id="actively_typing_member_text"><%= link_to member.user.name, member.user,
     class: :small_dark_link %> is typing... <i class="fa fa-keyboard-o"></i></span>
 </div>
-
-<script>
-  <%= render "app/fader.js", target: "actively_typing_member_text", target_id: "", fast: true %>
-</script>
