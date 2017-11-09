@@ -34,7 +34,7 @@ class Connection < ActiveRecord::Base
   def unseen_messages user
     if self.message_folder and self.messages.present?
       connection = self.connections.find_by_user_id user.id
-      unseen = self.messages.size - connection.total_messages_seen.to_i
+      unseen = self.messages.where.not(user_id: user.id).size - connection.total_messages_seen.to_i
     else
       unseen = 0
     end
