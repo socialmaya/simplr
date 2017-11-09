@@ -158,7 +158,7 @@ class MessagesController < ApplicationController
     unless @folder.messages.empty?
       @connection = @folder.connections.find_by_user_id current_user.id
       unless @folder.messages.size.eql? @connection.total_messages_seen
-        @connection.update total_messages_seen: @folder.messages.where.not(user_id: current_user.id).size
+        @connection.update total_messages_seen: @folder.messages.size
       end
     end
   end
