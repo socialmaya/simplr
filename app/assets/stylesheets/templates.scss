@@ -1,0 +1,32 @@
+// Place all the styles related to the templates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin section_part {
+  width: 100%;
+  min-height: 500px;
+  background: rgb(214, 216, 219);
+  color: DarkBlue;
+  text-align: center;
+  position: relative;
+  overflow: auto;
+}
+
+.section_part {
+  @include section_part;
+}
+
+
+.edit_carousel_img_link {
+  position: absolute;
+  right: 20%;
+  top: 50px;
+}
+
+.carousel_image {
+  width: 100%;
+}
+
+.carousel_outer {
+  margin-top: 7.5px;
+}

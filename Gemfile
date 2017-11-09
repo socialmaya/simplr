@@ -34,6 +34,10 @@ gem "simple_captcha2"
 # fonts and glyphs
 gem 'font-awesome-sass'
 
+# bootstrap
+#gem 'twitter-bootstrap-rails'
+#gem 'bootstrap-sass'
+
 # social media
 gem 'koala' # for facebook
 gem 'tumblr_client'
