@@ -1,3 +1,6 @@
 <h2 class="standard_page_header">Settings <i class="fa fa-cogs"></i></h2>
 
 <div class="card"><%= render "settings/form" %></div>
+
+<% @user = current_user %>
+<%= render "users/edit_password" %>
