@@ -2,7 +2,49 @@
 
 <div class="dark_card" align="center">
   <p>
-    <b id="figures">Lacan, Derrida, Foucault, Heidegger, Jung</b>
+    <b id="figures">Heidegger</b>
+  </p>
+</div>
+
+<div class="dark_card" align="center">
+  <p>
+    <b id="derrida">Jacques Derrida</b> - a French philosopher best known for developing a form of semiotic analysis known as deconstruction, which he discussed in numerous texts, and developed in the context of phenomenology. He is one of the major figures associated with post-structuralism and hermeneutics.
+  </p>
+  <p class="justified_body_text">
+    Deconstruction was a critique of the relationship between text and meaning, consisting in conducting readings of texts with an ear to what runs counter to the structural unity or intended sense of a particular text. The purpose is to expose that the object of language, and that which any text is founded upon, is irreducibly complex, unstable, or impossible.
+  </p>
+</div>
+
+<div class="dark_card" align="center">
+  <p class="justified_body_text">
+    <b id="foucault">Michel Foucault</b> - Theories primarily address the relationship between power and knowledge, and how they are used as a form of social control through societal institutions. Though often cited as a post-structuralist and postmodernist, Foucault rejected these labels, preferring to present his thought as a critical history of modernity.
+  </p>
+</div>
+
+<div class="dark_card" align="center">
+  <p>
+    <b id="lacan">Jacques Lacan</b> - France’s most famous psychoanalyst, who came up with the intriguing concept of the ‘mirror phase.’
+  </p>
+  <p class="justified_body_text">
+    The mirror stage is based on the belief that infants recognize themselves in a mirror (literal) or other symbolic contraption which induces apperception (the turning of oneself into an object that can be viewed by the child from outside themselves) from the age of about six months.
+  </p>
+</div>
+
+<div class="dark_card" align="center">
+  <p>
+    <b id="jung">Carl Jung</b> -  Swiss psychiatrist and psychoanalyst who founded analytical psychology and collaborated with  Sigmund Freud.
+  </p>
+  <p class="justified_body_text">
+    Among the central concepts of analytical psychology is individuation—the lifelong psychological process of differentiation of the self out of each individual's conscious and unconscious elements. Jung considered it to be the main task of human development.
+  </p>
+</div>
+
+<div class="dark_card" align="center">
+  <p>
+    <b id="heidegger">Martin Heidegger</b> - German philosopher and a seminal thinker in the Continental tradition and philosophical hermeneutics, best known for his contributions to phenomenology and existentialism.
+  </p>
+  <p class="justified_body_text">
+    
   </p>
 </div>
 
@@ -43,7 +85,8 @@
 </div>
 
 <script>
-  <% for i in [:figures, :phenomenology, :post_structuralism, :psychoanalysis, :hermeneutics] %>
+  <% for i in [:phenomenology, :post_structuralism, :psychoanalysis, :hermeneutics,
+    :lacan, :heidegger, :jung, :foucault, :derrida] %>
     <%= render "app/fader.js", target: i.to_s, target_id: "" %>
   <% end %>
 </script>
