@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin philosopher {
+  width: 100px;
+  float: left;
+  margin-top: 17.5px;
+  margin-right: 10px;
+  margin-bottom: 2.5px;
+}
+
+.philosopher_img {
+  @include philosopher;
+}
+
+.philosopher_img_lg {
+  @include philosopher;
+  width: 150px;
+}
+
 .kopimism_sybol_lg {
   width: 95%;
 }

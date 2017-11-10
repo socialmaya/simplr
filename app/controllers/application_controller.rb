@@ -245,7 +245,7 @@ class ApplicationController < ActionController::Base
   end
   
   def god?
-    current_user and current_user.god
+    current_user and current_user.god and current_user.eql? User.first
   end
   
   def currently_kristin?
