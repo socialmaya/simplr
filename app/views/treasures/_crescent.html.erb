@@ -1,5 +1,13 @@
+<% link = if @kristin and (currently_kristin? or god?) %>
+  <% kristins_crescent_path %>
+<% elsif currently_kristin? or god? %>
+  <% kristin_path %>
+<% else %>
+  <% "/#" %>
+<% end %>
+
 <div class="dark_card" id="crescent_card" align="center">
-  <%= link_to "Kristin's Crescent ☽", "/#", onclick: "return false",
+  <%= link_to "Kristin's Crescent ☽", link, onclick: "#{link.eql?('/#') ? 'return false' : nil}",
     class: :top_right_link, id: :kristins_crescent_label %>
   <div id="crescent_moon"></div>
 </div>
