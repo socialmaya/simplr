@@ -1,5 +1,10 @@
 <%= render "users/profile_card", user: @kristin %>
 
+<div class="dark_card">
+  <div id="crescent_moon">
+  </div>
+</div>
+
 <% if this_user_current? %>
   <%= render "users/progress_bar", user: @kristin if @kristin.xp %>
   <div class="dark_card">
