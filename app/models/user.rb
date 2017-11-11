@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
   
   scope :forrest_only, -> { where forrest_only: true }
   
+  def kristin?
+    self.id.eql? 34
+  end
+  
   def my_cart
     carts.last
   end

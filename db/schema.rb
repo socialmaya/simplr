@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109224024) do
+ActiveRecord::Schema.define(version: 20171111215348) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -357,6 +357,7 @@ ActiveRecord::Schema.define(version: 20171109224024) do
     t.boolean  "forrest_only"
     t.string   "foc_unique_token"
     t.boolean  "guest"
+    t.boolean  "goddess"
   end
 
   create_table "views", force: :cascade do |t|

@@ -244,8 +244,12 @@ class ApplicationController < ActionController::Base
     current_user and current_user.dev
   end
   
+  def goddess?
+    dev? and current_user.goddess and current_user.kristin?
+  end
+  
   def god?
-    (current_user and dev? and current_user.god and current_user.eql? User.first) or Rails.env.development?
+    (dev? and current_user.god and current_user.eql? User.first) or Rails.env.development?
   end
   
   def currently_kristin?
