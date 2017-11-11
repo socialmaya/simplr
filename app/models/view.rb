@@ -10,6 +10,15 @@ class View < ActiveRecord::Base
   
   validate :unique_to_item?, on: :create
   
+  scope :by_user, -> { where.not user_id: nil }
+  
+  def self.unique_views
+    _unique_views = []
+    for view in self.by_user.where.not locale: nil
+      _unique_views << view unless _unique_views.any? { |v| v.locale.eql? view.locale }
+    end
+  end
+  
   def self.get_locale ip=nil
     ip = if ip then ip else self.ip_address end
     address = nil; locale = nil
