@@ -1,5 +1,11 @@
 <%= render "users/card", user: @user %>
 
+<div class="dark_card" align="center">
+  <p>
+    Most views from <%= @most_viewed.locale %>
+  </p>
+</div>
+
 <% for view in @views %>
   <%= render "card", view: view %>
 <% end %>
