@@ -148,6 +148,9 @@ Rails.application.routes.draw do
   # search
   get 'search', to: 'search#index', as: 'search'
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
+  
+  # views
+  get 'user_views_index/:token', to: 'views#user_index', as: 'user_views_index'
 
   # pages
   get 'resume', to: 'pages#resume', as: 'resume'

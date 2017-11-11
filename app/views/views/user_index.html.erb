@@ -1,0 +1,5 @@
+<%= render "users/card", user: @user %>
+
+<% for view in @views %>
+  <%= render "card", view: view %>
+<% end %>

@@ -1,5 +1,9 @@
 class ViewsController < ApplicationController
-  before_action :god_only, only: [:user_index, :index]
+  before_action :god_only, only: [:user_index, :index, :show]
+  
+  def show
+    @view = View.find_by_id params[:id]
+  end
   
   def user_index
     @user = User.find_by_unique_token params[:token]
