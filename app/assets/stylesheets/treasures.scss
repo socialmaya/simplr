@@ -10,23 +10,6 @@
   margin-bottom: 2.5px;
 }
 
-#crescent_moon {
-  width: 145px;
-  height: 145px;
-  border-radius: 50%;
-  -ms-box-shadow: 17px 17px 0 0 #CD0001;
-  -o-box-shadow: 17px 17px 0 0 #CD0001;
-  -webkit-box-shadow: 17px 17px 0 0 #CD0001;
-  box-shadow: 17px 17px 0 0 #CD0001;
-  -ms-transform: rotate(100deg);
-  /* IE 9 */
-  -webkit-transform: rotate(100deg);
-  /* Chrome, Safari */
-  -o-transform: rotate(100deg);
-  transform: rotate(100deg);
-  margin: 30px 0 0 120px;
-}
-
 .philosopher_img {
   @include philosopher;
 }
@@ -145,4 +128,36 @@
 .loot_image {
   width: 90%;
   max-width: 350px;
+}
+
+@keyframes crescent_pulse {
+  0% {
+    box-shadow: -15px 15px 0 0 rgb(119,221,119);
+  }
+  100% {
+    box-shadow: -15px 15px 0 0 rgb(136,227,182);
+  }
+}
+
+@keyframes crescent_card_pulse {
+  0% {
+    background: rgb(119,158,203);
+  }
+  100% {
+    background: rgb(255,105,97);
+  }
+}
+
+#crescent_moon {
+  animation: crescent_pulse 5s infinite alternate;
+  
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: -15px 15px 0 0 black;
+  margin-bottom: 45px;
+}
+
+#crescent_card {
+  animation: crescent_card_pulse 5s infinite alternate;
 }
