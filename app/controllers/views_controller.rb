@@ -11,7 +11,7 @@ class ViewsController < ApplicationController
   end
   
   def index
-    @views = View.all.reverse
+    @views = View.all.unique_views
   end
   
   private
