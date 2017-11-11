@@ -119,9 +119,9 @@ class Post < ActiveRecord::Base
     end
     
     # in group you're in
-    if post.group and post.group.in_group? user
+    if self.group and self.group.in_group? user
       weights[:in_group] += 5
-      if post.group.creator.eql? user
+      if self.group.creator.eql? user
         weights[:in_group] += 10
       end
     end
