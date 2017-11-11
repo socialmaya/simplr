@@ -90,6 +90,7 @@ class Post < ActiveRecord::Base
       likes: 0, likes_plus: 0,
       comments: 0, comments_plus: 0,
       days: 0, days_plus: 0, fresh: 0,
+      in_group: 0,
       shares: 0,
       views: 0,
       classic: 0,
@@ -115,6 +116,14 @@ class Post < ActiveRecord::Base
     # shares, post shared
     for post in shares # only gives weight for shares of others posts
       weights[:shares] += 5 unless post.user_id and post.user_id.eql? post.original.user_id
+    end
+    
+    # in group you're in
+    if post.group and post.group.in_group? user
+      weights[:in_group] += 5
+      if post.group.creator.eql? user
+        weights[:in_group] += 10
+      end
     end
     
     # days since posted

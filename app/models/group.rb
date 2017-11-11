@@ -70,6 +70,14 @@ class Group < ActiveRecord::Base
     connection = self.connections.find_by_user_id _user.id
     connection.destroy if connection
   end
+  
+  def in_group? _user
+    for member in self.members
+      if member.user.eql? _user or self.creator.eql? _user
+        return true
+      end
+    end
+  end
 
   def members
     self.connections.current
