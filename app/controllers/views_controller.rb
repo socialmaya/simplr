@@ -25,10 +25,10 @@ class ViewsController < ApplicationController
   def get_most_viewed_locale
     # this first should be last view created
     @most_viewed = @views.first
-    a = @user.views.count { |i| i.locale.eql? @most_viewed.locale }
+    a = @user.views.select { |i| i.locale.eql? @most_viewed.locale }.size
     # loops through all views by user until most viewed from locale is found
     for v in @views.reverse # reverse to lead to first/last created
-      b = @user.views.count { |i| i.locale.eql? v.locale }
+      b = @user.views.select { |i| i.locale.eql? v.locale }.size
       if a < b
         @most_viewed = v
         a = b
