@@ -11,6 +11,7 @@ class ViewsController < ApplicationController
     for view in @user.views
       @unique_views << view unless @unique_views.any? { |v| v.locale.eql? view.locale }
     end
+    @views = @unique_views.sort_by { |v| v.created_at }.reverse
   end
   
   def index
