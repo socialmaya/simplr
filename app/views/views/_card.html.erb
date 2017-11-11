@@ -1,5 +1,5 @@
 <div class="dark_card" align="center">
-  <%= render "app/time_ago", item: view %>
+  <%= render "app/time_ago", item: view, white_link: true %>
   <p>
     <%= link_to view.user.name, user_views_index_path(view.user.unique_token), class: :white_link %>
   </p>
