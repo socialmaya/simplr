@@ -1,6 +1,9 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates, :philosophy]
   
+  def kristins_crescent
+  end
+  
   def templates
   end
   

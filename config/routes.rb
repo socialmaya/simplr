@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'sandbox', to: 'treasures#sandbox', as: 'sandbox'
   get 'templates', to: 'treasures#templates', as: 'templates'
   get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
+  get 'kristins_crescent', to: 'treasures#kristins_crescent', as: 'kristins_crescent'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
