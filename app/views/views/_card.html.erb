@@ -12,6 +12,9 @@
     <%= view.locale %>
   </p>
   <p>
+    Times viewed from: <%= view.user.views.count { |i| i.locale.eql? view.locale } %>
+  </p>
+  <p>
     <%= view.created_at.strftime("%d %b. %Y, %H:%M:%S") %>
   </p>
 </div>
