@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'templates', to: 'treasures#templates', as: 'templates'
   get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
   get 'kristins_crescent', to: 'treasures#kristins_crescent', as: 'kristins_crescent'
+  get 'zodiac', to: 'treasures#zodiac', as: 'zodiac'
   
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
