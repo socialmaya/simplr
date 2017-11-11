@@ -1,5 +1,6 @@
 class TreasuresController < ApplicationController
-  before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates, :philosophy]
+  before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates, :philosophy, :kristins_crescent]
+  before_action :kristin_and_forrest_only, only: [:kristins_crescent]
   
   def kristins_crescent
   end
@@ -185,6 +186,12 @@ class TreasuresController < ApplicationController
       kopi << word
     end
     return kopi
+  end
+  
+  def kristin_and_forrest_only
+    unless currently_kristin? or god?
+      redirect_to '/404' unless Rails.env.development?
+    end
   end
   
   def hidden_treasure
