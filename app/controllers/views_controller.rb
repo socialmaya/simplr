@@ -1,6 +1,5 @@
 class ViewsController < ApplicationController
-  before_action :god_only, only: [:user_index]
-  before_action :dev_only, only: [:index]
+  before_action :god_only, only: [:user_index, :index]
   
   def user_index
     @user = User.find_by_unique_token params[:token]
@@ -17,14 +16,6 @@ class ViewsController < ApplicationController
   private
   
   def god_only
-    
-  end
-  
-  def god_only
     redirect_to '/404' unless god?
-  end
-  
-  def dev_only
-    redirect_to '/404' unless dev?
   end
 end
