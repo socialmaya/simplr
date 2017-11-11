@@ -11,7 +11,7 @@ class View < ActiveRecord::Base
   validate :unique_to_item?, on: :create
   
   scope :by_user, -> { where.not user_id: nil }
-  scope :with_locale, -> { where.not locale: nil }
+  scope :with_locale, -> { where.not(locale: nil).where.not locale: ""  }
   
   def self.unique_views
     _unique_views = []
