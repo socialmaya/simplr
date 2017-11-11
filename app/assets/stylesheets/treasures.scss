@@ -132,32 +132,53 @@
 
 @keyframes crescent_pulse {
   0% {
-    box-shadow: -15px 15px 0 0 rgb(119,221,119);
+    box-shadow: -15px -15px 0 0 rgb(136,227,182);
   }
   100% {
-    box-shadow: -15px 15px 0 0 rgb(136,227,182);
+    box-shadow: 15px 15px 0 0 rgb(119,221,119);
   }
 }
 
 @keyframes crescent_card_pulse {
   0% {
     background: rgb(119,158,203);
+    box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
   }
   100% {
     background: rgb(255,105,97);
+    box-shadow: 7.5px 7.5px 7.5px rgb(119,221,119);
+  }
+}
+
+@keyframes kristins_crescent_label_pulse {
+  0% {
+    color: rgb(255,105,97);
+    text-shadow: 1px 1px 1px black;
+  }
+  100% {
+    color: rgb(119,158,203);
+    text-shadow: 1.25px 1.25px 1.25px black;
   }
 }
 
 #crescent_moon {
-  animation: crescent_pulse 5s infinite alternate;
+  animation: crescent_pulse 7.5s infinite alternate;
   
   width: 100px;
   height: 100px;
   border-radius: 50%;
   box-shadow: -15px 15px 0 0 black;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+  margin-top: 24px;
+}
+
+#kristins_crescent_label {
+  animation: kristins_crescent_label_pulse 7.5s infinite alternate;
+  
+  font-size: 12px;
+  font-weight: bold;
 }
 
 #crescent_card {
-  animation: crescent_card_pulse 5s infinite alternate;
+  animation: crescent_card_pulse 7.5s infinite alternate;
 }
