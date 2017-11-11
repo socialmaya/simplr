@@ -245,7 +245,9 @@ class ApplicationController < ActionController::Base
   end
   
   def goddess?
-    dev? and current_user.goddess and current_user.kristin?
+    if dev? and current_user.goddess and current_user.kristin?
+      return true
+    end
   end
   
   def god?
