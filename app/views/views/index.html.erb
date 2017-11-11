@@ -1,17 +1,15 @@
 <h2 class="standard_page_header">Views <i class="fa fa-eye"></i></h2>
 
 <% for view in @views %>
-  <% if view.locale %>
-  <div class="dark_card" align="center">
-    <p>
-      <%= view.user.name %>
-    </p>
-    <p>
-      <%= view.user.ip_address %>
-    </p>
-    <p>
-      <%= view.locale %>
-    </p>
-  </div>
-  <% end %>
+<div class="dark_card" align="center">
+  <p>
+    <%= view.user.name %>
+  </p>
+  <p>
+    <%= view.user.ip_address %>
+  </p>
+  <p>
+    <%= view.locale %>
+  </p>
+</div>
 <% end %>

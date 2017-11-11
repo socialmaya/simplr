@@ -11,7 +11,7 @@ class ViewsController < ApplicationController
   end
   
   def index
-    @views = View.all.unique_views
+    @views = View.all.unique_views.sort_by { |v| v.created_at }
   end
   
   private
