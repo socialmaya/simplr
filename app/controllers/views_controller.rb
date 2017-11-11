@@ -34,6 +34,7 @@ class ViewsController < ApplicationController
         a = b
       end
     end
+    @view_count = a
   end
   
   def god_only

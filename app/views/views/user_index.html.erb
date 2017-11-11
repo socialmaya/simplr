@@ -2,7 +2,7 @@
 
 <div class="dark_card" align="center">
   <p>
-    Most views from <%= @most_viewed.locale %>
+    Most views from: <%= @most_viewed.locale.to_s + " (#{@view_count.to_s})" %>
   </p>
 </div>
 
