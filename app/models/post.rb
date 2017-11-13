@@ -102,7 +102,7 @@ class Post < ActiveRecord::Base
       # recent likes on older posts have more weight
       weights[:likes] += ((like.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
       weights[:likes_plus] += 1 if like.whoa or like.love or like.zen
-      weights[:likes_plus] += 15 if like.love and like.user_id.eql?(34) \
+      weights[:likes_plus] += 5 if like.love and like.user_id.eql?(34) \
         and not self.user_id.eql?(34) # kristin power love
     end # plus one for likes on recent posts to still get valued
     
@@ -110,19 +110,19 @@ class Post < ActiveRecord::Base
     for comment in self.comments.where.not(user_id: user.id)
       # recent likes on older posts have more weight
       weights[:comments] += ((comment.created_at.to_date - self.created_at.to_date).to_i / 4) + 1
-      weights[:comments_plus] += 5 if comment.likes.where.not(user_id: user.id).present?
+      weights[:comments_plus] += 1 if comment.likes.where.not(user_id: user.id).present?
     end # plus one for likes on recent posts to still get valued
     
     # shares, post shared
     for post in shares # only gives weight for shares of others posts
-      weights[:shares] += 5 unless post.user_id and post.user_id.eql? post.original.user_id
+      weights[:shares] += 1 unless post.user_id and post.user_id.eql? post.original.user_id
     end
     
     # in group you're in
     if self.group and self.group.in_group? user
-      weights[:in_group] += 5
+      weights[:in_group] += 1
       if self.group.creator.eql? user
-        weights[:in_group] += 10
+        weights[:in_group] += 1
       end
     end
     
@@ -131,25 +131,25 @@ class Post < ActiveRecord::Base
     # older the post, less the weight
     weights[:days] -= days_old.to_i / 2
     # recent posts get more weight
-    weights[:days_plus] += 15 if days_old.to_i < 7
+    weights[:days_plus] += 5 if days_old.to_i < 7
     # still fresh posts get even more weight
-    weights[:days_plus] += 25 if days_old.to_i < 5
+    weights[:days_plus] += 15 if days_old.to_i < 5
     
     # very fresh posts get even more weight yet
-    weights[:fresh] += 50 if days_old.to_i < 2
+    weights[:fresh] += 25 if days_old.to_i < 2
     
     # views by current user
     view = self.views.where(user_id: user.id).last
     if view
-      score_count = view.score_count.to_i * 3
+      score_count = view.score_count.to_i * 5
       # more weight taken for views on older posts
-      score_count *= 10 if self.created_at > 2.week.ago
+      score_count *= 15 if self.created_at > 2.week.ago
       weights[:views] -= view.score_count.to_i
     end
     
     # bring back old classics
     if self.created_at < 4.month.ago
-      weights[:classic] += 75 if rand(Post.all.size/(Post.where("created_at < ?", 2.months.ago).size/5)).eql? 1
+      weights[:classic] += 75 if rand(Post.all.size/(Post.where("created_at < ?", 4.months.ago).size/5)).eql? 1
     end
     
     if self.user_id.eql? 20
