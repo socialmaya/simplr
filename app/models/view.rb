@@ -17,7 +17,7 @@ class View < ActiveRecord::Base
   
   def self.unique_views
     _unique_views = []
-    for view in self.by_user.with_locale
+    for view in self.by_user.with_locale.reverse
       _unique_views << view unless _unique_views.any? { |v| v.locale.eql? view.locale }
     end
     return _unique_views

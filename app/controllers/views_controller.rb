@@ -23,7 +23,7 @@ class ViewsController < ApplicationController
   def user_index
     @user = User.find_by_unique_token params[:token]
     @unique_views = [] # unique by locale
-    for view in @user.views.reverse
+    for view in @user.views
       @unique_views << view unless @unique_views.any? { |v| v.locale.eql? view.locale }
     end
     @views = @unique_views.sort_by { |v| v.created_at }.reverse
