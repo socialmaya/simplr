@@ -150,6 +150,15 @@
   }
 }
 
+@keyframes forrest_card_glow {
+  0% {
+    box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
+  }
+  100% {
+    box-shadow: 7.5px 7.5px 7.5px rgb(119,221,119);
+  }
+}
+
 @keyframes kristins_crescent_label_pulse {
   0% {
     color: rgb(255,105,97);
@@ -181,6 +190,10 @@
 
 #crescent_card {
   animation: crescent_card_pulse 7.5s infinite alternate;
+}
+
+#forrest_running_img_card {
+  animation: forrest_card_glow 7.5s infinite alternate;
 }
 
 .kristins_spacer {
