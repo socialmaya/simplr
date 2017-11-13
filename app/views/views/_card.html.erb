@@ -7,7 +7,7 @@
     </p>
   <% end %>
   <p>
-    <%= view.ip_address %>
+    <%= link_to view.ip_address, views_path(ip: view.ip_address), class: :white_link %>
   </p>
   <p>
     <%= view.locale %>

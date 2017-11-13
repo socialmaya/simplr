@@ -1,5 +1,13 @@
 <h2 class="standard_page_header">Views <i class="fa fa-eye"></i></h2>
 
+<% if @ip %>
+  <div class="dark_card" align="center">
+    <p>
+      Viewing all views from <%= @ip %>
+    </p>
+  </div>
+<% end %>
+
 <% for view in @views %>
   <%= render "card", view: view %>
 <% end %>
