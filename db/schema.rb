@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113045804) do
+ActiveRecord::Schema.define(version: 20171113053642) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -384,6 +384,8 @@ ActiveRecord::Schema.define(version: 20171113045804) do
     t.integer  "avail_screen_width"
     t.integer  "avail_screen_height"
     t.integer  "device_pixel_ratio"
+    t.string   "controller_name"
+    t.string   "action_name"
   end
 
   create_table "votes", force: :cascade do |t|
