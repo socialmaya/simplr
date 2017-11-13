@@ -19,6 +19,27 @@
     <%= view.created_at.strftime("%d %b. %Y, %H:%M:%S") %>
   </p>
   <% if view.click %>
-    <p><b>Click:</b> <%= view %></p>
+    <p><b>Click data</b></p>
+    <div>
+      X position: <%= view.x_pos %>
+    </div>
+    <div>
+      Y position: <%= view.y_pos %>
+    </div>
+    <div>
+      Screen width: <%= view.screen_width %>
+    </div>
+    <div>
+      Screen height: <%= view.screen_height %>
+    </div>
+    <div>
+      Device pixel ratio: <%= view.device_pixel_ratio %>
+    </div>
+    <div>
+      Controller name: <%= view.controller_name %>
+    </div>
+    <div>
+      Action name: <%= view.action_name %>
+    </div>
   <% end %>
 </div>
