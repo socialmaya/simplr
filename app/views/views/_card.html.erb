@@ -41,5 +41,21 @@
     <div>
       Action name: <%= view.action_name %>
     </div>
+  <% elsif view.post_id %>
+    <p>
+      <%= link_to "Post #{view.post_id}", show_post_path(view.post_id), class: :white_link  %>
+    </p>
+  <% elsif view.comment_id %>
+    <p>
+      <%= link_to "Comment #{view.comment_id}", comment_path(view.comment_id), class: :white_link  %>
+    </p>
+  <% elsif view.group_id %>
+    <p>
+      <%= link_to "Group #{view.post_id}", group_path(view.group_id), class: :white_link  %>
+    </p>
+  <% elsif view.profile_id %>
+    <p>
+      <%= link_to "User profile #{view.profile_id}", user_path(view.user_id), class: :white_link  %>
+    </p>
   <% end %>
 </div>
