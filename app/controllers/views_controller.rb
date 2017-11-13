@@ -42,7 +42,7 @@ class ViewsController < ApplicationController
     else
       View.all.unique_views.sort_by { |v| v.created_at }
     end
-    @views.reverse!
+    @views = @views.reverse
   end
   
   private
