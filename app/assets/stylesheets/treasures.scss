@@ -150,21 +150,25 @@
   }
 }
 
-@keyframes forrest_card_glow {
+@keyframes forrest_title_card_glow {
   0% {
+    background: rgb(119,158,203);
     box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
   }
   100% {
+    background: rgb(255,105,97);
     box-shadow: 7.5px 7.5px 7.5px rgb(119,221,119);
   }
 }
 
-@keyframes forrest_title_card_glow {
+@keyframes forrest_title_txt_shadow {
   0% {
-    box-shadow: -7.5px -7.5px 7.5px rgb(0,0,255);
+    color: rgb(255,105,97);
+    text-shadow: 1px 1px 1px black;
   }
   100% {
-    box-shadow: 7.5px 7.5px 7.5px rgb(0,255,0);
+    color: rgb(119,158,203);
+    text-shadow: 1.25px 1.25px 1.25px black;
   }
 }
 
@@ -201,12 +205,12 @@
   animation: crescent_card_pulse 7.5s infinite alternate;
 }
 
-#forrest_running_img_card {
-  animation: forrest_card_glow 7.5s infinite alternate;
+#forrest_title_card {
+  animation: forrest_title_card_glow 7.5s infinite alternate;
 }
 
-#forrest_running_title_card {
-  animation: forrest_title_card_glow 7.5s infinite alternate;
+#forrest_title_txt {
+  animation: forrest_title_txt_shadow 7.5s infinite alternate;
 }
 
 .kristins_spacer {
