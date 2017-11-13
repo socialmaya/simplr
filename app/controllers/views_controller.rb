@@ -40,9 +40,9 @@ class ViewsController < ApplicationController
     @views = if @ip
       View.all.by_user.where(ip_address: @ip)      
     else
-      View.all.unique_views.sort_by { |v| v.created_at }
+      View.all.unique_views
     end
-    @views = @views.reverse
+    @views = @views.sort_by { |v| v.created_at }.reverse
   end
   
   private
