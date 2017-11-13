@@ -149,7 +149,7 @@ class Post < ActiveRecord::Base
     end
     
     # bring back old classics
-    if self.created_at < 4.month.ago
+    if self.created_at < 6.month.ago
       weights[:classic] += 75 if rand(Post.all.size/(Post.where("created_at < ?", 4.months.ago).size/5)).eql? 1
     end
     
