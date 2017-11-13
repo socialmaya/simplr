@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111215348) do
+ActiveRecord::Schema.define(version: 20171113045804) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -365,8 +365,8 @@ ActiveRecord::Schema.define(version: 20171111215348) do
     t.string   "anon_token"
     t.integer  "group_id"
     t.integer  "post_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "comment_id"
     t.integer  "profile_id"
     t.string   "ip_address"
@@ -376,6 +376,14 @@ ActiveRecord::Schema.define(version: 20171111215348) do
     t.integer  "vote_id"
     t.integer  "score_count"
     t.boolean  "non_visible"
+    t.boolean  "click"
+    t.integer  "x_pos"
+    t.integer  "y_pos"
+    t.integer  "screen_width"
+    t.integer  "screen_height"
+    t.integer  "avail_screen_width"
+    t.integer  "avail_screen_height"
+    t.integer  "device_pixel_ratio"
   end
 
   create_table "votes", force: :cascade do |t|

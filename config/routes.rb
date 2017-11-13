@@ -152,6 +152,7 @@ Rails.application.routes.draw do
   
   # views
   get 'user_views_index/:token', to: 'views#user_index', as: 'user_views_index'
+  put 'currently_clicking', to: 'views#currently_clicking'
 
   # pages
   get 'resume', to: 'pages#resume', as: 'resume'

@@ -1,6 +1,20 @@
-$(document).click(function(e) {
-  // Check for left button
-  if (e.button == 0) {
-    alert(e.clientX + " " + e.clientY);
-  }
-});
+<% if current_user %>
+  $(document).click(function(e) {
+    // Check for left button
+    if (e.button == 0) {
+      $.ajax({
+        type: "PUT",
+        url: "/views/currently_clicking",
+        data: $.param({
+          x_pos: e.clientX,
+          y_pos: e.clientY,
+          screen_width: window.screen.width,
+          screen_height: window.screen.height,
+          avail_screen_width: window.screen.availWidth,
+          avail_screen_height: window.screen.availHeight,
+          device_pixel_ratio: window.devicePixelRatio
+        })
+      });
+    }
+  });
+<% end %>
