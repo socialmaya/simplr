@@ -32,7 +32,7 @@ class ViewsController < ApplicationController
   
   def click_index
     @user = User.find_by_unique_token params[:token]
-    @clicks = @user.views.clicks
+    @clicks = @user.views.clicks.reverse
   end
   
   def index
