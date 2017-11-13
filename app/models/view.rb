@@ -12,8 +12,7 @@ class View < ActiveRecord::Base
   
   scope :by_user, -> { where.not user_id: nil }
   scope :with_locale, -> { where.not(locale: nil).where.not locale: ""  }
-  
-  
+  scope :item_views, -> { where.not click: true }
   scope :clicks, -> { where click: true }
   
   def self.unique_views

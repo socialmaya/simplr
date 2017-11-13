@@ -18,4 +18,7 @@
   <p>
     <%= view.created_at.strftime("%d %b. %Y, %H:%M:%S") %>
   </p>
+  <% if view.click %>
+    <p><b>Click:</b> <%= view %></p>
+  <% end %>
 </div>

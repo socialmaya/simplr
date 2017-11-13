@@ -2,10 +2,13 @@
 
 <div class="dark_card" align="center">
   <p>
-    Total views: <%= @user.views.size %>
+    Total views (including clicks): <%= @user.views.size %>
   </p>
   <p>
     Most views from: <%= @most_viewed.locale.to_s + " (#{@view_count.to_s})" %>
+  </p>
+  <p>
+    Total clicks: <%= @user.views.clicks.size %>
   </p>
 </div>
 
