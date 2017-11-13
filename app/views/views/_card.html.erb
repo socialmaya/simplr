@@ -51,11 +51,16 @@
     </p>
   <% elsif view.group_id %>
     <p>
-      <%= link_to "Group #{view.post_id}", group_path(view.group_id), class: :white_link  %>
+      <%= link_to "Group #{Group.find(view.group_id).name}", group_path(view.group_id), class: :white_link  %>
     </p>
   <% elsif view.profile_id %>
     <p>
-      <%= link_to "User profile #{view.profile_id}", user_path(view.user_id), class: :white_link  %>
+      <%= link_to "User profile #{User.find(view.profile_id).name}", user_path(view.user_id), class: :white_link  %>
+    </p>
+  <% elsif view.proposal_id %>
+    <p>
+      <%= link_to "Proposal #{view.proposal_id}",
+        show_proposal_path(Proposal.find(view.proposal_id).unique_token), class: :white_link  %>
     </p>
   <% end %>
 </div>
