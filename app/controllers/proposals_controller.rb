@@ -119,6 +119,11 @@ class ProposalsController < ApplicationController
     end
   end
   
+  def destroy
+    @proposal.destroy
+    redirect_to root_url
+  end
+  
   # Proposal sections: :voting, :revision, :ratified
   def switch_section
     @group = Group.find_by_unique_token params[:group_token]

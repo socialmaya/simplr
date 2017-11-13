@@ -180,6 +180,8 @@ Rails.application.routes.draw do
   get 'motions/load_section_links', to: 'proposals#load_section_links'
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
   get 'make_a_motion', to: 'proposals#add_form', as: 'add_proposal_form'
+  # only because of spam business, capitalistic bullshit that keeps popping up....
+  delete 'fucking_destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
