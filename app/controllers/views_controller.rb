@@ -36,8 +36,9 @@ class ViewsController < ApplicationController
   end
   
   def index
-    @views = if params[:ip]
-      @ip = params[:ip]; View.where(ip_address: @ip)      
+    @ip = params[:ip]
+    @views = if @ip
+      View.where(ip_address: @ip)      
     else
       View.all.unique_views.sort_by { |v| v.created_at }
     end
