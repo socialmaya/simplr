@@ -1,5 +1,5 @@
 class ProposalsController < ApplicationController
-  before_filter :set_proposal, only: [:old_versions, :show]
+  before_filter :set_proposal, only: [:old_versions, :show, :destroy]
   
   def add_form
     @group = Group.find_by_id params[:group_id]
