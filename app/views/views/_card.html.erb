@@ -43,7 +43,7 @@
     </div>
   <% elsif view.post_id %>
     <p>
-      <%= link_to "Post #{view.post_id}", show_post_path(view.post_id), class: :white_link  %>
+      <%= link_to "Post #{view.post_id}", show_post_path(Post.find(view.post_id).unique_token), class: :white_link  %>
     </p>
   <% elsif view.comment_id %>
     <p>
@@ -51,7 +51,8 @@
     </p>
   <% elsif view.group_id %>
     <p>
-      <%= link_to "Group #{Group.find(view.group_id).name}", group_path(view.group_id), class: :white_link  %>
+      <%= link_to "Group #{Group.find(view.group_id).name}",
+        group_path(Group.find(view.group_id).unique_token), class: :white_link  %>
     </p>
   <% elsif view.profile_id %>
     <p>
