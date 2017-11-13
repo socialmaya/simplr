@@ -52,7 +52,7 @@ class MessagesController < ApplicationController
       @messages = @folder.messages.last 10
       set_last_message_seen
       set_last_im
-      for message in @messages
+      for message in @folder.messages
         seent message
       end
     else
@@ -86,6 +86,7 @@ class MessagesController < ApplicationController
     @message.sender_token = current_user.unique_token
     if @message.save and @folder
       Tag.extract @message
+      seent @message
         # notifications turned off for now
 #      for member in @folder.members
 #        next if member.user.eql? current_user
