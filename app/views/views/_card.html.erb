@@ -2,7 +2,8 @@
   <%= render "app/time_ago", item: view, white_link: true %>
   <% unless @user %>
     <p>
-      <%= link_to view.user.name, user_views_index_path(view.user.unique_token), class: :white_link %>
+      <%= link_to view.user.name + " (#{view.user.views.size})",
+        user_views_index_path(view.user.unique_token), class: :white_link %>
     </p>
   <% end %>
   <p>
