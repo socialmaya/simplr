@@ -1,5 +1,5 @@
 <div id="new_post_form">
-  <%= form_for(@post, remote: true) do |f| %>
+  <%= form_for(@post, remote: (!@editing)) do |f| %>
     <div align="center">
       <%= hidden_field_tag :group_id, @group.id if @group %>
       <%= hidden_field_tag :un_invited, true if @invite_only_page %>

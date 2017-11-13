@@ -3,8 +3,8 @@
     // Check for left button
     if (e.button == 0) {
       $.ajax({
-        type: "PUT",
-        url: "/views/currently_clicking",
+        type: "POST",
+        url: "/currently_clicking",
         data: $.param({
           x_pos: e.clientX,
           y_pos: e.clientY,

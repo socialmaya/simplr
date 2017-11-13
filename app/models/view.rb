@@ -47,24 +47,26 @@ class View < ActiveRecord::Base
   private
   
   def unique_to_item?
-    if self.post_id
-      if self.user_id
-        if Post.find(self.post_id).views.where(user_id: self.user_id).present?
-          errors.add :view, "Not unique view by user"
+    unless self.click
+      if self.post_id
+        if self.user_id
+          if Post.find(self.post_id).views.where(user_id: self.user_id).present?
+            errors.add :view, "Not unique view by user"
+          end
+        elsif self.anon_token
+          if Post.find(self.post_id).views.where(anon_token: self.anon_token).present?
+            errors.add :view, "Not unique view by anon"
+          end
         end
-      elsif self.anon_token
-        if Post.find(self.post_id).views.where(anon_token: self.anon_token).present?
-          errors.add :view, "Not unique view by anon"
-        end
-      end
-    elsif self.proposal_id
-      if self.user_id
-        if Proposal.find(self.proposal_id).views.where(user_id: self.user_id).present?
-          errors.add :view, "Not unique view of motion by user"
-        end
-      elsif self.anon_token
-        if Proposal.find(self.proposal_id).views.where(anon_token: self.anon_token).present?
-          errors.add :view, "Not unique view of motion by anon"
+      elsif self.proposal_id
+        if self.user_id
+          if Proposal.find(self.proposal_id).views.where(user_id: self.user_id).present?
+            errors.add :view, "Not unique view of motion by user"
+          end
+        elsif self.anon_token
+          if Proposal.find(self.proposal_id).views.where(anon_token: self.anon_token).present?
+            errors.add :view, "Not unique view of motion by anon"
+          end
         end
       end
     end
