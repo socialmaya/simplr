@@ -28,7 +28,11 @@ class ViewsController < ApplicationController
     end
     @views = @unique_views.sort_by { |v| v.created_at }.reverse
     get_most_viewed_locale
-    
+  end
+  
+  def click_index
+    @user = User.find_by_unique_token params[:token]
+    @clicks = @user.views.clicks
   end
   
   def index
