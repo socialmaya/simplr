@@ -5,7 +5,7 @@
 <% end %>
 
 <% if this_user_current? %>
-  <%= render "users/progress_bar", user: @user if @user.xp %>
+  <%= render "users/progress_bar", user: @user if @user.xp and Rails.env.development? %>
   <div class="dark_card" id="post_form_card">
     <%= render "posts/form" %>
   </div>

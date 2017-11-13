@@ -35,7 +35,7 @@
     
     <%= link_to fa_icon("cogs", "Bots"), my_bots_path(current_user), class: :standard_nav_menu_link,
       title: "My bots - Click here to manage all of the bots you've created." \
-      if (dev? or current_user.has_power?('create_bots')) and current_user.bots.present? %>
+      if (dev? or current_user.has_power?('create_bots')) and current_user.bots.present? and Rails.env.development? %>
       
     <%= link_to fa_icon("fort-awesome", "Gatekeeper"), invite_someone_path,
       class: :standard_nav_menu_link, title: "Invite someone to the site." \
@@ -59,7 +59,7 @@
     title: "Click here to see how the site works." %>
 	
 	<%= link_to fa_icon("book", "Book of Social Maya"), book_path, class: :standard_nav_menu_link,
-	  title: "Long term plans for the site..." %>
+	  title: "Long term plans for the site..." if Rails.env.development? %>
 	  
   <%= audio_tag "effects/umbrella_1.wav", id: "nav_menu_sound" %>
 </div>
