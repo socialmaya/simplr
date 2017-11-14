@@ -31,6 +31,10 @@
         <i class="fa fa-film fa-2x dark_link"></i>
       <% end %>
       
+      <%= link_to add_post_audio_path, remote: true, id: :add_audio_icon_link, title: "Attach an audio file" do %>
+        <i class="fa fa-file-audio-o fa-2x dark_link" aria-hidden="true"></i>
+      <% end %>
+      
       <div id="hidden_file_field" align="left" hidden>
         <p>
           <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
@@ -40,6 +44,12 @@
       <div id="hidden_video_field" hidden>
         <p>
           Video <%= f.file_field :video %>
+        </p>
+      </div>
+      
+      <div id="hidden_audio_field" hidden>
+        <p>
+          Audio <%= f.file_field :audio %>
         </p>
       </div>
       

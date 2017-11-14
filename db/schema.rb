@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113234619) do
+ActiveRecord::Schema.define(version: 20171114224804) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -209,6 +209,8 @@ ActiveRecord::Schema.define(version: 20171113234619) do
     t.boolean  "forrest_only"
     t.boolean  "un_invited"
     t.string   "video"
+    t.boolean  "sound"
+    t.string   "audio"
   end
 
   create_table "products", force: :cascade do |t|
@@ -283,6 +285,17 @@ ActiveRecord::Schema.define(version: 20171113234619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["key"], name: "idx_key"
+  end
+
+  create_table "sounds", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.string   "name"
+    t.string   "audio"
+    t.string   "unique_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "post_id"
   end
 
   create_table "tags", force: :cascade do |t|

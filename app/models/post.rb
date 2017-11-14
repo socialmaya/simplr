@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   has_many :tags, dependent: :destroy
   has_many :views, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :sounds, dependent: :destroy
   
   accepts_nested_attributes_for :pictures
   
@@ -17,6 +18,7 @@ class Post < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   mount_uploader :video, VideoUploader
+  mount_uploader :audio, AudioUploader
   
   scope :global, -> { where group_id: nil }
   scope :forrest_only, -> { where forrest_only: true }
@@ -187,7 +189,7 @@ class Post < ActiveRecord::Base
     if (body.nil? or body.empty?) and (image.url.nil? and not photoset)
       unless original_id and (body.present? or (Post.find_by_id(original_id) \
         and (Post.find(original_id).image.present? or Post.find(original_id).photoset)))
-        errors.add(:post, "cannot be empty.") unless video_url
+        errors.add(:post, "cannot be empty.") unless video_url or audio_url
       end
     end
   end

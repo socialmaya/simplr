@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
   
+  def play_audio
+    @post = Post.find_by_id params[:id]
+  end
+  
   def read_more
     @post = Post.find_by_id params[:post_id]
   end
@@ -23,6 +27,9 @@ class PostsController < ApplicationController
   end
 
   def add_image
+  end
+
+  def add_audio
   end
 
   def add_photoset
@@ -237,6 +244,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :group_id, :body, :video, :image, pictures_attributes: [:id, :post_id, :image])
+      params.require(:post).permit(:user_id, :group_id, :body, :video, :image, :audio,
+        pictures_attributes: [:id, :post_id, :image])
     end
 end

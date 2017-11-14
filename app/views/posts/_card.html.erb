@@ -82,6 +82,13 @@
           <%= video_tag post.video_url.to_s, autoplay: true, loop: true, class: :standard_post_video %>
         </p>
       <% end %>
+      
+      <% if post.audio_url %>
+        <%= audio_tag post.audio_url.to_s, id: "post_sound_#{post.id}" %>
+        <p>
+          <%= link_to post.audio_url.to_s, play_post_audio_path(post.id), remote: true %>
+        </p>
+      <% end %>
 
       <% if post.body.present? %>
         <% body_size = 500 %>

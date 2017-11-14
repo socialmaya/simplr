@@ -30,6 +30,8 @@
 <%= loader = case rand(2) when 0; 'load_wheel'; when 1; 'load_band'; when 2; 'load_circle'; end; \
   render "pages/#{loader}", token: unique_element_token %>
 
-<script>
-  <%= render "app/click_anywhere?.js" %>
-</script>
+<% unless Rails.env.development? %>
+  <script>
+    <%= render "app/click_anywhere?.js" %>
+  </script>
+<% end %>
