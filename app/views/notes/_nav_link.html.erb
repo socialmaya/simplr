@@ -6,10 +6,10 @@
   </script>
 <% end %>
 
-<% if current_user and current_user.inbox_unseen.size > 1 and Rails.env.development? %>
+<% if current_user and current_user.inbox_unseen > 0 and Rails.env.development? %>
   <%= link_to '<i class="fa fa-envelope fa-lg"></i>'.html_safe, inbox_path, id: :inbox_nav_link,
     class: "#{currently_unseen_notes.present? ? 'inbox_nav_link' : 'notes_nav_link'}",
-    title: "Unseen messages: #{current_user.inbox_unseen.size}" %>
+    title: "Unseen messages: #{current_user.inbox_unseen}" %>
   <script>
     <%= render "app/fader.js", target: "inbox_nav_link", target_id: "" %>
   </script>

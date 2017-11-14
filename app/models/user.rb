@@ -192,7 +192,8 @@ class User < ActiveRecord::Base
   def inbox_unseen
     unseen = 0
     for folder in self.message_folders
-      unseen +=1 unless folder.unseen_messages(self).zero?
+      unseen_msgs = folder.unseen_messages(self) 
+      unseen += unseen_msgs if unseen_msgs > 0
     end
     return unseen
   end
