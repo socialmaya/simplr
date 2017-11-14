@@ -1,4 +1,4 @@
-<% if ((user.dev or user.god or kristin?) and user.title.present?) or gatekeeper? user %>
+<% if ((user.dev or user.god or kristin?) and user.title.present?) or gatekeeper? user and not user.eql? User.first %>
   <script>
     <%= render "app/fader.js", target: "user_title", target_id: "" %>
     <%= render "app/fader.js", target: "user_title_card", background: true, target_id: "" %>
@@ -10,7 +10,7 @@
     <h2 id="user_title" class="user_title">
       <% if gatekeeper? user %>
         <i class="fa fa-fort-awesome"></i> Official Gatekeeper of Social Maya
-      <% elsif not user.eql? User.first %>
+      <% else %>
         <%= user.title.html_safe %>
       <% end %>
     </h2>
