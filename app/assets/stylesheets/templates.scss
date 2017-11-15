@@ -30,3 +30,42 @@
 .carousel_outer {
   margin-top: 7.5px;
 }
+
+.lil_c_form {
+  position: relative;
+  padding: 15px 7.5px;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 94.5%;
+}
+
+#lil_c_header_card {
+  animation: lil_c_header_card_glow 7.5s infinite alternate;
+}
+
+#lil_c_header {
+  animation: lil_c_header_shadow 7.5s infinite alternate;
+}
+
+@keyframes lil_c_header_card_glow {
+  0% {
+    background: black;
+    box-shadow: -7.5px -7.5px 7.5px purple;
+  }
+  100% {
+    background: purple;
+    box-shadow: 7.5px 7.5px 7.5px black;
+  }
+}
+
+@keyframes lil_c_header_shadow {
+  0% {
+    color: white;
+    text-shadow: 1px 1px 1px purple;
+  }
+  100% {
+    color: black;
+    text-shadow: 1.25px 1.25px 1.25px purple;
+  }
+}

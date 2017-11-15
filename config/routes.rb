@@ -197,6 +197,9 @@ Rails.application.routes.draw do
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
   
+  # templates for clients
+  get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
+  
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
 
