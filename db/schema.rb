@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114224804) do
+ActiveRecord::Schema.define(version: 20171114233620) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 20171114224804) do
     t.string   "video"
     t.boolean  "sound"
     t.string   "audio"
+    t.string   "audio_name"
   end
 
   create_table "products", force: :cascade do |t|

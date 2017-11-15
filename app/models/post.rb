@@ -7,7 +7,6 @@ class Post < ActiveRecord::Base
   has_many :tags, dependent: :destroy
   has_many :views, dependent: :destroy
   has_many :pictures, dependent: :destroy
-  has_many :sounds, dependent: :destroy
   
   accepts_nested_attributes_for :pictures
   

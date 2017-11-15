@@ -51,6 +51,7 @@
         <p>
           Audio <%= f.file_field :audio %>
         </p>
+        <%= f.text_field :audio_name, placeholder: "Audio title (optional)", class: :dark_text_field %>
       </div>
       
       <% if current_user and current_user.my_groups.present? and @editing and @post.group_id %>

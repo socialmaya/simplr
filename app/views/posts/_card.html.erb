@@ -86,7 +86,10 @@
       <% if post.audio_url %>
         <%= audio_tag post.audio_url.to_s, id: "post_sound_#{post.id}" %>
         <p>
-          <%= link_to post.audio_url.to_s, play_post_audio_path(post.id), remote: true %>
+          <%= link_to play_post_audio_path(post.id), remote: true do %>
+            <%= post.audio_name.present? ? post.audio_name : post.audio_url.to_s %>
+            <i class="fa fa-music" aria-hidden="true"></i>  
+          <% end %>
         </p>
       <% end %>
 
