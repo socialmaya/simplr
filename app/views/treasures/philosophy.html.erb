@@ -25,6 +25,13 @@
 </div>
 
 <div class="dark_card" align="center">
+  <%= image_tag "philosophers/husserl.png", class: :philosopher_img %>
+  <p class="justified_body_text">
+    <b id="husserl">Edmund Husserl</b> - German philosopher who established the school of phenomenology. Husserl made some key conceptual elaborations which led him to assert that in order to study the structure of consciousness, one would have to distinguish between the act of consciousness and the phenomena at which it is directed (the objects as intended). Knowledge of essences would only be possible by bracketing, or suspending all judgment about the natural world to instead focus on analysis of experience. This procedure he called epoché.
+  </p>
+</div>
+
+<div class="dark_card" align="center">
   <%= image_tag "philosophers/lacan.jpg", class: :philosopher_img %>
   <p class="justified_body_text">
     <b id="lacan">Jacques Lacan</b> - France’s most famous psychoanalyst, who came up with the intriguing concept of the ‘mirror phase.’
@@ -82,7 +89,7 @@
 
 <script>
   <% for i in [:phenomenology, :post_structuralism, :psychoanalysis, :hermeneutics,
-    :lacan, :heidegger, :jung, :foucault, :derrida] %>
+    :lacan, :heidegger, :husserl, :jung, :foucault, :derrida] %>
     <%= render "app/fader.js", target: i.to_s, target_id: "" %>
   <% end %>
 </script>
