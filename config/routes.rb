@@ -197,9 +197,6 @@ Rails.application.routes.draw do
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
   
-  # templates for clients
-  get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
-  
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
 
@@ -226,7 +223,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'posts#index'
+  #root 'posts#index'
+  
+  root 'templates#lil_c'
+  # templates for clients
+  #get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

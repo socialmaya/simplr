@@ -44,6 +44,8 @@ class ApplicationController < ActionController::Base
       'Anrcho'
     else
       case request.host
+      when 'lilccorleone.com'
+        "Join Lil' C. Corleone's Team For Free Stuff"
       when 'forrestonlyclub.com'
         'Forrest Only Club'
       when 'forrestwilkins.com'

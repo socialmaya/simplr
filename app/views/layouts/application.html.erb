@@ -7,7 +7,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     
-    <% if anrcho? %>
+    <% if request.host.eql? "lilccorleone.com" %>
+      <%= favicon_link_tag "favicons/lil_c.ico" %>
+    <% elsif anrcho? %>
       <%= favicon_link_tag "favicons/anrcho.ico" %>
     <% elsif request.host.eql? "forrestonlyclub.com" %>
       <%= favicon_link_tag "favicons/foc.ico" %>
