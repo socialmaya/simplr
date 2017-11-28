@@ -77,3 +77,21 @@
     text-shadow: 1.25px 1.25px 1.25px purple;
   }
 }
+
+
+// for desktop
+@media screen and (min-width: 1000px) {
+  .lil_c_form {
+    //float: left;
+    //width: 40%;
+  }
+  
+  .lil_c_img {
+    //float: left;
+    //width: 40%;
+  }
+}
+
+
+
+
