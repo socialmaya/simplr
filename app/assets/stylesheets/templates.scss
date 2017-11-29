@@ -82,13 +82,23 @@
 // for desktop
 @media screen and (min-width: 1000px) {
   .lil_c_form {
-    //float: left;
-    //width: 40%;
+    float: right;
+    width: 47.5%;
+    margin-left: 6.25px;
   }
   
   .lil_c_img {
-    //float: left;
-    //width: 40%;
+    float: left;
+    width: 47.5%;
+    margin-right: 6.25px;
+  }
+  
+  .lil_c_main_container {
+    position: relative;
+    max-width: 565px;
+    margin: 0 auto;
+    margin-bottom: 12.5px;
+    width: 98.65%;
   }
 }
 
