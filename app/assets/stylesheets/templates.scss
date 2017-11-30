@@ -33,7 +33,7 @@
 
 .lil_c_form {
   position: relative;
-  padding: 15px 7.5px;
+  padding: 0px 7.5px;
   max-width: 550px;
   margin: 0 auto;
   margin-bottom: 12.5px;
@@ -83,13 +83,13 @@
 @media screen and (min-width: 1000px) {
   .lil_c_form {
     float: right;
-    width: 47.5%;
+    width: 42.5%;
     margin-left: 6.25px;
   }
   
   .lil_c_img {
     float: left;
-    width: 47.5%;
+    width: 52.5%;
     margin-right: 6.25px;
   }
   
