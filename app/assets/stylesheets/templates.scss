@@ -22,18 +22,12 @@
 .image_border_middle_container {
   position: relative;
   width: 100%;
+  height: 80%;
   float: left;
+  background: white;
 }
 
 .image_border_left_container {
-  position: relative;
-  float: left;
-  width: 10%;
-  height: 100%;
-  background: red;
-}
-
-.image_border_right_container {
   position: relative;
   float: right;
   width: 10%;
@@ -41,26 +35,25 @@
   background: red;
 }
 
-.image_border_bottom_container {
+.lil_c_form {
   position: relative;
-  width: 100%;
-  height: 10%;
-  background: red;
+  width: 80%;
+  min-height: 100%;
+  float: right;
+}
+
+.image_border_right_container {
+  position: relative;
   float: left;
+  width: 10%;
+  height: 100%;
+  background: red;
 }
 
 .lil_c_border_top_img {
   position: relative;
-  width: 20%;
+  width: 10%;
   float: left;
-}
-
-.lil_c_form {
-  position: relative;
-  float: left;
-  width: 60%;
-  height: 100%;
-  display: inline;
 }
 
 .lil_c_border_side_img {
@@ -74,6 +67,11 @@
   margin: 0 auto;
   margin-bottom: 12.5px;
   width: 98.65%;
+}
+
+.lil_c_form_header {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 #lil_c_header_card {
@@ -110,29 +108,23 @@
 // for desktop
 @media screen and (min-width: 1000px) {
   .lil_c_form {
-    float: right;
-    width: 42.5%;
-    margin-left: 6.25px;
   }
   
-  .lil_c_img {
-    float: left;
-    width: 52.5%;
-    margin-right: 6.25px;
+  .lil_c_form_header {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0px;
+    padding-top: 10px;
   }
   
-  .lil_c_main_container {
-    position: relative;
-    max-width: 565px;
-    margin: 0 auto;
-    margin-bottom: 12.5px;
-    width: 98.65%;
+  .lil_c_border_side_img_mobile {
+    display: none;
+    visibility: hidden;
   }
 }
 
 // for mobile
 @media screen and (max-width: 975px) {
-  
 }
 
 
