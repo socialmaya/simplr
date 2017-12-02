@@ -106,7 +106,7 @@
 
 
 // for desktop
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 650px) {
   .lil_c_form {
   }
   
@@ -121,11 +121,28 @@
     display: none;
     visibility: hidden;
   }
+  
+  .lil_c_border_side_img_mobile_sm {
+    display: none;
+    visibility: hidden;
+  }
 }
 
-// for mobile
-@media screen and (max-width: 975px) {
+// for mobile (usually is min-width of 975)
+@media screen and (min-width: 400px) {
+  .lil_c_border_side_img_mobile_sm {
+    display: none;
+    visibility: hidden;
+  }
 }
+
+// for small mobile
+@media screen and (max-width: 400px) {
+}
+
+
+
+
 
 
 
