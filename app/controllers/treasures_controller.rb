@@ -6,6 +6,7 @@ class TreasuresController < ApplicationController
   #before_action :kristin_and_forrest_only, only: [:kristins_crescent]
 
   def google_verify
+    @google_verify = true
   end
 
   def kristins_crescent
