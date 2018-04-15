@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :reviews
+
+  # google verification
+  get '/google9d212043db078659.html', :to => redirect('/google9d212043db078659.html')
+
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
   get 'wikis/add_image', as: 'add_wiki_image'
@@ -40,7 +44,7 @@ Rails.application.routes.draw do
   get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
   get 'kristins_crescent', to: 'treasures#kristins_crescent', as: 'kristins_crescent'
   get 'zodiac', to: 'treasures#zodiac', as: 'zodiac'
-  
+
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
   get 'kopi', to: 'treasures#kopi', as: 'kopi'
@@ -97,7 +101,7 @@ Rails.application.routes.draw do
   put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
-  
+
   # dev
   get 'dev_log', to: 'sessions#dev_login', as: 'dev_login'
 
@@ -151,7 +155,7 @@ Rails.application.routes.draw do
   # search
   get 'search', to: 'search#index', as: 'search'
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
-  
+
   # views
   get 'user_views_index/:token', to: 'views#user_index', as: 'user_views_index'
   get 'user_click_index/:token', to: 'views#click_index', as: 'user_click_index'
@@ -196,7 +200,7 @@ Rails.application.routes.draw do
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
-  
+
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
 
@@ -224,7 +228,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'posts#index'
-  
+
   root 'templates#lil_c'
   # templates for clients
   #get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
