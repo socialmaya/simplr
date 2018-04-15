@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :reviews
 
   # google verification
-  get '/google9d212043db078659', :to => redirect('google9d212043db078659.html')
+  get '/google9d212043db078659.html', to: 'treasures#google_verify', as: 'google_verify'
 
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
