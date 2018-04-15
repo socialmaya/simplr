@@ -1,47 +1,43 @@
-<% if @google_verify %>
-  <%= yield %>
-<% else %>
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title><%= current_title %></title>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= current_title %></title>
 
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true unless @cluster_flier_page %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-      <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true unless @cluster_flier_page %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-      <% if request.host.eql? "lilccorleone.com" %>
-        <%= favicon_link_tag "favicons/lil_c.ico" %>
-      <% elsif anrcho? %>
-        <%= favicon_link_tag "favicons/anrcho.ico" %>
-      <% elsif request.host.eql? "forrestonlyclub.com" %>
-        <%= favicon_link_tag "favicons/foc.ico" %>
-      <% elsif request.host.eql? "forrestwilkins.com" %>
-        <%= favicon_link_tag "favicons/glitch_om.ico" %>
+    <% if request.host.eql? "lilccorleone.com" %>
+      <%= favicon_link_tag "favicons/lil_c.ico" %>
+    <% elsif anrcho? %>
+      <%= favicon_link_tag "favicons/anrcho.ico" %>
+    <% elsif request.host.eql? "forrestonlyclub.com" %>
+      <%= favicon_link_tag "favicons/foc.ico" %>
+    <% elsif request.host.eql? "forrestwilkins.com" %>
+      <%= favicon_link_tag "favicons/glitch_om.ico" %>
+    <% else %>
+      <% if invited? or current_user and not Rails.env.development? %>
+        <%= favicon_link_tag "favicons/bust.ico" %>
       <% else %>
-        <% if invited? or current_user and not Rails.env.development? %>
-          <%= favicon_link_tag "favicons/bust.ico" %>
-        <% else %>
-          <%= favicon_link_tag "favicons/social_maya.ico" %>
-        <% end %>
+        <%= favicon_link_tag "favicons/social_maya.ico" %>
       <% end %>
+    <% end %>
 
-      <%= render "app/meta_tags" %>
+    <%= render "app/meta_tags" %>
 
-  	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-      <!-- Chrome, Firefox OS and Opera -->
-      <meta name="theme-color" content="#000000">
-      <!-- Windows Phone -->
-      <meta name="msapplication-navbutton-color" content="#000000">
-      <!-- iOS Safari -->
-      <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#000000">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
 
-    </head>
-    <body>
-      <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @lil_c) %>
-      <%= yield %>
-      <%= render "app/footer" unless @cluster_flier_page or @lil_c %>
-    </body>
-  </html>
-<% end %>
+  </head>
+  <body>
+    <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @lil_c) %>
+    <%= yield %>
+    <%= render "app/footer" unless @cluster_flier_page or @lil_c %>
+  </body>
+</html>
