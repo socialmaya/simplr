@@ -1,0 +1,14 @@
+<div class="dsa_card" align="center">
+  <%= render "app/time_ago", item: shared_item %>
+  <%= link_to "Edit", edit_shared_item_path(shared_item), class: "bottom_right_link" %>
+
+  <p>
+    <%= link_to shared_item.name, shared_item_path(shared_item) %>
+  </p>
+
+  <% if shared_item.body.present? %>
+    <p class="<%= 'justified_body_text' if shared_item.body.size > 150 %>">
+      <%= render "app/body", item: shared_item %>
+    </p>
+  <% end %>
+</div>

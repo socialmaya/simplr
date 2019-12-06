@@ -1,0 +1,21 @@
+<% unless current_user %>
+  <div class="<%= get_card_type %>" align="center">
+	  <%= link_to "Haven't signed up yet?", new_user_path, class: "top_right_link white_link" if invited? %>
+
+	  <%= form_tag sessions_path do %>
+      <p>
+	      <%= text_field_tag :login, nil, placeholder: "Username", class: :surveys_text_field, id: :login_field_1 %>
+	      <%= password_field_tag :password, nil, placeholder: "Passphrase", class: :surveys_text_field, id: :login_field_2 %>
+	    </p>
+	    <p>
+        <button type="submit" name="commit" class="surveys_form_button">
+          <b>Log in <i class="fa fa-pencil"></i></b>
+        </button>
+      </p>
+
+		  <div id="remember_me_check_box">
+			  Remember me <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+		  </div>
+	  <% end %>
+	</div>
+<% end %>

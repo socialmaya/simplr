@@ -1,0 +1,29 @@
+$(".turn_choice").each(function() {
+  if ($(this).attr('id') == "turn_choice_<%= @turn_choice %>") {
+    $(this).css(
+      "color",
+      <% case @turn_choice %>
+      <% when "attack" %>
+        "rgb(255,105,97)"
+      <% when "build" %>
+        "rgb(136,227,182)"
+      <% when "skip" %>
+        "rgb(119,158,203)"
+      <% end %>
+    );
+  } else {
+    $(this).css("color", "rgb(175,175,175)");
+  }
+});
+
+$("#turn_choice_dropdown").fadeIn().prepend("<%=j render 'games/choice_confirm', turn_choice: @turn_choice %>");
+
+$(".choice_confirm_main").each(function() {
+  if ($(this).attr('id') == "confirm_choice_<%= @turn_choice %>") {
+    $(this).fadeIn();
+  } else {
+    $(this).remove();
+  }
+});
+
+window.navigator.vibrate(5);

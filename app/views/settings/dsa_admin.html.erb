@@ -1,0 +1,66 @@
+<div class="dsa_card" align="center">
+  <h2 class="surveys_page_header">
+    Raleigh DSA Admin <i class="fa fa-cog"></i>
+  </h2>
+</div>
+
+<div class="dsa_card" align="center">
+  <div class="admin_items_list_container">
+    <div class="admin_items_list">
+      <p>
+        <b>Users</b>
+      </p>
+      <% for user in @dsa_members %>
+        <p>
+          <%= user.name %>
+          <%= user.dev ? " (dev)" : (user.admin ? " (admin)" : '') %>
+        </p>
+      <% end %>
+    </div>
+    <div class="admin_items_list">
+      <p>
+        <b>Portals</b>
+      </p>
+      <% for portal in @portals %>
+        <p>
+          <%= link_to portal.unique_token, show_portal_path(portal.unique_token) %>,
+          <%= portal.remaining_uses %> remaining use(s),
+          expires in <%= time_ago_in_words(portal.expires_at) + (portal.dev or portal.admin ? ',' : '') %>
+          <% if portal.dev or portal.admin %>
+            grants: <%= 'dev' if portal.dev %> <%= 'admin' if portal.admin %>
+          <% end %>
+        </p>
+      <% end %>
+      <% if @portals.empty? %>
+        <p>
+          There are zero portals currently open.
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if @portal %>
+  <div class="dsa_card">
+    <p>
+      <b id="invite_link_label"><%= link_to "Portal link - Copy and share:",
+        copy_invite_link_path, remote: true, id: :copy_invite_link %></b>
+    </p>
+    <p align="center">
+      <%= text_field_tag :invite_link, @portal_link, id: :invite_link_field %>
+    </p>
+  </div>
+<% end %>
+
+<div class="dsa_card" align="center">
+  <%= link_to "Close all", destroy_all_portals_path, method: :delete,
+      data: { confirm: "Are you sure you want to close every single portal?" }, class: :top_right_link %>
+  <p>
+    Create portals to invite new members
+  </p>
+  <p>
+    Defaults to <%= Portal::DEFAULT_REMAINING_USES %> use(s) and expires in
+      <%= time_ago_in_words(Portal.expiration_date) %>
+  </p>
+  <%= render "connections/portal_link_form" %>
+</div>

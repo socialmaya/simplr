@@ -11,20 +11,38 @@
  * file per style scope.
  *
  *= require_tree .
+
+ *= stub "uikit_style"
+ *= stub "purecss_style"
+ *= stub "semantic_ui_style"
+
  *= require_self
+ *= require pushy-buttons.min.css
+ *= require rpg-awesome.min.css
+ *= require simple_calendar
+
  */
+
+
+ // top, right, bottom, left
+ 
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+//$import-google-fonts: false;
+//@import "semantic-ui";
+//@import 'purecss';
+
 
 $x_right_gap: 5px;
 $x_left_gap: 5px;
 
 @mixin card {
+  transition: all .4s ease-in-out;
   position: relative;
   padding: 15px 7.5px;
   background: white;
-  border: 0px solid white;
   max-width: 550px;
   margin: 0 auto;
   margin-bottom: 12.5px;
@@ -42,8 +60,16 @@ $x_left_gap: 5px;
 }
 
 html {
-	font-family: Helvetica;
-	background: black;
+  font-family: Helvetica;
+  background: black;
+  //-webkit-user-select: none; /* Safari */
+  //-moz-user-select: none; /* Firefox */
+  //-ms-user-select: none; /* IE10+/Edge */
+  //user-select: none; /* Standard */ turned off, very annoying not be able to copy...
+}
+
+body {
+  margin: initial;
 }
 
 a {
@@ -51,6 +77,7 @@ a {
 	font-weight: bold;
 	font-size: 14px;
 	color: black;
+  -webkit-tap-highlight-color: transparent;
 }
 
 textarea {
@@ -84,6 +111,18 @@ textarea {
 .danger_card {
   @include card;
   background: red;
+}
+
+.top_right_lower_link {
+	@include corner_link;
+	right: $x_right_gap;
+	top: 7.5px;
+}
+
+.top_left_lower_link {
+	@include corner_link;
+	left: $x_left_gap;
+	top: 7.5px;
 }
 
 .top_right_link {
@@ -121,6 +160,10 @@ textarea {
 
 .caution_link {
   color: yellow;
+}
+
+.danger_link {
+  color: red;
 }
 
 .justified_body_text {
@@ -200,7 +243,7 @@ textarea {
 }
 
 .vertical_spacer {
-  height: 500px;
+  padding-bottom: 50px;
 }
 
 .vertical_padding {
@@ -231,7 +274,11 @@ textarea {
   color: white;
 }
 
-.dark_link {
+.black_link {
+  color: black;
+}
+
+.dark_link, .dark_txt {
   color: rgb(175, 175, 175);
 }
 
@@ -240,9 +287,67 @@ textarea {
   font-size: 12px;
 }
 
+.dark_red_link {
+  color: rgb(158,49,28);
+}
+
 .header_icon_link {
   color: white;
   font-size: 30px;
+}
+
+.sparkles {
+  width: 100px;
+  height: 100px;
+}
+
+.dot_sparkle {
+  position: relative;
+  width: 1.5px;
+  height: 1.5px;
+  background: white;
+}
+
+.star_sparkle {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+.star_sparkle_top {
+  position: absolute;
+  width: 1px;
+  height: 3px;
+  bottom: 5px;
+  left: 4.5px;
+  background: white;
+}
+
+.star_sparkle_bottom {
+  position: absolute;
+  width: 1px;
+  height: 3px;
+  top: 5px;
+  left: 4.5px;
+  background: white;
+}
+
+.star_sparkle_left {
+  position: absolute;
+  width: 3px;
+  height: 1px;
+  top: 4.5px;
+  right: 5px;
+  background: white;
+}
+
+.star_sparkle_right {
+  position: absolute;
+  width: 3px;
+  height: 1px;
+  top: 4.5px;
+  left: 5px;
+  background: white;
 }
 
 // for mobile

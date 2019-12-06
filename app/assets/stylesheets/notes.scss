@@ -2,6 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.notes_slide_menu_container {
+  transition: all .4s ease-in-out;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+.notes_slide_menu_toggle_link {
+  transition: all .75s ease-out;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: rgb(175,175,175);
+  padding-top: 15px;
+  padding-right: 24.25px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.notes_icon_spins {
+  transform-origin: 0px 20px;
+  transform: rotatey(360deg);
+}
+
+.notes_side_pane_message {
+  margin-left: 5px;
+	font-size: 20px;
+}
+
+.unseen_note_message {
+  color: white;
+}
+
+.notes_dropdown {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  margin-bottom: 15px;
+  background: rgb(10, 10, 10);
+  z-index: 5;
+}
+
+.notes_dropdown_link {
+  margin-left: 5px;
+}
+
+.notes_dropdown_message {
+	font-size: 20px;
+}
+
+.notes_dropdown_title {
+  padding: 5px 5px;
+  padding-top: 12.5px;
+  color: rgb(175, 175, 175);
+	font-size: 26px;
+}
+
 .notes_nav_link {
 	position: absolute;
 	right: 45px;
@@ -27,4 +90,16 @@
 
 .note_dialog_text {
   font-size: 12px;
+}
+
+@keyframes icon_spin {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotatey(180deg);
+  }
+  100% {
+    transform: rotatey(-360deg);
+  }
 }

@@ -1,6 +1,6 @@
-<% link = if @kristin and (currently_kristin? or god?) %>
+<% link = if @kristin and currently_kristin? %>
   <% kristins_crescent_path %>
-<% elsif currently_kristin? or god? %>
+<% elsif currently_kristin? %>
   <% kristin_path %>
 <% else %>
   <% "/#" %>

@@ -1,9 +1,76 @@
 Rails.application.routes.draw do
+  apipie
+  resources :arts
+  resources :orders
+  resources :games
   resources :reviews
+  resources :surveys
+  resources :survey_questions
+  resources :survey_selections
+  resources :item_libraries
+  resources :shared_items
 
-  # google verification
-  get "/google9d212043db078659.html", to: static("google9d212043db078659.html")
-  #get 'google9d212043db078659.html', to: 'treasures#google_verify', as: 'google_verify'
+  # item libraries
+  get 'show_item_library_form', to: 'item_libraries#show_form', as: 'show_item_library_form'
+
+  # shared items
+  get 'show_shared_item_form/:item_library_id', to: 'shared_items#show_form', as: 'show_shared_item_form'
+
+  # raleigh_dsa social
+  get 'social', to: 'posts#raleigh_dsa', as: 'raleigh_dsa_social'
+
+  # surveys
+  get 'take_survey/:token', to: 'surveys#take', as: 'take_survey'
+  post 'complete_survey/:token', to: 'surveys#complete', as: 'complete_survey'
+  get 'show_survey_form', to: 'surveys#show_survey_form', as: 'show_survey_form'
+  get 'thank_you', to: 'surveys#thank_you', as: 'survey_thank_you'
+
+  # survey questions
+  get 'set_question_type', to: 'survey_questions#set_type', as: 'set_question_type'
+  delete 'delete_survey_question/:id', to: 'survey_questions#destroy', as: 'delete_survey_question'
+  get 'remove_question_field/:question_num', to: 'survey_questions#remove', as: 'remove_question_field'
+  get 'add_survey_question', to: 'survey_questions#add', as: 'add_survey_question'
+  get 'survey_question_read_more/:id', to: 'survey_questions#read_more', as: 'survey_question_read_more'
+  get 'survey_questions_next/:id', to: 'survey_questions#next', as: 'survey_questions_next'
+  get 'survey_questions_back/:id', to: 'survey_questions#back', as: 'survey_questions_back'
+
+  #survey selections
+  get 'add_survey_question_selection', to: 'survey_selections#add', as: 'add_survey_question_selection'
+  delete 'delete_survey_selection/:id', to: 'survey_selections#destroy', as: 'delete_survey_selection'
+  get 'new_survey_question_grid/:question_num', to: 'survey_selections#new_grid', as: 'new_survey_question_grid'
+  get 'add_survey_question_row/:question_num', to: 'survey_selections#add_row', as: 'add_survey_question_row'
+  get 'remove_selection_field', to: 'survey_selections#remove_field', as: 'remove_selection_field'
+  get 'remove_selection_row_field', to: 'survey_selections#remove_row_field', as: 'remove_selection_row_field'
+
+  # survey results
+  get 'survey_results/:id', to: 'survey_results#index', as: 'survey_results'
+  get 'survey_result_read_more/:id', to: 'survey_results#read_more', as: 'survey_result_read_more'
+  get 'show_survey_question_grid_filter/:id', to: 'survey_results#show_grid_filter', as: 'show_survey_question_grid_filter'
+  get 'remove_grid_question_filter/:id', to: 'survey_results#remove_grid_filter', as: 'remove_grid_question_filter'
+  get 'filter_survey_results', to: 'survey_results#filter_by', as: 'filter_survey_results'
+  get 'reset_results_filter/:id', to: 'survey_results#reset_filter', as: 'reset_results_filter'
+  get 'sort_results_by', to: 'survey_results#sort_by', as: 'sort_results_by'
+
+
+  # templates for clients
+  get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
+  get 'co', to: 'templates#index', as: 'forrest_web_co'
+  get 'keep_it_on_pointe', to: 'templates#on_point', as: 'on_point'
+  get 'story_bigger_bucks', to: 'templates#bigger_bucks', as: 'bigger_bucks'
+  get 'pricing', to: 'templates#pricing', as: 'on_point_pricing'
+  get 'bigger_bucks_login', to: 'templates#login', as: 'bigger_bucks_login'
+  get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
+  get 'thompson_design_and_son', to: 'templates#semantic_ui'
+  get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
+  get 'purecss', to: 'templates#purecss', as: 'purecss'
+  get 'uikit', to: 'templates#uikit', as: 'uikit'
+
+  # on point CRUD paths
+  get 'on_point_edit/:token', to: 'templates#edit', as: 'on_point_edit'
+  put 'on_point_update/:token', to: 'templates#update', as: 'on_point_update'
+
+  # for testing and learning purposes
+  get 'example_stuff', to: 'templates#example_stuff', as: 'example_stuff'
 
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
@@ -12,14 +79,20 @@ Rails.application.routes.draw do
   # groups
   get 'my_anon_groups', to: 'groups#my_anon_groups', as: 'my_anon_groups'
   get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
-  get 'group/:token', to: 'groups#show', as: 'show_group'
+  get 'show_group/:token', to: 'groups#show', as: 'show_group'
   get 'load_more_group_posts/:token', to: 'groups#load_more_posts', as: 'load_more_group_posts'
+  get 'g/:name', to: 'groups#show', as: 'show_group_by_name'
 
   # users
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'
   put 'users/:id/update_password', to: 'users#update_password', as: 'update_password'
   get 'geo', to: 'users#geolocation', as: 'geolocation'
   get 'load_more_posts/:token', to: 'users#load_more_posts', as: 'load_more_posts'
+  get 'show_user/:token', to: 'users#show', as: 'show_user'
+  get 'users/update_scrolling_avatar', to: 'users#update_scrolling_avatar'
+  get 'toggle_old_profile_pics/:token', to: 'users#toggle_old_profile_pics', as: 'toggle_old_profile_pics'
+  put 'switch/:token/back_to_old_profile_picture/:id', to: 'users#switch_back_to_old_profile_picture',
+    as: 'switch_back_to_old_profile_picture'
 
   # likes
   post 'like', to: 'likes#create', as: 'like'
@@ -34,6 +107,7 @@ Rails.application.routes.draw do
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
+  post 'hype_love/:token', to: 'treasures#hype_love', as: 'hype_love'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
   get 'poem', to: 'treasures#poem', as: 'poem'
   get 'kristin', to: 'users#kristin', as: 'kristin'
@@ -45,6 +119,7 @@ Rails.application.routes.draw do
   get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
   get 'kristins_crescent', to: 'treasures#kristins_crescent', as: 'kristins_crescent'
   get 'zodiac', to: 'treasures#zodiac', as: 'zodiac'
+  get 'leo', to: 'treasures#leo', as: 'leo'
 
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
@@ -66,6 +141,12 @@ Rails.application.routes.draw do
   delete 'close_all_portals', to: 'portals#destroy_all', as: 'destroy_all_portals'
   get 'cluster_flier/:token', to: 'portals#cluster_flier', as: 'cluster_flier'
   post 'redeem_portal', to: 'portals#enter', as: 'redeem_portal'
+  get 'copy_portal_link/:token', to: 'portals#copy_link', as: 'copy_portal_link'
+  put 'update_portal', to: 'portals#update', as: 'update_portal'
+  get 'edit_portal/:token', to: 'portals#edit', as: 'edit_portal'
+  # alias route for enter_portal_path, shorter url
+  get 'e/:token', to: 'portals#enter', as: 'inter_portal'
+  get 'port', to: 'portals#disseminator', as: 'disseminator'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
@@ -74,8 +155,10 @@ Rails.application.routes.draw do
   get 'find_a_portal', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
-  get 'zen', to: 'connections#zen', as: 'zen'
-  get 'zenful', to: 'connections#zen'
+  #get 'zen', to: 'connections#zen', as: 'zen'
+  get 'zenful_namaste_om', to: 'connections#zen'
+  get 'let_me_in', to: 'connections#let_me_in'
+  get 'hide_stop_invited_music', to: 'connections#hide_stop_invited_music', as: 'hide_stop_invited_music'
 
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'
@@ -83,6 +166,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/following', to: 'connections#following', as: 'following'
   get 'users/:user_id/followers', to: 'connections#followers', as: 'followers'
   put 'users/:user_id/steal/:follower_id', to: 'connections#steal_follower', as: 'steal_follower'
+  get 'connections_index/:token', to: 'connections#index', as: 'connections_index'
 
   # user to group connections
   post 'groups/:group_id/request_to_join', to: 'connections#create', as: 'request_to_join'
@@ -96,12 +180,17 @@ Rails.application.routes.draw do
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'groups/:group_id/invite', to: 'connections#new', as: 'invite_from_group'
   get 'my_groups', to: 'groups#my_groups', as: 'my_groups'
+  put 'update_connection/:id', to: 'connections#update', as: 'update_connection'
+  delete 'delete_connection/:id', to: 'connections#destroy', as: 'destroy_connection'
 
   # settings
   put 'settings/update', as: 'update_settings'
   put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
+  put 'set_location', to: 'settings#set_location'
+  get 'settings_dropdown', to: 'settings#dropdown', as: 'settings_dropdown'
+  get 'ctrl_stuf', to: 'settings#dsa_admin', as: 'dsa_admin'
 
   # dev
   get 'dev_log', to: 'sessions#dev_login', as: 'dev_login'
@@ -135,15 +224,23 @@ Rails.application.routes.draw do
   get 'posts/read_more/:post_id', to: 'posts#read_more', as: 'read_more'
   get 'play_post_audio/:id', to: 'posts#play_audio', as: 'play_post_audio'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
+  put 'posts/:id/feature', to: 'posts#feature', as: 'feature_post'
+  get 'posts/:id/show_goto', to: 'posts#goto', as: 'show_post_goto'
+  get 'posts/:id/copy_goto_link', to: 'posts#copy_goto_link', as: 'copy_post_goto_link'
   get 'posts/:token', to: 'posts#show', as: 'show_post'
   delete 'destroy_post/:token', to: 'posts#destroy', as: 'destroy_post'
+  get 'floating_pictures/:token', to: 'posts#floating_images', as: 'floating_images'
+  get 'load_index', to: 'posts#load_index', as: 'load_index'
 
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
+  put 'pictures/:id/move_up', to: 'posts#move_picture_up', as: 'move_post_picture_up'
+  put 'pictures/:id/move_down', to: 'posts#move_picture_down', as: 'move_post_picture_down'
+  get 'classify_picture/:token', to: 'posts#classify', as: 'classify_picture'
 
   # comments
   get 'comments/add_image', as: 'add_comment_image'
-  get 'posts/:post_id/toggle_comments', to: 'comments#toggle_mini_index', as: 'toggle_comments'
+  get 'toggle_comments/:id', to: 'comments#toggle_mini_index', as: 'toggle_comments'
   post 'motions/:proposal_id/comments/create', to: 'comments#create', as: 'create_proposal_comment'
 
   # notes
@@ -152,13 +249,16 @@ Rails.application.routes.draw do
   get 'dev_notes', to: 'notes#dev_index', as: 'dev_notes'
   get 'notes/instant_notes', to: 'notes#instant_notes', as: 'instant_notes'
   get 'load_more_notes', to: 'notes#load_more_notes', as: 'load_more_notes'
+  get 'notes_dropdown', to: 'notes#dropdown', as: 'notes_dropdown'
 
   # search
   get 'search', to: 'search#index', as: 'search'
+  get 'dropdown_search', to: 'search#dropdown_index', as: 'dropdown_search'
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
 
   # views
   get 'user_views_index/:token', to: 'views#user_index', as: 'user_views_index'
+  get 'anon_views_index/:token', to: 'views#anon_index', as: 'anon_views_index'
   get 'user_click_index/:token', to: 'views#click_index', as: 'user_click_index'
   post 'currently_clicking', to: 'views#create'
 
@@ -177,7 +277,7 @@ Rails.application.routes.draw do
   # proposals
   get 'contributors', to: 'proposals#contributors', as: 'contributors'
   get 'tutorial', to: 'proposals#tutorial', as: 'tutorial'
-  get 'motions', to: 'proposals#index', as: 'proposals'
+  get 'worker_motions', to: 'proposals#index', as: 'proposals'
   get 'motions/add_image', to: 'proposals#add_image', as: 'add_proposal_image'
   get 'motions/add_group', to: 'proposals#add_group_id', as: 'add_proposal_group_id'
   get 'motions/:token', to: 'proposals#show', as: 'show_proposal'
@@ -187,23 +287,81 @@ Rails.application.routes.draw do
   get 'motions/load_section_links', to: 'proposals#load_section_links'
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
   get 'make_a_motion', to: 'proposals#add_form', as: 'add_proposal_form'
-  # only because of spam business, capitalistic bullshit that keeps popping up....
-  delete 'fucking_destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
+  get 'motions/:token/add_photoset', to: 'proposals#add_photoset', as: 'add_proposal_photoset'
+  delete 'destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
+  put 'motions/:token/update', to: 'proposals#update', as: 'update_proposal'
+  get 'motions/:token/edit', to: 'proposals#edit', as: 'edit_proposal'
+  get 'motions/:token/open_menu', to: 'proposals#open_menu', as: 'open_proposal_menu'
+  get 'motions/:token/close_menu', to: 'proposals#close_menu', as: 'close_proposal_menu'
+
+  # anrcho
+  get 'hide_anrcho_info', to: 'proposals#hide_anrcho_info', as: 'hide_anrcho_info'
+  get 'portal_to_anrcho/:token', to: 'portals#to_anrcho', as: 'portal_to_anrcho'
+  get 'mood_board', to: 'proposals#mood_board', as: 'mood_board'
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
+  # for votes of support
   get 'for/:token', to: 'votes#new_up_vote', as: 'new_up_vote'
   delete 'unfor/:token', to: 'votes#destroy', as: 'unfor'
+  # for votes against, to block
   get 'block/:token', to: 'votes#new_down_vote', as: 'new_down_vote'
   delete 'unblock/:token', to: 'votes#destroy', as: 'unblock'
+  # for abstaining, to explicitly not vote
+  get 'abstain/:token', to: 'votes#new_abstain', as: 'new_abstain_vote'
+  delete 'unabstain/:token', to: 'votes#destroy', as: 'unabstain'
+  # casting votes, for, against, and abstain
   post 'votes/cast_up_vote', to: 'votes#cast_up_vote', as: 'cast_up_vote'
   post 'votes/cast_down_vote', to: 'votes#cast_down_vote', as: 'cast_down_vote'
+  post 'votes/cast_abstain', to: 'votes#cast_abstain', as: 'cast_abstain'
+  # update (before verification), reverse, verify, mostly update paths
+  put 'votes/:token/update', to: 'votes#update', as: 'update_vote'
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
+  # captcha verification of humanity, to be able to anon verify votes
   post 'votes/confirm_humanity', as: 'confirm_humanity'
+  # reveals dropdown table/menu for voting on options on a motion
+  get 'vote_dropdown/:token', to: 'votes#dropdown', as: 'vote_dropdown'
 
   # online store/ecommerce
+  get 'show_product/:token', to: 'products#show', as: 'show_product'
+  put 'add_to_cart/:token', to: 'carts#add_to_cart', as: 'add_to_cart'
+  put 'remove_from_cart/:token', to: 'carts#remove_from_cart', as: 'remove_from_cart'
+  put 'add_to_wish_list/:token', to: 'wish_lists#add_to_wish_list', as: 'add_to_wish_list'
+  put 'remove_from_wish_list/:token', to: 'wish_lists#remove_from_wish_list', as: 'remove_from_wish_list'
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
+  get 'my_wish_list', to: 'wish_lists#my_wish_list', as: 'my_wish_list'
+  get 'store', to: 'products#index', as: 'store'
+  get 'add_product_image', to: 'products#add_image', as: 'add_product_image'
+  get 'check_out', to: 'orders#new', as: 'check_out'
+  post 'confirm_check_out', to: 'orders#create', as: 'confirm_check_out'
+  get 'show_order/:token', to: 'orders#show', as: 'show_order'
+  get 'my_orders', to: 'orders#my_orders', as: 'my_orders'
+
+  # games
+  get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
+  put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'
+  get 'class_select/:class_selection', to: 'games#class_select', as: 'class_select'
+  get 'meme_war_classes', to: 'games#meme_war_classes', as: 'meme_war_classes'
+  get 'select_turn_choice/:choice', to: 'games#select_turn_choice', as: 'select_turn_choice'
+  get 'confirm_turn_choice/:choice', to: 'games#confirm_turn_choice', as: 'confirm_turn_choice'
+  get 'reset_game_interface', to: 'games#reset_interface', as: 'reset_game_interface'
+  get 'show_game/:token', to: 'games#show', as: 'show_game'
+  get 'my_games', to: 'games#my_games', as: 'my_games'
+
+  # arts
+  get 'love', to: 'arts#love', as: 'love'
+  get 'bands', to: 'arts#bands', as: 'bands'
+  post 'love_message', to: 'arts#create_love_message', as: 'love_messages'
+  get 'paper', to: 'arts#paper', as: 'paper'
+  get 'my_favorite_color', to: 'arts#my_favorite_color', as: 'my_favorite_color'
+  get 'get_distance', to: 'arts#get_distance'
+  get 'interactive_art', to: 'arts#my_apps', as: 'my_apps'
+  get 'vaporwave', to: 'arts#vaporwave', as: 'vaporwave'
+  get 'infinite_teal_void', to: 'arts#void', as: 'void'
+  get 'art_sign_up', to: 'arts#sign_up', as: 'art_sign_up'
+  get 'clicks', to: 'arts#clicks', as: 'clicks'
+  get 'fib', to: 'arts#fib', as: 'chuck_fib'
 
   resources :proposals do
     resources :comments
@@ -215,6 +373,7 @@ Rails.application.routes.draw do
   resources :settings
   resources :groups
   resources :wish_lists
+  resources :products
   resources :carts
   resources :users
   resources :posts
@@ -228,11 +387,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  #root 'posts#index'
-
-  root 'templates#lil_c'
-  # templates for clients
-  #get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
+  root 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

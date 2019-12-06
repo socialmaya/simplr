@@ -2,6 +2,43 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user_edit_form_card {
+  position: relative;
+}
+
+.edit_form_profile_picture {
+  position: relative;
+  top: 0.5px;
+  left: 7.5px;
+  width: 15%;
+}
+
+.scrolling_avatar {
+  display: block;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 5px 5px;
+  background: black;
+  color: white;
+  font-size: 10px;
+  z-index: 5;
+}
+
+.scrolling_avatar_img {
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+}
+
+.scrolling_avatar_name {
+  float: left;
+  background: black;
+  color: white;
+  height: 100%;
+}
+
 .user_card_name_and_bio {
   width: 85%;
 }
@@ -38,6 +75,7 @@
   background: rgb(0, 255, 0);
   text-align: center;
   padding: 10px 0px;
+  color: black;
 }
 
 .progress_bar {
@@ -48,6 +86,7 @@
 .progress_bar_label {
   padding-left: 1.5px;
   padding-bottom: 5px;
+  color: rgb(175,175,175);
 }
 
 .user_name_link {
@@ -84,11 +123,22 @@
 	position: absolute;
 	right: 11.5px;
 	top: 10px;
+	z-index: 15;
 }
 
 .avatar_container {
 	width: 25px;
 	height: 25px;
+}
+
+.inline_avatar_container {
+  display: inline-block;
+  margin-right: 7.5px;
+  margin-bottom: -5px;
+}
+
+.avatar_spins {
+  animation: avatar_spin 10s infinite alternate;
 }
 
 .avatar_pixel {
@@ -109,6 +159,18 @@
 
 .user_title {
   font-size: 25px;
+}
+
+@keyframes avatar_spin {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotatey(180deg);
+  }
+  100% {
+    transform: rotatey(-360deg);
+  }
 }
 
 // for mobile

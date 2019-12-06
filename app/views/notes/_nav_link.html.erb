@@ -1,16 +1,14 @@
-<% if currently_unseen_notes.present? %>
-  <%= link_to '<i class="fa fa-bell fa-lg"></i>'.html_safe, notes_path, id: :notes_nav_link, class: :notes_nav_link,
-    title: "Unseen notifications: #{currently_unseen_notes.size}" %>
-  <script>
-    <%= render "app/fader.js", target: "notes_nav_link", target_id: "" %>
-  </script>
+<% notes_icon = if currently_unseen_notes.present? %>
+  <% '<i class="fa fa-bell fa-lg"></i>' %>
+<% else %>
+  <% '<i class="fa fa-bell-o fa-lg"></i>' %>
 <% end %>
 
-<% if current_user and current_user.inbox_unseen > 0 %>
-  <%= link_to '<i class="fa fa-envelope fa-lg"></i>'.html_safe, inbox_path, id: :inbox_nav_link,
-    class: "#{currently_unseen_notes.present? ? 'inbox_nav_link' : 'notes_nav_link'}",
-    title: "Unseen messages: #{current_user.inbox_unseen}" %>
-  <script>
-    <%= render "app/fader.js", target: "inbox_nav_link", target_id: "" %>
-  </script>
+<%= link_to notes_dropdown_path, remote: true,
+  id: :notes_nav_link, class: "notes_nav_link toggle_notes_dropdown dark_link",
+  title: "Unseen notifications: #{currently_unseen_notes.size}" do %>
+  <span id="notifications_link_icon"><%= notes_icon.html_safe %></span>
 <% end %>
+
+<%= render "notes/dropdown", notes: current_notes.last(5).reverse %>
+<%= render "app/link_sound.js", link_id: :notes_nav_link, sound: :nav_menu_sound %>

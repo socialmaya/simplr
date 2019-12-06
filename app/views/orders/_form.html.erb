@@ -1,0 +1,19 @@
+<%= form_tag confirm_check_out_path, method: :post do %>
+  <p>
+    <%= text_field_tag :first_name, "Bob", placeholder: "First name", class: :dark_text_field %>
+  </p>
+  <p>
+    <%= text_field_tag :last_name, "Bobsen", placeholder: "Last name", class: :dark_text_field %>
+  </p>
+  <p>
+    <%= text_field_tag :card_number, "4242424242424242", placeholder: "Card number", class: :dark_text_field %>
+  </p>
+  <p>
+    <%= text_field_tag :verification_value, "000", placeholder: "Security code", class: :dark_text_field %>
+  </p>
+  <p>
+    <button type="submit" name="commit" class="dark_form_button">
+      <b>Confirm <i class="fa fa-pencil"></i></b>
+    </button>
+  </p>
+<% end %>

@@ -1,17 +1,24 @@
-<% if forrest_only_club? %>
-  <div class="dark_card">
-    <h2 class="user_title">
-      Forrest Only Club
-    </h2>
+<% if @down %>
+  </br>
+  <div class="vertical_spacer"></div>
+  <div class="dark_card" id="forrest_title_card" align="center">
+    <p>
+      <b id="forrest_title_txt">Social Maya will be back shortly...</b>
+    </p>
   </div>
+<% else %>
+  <div class="dark_card" id="post_form_card">
+    <%= render "posts/form" %>
+    <%= render "app/right_pane" %>
+  </div>
+
+  <% if session[:loading_loader_seen] %>
+    <%= render "posts/main_feed_container", items: @items, all_items: @all_items %>
+  <% else %>
+    <%= render "posts/feed_loader" %>
+  <% end %>
+
+  <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
+  <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
+  <%= audio_tag "interface/interface_9.mp3", id: "more_content_sound" %>
 <% end %>
-
-<div class="dark_card" id="post_form_card">
-  <%= render "posts/form" %>
-  <%= render "app/right_pane" %>
-</div>
-
-<%= render "posts/main_feed_container" %>
-
-<%= audio_tag "effects/magic.wav", id: "zen_sound" %>
-<%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>

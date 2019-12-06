@@ -2,147 +2,185 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.image_border_main_container {
+@mixin template_card {
   position: relative;
-  max-width: 565px;
+  padding: 1.25px 7.5px;
+  background: white;
+  border: 0px solid white;
+  max-width: 550px;
   margin: 0 auto;
   margin-bottom: 12.5px;
-  width: 98.65%;
-  background: white;
+  width: 94.5%;
 }
 
-.image_border_top_container {
-  position: relative;
+.template_card {
+  @include template_card;
+  background: rgb(10, 10, 10);
+  color: white;
+}
+
+@mixin section_part {
   width: 100%;
-  height: 10%;
-  background: red;
-  float: left;
+  min-height: 500px;
+  background: rgb(214, 216, 219);
+  color: DarkBlue;
+  text-align: center;
+  position: relative;
+  overflow: auto;
 }
 
-.image_border_middle_container {
-  position: relative;
+
+@mixin forrest_web_co_img {
+  width: 50%;
+  margin-top: 17.5px;
+  margin-right: 10px;
+  margin-bottom: 2.5px;
+}
+
+.section_part {
+  @include section_part;
+}
+
+.edit_carousel_img_link {
+  position: absolute;
+  right: 20%;
+  top: 50px;
+}
+
+.carousel_image {
   width: 100%;
-  height: 80%;
-  float: left;
-  background: white;
 }
 
-.image_border_left_container {
+.carousel_outer {
+  margin-top: 7.5px;
+}
+
+.faded_carousel {
   position: relative;
-  float: right;
-  width: 10%;
-  height: 100%;
-  background: red;
-}
-
-.lil_c_form {
-  position: relative;
-  width: 80%;
-  min-height: 100%;
-  float: right;
-}
-
-.image_border_right_container {
-  position: relative;
-  float: left;
-  width: 10%;
-  height: 100%;
-  background: red;
-}
-
-.lil_c_border_top_img {
-  position: relative;
-  width: 10%;
-  float: left;
-}
-
-.lil_c_border_side_img {
-  width: 100%;
-  float: left;
-}
-
-.lil_c_img {
-  position: relative;
-  max-width: 565px;
+  padding: 7.5px 7.5px;
+  background: green;
+  max-width: 550px;
+  min-height: 250px;
   margin: 0 auto;
-  margin-bottom: 12.5px;
-  width: 98.65%;
+  width: 94.5%;
 }
 
-.lil_c_form_header {
-  font-size: 12px;
-  font-weight: bold;
+.fwc_sample_templates_container {
+  margin-left: 2.5%;
 }
 
-#lil_c_header_card {
-  animation: lil_c_header_card_glow 7.5s infinite alternate;
+.fwc_sample_templates_img_container {
+  position: absolute;
+  top: 37.5px;
+  right: 35px;
+  width: 35%;
 }
 
-#lil_c_header {
-  animation: lil_c_header_shadow 7.5s infinite alternate;
+.fwc_sample_templates_img {
+  float: left;
+  width: 40%;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
-@keyframes lil_c_header_card_glow {
+.fwc_sample_templates_img_cascade {
+  width: 100%;
+}
+
+.fwc_sample_templates_cascade_img {
+  width: 100%;
+}
+
+.web_co_email_link {
+  font-size: 16px;
+}
+
+.web_co_bio_card {
+  clear: both;
+  overflow: auto;
+}
+
+.bigger_bucks_dark_text {
+  color: rgb(200, 200, 200);
+}
+
+#bigger_bucks_header_card {
+  animation: bigger_bucks_header_card_glow 7.5s infinite alternate;
+}
+
+#bigger_bucks_header {
+  animation: bigger_bucks_c_header_shadow 7.5s infinite alternate;
+}
+
+@keyframes bigger_bucks_header_card_glow {
   0% {
     background: black;
-    box-shadow: -7.5px -7.5px 7.5px purple;
+    box-shadow: -7.5px -7.5px 7.5px red;
   }
   100% {
-    background: purple;
+    background: red;
     box-shadow: 7.5px 7.5px 7.5px black;
   }
 }
 
-@keyframes lil_c_header_shadow {
+@keyframes bigger_bucks_c_header_shadow {
   0% {
     color: white;
-    text-shadow: 1px 1px 1px purple;
+    text-shadow: 1px 1px 1px red;
   }
   100% {
     color: black;
-    text-shadow: 1.25px 1.25px 1.25px purple;
+    text-shadow: 1.25px 1.25px 1.25px red;
   }
 }
 
+.forrest_web_co_img {
+  @include forrest_web_co_img;
+  float: left;
+}
 
-// for desktop
-@media screen and (min-width: 650px) {
-  .lil_c_form {
+.forrest_web_co_img_1 {
+  @include forrest_web_co_img;
+  width: 97.5%;
+  margin-top: 0px;
+}
+
+#forrest_web_co_card {
+  animation: forrest_web_co_header_card_glow 7.5s infinite alternate;
+}
+
+#forrest_web_co_header {
+  animation: forrest_web_co_header_shadow 7.5s infinite alternate;
+}
+
+@keyframes forrest_web_co_header_card_glow {
+  0% {
+    background: black;
+    box-shadow: -7.5px -7.5px 7.5px orange;
   }
-  
-  .lil_c_form_header {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 0px;
-    padding-top: 10px;
-  }
-  
-  .lil_c_border_side_img_mobile {
-    display: none;
-    visibility: hidden;
-  }
-  
-  .lil_c_border_side_img_mobile_sm {
-    display: none;
-    visibility: hidden;
+  100% {
+    background: rgb(70, 173, 212);
+    box-shadow: 7.5px 7.5px 7.5px black;
   }
 }
 
-// for mobile (usually is min-width of 975)
-@media screen and (min-width: 400px) {
-  .lil_c_border_side_img_mobile_sm {
-    display: none;
-    visibility: hidden;
+@keyframes forrest_web_co_header_shadow {
+  0% {
+    color: white;
+    text-shadow: 2.25px 2.25px 2.25px orange;
+  }
+  100% {
+    color: black;
+    text-shadow: 0.1px 0.1px 0.1px rgb(70, 173, 212);
   }
 }
 
-// for small mobile
-@media screen and (max-width: 400px) {
+// for mobile
+@media screen and (max-width: 450px) {
+  .fwc_sample_templates_img_container {
+    position: absolute;
+    top: 80px;
+    right: 35px;
+    width: 35%;
+  }
 }
-
-
-
-
-
-
-

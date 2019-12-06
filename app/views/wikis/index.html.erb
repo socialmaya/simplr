@@ -2,7 +2,7 @@
   <%= render "card", wiki: @wiki %>
 <% end %>
 
-<% if god? %>
+<% if dev? %>
   <div class="dark_card">
     <p align="center">
       <%= link_to "New wiki", new_wiki_path, class: :white_link %>

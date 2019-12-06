@@ -1,10 +1,10 @@
 <div class="card_corner_cut_out"></div>
 
 <% if defined?(user) and user %>
-  <% if user.image.url %>
-    <%= link_to user_path(user), class: :user_avatar_link,
+  <% if profile_picture user %>
+    <%= link_to show_user_path(user.unique_token), class: :user_avatar_link,
       title: "#{user.name}" + (last_locale(user).present? ? ", #{last_locale user}" : "") do %>
-      <%= image_tag user.image, class: :user_avatar_image %>
+      <%= image_tag profile_picture(user), class: :user_avatar_image %>
     <% end %>
   <% elsif user %>
     <%= render "users/anon_avatar", user: user, position: :token_card_link %>

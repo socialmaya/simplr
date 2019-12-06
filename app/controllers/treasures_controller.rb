@@ -1,12 +1,11 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates,
-                                           :zodiac, :philosophy, :kristins_crescent, :google_verify]
+                                           :zodiac, :philosophy, :kristins_crescent, :leo]
 
-  # turned off just for now...
-  #before_action :kristin_and_forrest_only, only: [:kristins_crescent]
+  before_action :kristin_and_forrest_only, only: [:kristins_crescent, :leo, :hype_love]
 
-  def google_verify
-    @google_verify = true
+  def leo
+    @templating = true
   end
 
   def kristins_crescent
@@ -28,7 +27,7 @@ class TreasuresController < ApplicationController
     @message = params[:tweet]
     twitter = generate_twitter
     if twitter
-      if dev? and god? and @message.size >= 4 and @message.size <= 139
+      if dev? and @message.size >= 4 and @message.size <= 139
         twitter.update @message
         redirect_to :back, notice: "Your tweet has satisfied the gods of Social Maya."
       else
@@ -117,6 +116,17 @@ class TreasuresController < ApplicationController
     redirect_to :back
   end
 
+  # hype other users
+  def hype_love
+    @user = User.find_by_unique_token params[:token]
+    love_nugget = Treasure.new treasure_type: :hype_love, power: :hype_love_others,
+      user_id: @user.id, giver_id: current_user.id
+    if love_nugget.save
+      Note.notify :hype_love_received, love_nugget.unique_token, @user, current_user
+    end
+    redirect_to :back
+  end
+
   def powers
     @powers = current_user.active_powers.reverse
   end
@@ -180,7 +190,10 @@ class TreasuresController < ApplicationController
 
   def show
     @treasure = Treasure.find_by_unique_token(params[:token])
+
     redirect_to '/404' if @treasure.nil?
+
+    @hype_love = @treasure.treasure_type.eql? 'hype_love'
   end
 
   private
@@ -196,7 +209,7 @@ class TreasuresController < ApplicationController
   end
 
   def kristin_and_forrest_only
-    unless currently_kristin? or god?
+    unless currently_kristin?
       redirect_to '/404' unless Rails.env.development?
     end
   end

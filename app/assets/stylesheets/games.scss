@@ -1,0 +1,74 @@
+// Place all the styles related to the games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.game_build_main {
+  color: green;
+  font-weight: bold;
+  padding-top: 9.75px;
+}
+
+.game_card {
+}
+
+.game_okay {
+  color: rgb(136,227,182);
+  padding: 5px 2.5px;
+  margin: 5px 0px;
+  width: 12.5%;
+  font-size: 17.5px;
+}
+
+.game_damage_dealt {
+  color: red;
+  font-size: 25px;
+  font-weight: bolder;
+  padding: 2.5px 2.5px;
+  width: 55%;
+}
+
+.meme_war_class_img {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  margin-top: 1.5px;
+  margin-right: 10px;
+  margin-bottom: 2.5px;
+}
+
+.meme_war_class_card {
+  min-height: 55.25px;
+}
+
+.meme_war_class_description {
+  width: 65%;
+}
+
+.choices_container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.choice_confirm_btn {
+}
+
+.turn_choice_prompt {
+  margin-top: 5px;
+  margin-left: 12.5px;
+}
+
+.turn_choice {
+  float: left;
+  padding: 5px 5px;
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 25%;
+  color: rgb(175, 175, 175);
+}
+
+.turn_choice_dropdown {
+  width: 25%;
+  margin-top: 10px;
+  color: rgb(136,227,182);
+}

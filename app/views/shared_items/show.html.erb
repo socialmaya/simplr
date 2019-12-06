@@ -1,0 +1,9 @@
+<%= render "shared_items/card", shared_item: @shared_item %>
+
+<div class="dsa_card" align="center">
+  <p>
+    <%= link_to 'See all item libraries <i class="fa fa-home"></i>'.html_safe, item_library_path(@shared_item.item_library) %>
+  </p>
+</div>
+
+<%= render "app/link_sound.js", _class: true, link_id: :survey_interactive_link, sound: :post_interface_sound %>

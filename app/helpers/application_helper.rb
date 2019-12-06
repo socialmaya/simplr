@@ -1,4 +1,63 @@
 module ApplicationHelper
+  def get_card_type
+    if raleigh_dsa?
+      'surveys_card'
+    elsif social_maya?
+      'dark_card'
+    else
+      'card'
+    end
+  end
+
+  def middle_dot
+    "·"
+  end
+
+  def is_a_link? word
+    word =~ /\A#{URI::regexp}\z/ or word.include? "http://" or word.include? ".se" \
+      and word != "in:" and not (["::", ":)", ":]", "c:"].any? { |i| word.include? i } or word =~ /\w+:/)
+  end
+
+  def is_a_yt_link? word
+    word =~ /\A#{URI::regexp}\z/ and word.include? "youtu" and !word.include? "user" and !word.include? "channel"
+  end
+
+  def standard_dark_card id='', alignment='center', &block
+    str = "<div class=\"dark_card\" id=\"#{id}\" align=\"#{alignment.to_sym}\">"
+    str << capture(&block)
+    str << '</div>'
+    raw str
+  end
+
+  def standard_card &block
+    str = '<div class="card" align="center">'
+    str << capture(&block)
+    str << '</div>'
+    raw str
+  end
+
+  def get_site_ico
+    if anrcho?
+      "anrcho"
+    elsif raleigh_dsa?
+      "dsa"
+    elsif @bigger_bucks
+      "story"
+    elsif request.host.eql? "forrestonlyclub.com"
+      "foc"
+    elsif request.host.eql? "forrestwilkins.com" or request.host.eql? "forrestwebco.com" or dev? or (invited? and not current_user)
+      "cube"
+    elsif request.original_url.include? "/store"
+      "store_2"
+    else
+      if current_user and not Rails.env.development?
+        "bust"
+      else
+        "social_maya"
+      end
+    end
+  end
+
   def justified_body item
     'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 125
   end

@@ -1,43 +1,71 @@
-<!-- votes -->
-
 <% if vote.present? and vote.body.present? %>
-  <div class="card">
-    <div class="card_corner_cut_out"></div>
-    <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
-    <%= render "votes/time_ago", vote: vote %>
-	  
-	  <div align="center">
-		  <p class="comment_body_text" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
-		    <%= render "app/body", item: vote %>
-		  </p>
-      
-      <% if humanity_confirmed? and vote.verifiable? anon_token, current_user and not vote.proposal.requires_revision %>
-        <%= link_to("Verify", verify_vote_path(vote.unique_token),
-          data: { confirm: "Are you sure you want to verify this vote?" }) %>
+  <div class="card" id="vote_card_<%= vote.id %>">
+    <div align="center">
+      <div class="card_corner_cut_out"></div>
+      <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
+      <%= render "app/time_ago", item: vote %>
+
+  	  <p class="comment_body_text" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
+  	    <%= render "app/body", item: vote %>
+  	  </p>
+
+      <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
+          and not vote.proposal.requires_revision and not vote.abstain?  %>
+        <p>
+          <%= link_to "Verify", verify_vote_path(vote.unique_token), remote: true %>
+        </p>
       <% end %>
-      
-      <% if humanity_confirmed? and vote.could_be_reversed? anon_token, current_user %>
-        <% if vote.up? and vote.proposal.ratified %>
-          <%= link_to "Votes to reverse: #{vote.votes_to_reverse}",
-            show_vote_path(vote), class: :votes_to_reverse_label %>
-          <%= link_to("Reverse", reverse_vote_path(vote.unique_token), method: :post) %>
-        <% elsif vote.down? and vote.proposal.requires_revision? %>
-          <%= link_to "Votes to reverse block: #{vote.votes_to_reverse}",
-            show_vote_path(vote), class: :votes_to_reverse_label %>
-          <%= link_to("Reverse", reverse_vote_path(vote.unique_token), method: :post) %>
+
+      <% if vote_can_be_reversed? vote and not vote.abstain? %>
+        <p>
+          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, remote: true, id: "reverse_link_#{vote.id}" %>
+            <%= render "app/link_sound.js", link_id: "reverse_link_#{vote.id}", sound: :post_interface_sound %>
+        </p>
+      <% end %>
+
+  	  <% if vote.verified %>
+  	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote),
+          class: "verified_label", id: "verify_link_#{vote.id}" %>
+          <%= render "app/link_sound.js", link_id: "verify_link_#{vote.id}", sound: :post_interface_sound %>
+  	  <% end %>
+    </div>
+
+  	<!-- anchor for inserting new comment form -->
+  	<div id="vote_comments_anchor_<%= vote.id %>"></div>
+
+
+    <table class="bottom_left_link">
+      <tr>
+        <td>
+          <%= render "votes/comments_link", vote: vote %>
+        </td>
+        <% if votes_to_reverse? vote %>
+          <td>
+            ·
+          </td>
+          <td>
+            <%= link_to "Votes to reverse#{votes_to_reverse?(vote)}: #{vote.votes_to_reverse}",
+              show_vote_path(vote), class: :standard_post_link %>
+          </td>
         <% end %>
-      <% end %>
-	  </div>
-	  
-	  <% if vote.verified %>
-	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote), class: :verified_label %>
-	  <% end %>
-	  
-    <span id="like_vote_link_anchor_<%= vote.id %>"></span>
-    <%= render "likes/link", item: vote, bottom_left: true %>
-	  
-	  <strong class="action_type_label" style="color: <%= vote.up? ? 'green' : (vote.down? ? 'red' : '') %>;">
-	    Motion: <%= vote.up? ? "vote_of_support" : (vote.down? ? "vote_to_block" : "") %>
-	  </strong>
+      </tr>
+    </table>
+
+    <table class="bottom_right_link">
+      <tr>
+        <td>
+          <strong style="color: <%= vote.up? ? 'green' : (vote.down? ? 'red' : (vote.abstain? ? 'grey' : '')) %>;">
+            Motion: <%= vote.up? ? "vote_of_support" : (vote.down? ? "vote_to_block" : (vote.abstain? ? "abstained" : '')) %>
+          </strong>
+        </td>
+        <td>
+          ·
+        </td>
+        <td>
+          <span id="like_vote_link_anchor_<%= vote.id %>"></span>
+          <%= render "likes/link", item: vote %>
+        </td>
+      </tr>
+    </table>
   </div>
 <% end %>

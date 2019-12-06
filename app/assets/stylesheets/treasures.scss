@@ -27,6 +27,15 @@
   width: 25px;
 }
 
+.hype_love_img {
+  transition: all .4s ease-in-out;
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 94.5%;
+}
+
 .bottom_right_icon {
   position: absolute;
   bottom: 5px;
@@ -183,9 +192,18 @@
   }
 }
 
+@keyframes kristins_leo_sign_pulse {
+  0% {
+    text-shadow: 0px 0px 0px yellow;
+  }
+  100% {
+    text-shadow: 1.25px 1.25px 1.25px rgb(119,221,119);
+  }
+}
+
 #crescent_moon {
   animation: crescent_pulse 7.5s infinite alternate;
-  
+
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -196,9 +214,13 @@
 
 #kristins_crescent_label {
   animation: kristins_crescent_label_pulse 7.5s infinite alternate;
-  
+
   font-size: 12px;
   font-weight: bold;
+}
+
+#kristins_leo_sign {
+  animation: kristins_leo_sign_pulse 7.5s infinite alternate;
 }
 
 #crescent_card {
@@ -220,8 +242,8 @@
 
 // zodiac stuff
 .ai.leo:before {
-    content:"\264C";
+  content:"\264C";
 }
 .ai.pisces:before {
-    content:"\2653";
+  content:"\2653";
 }

@@ -1,0 +1,58 @@
+<div class="surveys_card" align="center">
+  <div class="survey_card_corner_cut_out"></div>
+  <%= link_to survey, class: "group_avatar_link surveys_image_link" do %>
+    <% if survey.image.url %>
+      <%= image_tag survey.image, class: :group_avatar_image %>
+    <% else %>
+      <%= fa_icon "users fa-2x group_placeholder_icon" %>
+    <% end %>
+  <% end %>
+
+  <%= render "app/time_ago", item: survey %>
+  <%= link_to "Edit", edit_survey_path(survey), class: "bottom_right_link" %>
+
+  <p class="surveys_link">
+    <%= link_to survey.title, survey %>
+  </p>
+
+  <% if survey.body.present? %>
+    <p class="<%= 'justified_body_text' if survey.body.size > 150 %>">
+      <%= render "app/body", item: survey %>
+    </p>
+  <% end %>
+
+  <% i=1; for question in show_ten_or_all_questions survey %>
+    <%= render "survey_questions/question_body", survey: survey, question: question %>
+
+    <% if @showing %>
+      <!-- list selections and or rows -->
+      <% unless question.open_ended? %>
+        <% unless question.grid %>
+          <%= render "survey_selections/edit_list", question: question, selections: question.selections, label: "S" %>
+        <!-- outputs rows and columns for grid questions -->
+        <% else %>
+          <%= render "survey_selections/edit_list", question: question, selections: question.rows, label: "R" %>
+          <%= render "survey_selections/edit_list", question: question, selections: question.columns, label: "C" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  <% i += 1; end %>
+
+  <% if survey.questions.size > 10 and @surveys %>
+    <%= link_to survey do %>
+      <p>
+        With <%= survey.questions.size - 10 %> more question(s)
+      </p>
+    <% end %>
+  <% end %>
+
+  <p class="surveys_link surveys_card_links">
+    <%= link_to 'Take survey <i class="fa fa-group"></i>'.html_safe, take_survey_path(survey.unique_token) %>
+
+    <% if survey.survey_results.present? %>
+      <%= middle_dot %>
+      <%= link_to 'See results <i class="fa fa-list"></i>'.html_safe, survey_results_path(survey) %>
+    <% end %>
+  </p>
+</div>

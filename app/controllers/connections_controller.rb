@@ -1,11 +1,35 @@
 class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
-  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :zen, :new, :create, :members]
+  before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite,
+      :new, :create, :members, :let_me_in, :zen]
   before_action :invited_or_anrcho, only: [:new, :create, :members]
   before_action :user_access, only: [:invites, :followers]
-  before_action :dev_only, only: [:zen]
-  
+  before_action :dev_only, only: [:let_me_in] # zenful only for devs in production now
+
+  def index
+    @user = User.find_by_unique_token params[:token]
+    @following = @user.following
+    @followers = @user.followers
+    @groups = @user.my_groups
+    @views = @user.profile_views
+  end
+
+  def let_me_in
+    @connection = Connection.new invite: true
+    if @connection.save
+      cookies[:invite_token] = @connection.unique_token
+    end
+    redirect_to new_user_path
+  end
+
+  def hide_stop_invited_music
+    if params[:stop_invited_music]
+      cookies[:invited_music_stopped] = true
+      @invited_music_stopped = true
+    end
+  end
+
   def invite_someone
     unless current_user and (current_user.has_power? 'invite_someone' or current_user.gatekeeper)
       redirect_to '/404'
@@ -19,21 +43,21 @@ class ConnectionsController < ApplicationController
       end
     end
   end
-  
+
   def peace
     if current_user
       current_user.update_token
     end
-    cookies.clear
+    cookies.clear unless anrcho?
     redirect_to root_url
   end
-  
+
   def zen
     cookies.clear
     cookies[:zen] = true
-    redirect_to root_url
+    redirect_to new_user_path
   end
-  
+
   # to make inviting easier in person without sending them a link
   def backdoor
     redirect_to '/404' if invited?
@@ -50,10 +74,10 @@ class ConnectionsController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def copy_invite_link
   end
-  
+
   def invite_only_message
     if anrcho?
       redirect_to proposals_path
@@ -64,7 +88,7 @@ class ConnectionsController < ApplicationController
     @char_bits = char_bits Post.last 10
     @char_codes = char_codes Post.last 10
   end
-  
+
   def redeem_invite
     @invite = Connection.find_by_unique_token params[:token]
     if @invite and @invite.invited_to_site?
@@ -75,11 +99,7 @@ class ConnectionsController < ApplicationController
           cookies[:grant_gk_access] = @invite.grant_gk_access
           cookies.permanent[:human] = true
         end
-        if @invite.forrest_only
-          cookies.permanent[:forrest_only_invite_token] = @invite.unique_token
-        else
-          cookies.permanent[:invite_token] = @invite.unique_token
-        end
+        cookies.permanent[:invite_token] = @invite.unique_token
       # if invite already redeemed in current browser
       elsif @invite.redeemed and invited?
         @already_redeemed = true
@@ -89,13 +109,11 @@ class ConnectionsController < ApplicationController
       redirect_to '/404'
     end
   end
-    
+
   def generate_invite
     @invite = Connection.new invite: true,
-      forrest_only: params[:forrest_only],
       grant_dev_access: params[:grant_dev_access],
-      grant_mod_access: params[:grant_mod_access],
-      grant_gk_access: params[:grant_gk_access]
+      grant_mod_access: params[:grant_mod_access]
     if params[:password].present?
       @invite.invite_password = params[:password]
     end
@@ -146,7 +164,7 @@ class ConnectionsController < ApplicationController
     end
     redirect_to :back unless @followed or @requested
   end
-  
+
   # when group invite or request is accepted
   def update
     if @connection
@@ -155,10 +173,11 @@ class ConnectionsController < ApplicationController
       if @connection.group
         if request
           Note.notify :group_request_accepted, @connection.group, @connection.user, current_user
+          @group_request_accepted = true
         end
       end
     end
-    redirect_to :back
+    redirect_to :back unless params[:ajax_req].present?
   end
 
   def destroy
@@ -173,7 +192,7 @@ class ConnectionsController < ApplicationController
     elsif @connection
       @connection.destroy
     end
-    redirect_to :back unless @unfollowed or @left_group
+    redirect_to :back unless @unfollowed or @left_group or params[:ajax_req].present?
   end
 
   def members
@@ -195,7 +214,7 @@ class ConnectionsController < ApplicationController
   def followers
     @followers = @user.followers.last(10).reverse
   end
-  
+
   def steal_follower
     @follower = User.find_by_id params[:follower_id]
     # if both users found and power has not been used yet
@@ -212,13 +231,13 @@ class ConnectionsController < ApplicationController
   end
 
   private
-  
+
   def dev_only
     unless ENV['RAILS_ENV'].eql? 'development'
       redirect_to '/404'
     end
   end
-  
+
   def user_access
     if current_user
       unless @user.eql? current_user or dev? or \
@@ -229,19 +248,19 @@ class ConnectionsController < ApplicationController
       redirect_to '/404'
     end
   end
-  
+
   def invited_or_anrcho
     unless invited? or anrcho?
       redirect_to invite_only_path
     end
   end
-  
+
   def invite_only
     unless invited?
       redirect_to invite_only_path
     end
   end
-  
+
   def set_item
     @user = User.find_by_id params[:user_id]
     @group = Group.find_by_id params[:group_id]

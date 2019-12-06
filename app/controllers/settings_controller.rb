@@ -1,11 +1,38 @@
 class SettingsController < ApplicationController
   before_action :dev_only, only: [:dev_panel]
-  
+  before_action :admin_only, only: [:dsa_admin]
+
+  def dsa_admin
+    @portals = Portal.to_dsa
+    @dsa_members = User.dsa_members
+    if params[:portal_token]
+      @portal = Portal.find_by_unique_token params[:portal_token]
+      if @portal
+        @portal_link = root_url.gsub('http', "http#{in_dev? ? '' : 's'}"); @portal_link.slice!(-1)
+        @portal_link +=inter_portal_path(@portal.unique_token)
+      end
+    end
+  end
+
+  def dropdown
+    @dropdown = true
+  end
+
+  def set_location
+    # sets coords
+    latitude = params[:lat]
+    longitude = params[:long]
+    @geo = [latitude, longitude].to_s
+    current_user.update geo_coordinates: @geo
+    # sets location/address if gps successful
+    @location = get_location
+  end
+
   def update_all_user_settings
     Setting.initialize_all_settings
     redirect_to :back
   end
-  
+
   def dev_panel
     @dev_panel_shown = true
     @char_bits = char_bits Post.last 10
@@ -20,12 +47,12 @@ class SettingsController < ApplicationController
     elsif params[:portal_token]
       @portal = Portal.find_by_unique_token params[:portal_token]
       if @portal
-        @portal_link = root_url; @portal_link.slice!(-1)
-        @portal_link +=enter_portal_path(@portal.unique_token)
+        @portal_link = root_url.gsub('http', "http#{in_dev? ? '' : 's'}"); @portal_link.slice!(-1)
+        @portal_link +=inter_portal_path(@portal.unique_token)
       end
     end
   end
-  
+
   def index
   end
 
@@ -47,12 +74,24 @@ class SettingsController < ApplicationController
         end
       end
     end
-    redirect_to :back
+    if params[:ajax]
+      @dropdown = true
+    else
+      redirect_to :back, notice: "Settings updated successfully..."
+    end
   end
-  
+
   private
-  
+
+  def admin_only
+    unless admin?
+      redirect_to '/404'
+    end
+  end
+
   def dev_only
-    dev?
+    unless dev?
+      redirect_to '/404'
+    end
   end
 end

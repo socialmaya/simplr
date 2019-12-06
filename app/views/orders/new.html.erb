@@ -1,0 +1,12 @@
+<h2 class="standard_page_header">Confirm check out <i class="fa fa-shopping-basket"></i></h2>
+
+<% for product in @products %>
+  <%= render "products/card", product: product %>
+<% end %>
+
+<%= standard_dark_card do %>
+  <p>
+    Please enter your card information below...
+  </p>
+  <%= render "orders/form" %>
+<% end %>

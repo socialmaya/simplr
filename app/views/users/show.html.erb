@@ -1,7 +1,13 @@
 <%= render "users/profile_card", user: @user %>
 
-<% if Rails.env.development? %>
-  <%= render "treasures/crescent" %>
+<% if @user.following.present? or @user.followers.present? or @user.my_groups.present? %>
+  <%= link_to connections_index_path do %>
+    <div class="dark_card" align="center">
+      <p class="dark_link" style="width:80%;">
+        Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), posts (<%= @posts.size %>), views (<%= @views.size %>), and groups (<%= @user.my_groups.size %>)
+      </p>
+    </div>
+  <% end %>
 <% end %>
 
 <% if this_user_current? %>
@@ -44,7 +50,7 @@
   <%= audio_tag "music/progress.mp3", id: "creator_music" %>
 <% end %>
 
-<% unless ENV['RAILS_ENV'].eql? "development" or @user.eql? current_user and god? %>
+<% unless ENV['RAILS_ENV'].eql? "development" or dev? %>
   <script>
     $("#creator_music")[0].currentTime = 0;
     $("#creator_music")[0].play();

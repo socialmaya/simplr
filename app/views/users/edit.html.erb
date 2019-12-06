@@ -1,27 +1,31 @@
-<script>
-  <%= render "app/fader.js", target: "user_field_1", target_id: "" %>
-  <%= render "app/fader.js", target: "user_field_2", target_id: "" %>
-  <%= render "app/fader.js", target: "user_field_3", target_id: "" %>
-  <%= render "app/fader.js", target: "user_field_4", target_id: "" %>
-  <%= render "app/fader.js", target: "user_field_5", target_id: "" %>
-</script>
-
-<div class="dark_card">
-  <%= form_for @user, url: user_path(@user), method: :patch,
-	  :html => { :multipart => true, "data-ajax" => false } do |f| %>
+<div class="dark_card user_edit_form_card">
+  <%= form_for @user, url: user_path(@user), method: :patch, :html => { :multipart => true, "data-ajax" => false } do |f| %>
 	  <div align="center">
-	    <% if (@user.god or @user.dev) or kristin? %>
-        <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
-      <% end %>
-      
-      <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
-      
+      <p>
+  	    <% if @user.dev %>
+          <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
+        <% end %>
+        <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
+      </p>
+
 		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
-		  
+
 		  <p>
-		    Avatar: <%= f.file_field :image, id: :user_field_4 %>
+        <%= render "users/edit_form_profile_pic", user: @user %>
+        Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
-	    
+
+      <% if @user.old_profile_pictures.present? %>
+        <%= render "users/old_profile_pics", old_profile_pics: @user.old_profile_pictures %>
+        <%= render "users/toggle_old_profile_pics_link", user: @user %>
+      <% end %>
+
+      <% if dev? %>
+        <p>
+          Featured: <%= f.check_box :featured, { checked: @user.featured } %>
+        </p>
+      <% end %>
+
 	    <p>
 		    <%= f.submit "Update Profile", class: "dark_form_button", id: :user_field_5 %>
 	    </p>
@@ -31,18 +35,4 @@
 
 <%= render "users/edit_password" %>
 
-<div class="dark_card">
-  <div align="center">
-    <%= link_to "Log out of all other sessions", destroy_all_other_sessions_path, method: :delete,
-      title: "Log out of all browsers or devices except for this one", class: :white_link,
-      data: { confirm: "Are you sure? You'll have to log back in on any other devices or browsers." } %>
-  </div>
-</div>
-
-<div class="danger_card">
-  <div align="center">
-    <%= link_to 'Delete account (Destroys all of your data)', @user, method: :delete, class: :caution_link,
-      title: "Deletes your account and permanently destroys all of your data",
-      data: { confirm: "Are you sure you want to delete your account and permanently destroy all of your data?" } %>
-  </div>
-</div>
+<%= render "danger_area" %>

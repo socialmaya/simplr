@@ -2,14 +2,131 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.circle_menu_nav_links {
+  padding-top: 17.5px;
+  padding-left: 7.5px;
+}
+
+.circle_menu_container {
+  transition: all .4s ease-in-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+.circle_menu_open {
+	background: rgb(10, 10, 10);
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+}
+
+.circle_menu_link {
+  transition: all .4s ease-out;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.35);
+}
+
+.circle_menu_rotate {
+  transform-origin: 10px 10px;
+  transform: rotate(225deg);
+  //box-shadow: -1.25px -1.25px 1.25px rgb(255,192,203);
+  background: #72FE95;
+  box-shadow: 0 0 15px orange;
+}
+
+@mixin circle_menu_section {
+  transition: all .6s ease-in-out .4s;
+  display: block;
+  width: 50%;
+  height: 50%;
+  float: left;
+}
+
+.circle_menu_section_top_left {
+  @include circle_menu_section;
+  border-top-left-radius: 100%;
+  background: lightblue;
+}
+
+.circle_menu_section_top_right {
+  @include circle_menu_section;
+  border-top-right-radius: 100%;
+  background: pink;
+}
+
+.circle_menu_section_bottom_left {
+  @include circle_menu_section;
+  border-bottom-left-radius: 100%;
+  background: pink;
+}
+
+.circle_menu_section_bottom_right {
+  @include circle_menu_section;
+  border-bottom-right-radius: 100%;
+  background: lightblue;
+}
+
+.circle_top_left_shift {
+  transform: translate(-2.5px, -2.5px);
+  background: pink;
+  //box-shadow: -1.5px -1.5px 1.5px lightblue;
+}
+
+.circle_top_right_shift {
+  transform: translate(2.5px, -2.5px);
+  background: lightblue;
+  //box-shadow: 1.5px -1.5px 1.5px pink;
+}
+
+.circle_bottom_left_shift {
+  transform: translate(2.5px, 2.5px);
+  background: pink;
+  //box-shadow: 1.5px 1.5px 1.5px lightblue;
+}
+
+.circle_bottom_right_shift {
+  transform: translate(-2.5px, 2.5px);
+  background: lightblue;
+  //box-shadow: -1.5px 1.5px 1.5px pink;
+}
+
+.loading_gif {
+  width: 40%;
+  margin-top: 50px;
+}
+
+.side_pane_activity {
+  text-align: left;
+  padding-left: 10px;
+  margin-top: -7.5px;
+  width: 100%;
+}
+
+.right_pane_sub {
+  position: relative;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 12.5px;
+  padding-top: 12.5px;
+  background: rgb(10, 10, 10);
+  color: rgb(175, 175, 175);
+}
+
 .right_pane {
   position: absolute;
   right: -262.5px;
   top: 0px;
   width: 250px;
-  min-height: 200px;
-  background: rgb(10, 10, 10);
-  padding-top: 20px;
 }
 
 .left_pane {
@@ -63,8 +180,8 @@
 }
 
 .load_wheel_container {
-	width: 25px;
-	height: 25px;
+	width: 50px;
+	height: 50px;
 }
 
 .load_wheel {
@@ -111,8 +228,9 @@
 }
 
 .load_circle_containor {
-  width: 20px;
-  height: 20px;
+  margin-top: 25px;
+  width: 30px;
+  height: 30px;
   position: relative;
 }
 
@@ -148,21 +266,34 @@
   right: 15px
 }
 
+.fibonacci_loading {
+  position: relative;
+  max-width: 565px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 98.65%;
+}
+
+.fib_loading_label {
+  font-size: 40px;
+}
+
 #standard_nav_menu {
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
+  background: rgb(10, 10, 10);
   margin-bottom: 15px;
   z-index: 5;
 }
 
 .standard_nav_menu_link {
-	color: white;
-	font-size: 20px;
+	color: rgb(195,195,195);
+	font-size: 26px;
 	display: block;
 	padding: 5px 5px;
-	background: black;
+	background: rgb(10, 10, 10);
 }
 
 #menu_link_container {
@@ -175,20 +306,72 @@
   z-index: 1;
 }
 
+.slide_menu_container {
+  transition: all .4s ease-in-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  background: black;
+  z-index: 10;
+}
+
+.slide_menu_toggle_link {
+  transition: all .4s ease-in-out;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.slide_menu_open {
+	background: rgb(10, 10, 10);
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  position: fixed;
+}
+
+.slide_menu_toggle_link_span {
+  transform: translateX(320px);
+}
+
+.plus_sign {
+  transition: all .4s ease-in-out;
+  font-weight: bolder;
+  font-size: 35px;
+  width: 100%;
+  height: 100%;
+	color: rgb(175, 175, 175);
+	position: relative;
+}
+
+.plus_rotate {
+  transform-origin: 20px 20px;
+  transform: rotate(225deg);
+}
+
+.plus_fade {
+  text-shadow: 1.25px 1.25px 1.25px pink;
+  color: lightblue;
+}
+
 #toggle_menu_link {
-	position: fixed;
+	position: relative;
 	top: 7.5px;
 	left: 12.5px;
-	color: white;
 	font-size: 13px;
-	z-index: 2;
+	color: rgb(175, 175, 175);
 }
 
 .return_home_link {
   position: absolute;
   top: 12.5px;
-  left: 75px;
-  color: white;
+  left: 65.5px;
+  color: rgb(175, 175, 175);
 }
 
 #scroll_to_top_link_icon {
@@ -197,24 +380,59 @@
   left: 17.5px;
 }
 
-#scroll_to_top_link_container {
+.scroll_to_top_link_container {
   position: fixed;
   bottom: 0px;
   right: 0px;
   width: 47.5px;
   height: 40.5px;
   background: black;
-  z-index: 1;
+  z-index: 5;
 }
 
-#scroll_to_top_link {
-  color: white;
+.scroll_to_top_link {
+  color: rgb(175, 175, 175);
   font-size: 20px;
   display: none;
 }
 
-#vertical_load_screen {
-  position: relative;
+@mixin line_fader {
+  transition: all 0.3s ease-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: black;
+  width: 100%;
+  height: 0px;
+  z-index: 15;
+}
+
+.top_line_fader {
+  @include line_fader;
+}
+
+.bottom_line_fader {
+  transition: all 0.3s ease-out;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background: black;
+  width: 100%;
+  height: 0px;
+  z-index: 15;
+}
+
+.top_line_faded {
+  box-shadow: 0px 3.5px 1.25px 1.5px pink;
+  background: lightblue;
+  height: 3.5px;
+}
+
+.bottom_line_faded {
+  box-shadow: 0px -3.5px 1.25px 1.5px pink;
+  background: lightblue;
+  height: 3.5px;
+  bottom: 3.5px;
 }
 
 // for mobile
@@ -225,7 +443,3 @@
     left: 0px;
   }
 }
-
-
-
-

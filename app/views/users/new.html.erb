@@ -1,19 +1,43 @@
-<% if params[:already_redeemed] %>
-  <div class="card">
-    <p align="center">
-      Invitation already redeemed.
-    </p>
-  </div>
-<% end %>
-
-<% unless current_user %>
-  <%= render "connections/invited_message" %>
-  <%= render 'form' %>
-  <%= render "posts/feed" %>
+<% if raleigh_dsa? %>
+  <%= render 'dsa_new' %>
 <% else %>
-  <div class="card">
-    <p align="center">
-      You've already signed up.
-    </p>
-  </div>
+  <% if params[:already_redeemed] %>
+    <div class="card">
+      <p align="center">
+        Invitation already redeemed.
+      </p>
+    </div>
+  <% end %>
+
+  <% unless current_user %>
+    <%= render "connections/invited_message" %>
+    <%= render 'form' %>
+
+    <%= render 'app/github_card' %>
+
+    <%= render "posts/feed_loader" %>
+    <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
+
+    <% muzak = rand 3; if muzak == 0 %>
+      <%= audio_tag "music/future_business.mp3", id: "invited_music" %>
+    <% elsif muzak == 1 %>
+      <%= audio_tag "music/progress.mp3", id: "invited_music" %>
+    <% else %>
+        <%= audio_tag "music/high_tech_city.mp3", id: "invited_music" %>
+    <% end %>
+
+    <% unless cookies[:invited_music_stopped] %>
+      <script>
+        $("#invited_music")[0].currentTime = 0;
+        $("#invited_music")[0].play();
+      </script>
+    <% end %>
+
+  <% else %>
+    <div class="card">
+      <p align="center">
+        You've already signed up.
+      </p>
+    </div>
+  <% end %>
 <% end %>

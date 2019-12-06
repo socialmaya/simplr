@@ -1,0 +1,50 @@
+<% unless current_user %>
+  <div class="card">
+    <%= form_tag sessions_path, class: "ui form login_form_sm", id: :session_form do %>
+      <%= hidden_field_tag :on_point, true %>
+      <div class="field">
+        <label>Username</label>
+        <%= text_field_tag :login, nil, placeholder: "Username" %>
+      </div>
+
+      <div class="field">
+        <label>Passphrase</label>
+        <%= password_field_tag :password, nil, placeholder: "Passphrase" %>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+      	  <%= check_box_tag :remember_me, 1, params[:remember_me], class: :hidden %>
+          <label>Remember me</label>
+        </div>
+      </div>
+
+      <button class="ui button" type="submit">Log in</button>
+
+    <% end %>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('.ui.checkbox').checkbox();
+      setTimeout(scroll_to_form, 500);
+    });
+
+    function scroll_to_form() {
+      var session_form = $("#session_form");
+
+      $('html, body').animate({
+        scrollTop: ($(session_form).offset().top - 55)
+      }, 500);
+    }
+  </script>
+<% else %>
+  <%= link_to bigger_bucks_path do %>
+    <div class="ui message">
+      <div class="header">
+        You've already logged in.
+      </div>
+      <p>Click here to return home.</p>
+    </div>
+  <% end %>
+<% end %>

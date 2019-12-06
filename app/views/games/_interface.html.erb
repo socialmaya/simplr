@@ -1,0 +1,56 @@
+<div id="interface_main">
+  <div class="dark_card" id="interface_card" align="center">
+    <% if your_turn? and game.all_players_ready? %>
+      <div id="your_turn_stuff">
+        <div class="turn_choice_prompt" align="left">
+          <b>What do you want to do?</b>
+        </div>
+        
+        <div class="choices_container">
+          <% for choice in your_choices %>
+            <%= link_to select_turn_choice_path(choice), remote: true do %>
+              <div class="turn_choice" id="turn_choice_<%= choice.to_s %>">
+                <%= choice.to_s.capitalize %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <div class="turn_choice_dropdown" id="turn_choice_dropdown" hidden>
+        </div>
+      </div>
+    <% else %>
+      <p>
+        Waiting for other player(s)...
+      </p>
+    <% end %>
+  
+    <% if in_dev? %>
+      <p>
+        <% if current_user.eql? User.first %>
+          <%= link_to "h a c k other player",
+            hijack_path(token: User.second.unique_token, game_token: game.unique_token), class: :white_link %>
+        <% else %>
+          <%= link_to "h a c k other player",
+            hijack_path(token: User.first.unique_token, game_token: game.unique_token), class: :white_link %>
+        <% end %>
+      </p>
+    <% end %>
+    
+    <p>
+      You <%= "#{current_user._class.dead? ? 'are dead' \
+        : 'have ' + current_user._class.health.to_i.to_s + ' health'}" %> (<%= current_user._class.game_class %>)
+    </p>
+    
+    <% for player in game.other_players current_user %>
+      <% if player._class %>
+        <p>
+          <%= player.name %> <%= "#{player._class.dead? ? 'is dead' \
+            : 'has ' + player._class.health.to_i.to_s + ' health'}" %> (<%= player._class.game_class %>)
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div id="interface_anchor"></div>

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114233620) do
+ActiveRecord::Schema.define(version: 20191205080643) do
+
+  create_table "arts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "unique_token"
+    t.string   "element_id"
+    t.integer  "art_id"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.string   "shape"
+    t.string   "color"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,12 +47,17 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.integer  "bot_id"
     t.string   "page"
     t.string   "parent_tokens"
+    t.integer  "group_id"
+    t.string   "misc_data"
+    t.binary   "blob_data"
   end
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "product_token_list"
+    t.string   "unique_token"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -84,6 +102,27 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.boolean  "mod"
     t.boolean  "admin"
     t.string   "title"
+    t.integer  "game_id"
+  end
+
+  create_table "crono_jobs", force: :cascade do |t|
+    t.string   "job_id",                               null: false
+    t.text     "log",               limit: 1073741823
+    t.datetime "last_performed_at"
+    t.boolean  "healthy"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "game_pieces", force: :cascade do |t|
@@ -96,9 +135,41 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.string   "image"
     t.string   "game_type"
     t.string   "piece_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "game_piece_id"
+    t.integer  "game_id"
+    t.string   "game_class"
+    t.integer  "level"
+    t.string   "ability"
+    t.boolean  "active"
+    t.integer  "level_requirement"
+    t.string   "item_type"
+    t.integer  "cost"
+    t.datetime "expires_at"
+    t.boolean  "game_class_preset"
+    t.float    "health"
+    t.float    "stamina"
+    t.float    "mana"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "folder_id"
+    t.string   "title"
+    t.string   "name"
+    t.string   "body"
+    t.string   "description"
+    t.string   "ability"
+    t.string   "stats"
+    t.boolean  "active"
+    t.string   "item_type"
+    t.datetime "expires_at"
+    t.string   "unique_token"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "game_type"
+    t.integer  "current_turn_of_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -119,6 +190,15 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.boolean  "hidden"
     t.string   "social_structure"
     t.integer  "total_items_seen"
+  end
+
+  create_table "item_libraries", force: :cascade do |t|
+    t.string   "name"
+    t.text     "body"
+    t.string   "image"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "unique_token"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -169,12 +249,28 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.string   "item_token"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "product_token_list"
+    t.integer  "total_cents"
+    t.string   "address"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "unique_token"
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "wiki_id"
+    t.integer  "product_id"
+    t.string   "classifier_name"
+    t.integer  "order"
+    t.integer  "proposal_id"
+    t.integer  "user_id"
+    t.boolean  "reverted_back_to"
   end
 
   create_table "portals", force: :cascade do |t|
@@ -190,8 +286,9 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.boolean  "mod"
     t.boolean  "dev"
     t.boolean  "admin"
-    t.boolean  "goddess"
-    t.boolean  "god"
+    t.boolean  "expired"
+    t.boolean  "to_anrcho"
+    t.boolean  "to_dsa"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -212,6 +309,7 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.boolean  "sound"
     t.string   "audio"
     t.string   "audio_name"
+    t.boolean  "featured"
   end
 
   create_table "products", force: :cascade do |t|
@@ -219,8 +317,12 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.integer  "wish_list_id"
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "body"
+    t.string   "unique_token"
+    t.integer  "price_cents",    default: 0,     null: false
+    t.string   "price_currency", default: "USD", null: false
   end
 
   create_table "proposals", force: :cascade do |t|
@@ -280,6 +382,26 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shared_items", force: :cascade do |t|
+    t.string   "name"
+    t.text     "body"
+    t.string   "item_type"
+    t.string   "domain"
+    t.string   "size"
+    t.string   "aka"
+    t.string   "arrangment"
+    t.string   "holder"
+    t.string   "originator"
+    t.string   "contact"
+    t.string   "address"
+    t.boolean  "in_stock"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "image"
+    t.integer  "item_library_id"
+    t.string   "unique_token"
+  end
+
   create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
     t.string   "value",      limit: 6
@@ -297,6 +419,55 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "post_id"
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.text     "body"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "survey_result_id"
+    t.text     "question_body"
+    t.integer  "survey_question_id"
+    t.boolean  "other"
+  end
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.text     "body"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "question_type"
+    t.boolean  "grid"
+  end
+
+  create_table "survey_results", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_selections", force: :cascade do |t|
+    t.integer  "survey_question_id"
+    t.text     "body"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.boolean  "row"
+    t.integer  "survey_selection_id"
+    t.boolean  "other"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "title"
+    t.text     "body"
+    t.string   "image"
+    t.integer  "user_id"
+    t.text     "questions"
+    t.integer  "group_id"
+    t.string   "unique_token"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -371,15 +542,20 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.boolean  "dev"
     t.boolean  "mod"
     t.integer  "xp"
-    t.boolean  "gatekeeper"
     t.datetime "last_active_at"
-    t.boolean  "god"
     t.boolean  "hidden"
     t.string   "title"
     t.boolean  "forrest_only"
     t.string   "foc_unique_token"
     t.boolean  "guest"
-    t.boolean  "goddess"
+    t.string   "meme_war_class"
+    t.string   "zodiac"
+    t.integer  "energy_points"
+    t.string   "geo_coordinates"
+    t.string   "location"
+    t.boolean  "featured"
+    t.boolean  "admin"
+    t.boolean  "dsa_member"
   end
 
   create_table "views", force: :cascade do |t|
@@ -408,6 +584,7 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.integer  "device_pixel_ratio"
     t.string   "controller_name"
     t.string   "action_name"
+    t.string   "current_url"
   end
 
   create_table "votes", force: :cascade do |t|
@@ -424,6 +601,7 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.integer  "bot_id"
   end
 
   create_table "wiki_versions", force: :cascade do |t|
@@ -446,8 +624,10 @@ ActiveRecord::Schema.define(version: 20171114233620) do
 
   create_table "wish_lists", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "product_token_list"
+    t.string   "unique_token"
   end
 
 end

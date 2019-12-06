@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :settings, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :bots, dependent: :destroy
@@ -10,32 +11,75 @@ class User < ActiveRecord::Base
   has_many :proposals, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
-  has_many :carts, dependent: :destroy
-  has_many :wish_lists, dependent: :destroy
+  has_many :game_pieces, dependent: :destroy
+  has_many :games, dependent: :destroy
   has_many :treasures
   has_many :portals
   has_many :groups
+
+  # ecommerce associations
+  # has_many :orders
+  # has_many :products, dependent: :destroy
+  # has_one :wish_list, dependent: :destroy
+  # has_one :cart, dependent: :destroy
 
   validates_uniqueness_of :name
   validates_presence_of :name, length: { minimum: 3 }
   validates_presence_of :password, length: { minimum: 4 }
   validates_confirmation_of :password
 
-  before_create :encrypt_password, :generate_token, :gen_unique_token
+  before_create :encrypt_password, :generate_token, :gen_unique_token, :gen_energy_points
   after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
-  
-  scope :forrest_only, -> { where forrest_only: true }
-  
+
+  scope :featured, -> { where featured: true }
+  scope :dsa_members, -> { where dsa_member: true }
+
+  # finds @ mention for user with name including spaces
+  def self.spaced_name_has_at? text
+    if text.include? "@"
+      text = text.split " "
+      name = ""; started = false; len = 0; for t in text
+        # only removes @ for first word containing @
+        if t.include? "@"
+          name << t.slice(t.index("@")+1..t.size)
+          started = true
+          len += 1
+        # otherwise only inserts word with prepended space
+        elsif started
+          name << " " + t
+          len += 1
+        end
+        u = find_by_name name
+        break if u
+      end
+    end
+    return { user: u, len: len }
+  end
+
+  def my_cart
+    Cart.initialize self if cart.nil? or not cart.product_token_list.present?
+    return cart
+  end
+
+  def my_wish_list
+    WishList.initialize self if wish_list.nil? or not wish_list.product_token_list.present?
+    return wish_list
+  end
+
+  def _class
+    self.game_pieces.where.not(game_class: nil).first
+  end
+
   def kristin?
     self.id.eql? 34
   end
-  
-  def my_cart
-    carts.last
+
+  def self.kristin
+    self.find_by_id 34
   end
-  
+
   # optional arg to check if power present AND not expired
   def has_power? power, not_expired=nil
     treasure = self.treasures.find_by_power power
@@ -45,7 +89,7 @@ class User < ActiveRecord::Base
       return treasure
     end
   end
-  
+
   def active_powers
     powers = []
     self.treasures.where.not(power: nil).where(expired: [nil, false]).each do |power|
@@ -53,7 +97,11 @@ class User < ActiveRecord::Base
     end
     return powers
   end
-  
+
+  def self.grant_xp_to_all
+
+  end
+
   def loot treasure
     # duplicates treasure and assigns duplicate to user
     dup_treasure = treasure.dup; dup_treasure.user_id = self.id
@@ -66,7 +114,7 @@ class User < ActiveRecord::Base
       return dup_treasure
     end
   end
-  
+
   def level
     xp_to_nxt_lvl = 0; progress = 0.0; lvl = 0
     # leveling scales based on fibonacci, initialized with 0
@@ -88,8 +136,8 @@ class User < ActiveRecord::Base
     # returns current level, current progress, or XP left until next level
     return { xp_left: xp_to_nxt_lvl, progress: progress, lvl: lvl }
   end
-  
-  def feed forrest_only=nil
+
+  def feed
     _feed = []
     # all posts from users followed
     for user in following
@@ -118,8 +166,6 @@ class User < ActiveRecord::Base
     Proposal.globals.main.each do |proposal|
       _feed << proposal unless _feed.include? proposal
     end
-    # only gets foc posts when forrest_only
-    _feed.delete_if { |item| !item.forrest_only } if forrest_only
     # removes hidden posts or hidden users posts
     _feed.delete_if do |item|
       if item.is_a? Post and not item.user.eql? self
@@ -130,9 +176,56 @@ class User < ActiveRecord::Base
         end
       end
     end
-    # sorts posts/proposals chronologically
-    _feed.sort_by! { |item| item.score self }
+    # sorts posts/proposals chronologically or by score weight
+    _feed.sort_by! { |item| Setting.settings(self)[:chrono_feed_on] ? item.created_at : item.score(self) }
+    #_feed.sort_by! { |item| item.created_at }
     return _feed.reverse
+  end
+
+  def old_profile_pictures
+    pics = []; for pic in profile_pictures
+      pics << pic unless pic.eql? current_profile_picture
+    end
+    pics
+  end
+
+  def current_profile_picture
+    # check for new img way
+    if pictures.present?
+      # if reverted back to old profile pic, return that
+      reverted = pictures.where reverted_back_to: true
+      if reverted.present?
+        return reverted.last
+      else
+        # else just return newest uploaded profile pic
+        return pictures.last
+      end
+    # return old img way
+    elsif image_url
+      return self
+    end
+    nil
+  end
+
+  def profile_pictures
+    pics = pictures.to_a
+    pics.unshift self if image_url
+    pics
+  end
+
+  def dup_profile_pic_made?
+    if image_url and pictures.present?
+      pic_name = image_url.split("/").last
+      for pic in pictures
+        this_pic_name = pic.image_url.split("/").last
+        return true if this_pic_name.eql? pic_name
+      end
+    end
+    nil
+  end
+
+  def profile_views
+    View.where profile_id: id
   end
 
   def following? other_user
@@ -168,7 +261,7 @@ class User < ActiveRecord::Base
   def request_to_join group
     self.connections.create group_id: group.id, request: true
   end
-  
+
   def my_groups
     _my_groups = []
     self.groups.each { |group| _my_groups << group }
@@ -188,16 +281,16 @@ class User < ActiveRecord::Base
   def requests
     self.connections.requests
   end
-  
+
   def inbox_unseen
     unseen = 0
     for folder in self.message_folders
-      unseen_msgs = folder.unseen_messages(self) 
+      unseen_msgs = folder.unseen_messages(self)
       unseen += unseen_msgs if unseen_msgs > 0
     end
     return unseen
   end
-  
+
   def folder_between user
     for folder in self.message_folders
       if folder.connections.size.eql? 2 and folder.connections.where(user_id: user.id).present?
@@ -206,7 +299,7 @@ class User < ActiveRecord::Base
     end
     return _folder
   end
-  
+
   def message_folders
     folders = []
     self.connections.where.not(connection_id: nil).each do |connection|
@@ -216,11 +309,11 @@ class User < ActiveRecord::Base
     end
     return folders
   end
-  
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
+
   def initialize_settings
     _settings = Setting.names
     # puts names from both categories into one array
@@ -273,10 +366,14 @@ class User < ActiveRecord::Base
   end
 
   private
-  
+
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64
     end while User.exists? unique_token: self.unique_token
+  end
+
+  def gen_energy_points
+    self.energy_points = rand 1000
   end
 end

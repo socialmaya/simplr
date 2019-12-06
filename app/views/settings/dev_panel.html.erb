@@ -1,6 +1,6 @@
 <h2 class="standard_page_header">Dev Panel <i class="fa fa-code"></i></h2>
 
-<div class="dark_card" align="center">
+<div class="dark_card" id="dev_card" align="center">
   <p>
     <%= link_to '<i class="fa fa-terminal fa-lg" aria-hidden="true"></i>'.html_safe,
       console_path, class: :white_link %> 
@@ -49,12 +49,20 @@
 
 <%= render "treasures/tweet_form" %>
 
-<%= render "bots/form" %>
-
-<div class="card">
-  <div align="center">
-    <%= render "treasures/form" %>
-  </div>
+<div class="dark_card" align="center">
+  <p id="check_internet_connection">
+    <b>Click to check internet connection...</b>
+  </p>
+  
+  <script>
+    $("#check_internet_connection").click(function() {
+      if (navigator.onLine) {
+        alert("You are online.");
+      } else {
+        alert("You are offline.");
+      }
+    });
+  </script>
 </div>
 
 <div class="dark_card" align="center">
@@ -84,3 +92,28 @@
     <%= link_to "Magic wand", play_audio_path("magic"), remote: true, class: :white_link %>
   </p>
 </div>
+
+<div class="card" align="center">
+  <p>
+    <button id="playPauseButton" class="playerButton" is="google-cast-button"></button>
+  </p>
+  <p id="cast_hello_world">
+    <b>Hello world text for Chromecast</b>
+  </p>
+</div>
+
+<script>
+  // none of this is working...
+  $("#cast_hello_world").click(function() {
+    var frenchSubtitle = new chrome.cast.media.Track(2, // track ID
+    chrome.cast.media.TrackType.TEXT);
+    frenchSubtitle.trackContentType = 'text/vtt';
+    frenchSubtitle.subtype = chrome.cast.media.TextTrackType.SUBTITLES;
+    frenchSubtitle.name = 'Hello World';
+    frenchSubtitle.language = 'fr';
+    frenchSubtitle.customData = null;
+
+    var textTrackStyle = new chrome.cast.media.TextTrackStyle();
+    textTrackStyle.foregroundColor = '#80FF0000';
+  });
+</script>

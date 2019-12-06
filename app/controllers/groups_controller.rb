@@ -5,17 +5,17 @@ class GroupsController < ApplicationController
   before_action :invite_only, except: [:new, :create, :update, :destroy, :show, :edit, :my_anon_groups]
   before_action :invited_or_anrcho, only: [:new, :create, :show]
   before_action :anrcho_only, only: [:my_anon_groups]
-  
+
   def load_more_posts
     build_feed
     @items = paginate @items
     page_turning @items
   end
-  
+
   def hide_featured_groups
     cookies.permanent[:hide_featured_groups] = true
   end
-  
+
   def their_groups
     @user = User.find_by_id params[:user_id]
     @groups = @user.my_groups.reverse
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
   def my_groups
     @group = Group.new
   end
-  
+
   def my_anon_groups
     unless current_user
       Group.delete_all_old
@@ -43,13 +43,17 @@ class GroupsController < ApplicationController
       @groups.reverse!
     end
   end
-  
+
   def index
     @groups = Group.global.reverse
   end
 
   def show
     if @group
+      # extra security
+      if @requested_by_integer_id
+        redirect_to show_group_path @group.unique_token
+      end
       reset_page
       # solves loading error
       session[:page] = 1
@@ -99,7 +103,7 @@ class GroupsController < ApplicationController
   def update
     if @group.update(group_params)
       Tag.extract @group
-      redirect_to @group
+      redirect_to :back, notice: "Group updated successfully..."
     else
       render :edit
     end
@@ -115,35 +119,35 @@ class GroupsController < ApplicationController
   end
 
   private
-  
+
   def build_feed
     @items = @group.posts + @group.proposals
     @items.sort_by! { |i| i.created_at }.reverse!
     @items_size = @items.size
   end
-  
+
   def anrcho_only
     unless anrcho?
       redirect_to '/404'
     end
   end
-  
+
   def invited_or_anrcho
     unless invited? or anrcho?
       redirect_to invite_only_path
     end
   end
-  
+
   def invite_only
     unless invited?
       redirect_to invite_only_path
     end
   end
-  
+
   def dev_only
     redirect_to '/404' unless dev?
   end
-  
+
   def secure_group
     set_group
     secure = if current_user
@@ -151,14 +155,28 @@ class GroupsController < ApplicationController
     else
       anon_token.eql? @group.anon_token
     end
-    redirect_to '/404' unless secure or dev?
+    # checks for model of consensus
+    consensus_group = @group.social_structure.eql? 'consensus'
+    # redirect to 404 unless secure
+    redirect_to '/404' if consensus_group or !(secure or dev?)
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_group
-    @group = Group.find_by_id(params[:id])
-    # sets group with token for anrcho groups
-    @group ||= Group.find_by_unique_token(params[:token])
+    if params[:token]
+      @group = Group.find_by_unique_token(params[:token])
+      @group ||= Group.find_by_name params[:token]
+      @group ||= Group.find_by_id(params[:token])
+    elsif params[:name] and not request.bot?
+      @group = Group.find_by_name(params[:name])
+    else
+      @group = Group.find_by_id(params[:id])
+      @group ||= Group.find_by_name params[:id]
+      @group ||= Group.find_by_unique_token(params[:id])
+      # for redirection to the more secure path
+      @requested_by_integer_id = true if @group
+    end
+    redirect_to '/404' unless @group or params[:id].nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

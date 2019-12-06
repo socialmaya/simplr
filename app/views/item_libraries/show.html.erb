@@ -1,0 +1,29 @@
+<%= render "item_libraries/card", item_library: @item_library %>
+
+<div class="dsa_card" align="center" id="show_shared_item_form_link_card">
+  <%= link_to show_shared_item_form_path(@item_library), remote: true, class: "survey_interactive_link" do %>
+    <p>
+      Share an item <i class="fa fa-pencil"></i>
+    </p>
+  <% end %>
+</div>
+
+<% for shared_item in @shared_items %>
+  <%= render "shared_items/card", shared_item: shared_item %>
+<% end %>
+
+<% if @shared_items.empty? %>
+  <div class="dsa_card" align="center">
+    <p>
+      No shared items have been added yet.
+    </p>
+  </div>
+<% end %>
+
+<div class="dsa_card" align="center">
+  <p>
+    <%= link_to 'See all item libraries <i class="fa fa-home"></i>'.html_safe, item_libraries_path %>
+  </p>
+</div>
+
+<%= render "app/link_sound.js", _class: true, link_id: :survey_interactive_link, sound: :post_interface_sound %>

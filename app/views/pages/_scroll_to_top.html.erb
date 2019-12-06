@@ -4,8 +4,12 @@
   <%= render "pages/toggle_scroll_to_top_link.js" %>
 </script>
 
-<%= link_to scroll_to_top_path, remote: true, id: :scroll_to_top_link do %>
-  <div id="scroll_to_top_link_container">
+<%= link_to scroll_to_top_path, remote: true, id: :scroll_to_top_link, class: "scroll_to_top_link #{'surveys_link' if raleigh_dsa?}" do %>
+  <div id="scroll_to_top_link_container" class="scroll_to_top_link_container
+    <% if raleigh_dsa? %>
+      surveys_scroll_to_top_link_container
+    <% end %>
+    ">
     <i class="fa fa-arrow-up" id="scroll_to_top_link_icon"></i>
   </div>
 <% end %>

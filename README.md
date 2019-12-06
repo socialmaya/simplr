@@ -1,10 +1,16 @@
-## Social Maya ॐ
+## Anrcho
 
-Social Maya, a secret place for cool art and philosophy.
+Anrcho, a model of consensus voting platform for the digital proletariat.
+
+## Social Maya
+
+Social Maya, a free and open source social network, and intentional digital community for artists and philosophers.
+
+## FOSS
 
 This is free and open source software, as specified above by the GNU General Public License.
 
-## Setting up Social Maya server
+## Setting up your local test server
 
 1. Download the package or clone the repo.
 2. Install Ruby version 2.2 using RVM or the Ruby Installer

@@ -1,0 +1,17 @@
+<h2 class="standard_page_header">Orders <i class="fa fa-truck"></i></h2>
+
+<%= standard_dark_card do %>
+  <p>
+    Showing order <%= @order.unique_token.capitalize %>
+  </p>
+  <%= render "products/right_pane" %>
+<% end %>
+
+
+<%= render "orders/card", order: @order %>
+
+<%= standard_dark_card do %>
+  <p>
+    <%= link_to "Return home", store_path, class: :white_link %>
+  </p>
+<% end %>

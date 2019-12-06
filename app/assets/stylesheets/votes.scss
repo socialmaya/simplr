@@ -2,8 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.voter_for_links_card_line {
+  border-top: 2.5px solid green;
+}
+
+.voter_against_links_card_line {
+  border-top: 2.5px solid red;
+}
+
+.voter_abstain_links_card_line {
+  border-top: 2.5px solid grey;
+}
+
+.vote_dropdown_table {
+  width: 70%;
+  height: 20px;
+  margin-bottom: 25px;
+}
+
+.vote_dropdown_table_cell {
+  width: 33.3333%;
+  height: 100%;
+  background: white;
+  float: left;
+}
+
 .new_vote_form {
   padding-bottom: 25px;
+}
+
+.new_vote_form_text_area {
+  margin-bottom: 5px;
 }
 
 .voted_on {
@@ -53,4 +82,12 @@
 
 #voter_links_card {
   min-height: 60px;
+}
+
+.vote_cast_btn_spacer {
+  margin-top: 4px;
+}
+
+.ratified_link_yay {
+  color: green;
 }

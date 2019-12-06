@@ -1,0 +1,29 @@
+<%= render "arts/bands", reds: true, slow: true %>
+
+<div class="vertical_spacer"></div>
+
+<% if currently_kristin? %>
+    <%= image_tag 'kristin_card_3.png', class: :hype_love_img %>
+  </br></br>
+<% end %>
+
+<div class="love_message_card love_message_card_glow" id="i_love_you_card" align="center">
+  <p id="i_love_you_txt" style="width:95%;">
+    I love you <%= current_user.name %>!
+  </p>
+  <p id="i_love_you_from">
+    - <%= link_to @treasure.giver.name, @treasure.giver, style: "color:red;" %>
+  </p>
+</div>
+
+<% if love_hypeable? @treasure.giver %>
+  <div class="love_message_card love_message_card_glow" align="center">
+    <p style="width:95%;">
+      Send some L O V E <i class="fa fa-bolt"></i> back to <%= @treasure.giver.name %>?
+    </p>
+    <p>
+      <%= link_to 'L O V E <i class="fa fa-bolt"></i>'.html_safe, hype_love_path(@treasure.giver.unique_token),
+        method: :post, id: "hype_love_link", style: 'color:red;' %>
+    </p>
+  </div>
+<% end %>

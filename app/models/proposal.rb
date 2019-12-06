@@ -2,25 +2,30 @@ class Proposal < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :group
   belongs_to :user
-  
+
   has_many :proposals, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
   has_many :likes, dependent: :destroy
-  
-  before_create :gen_unique_token, :spam_filter
+
+  accepts_nested_attributes_for :pictures
+
+  before_create :gen_unique_token
+  before_save :spam_filter
+  before_update :not_voted_on
   validates_presence_of :body
-  
+
   scope :main, -> { where requires_revision: [nil, false] }
   scope :globals, -> { where(group_id: nil).where.not action: :revision }
   scope :voting, -> { where(ratified: [nil, false]).where requires_revision: [nil, false] }
   scope :revision, -> { where requires_revision: true }
   scope :ratified, -> { where ratified: true }
-  
+
   mount_uploader :image, ImageUploader
-  
+
   def evaluate
     if ratifiable?
       self.ratify!
@@ -35,24 +40,34 @@ class Proposal < ActiveRecord::Base
       puts "\nProposal #{self.id} has been deprecated."
     end
   end
-  
+
   def ratify!
     # for revision proposals
     if self.proposal
       case action.to_sym
       when :revision
         Note.notify :proposal_revised, self.unique_token, (self.user ? self.user : self.anon_token)
+        # creates new obj dup as reivision is only an intermediary phase to the next version
+        # what happens to ratified revision motion?
         new_version = self.proposal.dup
         new_version.assign_attributes({
           requires_revision: false,
           action: self.revised_action,
           version: self.version,
           title: self.title,
-          body: self.body
+          body: self.body,
+          # to stay in group if present
+          group_id: self.group_id,
+          # also very important to most actions
+          misc_data: self.misc_data
+          # needs imgs as well, with img model
         })
         if new_version.save
+          # sets values to finish revision
           self.proposal.update(
+            # old version now ties back to new one
             proposal_id: new_version.id,
+            # officially revised
             revised: true
           )
         end
@@ -68,6 +83,16 @@ class Proposal < ActiveRecord::Base
         self.group.update ratification_threshold: 25
       when :limit_views
         self.group.update view_limit: 3
+      when :grant_title
+      when :update_name
+        self.group.update name: self.misc_data
+      when :update_description
+        self.group.update body: self.misc_data
+      when :update_social_structure
+        self.group.update social_structure: self.misc_data
+      when :create_bot
+        bot = self.group.bots.new
+        bot.save
       end
     # global proposals
     else
@@ -81,17 +106,17 @@ class Proposal < ActiveRecord::Base
     puts "\nProposal #{self.id} has been ratified.\n"
     self.tweet if ENV['RAILS_ENV'].eql? 'production'
   end
-  
+
   def rank user=nil, feed=nil
     proposals = self.group.present? ? self.group.proposals : Proposal.globals
     ranked = proposals.sort_by { |proposal| proposal.score }
     return ranked.reverse.index(self) + 1 if ranked.include? self
   end
-  
+
   def score user=nil, feed=nil, get_weights=nil
     Vote.score(self, get_weights)
   end
-  
+
   def self.action_types
     { general: "General statement or idea",
       direct_action: "Plan some direct action",
@@ -104,35 +129,39 @@ class Proposal < ActiveRecord::Base
       just_a_test: "Test motion",
       grant_title: "Grant title" }
   end
-  
+
   def self.group_action_types
     { add_hashtags: "Add hashtags",
+      update_name: "Update group name",
       update_banner: "Update group banner",
+      update_description: "Update group description",
+      update_social_structure: "Update group social structure",
       add_locale: "Set your locale as the groups",
       disband_early: "Disband, effective immediately",
       postpone_expiration: "Postpone expiration of the group",
       set_ratification_threshold: "Set ratification threshold to 25",
       update_manifesto: "Update group manifesto",
       limit_views: "Expire at view limit of 3",
+      create_bot: "Create a voter bot",
       grant_title: "Grant title",
       debate: "Debate" }
   end
-  
+
   def votes_to_ratify
     # also accounts for non verified votes as well, as half votes, since no peer review
     (self.ratification_threshold - (self.verified_up_votes.size + (self.up_votes.size / 2))).to_i + 1
   end
-  
+
   def requires_revision?
     self.verified_down_votes.size > 0 and not self.revised
   end
-  
+
   def ratifiable?
     # also accounts for non verified votes as well, as half votes, since no peer review
     !self.ratified and !(self.proposal.present? and self.proposal.revised) and self.verified_down_votes.size.zero? \
       and (self.verified_up_votes.size + (self.up_votes.size / 2)) > self.ratification_threshold
   end
-  
+
   def ratification_threshold
     # dynamic threshold able to be set by group proposal
     _threshold = if self.group and self.group.ratification_threshold.present?
@@ -140,7 +169,7 @@ class Proposal < ActiveRecord::Base
     else
       5
     end
-    # views for group if present
+    # views for group (instead of motion views) if present
     _views = if self.group
       self.group.views
     else
@@ -153,29 +182,33 @@ class Proposal < ActiveRecord::Base
   		return _threshold / 2
   	end
   end
-  
+
   def verified_up_votes
     self.up_votes.where verified: true
   end
-  
+
   def verified_down_votes
     self.down_votes.where verified: true
   end
-  
+
   def up_votes
     self.votes.up_votes.where moot: [nil, false]
   end
-  
+
   def down_votes
     self.votes.down_votes.where moot: [nil, false]
   end
-  
+
+  def abstains
+    self.votes.abstains
+  end
+
   def seent current_token
     unless self.seen? current_token
       self.views.create token: current_token
     end
   end
-  
+
   def seen? current_token
     if self.views.find_by_token current_token
       return true
@@ -183,11 +216,11 @@ class Proposal < ActiveRecord::Base
       return false
     end
   end
-  
+
   def revisions
     self.proposals.where action: "revision"
   end
-  
+
   # all proposals need to be updated as version 1 before this can work
   # unless database started with version 1 proposals by default
   def old_versions
@@ -197,11 +230,20 @@ class Proposal < ActiveRecord::Base
       end
     return versions
   end
-  
+
+  def identity
+    return user if user
+    return anon_token if anon_token
+  end
+
+  def able_to_edit?
+    self.votes.empty?
+  end
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
+
   def tweet
     message = ""
     insert = lambda { |char| message << char if message.size < 140 }
@@ -231,15 +273,38 @@ class Proposal < ActiveRecord::Base
       puts "Twitter API keys are not present."
     end
   end
-  
-  private
-  
-  def spam_filter
-    if self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
-      errors.add(:post, "cannot be vile fucking spam!")
+
+  def self.filter_spam
+    for proposal in self.all
+      if proposal.is_spam?
+        proposal.destroy
+      end
     end
   end
-  
+
+  def is_spam?
+    for i in [self.title.to_s, self.body.to_s]
+      if i.include? "business" or i.include? "capital" or i.include? "fund"
+        return true
+      end
+    end
+    nil
+  end
+
+  private
+
+  def not_voted_on
+    if votes.present?
+      errors.add(:proposal, "cannot be voted on.")
+    end
+  end
+
+  def spam_filter
+    if self.is_spam?
+      errors.add(:proposal, "cannot be spam")
+    end
+  end
+
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64

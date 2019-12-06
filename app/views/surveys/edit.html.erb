@@ -1,0 +1,13 @@
+<%= render "form" %>
+
+<div class="surveys_card" align="center">
+  <p>
+    <%= link_to 'See all surveys <i class="fa fa-home"></i>'.html_safe, surveys_path %>
+    <%= middle_dot %>
+    <%= link_to 'See results for this survey <i class="fa fa-list"></i>'.html_safe, survey_results_path(@survey) %>
+    <%= middle_dot %>
+    <%= link_to 'Take survey <i class="fa fa-group"></i>'.html_safe, take_survey_path(@survey.unique_token) %>
+  </p>
+</div>
+
+<%= render "danger_area" %>

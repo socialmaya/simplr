@@ -1,0 +1,7 @@
+<br/>
+
+<div class="surveys_card" align="center">
+  <%= link_to 'Delete survey (Destroys all data for results)', @survey, method: :delete, class: :danger_link,
+    title: "Deletes survey and permanently destroys all associated data",
+    data: { confirm: "Are you sure you want to delete this survey and permanently destroy all associated data?" } %>
+</div>

@@ -1,4 +1,16 @@
-<p id="notice"><%= notice %></p>
+<h2 class="standard_page_header">Store <i class="fa fa-shopping-bag"></i></h2>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<div class="dark_card" align="center">
+  <p>
+    Showing product <%= @product.name.capitalize %>
+  </p>
+  <%= render "right_pane" %>
+</div>
+
+<%= render "products/card", product: @product %>
+
+<%= standard_dark_card do %>
+  <p>
+    <%= link_to "Return home", store_path, class: :white_link %>
+  </p>
+<% end %>

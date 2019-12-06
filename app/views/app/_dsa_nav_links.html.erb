@@ -1,0 +1,20 @@
+<%= link_to fa_icon("users", "Raleigh DSA Social"), raleigh_dsa_social_path, class: :standard_nav_menu_link %>
+
+<%= link_to fa_icon("calendar", "Activist Calendar"), raleigh_dsa_social_path, class: :standard_nav_menu_link, id: :power_nav_menu_link %>
+
+<%= link_to fa_icon("book", "Tool Library"), item_libraries_path, class: :standard_nav_menu_link, id: :power_nav_menu_link if invited? %>
+
+<%= link_to fa_icon("check-square-o", "Surveys"), surveys_path, class: :standard_nav_menu_link, id: :power_nav_menu_link if invited? %>
+
+<% unless current_user %>
+  <%= link_to fa_icon("user-plus", "Sign up"), new_user_path, class: :standard_nav_menu_link if invited? %>
+  <%= link_to fa_icon("sign-in", "Log in"), sessions_new_path, class: :standard_nav_menu_link %>
+
+<% else %>
+  <%= link_to fa_icon("cog", "Admin"), dsa_admin_path, class: :standard_nav_menu_link if admin? %>
+
+  <%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete,
+  class: :standard_nav_menu_link, title: "Click here to destroy your cookie.",
+  data: { confirm: "Are you sure?" } %>
+
+<% end %>

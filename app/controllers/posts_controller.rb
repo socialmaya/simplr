@@ -1,38 +1,50 @@
 class PostsController < ApplicationController
+  before_action :dsa_to_dsa, only: [:index]
+  
   before_action :set_post, only: [:show, :edit, :update, :destroy, :share,
-    :hide, :open_menu, :close_menu, :add_photoset]
+    :hide, :feature, :open_menu, :close_menu, :add_photoset, :classify, :goto]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
-  before_action :invite_only, except: [:show, :create, :add_image, :add_video]
+  before_action :invite_only, except: [:show, :create, :add_image, :add_video, :raleigh_dsa]
   before_action :invited_or_token_used, only: [:show]
-  
+
+  before_action :dev_only, only: [:classify, :feature]
+
+  def raleigh_dsa
+  end
+
+  def classify
+    @picture = @post.pictures.first
+    notice = if @picture.classify
+      "Picture classification successful."
+    else
+      "Picture classification failed."
+    end
+  end
+
+  def floating_images
+    @user = User.find_by_unique_token params[:token]
+    @posts = @user.posts.first(100).select { |p| p.pictures.present? }
+  end
+
   def play_audio
     @post = Post.find_by_id params[:id]
   end
-  
+
   def read_more
     @post = Post.find_by_id params[:post_id]
   end
 
-  def open_menu
+  def move_picture_up
+    @picture = Picture.find_by_id params[:id]
+    @picture.move_up
+    @post = @picture.post
   end
 
-  def close_menu
-  end
-
-  def add_group_id
-  end
-
-  def add_video
-  end
-
-  def add_image
-  end
-
-  def add_audio
-  end
-
-  def add_photoset
+  def move_picture_down
+    @picture = Picture.find_by_id params[:id]
+    @picture.move_down
+    @post = @picture.post
   end
 
   def remove_picture
@@ -41,9 +53,12 @@ class PostsController < ApplicationController
     @picture.destroy
   end
 
+  def feature
+    @post.update featured: !@post.featured
+  end
+
   def hide
     @post.update hidden: true
-    redirect_to root_url
   end
 
   def share
@@ -73,28 +88,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def load_index
+    # ensuring loader only shows once per session
+    session[:loading_loader_seen] = true
+    run_for_main_feed
+  end
+
   def index
-    @you_are_home = true
-    @all_items = if current_user
-      # gets the current users posts, accounts for foc
-      current_user.feed forrest_only_club?
-    else
-      @preview_items = true
-      # gets preview items for invitee, accounting for when foc invitee
-      Post.preview_posts(invited_to_forrest_only_club?).last(10).reverse
-    end
-    @items = if @preview_items
-      @all_items
-    else
-      paginate @all_items
-    end
-    # accessible for other controllers
-    $all_items = @all_items # stays constant, only sorted once
-    @char_codes = char_codes @items
-    @char_bits = char_bits @items
     @post = Post.new
-    # records user viewing posts
-    @items.each {|item| seent item}
+    @you_are_home = true
+    @down = false # turn on for testing/maintence
+    if session[:loading_loader_seen]
+      # gets everything for main feed
+      run_for_main_feed
+    end
     # records current time for last visit
     record_last_visit
   end
@@ -120,12 +127,14 @@ class PostsController < ApplicationController
       seent @post
       # gets views, viewed by users other than current users
       @views = if current_user
-        @post.views.where.not(user_id: current_user.id)
+        @post.views.to_a - View.where(user_id: current_user.id).to_a
       else
         @post.views
       end
+
+
       # filters any views by the OP, of course they saw, they posted it
-      @views = @views.where.not(user_id: @post.user_id) if @post.user_id
+      @views = @views - View.where(user_id: @post.user_id) if @post.user_id
     else
       redirect_to '/404'
     end
@@ -146,6 +155,7 @@ class PostsController < ApplicationController
     end
     @post = Post.new(post_params)
     @group = Group.find_by_id params[:group_id]
+    @from_profile = params[:from_profile]
     # check to see if user is a member of group if ones selected
     @post.group_id = @group.id if current_user and @group and \
       (current_user.my_groups.include? @group or @group.user.eql? current_user)
@@ -170,16 +180,20 @@ class PostsController < ApplicationController
           params[:pictures][:image].each do |image|
             @post.pictures.create image: image
           end
+          # adds order numbers to each picture in photoset if more than 1
+          @post.pictures.first.ensure_order if @post.pictures.present? and @post.pictures.size > 1
         end
         # extracts any hashtags along with their position in the text
         Tag.extract @post
+        # checks for users mention and notifys each mentioned user
+        user_mentioned? @post
         # prepares vars for ajax create.js
         #@successfully_created = true
         #@post_just_created = @post
         #@post = Post.new
-        format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
+        format.html { redirect_to (@post.group.present? ? @post.group : (@from_profile ? @post.user : root_url)) }
       else
-        format.html { redirect_to root_url }
+        format.html { redirect_to (@from_profile ? @user : root_url) }
       end
     end
   end
@@ -193,6 +207,8 @@ class PostsController < ApplicationController
         params[:pictures][:image].each do |image|
           @post.pictures.create image: image
         end
+        # adds order numbers to each picture in photoset if more than 1 now
+        @post.pictures.first.ensure_order if @post.pictures.present? and @post.pictures.size > 1
       end
       Tag.extract @post
       redirect_to show_post_path @post.unique_token
@@ -211,45 +227,77 @@ class PostsController < ApplicationController
   end
 
   private
-    def invited_or_token_used
-      unless invited? or (params[:token] and params[:token].size > 4)
-        redirect_to '/404'
-      end
-    end
 
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+  def dsa_to_dsa
+    if raleigh_dsa?
+      redirect_to take_survey_path(Survey.last.unique_token)
     end
+  end
 
-    def secure_post
-      set_post
-      params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
-      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 4
-        redirect_to '/404'
-      end
+  def dev_only
+    unless dev?
+      redirect_to '/404'
     end
+  end
 
-    def reset_page_num
-      reset_page
+  # everything required to render main feed
+  def run_for_main_feed
+    # for recent anrcho spam
+    Proposal.filter_spam
+    @all_items = if current_user
+      current_user.feed
+    else
+      @preview_items = true
+      Post.preview_posts
     end
+    @items = paginate @all_items
+    # accessible for other controllers
+    $all_items = @all_items # stays constant, only sorted once
+    @char_codes = char_codes @items
+    @char_bits = char_bits @items
+    # records user viewing posts
+    @items.each {|item| seent item}
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      if params[:token]
-        @post = Post.find_by_unique_token(params[:token])
-        @post ||= Post.find_by_id(params[:token])
-      else
-        @post = Post.find_by_unique_token(params[:id])
-        @post ||= Post.find_by_id(params[:id])
-      end
-      redirect_to '/404' unless @post
+  def invited_or_token_used
+    unless invited? or (params[:token] and params[:token].size > 4)
+      redirect_to '/404'
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:user_id, :group_id, :body, :video, :image, :audio, :audio_name,
-        pictures_attributes: [:id, :post_id, :image])
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
+
+  def secure_post
+    set_post
+    params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
+    unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 4
+      redirect_to '/404'
+    end
+  end
+
+  def reset_page_num
+    reset_page
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    if params[:token]
+      @post = Post.find_by_unique_token(params[:token])
+      @post ||= Post.find_by_id(params[:token])
+    else
+      @post = Post.find_by_unique_token(params[:id])
+      @post ||= Post.find_by_id(params[:id])
+    end
+    redirect_to '/404' unless @post
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:user_id, :group_id, :body, :video, :image, :audio, :audio_name,
+      pictures_attributes: [:id, :post_id, :image])
+  end
 end

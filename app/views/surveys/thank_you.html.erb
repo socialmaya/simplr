@@ -1,0 +1,15 @@
+<div class="surveys_card" align="center">
+  <h2 class="surveys_page_header">
+    Thank you for taking our survey
+  </h2>
+</div>
+
+<% if invited? %>
+  <div class="surveys_card" align="center">
+    <%= link_to surveys_path do %>
+      <p>
+        See all surveys
+      </p>
+    <% end %>
+  </div>
+<% end %>

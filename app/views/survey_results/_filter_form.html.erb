@@ -1,0 +1,60 @@
+<%= form_tag filter_survey_results_path(id: @survey.id), method: :get, remote: true, class: :survey_results_filter_form, id: :survey_results_filter_form do |f| %>
+  <div class="results_filter_form_section">
+    <%= link_to '<i class="fa fa-refresh"></i>'.html_safe, reset_results_filter_path(@survey.id),
+      remote: true, class: "survey_results_filter_item survey_filter_form_link" %>
+    <%= render 'filter_form_button' %>
+  </div>
+
+  <div class="results_filter_form_section">
+    <% for question in @survey.open_ended_questions %>
+      <div class="survey_results_filter_item filter_item_open_ended">
+        <%= text_field_tag question.body.squish, nil, placeholder: "Filter for '#{question.body}'...", class: "results_filter_text_area" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="results_filter_form_section">
+    <% for question in @survey.checkbox_questions %>
+      <div class="survey_results_filter_item filter_item_checkbox">
+        <b><%= snip_survey_txt question.body %>:</b>
+        <% for selection in question.survey_selections %>
+          <% if selection.body.present? %>
+            <%= check_box_tag "question_#{question.id}_#{selection.body}", true %>
+            <%= snip_survey_txt (selection.other ? "Other..." : selection.body) %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @survey.radio_button_questions.present? %>
+    <div class="results_filter_form_section">
+      <% for question in @survey.radio_button_questions %>
+        <div class="survey_results_filter_item">
+          <%= select_tag question.body.squish, options_for_select(question.radio_button_options) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @survey.grid_questions.present? %>
+    <div class="survey_results_filter_item" id="filter_options" align="left">
+      <b id="click_to_filter_by_grid_txt">
+        Click to filter by the following grid questions:
+      </b>
+      <% for grid_question in @survey.grid_questions %>
+        <%= render "show_grid_filter_link", grid_question: grid_question %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="results_filter_form_section">
+    <%= link_to '<i class="fa fa-refresh"></i>'.html_safe, reset_results_filter_path(@survey.id),
+      remote: true, class: "survey_results_filter_item survey_filter_form_link" %>
+    <%= render 'filter_form_button' %>
+  </div>
+
+  <%= render "filter_form_button_fade.js" %>
+<% end %>
+
+<%= render "app/link_sound.js", _class: true, link_id: :survey_filter_form_link, sound: :post_interface_sound %>

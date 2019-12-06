@@ -3,13 +3,19 @@ class CommentsController < ApplicationController
   before_action :invite_only, except: [:new, :show, :create, :add_image]
   before_action :invite_only_or_anrcho, only: [:new, :show, :create, :add_image]
   before_action :dev_only, only: [:index]
-  
+
   def add_image
   end
-  
+
   def toggle_mini_index
-    @post = Post.find_by_id params[:post_id]
-    @comments = @post.comments.last 5 if @post
+    @item = if params[:proposal]
+      Proposal.find_by_unique_token params[:id]
+    elsif params[:vote]
+      Vote.find_by_unique_token params[:id]
+    else
+      Post.find_by_id params[:id]
+    end
+    @comments = @item.comments.last 5 if @item
     @comment = Comment.new
   end
 
@@ -60,14 +66,18 @@ class CommentsController < ApplicationController
     @from_mini_form = true if params[:mini_form] and params[:mini_form].present?
     if @comment.save
       @successfully_created = true
+      # extracts and hastags, creates them as db obj
       Tag.extract @comment
+      # checks for user mention and notifys mentioned user
+      user_mentioned? @comment
+      # checks if a reply, notfy and redirects accordingly
       if @comment.comment
         Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_identity \
           unless current_user.eql? @comment.comment.user \
           or (anon_token and anon_token.eql? @comment.anon_token)
         redirect_to @comment.comment
       elsif @comment.post
-        @post = @comment.post
+        @post = @item = @comment.post
         Note.notify :post_comment, @post, @post.user, current_identity \
           unless current_user.eql? @post.user \
           or (anon_token and anon_token.eql? @post.anon_token)
@@ -78,19 +88,21 @@ class CommentsController < ApplicationController
         # only redirects if not ajax
         if @from_mini_form
           @comment = Comment.new
-          @comments = @post.comments.last 5
+          @comments = @item.comments.last 5
         else
           @comment_just_created = @comment
           @comment = Comment.new
         end
       elsif @comment.proposal
-        @proposal = @comment.proposal
-        Note.notify :proposal_comment, @proposal.unique_token, @proposal.anon_token \
-          unless @proposal.anon_token.eql? anon_token
+        @proposal = @item = @comment.proposal; prepare_mini_form
+        Note.notify :proposal_comment, @proposal.unique_token, @proposal.identity, current_identity \
+          unless @proposal.identity.eql? current_identity
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
-        Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
-        redirect_to show_vote_path @comment.vote.unique_token 
+        @vote = @item = @comment.vote; prepare_mini_form
+        Note.notify :vote_comment, @vote.unique_token, @vote.identity, current_identity \
+          unless @vote.identity.eql? current_identity
+        redirect_to show_vote_path @vote.unique_token unless @from_mini_form
       end
     else
       redirect_to :back
@@ -119,11 +131,18 @@ class CommentsController < ApplicationController
   end
 
   private
-  
+
+  def prepare_mini_form
+    if @from_mini_form
+      @comments = @item.comments.last 5
+      @comment = Comment.new
+    end
+  end
+
   def dev_only
     redirect_to '/404' unless dev?
   end
-  
+
   def invite_only_or_anrcho
     unless invited? or anrcho?
       redirect_to '/404'
@@ -135,7 +154,7 @@ class CommentsController < ApplicationController
       redirect_to invite_only_path
     end
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])

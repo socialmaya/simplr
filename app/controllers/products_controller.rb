@@ -1,9 +1,14 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :invite_only
+
+  def add_image
+  end
 
   # GET /products
   # GET /products.json
   def index
+    @product = Product.new
     @products = Product.all
   end
 
@@ -28,6 +33,14 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        # checks for image upload
+        if params[:pictures]
+          # builds photoset for product
+          params[:pictures][:image].each do |image|
+            @product.pictures.create image: image
+          end
+        end
+
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -62,13 +75,28 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.fetch(:product, {})
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    if params[:token]
+      @product = Product.find_by_unique_token(params[:token])
+      @product ||= Product.find_by_id(params[:token])
+    else
+      @product = Product.find_by_id(params[:id])
+      @product ||= Product.find_by_unique_token(params[:id])
+    end
+    redirect_to '/404' unless @product
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.fetch(:product, {}).permit(:name, :description, :body, :image, :price,
+      pictures_attributes: [:id, :product_id, :image])
+  end
 end

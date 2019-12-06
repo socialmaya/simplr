@@ -1,0 +1,34 @@
+<div class="dark_card" align="center">
+  <%= render "app/time_ago", item: product, white_link: true %>
+  <p>
+    <%= product.name + " " + product.price.format %>
+  </p>
+
+  <% if product.pictures.present? %>
+    <%= link_to show_product_path(product.unique_token) do %>
+      <%= image_tag product.pictures.first.image, class: :product_img %>
+    <% end %>
+  <% end %>
+
+  <% if product.body.present? %>
+    <p class="<%= justified_body product %>">
+      <%= render "app/body", item: product %>
+    </p>
+  <% end %>
+
+  <table class="bottom_right_link">
+    <tr>
+      <td>
+        <span id="add_remove_cart_link_anchor_<%= product.id %>"></span>
+        <%= render "carts/add_remove_link", product: product %>
+      </td>
+      <td>
+        ·
+      </td>
+      <td>
+        <span id="add_remove_wish_list_link_anchor_<%= product.id %>"></span>
+        <%= render "wish_lists/add_remove_link", product: product %>
+      </td>
+    </tr>
+  </table>
+</div>

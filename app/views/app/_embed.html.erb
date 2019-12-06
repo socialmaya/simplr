@@ -1,13 +1,12 @@
 <!-- app -->
 
-<% if word =~ /\A#{URI::regexp}\z/ and word.include? "youtu" and !word.include? "user" and !word.include? "channel" %>
+<% if is_a_yt_link? word %>
 	<% word = word.slice 0...word.index("&") if word.include? "&" %>
 	<% word.sub! "watch?v=", "embed/" if word.include? "watch?v=" %>
 	<% word.sub! "youtu.be", "www.youtube.com/embed" if word.include? "youtu.be" %>
 	<iframe width="90%" height="315" src="<%= word %>" frameborder="0" allowfullscreen>
 	</iframe></br>
-<% elsif word =~ /\A#{URI::regexp}\z/ or word.include? "http://" or word.include? ".se" \
-  and word != "in:" and not ["::", ":)", ":]", "c:"].any? { |i| word.include? i } %>
+<% is_a_link? word %>
   <!-- if word is a link to an image file, renders image as standard image -->
 	<% if word.include? ".jpg" or word.include? ".png" or word.include? ".gif" %>
 		<div align="center"><%= image_tag word, class: :standard_image %></div>

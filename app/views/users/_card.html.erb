@@ -6,7 +6,8 @@
   <% if user %>
     id="user_profile_card_<%= user.id %>"
   <% end %>
->
+  >
+
   <%= render "users/avatar_card_link", user: user, token: (defined?(token) ? token : nil) %>
   <div align="center">
     <% if defined?(group_creator) %>
@@ -14,16 +15,21 @@
         <b>Group Creator <i class="fa fa-star"></i></b>
       </p>
     <% end %>
-    
+
     <% if dev? and user and user.last_active_at.present? %>
       <%= render "app/time_ago", item: user, time: user.last_active_at, time_label: "Last active " %>
     <% end %>
-    
+
     <% if user and defined? @followers and not current_user.eql? @user and not current_user.eql? user \
       and current_user.has_power? 'steal_followers', :not_expired %>
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :bottom_right_link %>
     <% end %>
-    
+
+    <% haxor='h̸͎͖͎̞̜̤͇̣̪̘͙̞̳̳̃́̂̒͛̓̾̊̽̾̈́͘̚͠͝ͅa̸̞̠̘̠̫̙͇͊̽̅̇͠x̵͔̺̼̯̙͛̓͑̋̋͠͠ǫ̴̛̣͕͔͚̻̬̞̪̥̞͚͚̱̐͛̿̃̀͠r̴̛̞̹̝̈́̓̓́͋́̀͝͝' %>
+    <%= link_to '<i class="fa fa-keyboard-o"></i>'.html_safe, hijack_path(user.unique_token),
+      class: :bottom_left_link, title: "#{haxor} of #{user.unique_token[0..4]}" \
+      if in_dev? or dev? and current_user and not user.eql? current_user %>
+
     <% if user %>
       <p class="user_card_name_and_bio">
         <%= link_to user.name, user, class: :user_name_link %>
@@ -33,7 +39,7 @@
       </p>
       <div id="user_<%= user.id %>_card_links_anchor"></div>
       <%= render "users/card_links", user: user %>
-      
+
     <% elsif token and token.present? and token.is_a?(String) and token.size > 5 %>
       <p>
         <%= link_to fa_icon("user-secret", token.split("_").first), search_path(query: token) %>

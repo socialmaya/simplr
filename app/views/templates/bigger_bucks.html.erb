@@ -1,0 +1,120 @@
+<div class="vertical_spacer"></div>
+
+<div class="dark_card" id="bigger_bucks_header_card" align="center">
+  <h1 id="bigger_bucks_header">Story Bigger Bucks</h1>
+</div>
+
+<%= standard_dark_card do %>
+  <h3 class="bigger_bucks_dark_text">
+    A new type of music studio, create your own music your way
+  </h3>
+  <p>
+    <%= image_tag "story/group.jpg", class: "standard_image" %>
+  </p>
+  <p class="standard_body justified_body_text bigger_bucks_dark_text">
+    On August 11, 1973, DJ Kool Herc was the DJ at his sister's back-to-school party. He extended the beat of a record by using two record players, isolating the percussion "breaks" by using a mixer to switch between the two records.
+  </p>
+<% end %>
+
+<%= standard_dark_card do %>
+  <h3 class="bigger_bucks_dark_text">We Help Companies and Companions</h3>
+  <p class="standard_body justified_body_text bigger_bucks_dark_text">
+    At block parties DJs played percussive breaks of popular songs using two turntables and a DJ mixer to be able to play breaks from two copies of the same record, alternating from one to the other and extending the "break".
+  </p>
+
+  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/422429469&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+
+  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/478103223&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+<% end %>
+
+<div class="dark_card" id="bigger_bucks_header_card" align="center">
+  <h3 id="bigger_bucks_header">A Music Studio, Quality Lessons</h3>
+  <p class="standard_body justified_body_text" id="bigger_bucks_header">
+    Make music online together by recording and using loops. Your very own online music studio where you can record your creations with your device.
+  </p>
+
+  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/672332325&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+
+  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/562287903&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+</div>
+
+<div class="vertical_spacer"></div>
+<div class="vertical_spacer"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--- suspending to start from scratch --->
+<% if false %>
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">We Help Companies and Companions</h3>
+          <p>At block parties DJs played percussive breaks of popular songs using two turntables and a DJ mixer to be able to play breaks from two copies of the same record, alternating from one to the other and extending the "break".</p>
+          <h3 class="ui header">A Music Studio, Quality Lessons</h3>
+          <p>Make music online together by recording and using loops. Your very own online music studio where you can record your creations with your device.</p>
+        </div>
+        <div class="six wide right floated column">
+          <%= image_tag "story/group.jpg", class: "ui large rounded image" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="center aligned column">
+          <a class="ui huge button">Check Them Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>"What a Company"</h3>
+          <p>That is what they all say about us</p>
+        </div>
+        <div class="column">
+          <h3>"I shouldn't have gone with their competitor."</h3>
+          <p>
+            <img src="https://semantic-ui.com/examples/assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
+      <p>New York City experienced a heavy Jamaican hip hop influence during the 1990s. This influence was brought on by cultural shifts particularly because of the heightened immigration of Jamaicans to New York City and the American-born Jamaican youth who were coming of age during the 1990s.</p>
+      <a class="ui large button">Read More</a>
+      <h4 class="ui horizontal header divider">
+        <a class="horizontal_header" href="#">Case Studies</a>
+      </h4>
+      <h3 class="ui header">Wonder What's Going On This Week?</h3>
+      <p>On August 11, 1973, DJ Kool Herc was the DJ at his sister's back-to-school party. He extended the beat of a record by using two record players, isolating the percussion "breaks" by using a mixer to switch between the two records.</p>
+      <a class="ui large button">I'm Still Quite Interested</a>
+    </div>
+  </div>
+
+  <% unless in_dev? %>
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/478103223&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

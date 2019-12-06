@@ -2,6 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new_post_form_pulse {
+  background: rgb(119,158,203);
+  box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
+}
+
+.feed_loader_loading_label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 50px;
+  color: rgb(175, 175, 175);
+  position: relative;
+  max-width: 567.25px;
+  margin: 20px auto;
+  width: 97.5%;
+}
+
+.floated_image {
+  float: left;
+  width: 20%;
+}
+
+.anon_post_check_box {
+  transform: scale(.75);
+}
+
+.anon_post_check_box_span {
+  font-size: 10px;
+}
+
 .standard_post_link {
 	font-size: 11px;
 }

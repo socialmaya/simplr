@@ -1,0 +1,23 @@
+<div class="dsa_card" align="center">
+  <div class="item_library_card_corner_cut_out"></div>
+  <%= link_to item_library_path(item_library), class: "group_avatar_link item_librarys_image_link" do %>
+    <% if item_library.image.url %>
+      <%= image_tag item_library.image, class: :group_avatar_image %>
+    <% else %>
+      <%= fa_icon "cubes fa-2x group_placeholder_icon" %>
+    <% end %>
+  <% end %>
+
+  <%= render "app/time_ago", item: item_library %>
+  <%= link_to "Edit", edit_item_library_path(item_library), class: "bottom_right_link" %>
+
+  <p>
+    <%= link_to item_library.name, item_library_path(item_library) %>
+  </p>
+
+  <% if item_library.body.present? %>
+    <p class="<%= 'justified_body_text' if item_library.body.size > 150 %>">
+      <%= render "app/body", item: item_library %>
+    </p>
+  <% end %>
+</div>

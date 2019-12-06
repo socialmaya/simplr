@@ -1,1 +1,3 @@
-<%= render "sessions/form" %>
+<%= render "sessions/#{'dsa_' if raleigh_dsa?}form" %>
+
+<%= render "arts/app" unless raleigh_dsa? %>

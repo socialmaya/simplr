@@ -1,0 +1,7 @@
+var show_shared_item_card = $("#show_shared_item_form_link_card");
+
+show_shared_item_card.after("<%=j render 'form' %>");
+
+show_shared_item_card.remove();
+
+window.navigator.vibrate(1);
